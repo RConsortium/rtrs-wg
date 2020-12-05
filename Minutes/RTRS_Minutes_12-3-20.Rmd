@@ -9,7 +9,7 @@ output: html_document
 knitr::opts_chunk$set(echo = TRUE)
 ```
 
-## R Tables fro Regulatory Submissions Working Group
+## R Tables for Regulatory Submissions Working Group
 
 Minutes for 12-3-20 meeting prepared by Joseph Rickert
 
