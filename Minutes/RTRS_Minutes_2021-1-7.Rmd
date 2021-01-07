@@ -1,0 +1,93 @@
+---
+title: "RTRS_Minutes_2021-1-7"
+author: "Joseph Rickert"
+date: "1/7/2021"
+output: html_document
+---
+## R Tables for Regulatory Submissions Working Group
+
+Minutes for 12-3-20 meeting prepared by Joseph Rickert
+
+## Attendees
+
+* Joseph Rickert - RStudio
+* Adrian Waddell - Roche
+* Michael Kane - Yale
+* Arthur Allignol - Merck
+* Ben Straub - 
+* Bryant Chen - FDA
+* Eli Miller - Atorus Research
+* Himanshu Pandya - Biogen
+* Keaven Anderson - Merck
+* Michael Stackhouse - Atorus Research
+* Nathan Kosiba - Atorus Research
+* Ning Leng - Roche
+* Phil Bowsher - RStudio
+* Rich Iannone - RStudio
+* Søren Klim - Novonordisk
+* Yilong Zhang - Merck
+
+
+Joseph Rickert (JR) opened the meeting by noting that the minutes from previous meetings along with a draft requirements document are available on the GitHub repository. He gave a brief summary of the minutes. He also noted that the present meeting was being recorded.
+
+The group briefly discussed the action item from the previous meeting about creating an R Task View for Tables. Someone questioned whether the existing Reproducible Research Task view already satisfied this need. The consensus was that it does not and that the group should proceed with creating a task view. Later on in the meeting Phil Bowsher asked if the Task View would cover tables in general or just tables for regulatory environments. JR observed that packages for regulatory environments could be a subheading of the task view.
+
+Michael Kane (MK) wanted to know more about the topic of workflows discussed in the previous meeting. Adriane Waddell (AW) offered a brief summary and Ning Leng (NL) observed that the requirements for tables are often influenced by a downstream requirements in the workflow.
+
+There was a discussion on Certification or Validation - meaning the process of determining that software works as intended. AW suggested creating a process where we:
+
+1. Describe how to make tables that compare against a baseline
+2. Once you have a table, dertermine how it is used in a workflow
+3. Validate after this
+
+Two requirements that emerged in the discussion are:
+
+1. Supporting RTF
+2. The ability to track changes 
+
+It was noted that the R Markdown is not suitable for working with tables in the regulatory environment because it does not have the ability to track changes.
+
+There was some discussion about how the working group should continue online discussions. The group decided to use GitHub with "Discussions" enabled. MK asked to be given Admin privleges for the RTRS repo. JR said he would follow up with the RC to make that happen. The group considered using slack but decided agains it. Everyone else present agreed to work through pull requests.
+
+AW took the action item of taking the present requirements document, spliting it up into sections (e.g. requirements specific to tables themselves and others such as having to do with indentation and alignment) and include additional requirements based on his previous work.
+
+Mike Stackhouse (MK) talked about the architecture of the [pharmaRTF](https://CRAN.R-project.org/package=pharmaRTF) package and described other work. He agreed to make some scripts available to the group.
+
+It was noted that in addition to haveing RTF capability, the group must determine how people want to use RTF in their workflows.
+
+MK stated that it would be nice to have example data sets so one could show: "Here is the data, here is the table, and here is the code that produced the table." The group agreed that this is a good idea and several people offered to contribute examples to the GitHub repo. MS described an example to replicate a cdisc table, AW offered a randomized table. 
+
+JR took the action item to have a separate GitHub repo set up for the Task View project.
+
+JR noted that time was almost up and asked if anyone could suggest a representative from the FDA who could attend future RTRS meetings. At this point Bryant Chen of the FDA noted that he was present and said that he would reach out and see who was interested in contributing.
+
+JR brought the meeting to a close
+
+The recording of the meeting is available [here](https://zoom.us/rec/share/6WIV8QbWkLNvP5A02FtQiRB58ByJLFmeb65cNkfYaVGyjFaaukG5yagAxXQ6G8pn.v3Kq5TBgseF6O78w)
+
+Passcode: trnk4q7?
+
+Several links were contributed in the chat file.
+
+Chat file
+00:12:34	Mike Stackhouse:	https://www.fda.gov/regulatory-information/search-fda-guidance-documents/part-11-electronic-records-electronic-signatures-scope-and-application
+00:12:58	Rich Iannone:	^- thank you
+00:14:30	Mike Stackhouse:	Base R on 21 CFR Part 11: https://www.r-project.org/doc/R-FDA.pdf
+00:15:04	Mike Stackhouse:	RStudio/tidyverse/shiny/gt/markdown/etc. similar documents - so all are aware: https://rstudio.com/solutions/pharma/
+00:15:10	Mike Stackhouse:	Way down at the bottom.
+00:22:57	Mike Stackhouse:	Some PHUSE white papers on standard tables: 
+https://phuse.s3.eu-central-1.amazonaws.com/Deliverables/Standard+Analyses+and+Code+Sharing/Analyses+and+Displays+Associated+with+Adverse+Events+Focus+on+Adverse+Events+in+Phase+2-4+Clinical+Trials+and+Integrated+Summary.pdf
+00:23:05	Mike Stackhouse:	https://phuse.s3.eu-central-1.amazonaws.com/Deliverables/Standard+Analyses+and+Code+Sharing/Analyses+%26+Displays+Associated+with+Outliers+or+Shifts+from+Normal+To+Abnormal+Focus+on+Vital+Signes+%26+Electrocardiogram+%26+Laboratory+Analyte+Measurements+in+Phase+2-4+Clinical+Trials+and+Integrated+Summary.pdf
+00:23:14	Mike Stackhouse:	https://phuse.s3.eu-central-1.amazonaws.com/Deliverables/Standard+Analyses+and+Code+Sharing/Analyses+%26+Displays+Associated+with+Measures+of+Central+Tendency-+Focus+on+Vital+Sign,+Electrocardiogram+%26+Laboratory+Analyte+Measurements+in+Phase+2-4+Clinical+Trials+and+Integrated+Submissions.pdf
+00:23:46	Mike Stackhouse:	https://phuse.s3.eu-central-1.amazonaws.com/Deliverables/Standard+Analyses+and+Code+Sharing/Analyses+%26+Displays+Associated+with+Demographics,+Disposition+and+Medication+in+Phase+2-4+Clinical+Trials+and+Integrated+Summary+Documents.pdf
+00:32:41	Mike Stackhouse:	https://atorus-research.github.io/pharmaRTF/
+00:38:26	Mike Stackhouse:	Publicly available set of trial data: https://github.com/phuse-org/phuse-scripts/blob/master/data/sdtm/TDF_SDTM_v1.0%20.zip 
+
+https://github.com/phuse-org/phuse-scripts/blob/master/data/adam/TDF_ADaM_v1.0.zip
+00:41:47	Mike Stackhouse:	https://github.com/atorus-research/CDISC_pilot_replication
+00:56:26	Rich Iannone:	https://github.com/RConsortium/rtrs-wg/issues
+00:56:50	phil@rstudio.com:	https://beta.rstudioconnect.com/content/3145/Resources_Links_on_Using_R_in_Regulated_Clinical_Trial_Environments.html
+
+My crappy doc on this from 2016
+00:57:11	phil@rstudio.com:	reports & tables in the TOC
+
