@@ -1,0 +1,71 @@
+---
+title: "RTRS_WG_Minutes_2021_02-04"
+author: "Joseph Rickert"
+date: "2/4/2021"
+output: html_document
+---
+
+## R Tables for Regulatory Submissions Working Group
+
+Minutes for 2/4/2021 meeting prepared by Joseph Rickert with much appreciated help from Rich Iannone
+
+## Attendees
+
+* Joseph Rickert - RStudio
+* Adrian Waddell - Roche
+* Michael Kane - Yale
+* Tony Jiang - Amgen
+* Arthur Allignol - Merck
+* Ben Straub - GSK
+* Tadeusz Lewandowski -
+* Bob Engle - Biogen
+* Bryant Chen - FDA
+* Eli Miller - Atorus Research
+* Himanshu Pandya - Biogen
+* James Roose - Flatiron
+* Keaven Anderson - Merck
+* Kevin Bolger - Procogia
+* Michael Stackhouse - Atorus Research
+* Martin Brown - PPD
+* Nathan Kosiba - Atorus Research
+* Nicholas Masel - J&J
+* Ning Leng - Roche
+* Prashni Paliwal - Flatiron
+* Phil Bowsher - RStudio
+* Rich Iannone - RStudio
+* Yilong Zhang - Merck
+
+Joseph Rickert brought the meeting to order.
+Mike Kane noted that the RTRS WG repo has been updated with an opened up Discussions section.
+
+Mike Stackhouse presented an overview of the pharmaRTF package:
+
+* Goal was to replicate a CSR table using CDISC data (CDSIC Pilot Replication in R). 
+* Writing to RTF does nicely replicate the regulatory reference doc
+* The header and footer present challenges: ideal situation is to have the table header and footer in the document’s header and footer (allowing for repeating across pages)
+* There was some discussion about how RTF and style of formatting is largely governed by processes in Pharma companies rather than a requirement from regulatory bodies
+
+Michael Kane
+* two areas of attention: (1) reproduce formatting/layout in document, (2) integration with other table packages
+
+Michael Stackhouse
+* suggested Atorus and RStudio to make table packages work together more nicely
+* asked if there might be interested in a formal, language-free specification for tables
+
+Adrian Waddell did a  walkthrough of the requirements from his pull request which was merged into the requirements document discussing how they relate to the rtables package .
+ * Rounding of numbers became a point of discussion (should it be an option? What should the default be?)
+
+
+Joseph Rickert suggested that we add the following discussion topics to the repo to help shape our short term objectives and work product
+
+* Address the issue identified by Mike Stackhouse that some believe CDISC compliant tables cannot be generated in R by providing an example of doing so and publicizing it. (Maybe in a blog)
+* Continue to build out the requirements document and consider whether its
+focus needs to be narrowed to a particular area of Pharma e.g. clinical, or Phase 2 and 3 trials etc
+* Continue to explore features of the existing table generation packages and explain how and to what extent they work together
+* Explore making a CRAN task view for R packages that generate summary tables.
+
+The video of the meeting is available at the following link:
+https://zoom.us/rec/share/G1UM-wczqHhc5MCs__8iotbXVSs0AOQu3bdpyeMkBDb675j0CdWe_oicx56chpeK.7hGn3w23Qf5Pq4Io **Passcode &$1$TThd**
+
+
+The next meeting will be held on Thursday, March 4, 2021 at 9AM Pacific Time. Adrian Waddell will provide a 30 min overview of the [rtables](https://github.com/Roche/rtables) package.
