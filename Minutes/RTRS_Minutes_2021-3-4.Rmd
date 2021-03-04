@@ -1,0 +1,77 @@
+---
+title: "RTRS_Minutes_2021-3-4"
+author: "Joseph Rickert"
+date: "3/4/2021"
+output: html_document
+---
+
+## R Tables for Regulatory Submissions Working Group
+
+Minutes for 3/4/2021 meeting prepared by Rich Ianonne and Joseph Rickert
+
+## Attendees
+* Joseph Rickert - RStudio
+* Keaven Anderson - Merck
+* Paulo Bargo - Janssen
+* Adrian Waddell - Roche 
+* Michael Kane - Yale 
+* Ben Straub - GSK 
+* Eli Miller - Atorus Research 
+* Himanshu Pandya - Biogen 
+* James Roose - Flatiron 
+* Kevin Bolger - Procogia 
+* Michael Stackhouse - Atorus Research 
+* Martin Brown - PPD 
+* Søren Klim - Novonordisk
+* Nathan Kosiba - Atorus Research 
+* Nicholas Masel - J&J 
+* Prashni Paliwal - Flatiron 
+* Phil Bowsher - RStudio 
+* Rich Iannone - RStudio 
+* Yilong Zhang - Merck 
+
+
+Joe Rickert began the meeting and suggested the following agenda:
+
+1. Discussion of requirements document
+2. Discussion about `rtables` which is now on CRAN
+3. Workflows discussion
+
+Adrian Waddell presented the rtables package by showing examples, and provided a walk through of the code for table generation. Note that all but the very beginning of Adrian's presentation was recorded. The link is below. Some key points:
+
+* `rtables` still needs to add title and footnotes support and other formatting features to be ready for making regulatory filings. 
+* Used data from `random.cdisc.data` which may be open-sourced by Roche soon
+* Adrian demonstrated the rtables API with the CDISC data sample
+* The building of analysis functions is key to effectively creating table layouts
+* Once a table is built, you can do post-processing (and one of the operations is pruning values)
+* The table_structure() function provides the table AST and it uses the CDISC terminology; full paths to the data are revealed, allowing for setting and getting (e.g., value_at())
+* Adrian showed the `tern` package which is a Roche proprietary package that supports `rtables`
+    
+Joe noted that `tern` is proprietary and asked where the boundary between open-source table creation and proprietary, closed-source functions for tabulation?
+
+Adrian replied that `tern` project (internal package at Roche that supports rtables) is a large focus in the company (with dedicated resources working on it); two-stage approach: (1) find collaborators to help with development, (2) release only when absolutely sure it is ready for public consumption
+
+Michael Kane noted that keeping a package proprietary has more to do with risk-management than profit-based (e.g., software that is open-sourced is perceived to be of poor quality, reflecting on the company brand)
+
+Adrian noted that the development of table software to be a competitive advantage (accelerates review times since it reduces table development time but suggested that he sees very little proprietary-ness in the future of rtables
+
+Phil Bowsher called attention to that threat that large companies could bundle `rtables` into their proprietary cloud offerings.
+
+Paulo Bargo affirmed that collaboration on coding tables for regulators means that everyone could benefit (companies and regulators).
+
+This initiated a lengthy discussion on collaboration. Both Adrian and Paulo suggested that it might be possible for developers from their respective companies to work jointly to further develop `rtables`. Everyone seemed to agree that company safeguards, legal considerations and other practical considerations could be worked out.
+
+Joe pointed out at less tightly integrated collaboration was still very important and suggested every one would benefit from building out the [requirements document](https://github.com/RConsortium/rtrs-wg/blob/main/Requirements/working-requirements/requirements.md).
+
+Joe suggested that the group consider
+* documenting workflows in which the table generating software would be used
+* building out the requirements document to reflect these workflows
+* creating a document that compares the different table-making packages
+
+The meeting adjourned a little over an hour after starting.
+The next meeting is scheduled for 9AM Pacific Time on April 1, 2021
+
+The [zoom recording](
+https://zoom.us/rec/share/3yp8vb9yplFWTT8MH23dewo-H1_ZgM8SABAMoQt-oX545iqgL-a84ntumMddN76_.s-9UMnzWp9dMQbUM) of the meeting is available the passcode is #YMaU3$e
+
+
