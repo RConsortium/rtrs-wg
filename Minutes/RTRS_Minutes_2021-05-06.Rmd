@@ -1,0 +1,82 @@
+---
+title: "RTRS_WG_Minutes_2021-05-06"
+author: "Joseph Rickert"
+date: "5/6/2021"
+output: html_document
+---
+
+## R Tables for Regulatory Submissions Working Group
+
+Minutes for 5/6/2021 meeting prepared by Rich Ianonne and Joseph Rickert
+
+## Attendees
+* Keaven Anderson - Merck 
+* Paulo Bargo Janssen 
+* Kevin Bolger - Procogia 
+* Martin Brown - PPD 
+* Bryant Chen - FDA 
+* Rich Iannone - RStudio 
+* Michael Kane - Yale 
+* Nathan Kosiba - Atorus Research 
+* Alexandra Lauer - Merck 
+* Tadeusz Lewandowski - Roche
+* Ning Leng - Roche 
+* Nicholas Masel - J&J 
+* Eli Miller - Atorus Research
+* Himanshu Pandya - Biogen 
+* Joseph Rickert - RStudio
+* Michael Stackhouse - Atorus Research 
+* Ben Straub - GSK 
+* Adrian Waddell - Roche 
+* Pierre Wallet - Novartis
+* Yilong Zhang - Merck
+
+Joe Rickert began the discussion by referencing the minutes from the previous meeting and suggesting that the group pick up where it left off. He asked if it was possible to begin collecting practical examples of CDISC compliant tables.
+
+Adrian Waddell noted that there is a new table package https://github.com/ianmoran11/mmtable2 and suggested that a library of practical examples could be created that shows tables and allows users to switch between various frameworks for creating tables. The group noted that some table packages such as `r2rtf` focus primarily on formatting leaving tabulation to `dplyr` while others such as `rtables` focus on tabulation.
+
+Rich Iannone launched a lengthy discussion on rounding issues by noting that R v4.0.3 changed that way R does rounding and that there is not an easy way to get back to v3.6 rounding. He also noted that his has produced data rounded to "-0". 
+
+The group agreed that R has a more sophisticated approach to rounding than SAS which the group characterized as doing "grade school style round 5 up"
+
+Mike Stackhouse emphasized that it is standard good practice to deliberately round data first before running code to format the data.
+
+The group agreed that small differences in rounding between SAS and R are not likely to make a difference to interpreting the results of a statistical analysis. Furthermore, if they do make a difference, then there are bigger problems. The group agreed that it would not be productive to try and get perfect rounding between R and SAS. 
+
+Nevertheless, the group acknowledged that while there is no real technical problem, there is a "social" problem and that clinical trial statisticians struggle with matching SAS and R output.
+
+Himanshu Pandya noted that the perception problem is especially vexing in hybrid projects where a table produced by SAS may not agree with a figure produced by R.
+
+The group agree that the next step should be to begin building a markdown document to discuss the various issues. Adrian suggested that the chapters in the document should be:
+
+1. Tabulation
+2. Formatting/Rounding
+3. Rendering Output 
+4. Downstream Use including processing tables as if they are matrices
+5. Interactive Tables and drill down capability
+ 
+Adrian also noted that there is even more interesting work than the chapters listed. For example, there is literature on transforming tables to make them better readable.
+
+Mike Kane suggested that chapters could also be published as a series of papers in the R Journal. The group agreed that this would be an excellent way to document and promote the group's work.
+
+The discussion also touched on other topics. For example, making a decision about how much of the CDISC standard should be in satisfied by tabulation code, and where should the split points go in split, apply, and combine processes?
+
+**Action Items**:
+
+* **Rich Iannone** agreed to put an example of the rounding errors he observed in an markdown document in the repo.
+* **Adrian Waddell** agreed to start the document described above and begin filling in bullet points for topics that need to be discussed in the various chapters.
+* **Mike Kane** agreed to ask the editors of the R Journal about their willing to accept papers as described above.
+
+The following links: put in the zoom chat point to relevant documentation:  
+
+* https://en.wikipedia.org/wiki/IEEE_754#Rounding_rules
+* https://blogs.sas.com/content/iml/2019/11/11/round-to-even.html
+* https://cran.r-project.org/web/packages/round/vignettes/Rounding.html
+* https://github.com/atorus-research/Tplyr/blob/master/uat/references/output/uat.pdfRequirements 
+
+The **zoom video** of the meeting is available here: 
+https://zoom.us/rec/share/UCbreIpDD7ij6Qm5LJ0FEe1zbw5g7x4oKrz5wdlIRT6Svo55YwduaTjntmdyRJJJ.GKngsVgAQ-GJyLsN Passcode: #A6WkCz@
+
+The next meeting will be at 9:00AM pacific Time on Thursday, June 3, 2021.
+
+
