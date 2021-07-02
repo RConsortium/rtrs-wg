@@ -1,0 +1,61 @@
+---
+title: "RTRS_WG_Minutes_2021-07-01"
+author: "Joseph Rickert"
+date: "7/1/2021"
+output: html_document
+---
+
+Minutes for 7/1/2021 meeting prepared by Joseph Rickert
+
+## Attendees
+* Martin Brown - PPDI
+* Bryant Chen - FDA
+* Rich Iannone - RStudio
+* Michael Kane - Yale
+* Nathan Kosiba - Atorus Research
+* Tadeusz Lewandowski - Roche
+* Nicholas Masel - J&J
+* Eli Miller - Atorus Research
+* Himanshu Pandya - Biogen 
+* Joseph Rickert - RStudio -
+* Yilong Zhang - Merck
+
+### Minutes
+
+Joseph Rickert brought the meeting to order and noted that since Adrian Waddell was out sick, we would have to postpone the discussion of his document until the next meeting. 
+
+Rich Iannone commented on some feedback about `gt` from GSK  
+requesting native Word tables within R markdown workflow.
+
+Mike Kane suggested that if you can get to rtf you can get to anything from there. This initiated a discussion as to whether rtf was stable enough to be considered as a standard. Software could then be written to convert rtf into any desired format.
+
+There was a discussion about including Chinese characters and images into table cells.
+
+Nicholas Masel noted that J&J is moving from RTF to DOCX. They have developed a tool that converts from RTF to DOCX.
+
+Mike Kane proposed developing an intermediate format with code to convert to any target. Or alternatively, developing an API that specifies what can be obtained from the intermediate step.
+
+There was some discussion about data structures that would be appropriate for tables. Rich agreed to put an issue in the repo.
+
+Joe asked where we want to go next. Are we interested in completing the requirements document? He also pointed out that we would fulfill the mission of the group if we could recommend a way of making tables without requiring companies to write a lot of custom code for their particular workflows.
+
+Is it RTF now and a future standard?
+Nick mentions that J&J intends directly to DOCX. There was general agreement that RTF is the stopgap and DOCX is the future companies for many companies.
+
+Tad offered another view of the future that is not document based at all. This could include HTML and Shiny for example. It was noted that this would depend on the FDA accepting this approach. Yilong noted that although there is not much mention of HTML in FDA specifications they do use XML. 
+
+The group agreed that it would be useful to produce a white paper discussing the various approaches for the future. Tad stated that Roche has been thinking of Shiny submissions for some time an has offered to share.
+
+Next, followed a short discussion about the difficulty in moving medical writers from MS Word. 
+
+In the final discussion, Eli asked about that status of entering examples into the repo. He stated that he had material to offer. The decision was made to enter documents into a folder structure. Joe offered to provide repo access to anyone who need it, and asked people to email him their GitHub ids.
+
+#### Next Meeting
+The next meeting is set for Thursday, August 5, 2021 at 9AM Pacific Time.
+
+#### Video Recording
+The video recording of the meeting is available here: https://rstudio.zoom.us/rec/share/SNzNSNx1hQtHVdOVulB6tTML1rOwYC_AXSlgX7fA45trlAtYf0eDE1ribGyOdGLL.pYV-Ht7mpYyIomc9 Passcode: qUn%cx4S
+
+
+
+
