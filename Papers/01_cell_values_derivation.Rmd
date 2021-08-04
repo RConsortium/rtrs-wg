@@ -1,0 +1,274 @@
+---
+title: "Tables in Pharma"
+author: "R Consortium Workstream Tables for Regulatory Submission"
+date: "6/3/2021"
+output:
+  html_document: default
+  pdf_document: default
+subtitle: Cell Values Derivation and Simple Tabulation
+editor_options:
+  chunk_output_type: console
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+# Introduction
+
+Tables are a major component for analyzing clinical trials data and to communicate the results to the study teams, in
+publications, and to the health authorities. Historically most tables for clinical trials submissions have been created
+with SAS but there is an ongoing industry effort to switch the programming language of choice to R.
+
+The R Consortium has a number of working streams to coordinate the efforts among Pharma companies and health authorities
+to establish the requirements for an R based submission (the analytics part). The aim is to spawn collaborations on open
+source solutions that will settle in as the industry standard.
+
+This paper on table creation is the first paper from the  *R Consortium Tables for Regulatory Submission (RTRS)* working
+group. The aim is to publish a series of papers on table creation to analyze clinical trials data with R. The series of
+papers will be:
+
+1. Data Derivation for Tabulation & Table Data Structure
+   - (`dplyr` & `tidyr`, `rtables`, `Tplyr`, `tables`)
+   - Analytics & matching results (rounding rules)
+   - data structure & accessors and modifiers
+1. Formatting & Rendering
+   - cell format
+   - (tables, titles and footnotes) & Rendering (html, pdf, txt, rtf, xml, markdown & rmarkdown, word, power point, etc.)
+      - including `pharmaRTF`
+   - pagination
+   - titles, footnotes, cell references
+1. Creating Tables at Scale (Workflow, pipelining)
+   - table templates (standards)
+   - cross checks
+   - hybrid SAS and R projects
+1. Listings
+1. Interactive Tables and drill down capability
+
+1. Table Catalog??
+1. Transforming tables??
+
+In this paper we discuss key data derivation concepts behind tabulation.
+
+
+# Table R packages Overview
+
+R's table creation functionality has recently seen a lot of contribution via specialized R packages. In this section we
+provide an overview of packages what this working group has found to be useful in analyzing clinical trials data.
+
+Open source projects in alphabetical order (remember, this is not a sales pitch, please be as objective as possible in describing the functionality of the package):
+
+- `broom`: useful to create tables of statistical model fits
+- `flextable`:
+- `gt`:
+- `huxtable`:
+- `mmtable2`:
+- `pharmaRTF`:
+- `rtables`: defines a pipe-able grammar for declaring complex table structure layouts via nested splitting - in
+row- and column-space - and the specification of analysis functions which will calculate cell values within that
+structure. These pre-data table layouts are then applied to data to build the table, during which all necessary data
+grouping implied by the row and column splits, cell value calculation, and tabulation occurs automatically. Additional
+table features such as titles, footers, and referential footnotes are supported. ASCII, HTML, and PDF are supported as
+output formats for rendering tables.
+- `tableone`: 
+- `tables`: 
+- `tplyr`:
+- `xtable`:
+
+Note that `DT`, `reactable` are not listed here as it is used to create interactive tables only. 
+
+# What is a Table
+
+https://uwspace.uwaterloo.ca/bitstream/handle/10012/10962/WANG_XINXIN_.pdf?sequence=1&isAllowed=y
+
+The tables of interest for this paper are those who represent summarizations of data.
+
+Computing a Table:
+
+* Derive Cell Values from Data
+  - this includes splitting data to subsets for each cell
+  - calculate cell values from data subsets
+* Tabulation: mapping to table structure
+  - row and column labeling
+  - i.e. arrange cell values in a tabular form
+  - titles, footnotes
+  - cell, row, column references
+* Rendering & Formatting:
+   - to a device (display, HTML, PDF,  txt, ...)
+   - colors
+
+Presentational Form Table:
+
+*A table is an arrangement of data in rows and columns, or possibly in a more complex structure.* (Wikipedia)
+
+* Cells
+* Columns
+* Rows
+* ...
+
+# Other Important Requirements For Pharma
+
+* Pagination
+* regulated (validation)
+
+# Data Used
+
+```{r, message=FALSE}
+adsl <- rtables::ex_adsl
+adae <- rtables::ex_adae
+```
+
+# Cell Content Derivation
+
+For this paper we look at cell content derivation. The different table packages (except for `broom`) can be grouped into
+frameworks that require the cell content to be per-calculated and available in a data frame and frameworks that come
+with specialized cell derivation methods.
+
+The table packages that rely on external ways of deriving the cell contents include `gt`, `flextable`, `huxtable`,
+`xtable`. We found that `dplyr` and `tidyr` are well suited for that task and use those two packages for the further
+cell derivation discussion. In the subsequent papers we will discuss the tabulation, rendering, and other relevant
+features of those table packages.
+
+Packages that provide specialized cell value derivation tooling include: base R, `tables`, `Tplyr`, `rtables`.
+
+We now provide ... examples that discuss different requirements of cell content derivation and basic tabulation in form
+of row and column arrangement.
+
+
+## Cross Tabulation
+
+```{r}
+library(dplyr)
+library(tidyr)
+library(tables)
+library(Tplyr)
+library(rtables)
+```
+
+Calculate frequencies
+
+```{r}
+# base R `table` function
+table(adsl$COUNTRY, adsl$ARM)
+```
+
+
+```{r}
+# base R `xtabs`
+xtabs(~ COUNTRY + ARM, data = adsl)
+```
+
+
+```{r}
+# `dplyr` and `tidyr`
+adsl %>%
+  group_by(ARM, COUNTRY) %>%
+  summarize(n = n()) %>%
+  ungroup() %>%
+  pivot_wider(names_from = ARM, values_from = n)
+```
+
+
+```{r}
+# `rtables`
+lyt <- basic_table() %>%
+  split_cols_by("ARM") %>%
+  analyze("COUNTRY")
+
+build_table(lyt, adsl)
+```
+
+
+```{r}
+# `Tplyr`
+tplyr_table(adsl, ARM) %>%
+  add_layer(
+    group_count(COUNTRY)
+  ) %>%
+  build() 
+```
+
+
+```{r}
+# tables
+tabular(COUNTRY ~ ARM, data = adsl)
+```
+
+Note the difference in code required between specialized functions (`table`), formula based frameworks (`xtabs`,
+`tables`), and grammar based frameworks (`dplyr`, `rtables`, `Tplyr`). Next we look at more complex tables used in
+Pharma.
+
+## Demographic Table
+
+* N=xx
+* Total Column
+* Variable Labels
+
+```{r}
+lyt <- basic_table() %>%
+   split_cols_by("ARM") %>%
+   add_colcounts() %>%
+   add_overall_col("All Patients") %>%
+   analyze(c("SEX", "AGE"), afun = function(x) {
+      if (is.numeric(x)) {
+         in_rows(
+            "n" = sum(is.na(x)),
+            "Mean (sd)" = rcell(c(mean(x), sd(x)), format = "xx.xx (xx.xx)"), 
+            "Median" = median(x),
+            "Min - Max" = rcell(range(x), "xx.xx - xx.xx")
+         )
+      } else {
+         in_rows(.list = as.list(table(x)))
+      }
+   })
+
+build_table(lyt, adsl)
+```
+
+## Adverse Events Table
+
+## Disposition Table
+
+## Statistical Model Summary Table
+
+* `broom`
+
+## Example of Structured Data Derivation
+
+e.g.  Comparing Biomarker Evaluable Population vs All
+
+* nesting & splits
+* Total Columns
+
+# Analysis functions
+
+* analysis functions 
+   - same for every cell
+   - different per row group
+   - different per column
+
+## Rounding Rules
+This might fit into the next paper.
+
+* Round half up
+  - SAS, Excel
+* R rounds to even.
+  - 3.* to 4.* difference?
+  - sprintf, formatC
+* Data precision based rounding
+
+
+# Conclusions
+
+
+# Ressources
+
+This section will be deleted, but the listed documents are useful to build the paper.
+
+- https://github.com/RConsortium/rtrs-wg/blob/main/Minutes/RTRS_Minutes_2021-05-06.Rmd
+- https://github.com/RConsortium/rtrs-wg/blob/main/Requirements/working-requirements/requirements.md
+- https://roche.github.io/rtables/articles/tabulation_concepts.html
+- https://roche.github.io/rtables/articles/tabulation_dplyr.html
+- https://phuse.s3.eu-central-1.amazonaws.com/Deliverables/Standard+Analyses+and+Code+Sharing/Analyses+%26+Displays+Associated+with+Demographics,+Disposition+and+Medication+in+Phase+2-4+Clinical+Trials+and+Integrated+Summary+Documents.pdf
+- https://advance.phuse.global/display/WEL/Safety+Analytics
+- https://phuse.global/Deliverables/1
