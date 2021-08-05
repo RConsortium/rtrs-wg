@@ -38,12 +38,21 @@ papers will be:
       - including `pharmaRTF`
    - pagination
    - titles, footnotes, cell references
+1. Listings
+
 1. Creating Tables at Scale (Workflow, pipelining)
    - table templates (standards)
    - cross checks
    - hybrid SAS and R projects
-1. Listings
-1. Interactive Tables and drill down capability
+   - saving table cell values
+1. clinicaltrials.gov submission
+1. Future Recommendations
+   - Interactive Tables and drill down capability
+      - shiny
+      - e.g. patient profile table, listings, graphs
+   - HTML website with tables as reviewing aid
+      - add more markup/formatting
+      - search/organizing
 
 1. Table Catalog??
 1. Transforming tables??
@@ -63,7 +72,6 @@ Open source projects in alphabetical order (remember, this is not a sales pitch,
 - `gt`:
 - `huxtable`:
 - `mmtable2`:
-- `pharmaRTF`:
 - `rtables`: defines a pipe-able grammar for declaring complex table structure layouts via nested splitting - in
 row- and column-space - and the specification of analysis functions which will calculate cell values within that
 structure. These pre-data table layouts are then applied to data to build the table, during which all necessary data
@@ -73,9 +81,13 @@ output formats for rendering tables.
 - `tableone`: 
 - `tables`: 
 - `tplyr`:
-- `xtable`:
+
+`pharmaRTF`, `xtable`, `r2rtf`, `officer`, `pander`, `ttt` fit in to the discussion of the 2nd paper.
 
 Note that `DT`, `reactable` are not listed here as it is used to create interactive tables only. 
+
+
+Other R packages?:
 
 # What is a Table
 
