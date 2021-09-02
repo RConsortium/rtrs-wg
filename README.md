@@ -8,14 +8,6 @@ The R Consortium working group, R Tables for Regulatory Submissions  (RTRS) incl
 
 Let's talk about working group goals, work in progress, challenges and ideas in discussions. It's a great place to ask questions about buiding tables and documents for clinical trial submissions, discuss some ideas, engage with others, and much more!
 
-INSTALLATION
 
-Want to try this out? The pointblank package is available on CRAN:
-
-install.packages("pointblank")
-You can also install the development version of pointblank from GitHub:
-
-devtools::install_github("rich-iannone/pointblank")
-
-If you encounter a bug, have usage questions, or want to share ideas to make this package better, feel free to file an issue.
+Please feel free to file an issue.
 From gt (special character encoding in RTF): https://github.com/rstudio/gt/blob/bae32f432f190a904e26c3d1396b63ea65e5106a/R/utils_render_rtf_redo.R#L536
