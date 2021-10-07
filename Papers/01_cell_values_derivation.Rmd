@@ -32,13 +32,15 @@ papers will be:
    - (`dplyr` & `tidyr`, `rtables`, `Tplyr`, `tables`)
    - Analytics & matching results (rounding rules)
    - data structure & accessors and modifiers
+1. Table creation Process -- Industry
+   - stages
 1. Formatting & Rendering
    - cell format
-   - (tables, titles and footnotes) & Rendering (html, pdf, txt, rtf, xml, markdown & rmarkdown, word, power point, etc.)
+   - (tables, titles and footnotes) & Rendering (html, pdf, txt, rtf, xml, markdown & rmarkdown, word, power point, tgen etc.)
       - including `pharmaRTF`
    - pagination
    - titles, footnotes, cell references
-1. Listings
+3. Listings
 
 1. Creating Tables at Scale (Workflow, pipelining)
    - table templates (standards)
