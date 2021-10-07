@@ -1,0 +1,55 @@
+---
+title: "RTRS_Minutes_2021-10-07"
+author: "Joseph Rickert"
+date: "10/7/2021"
+output: html_document
+---
+
+Minutes from 2021010-07 RTRS meeting compiled by Joseph Rickert.
+
+The meeting was recorded and is available [here](https://rstudio.zoom.us/rec/share/Tv9jiy4E_Cryk7Rg-lOZdB1z0SZE6OPPfJvaLGOOkQM-cuq3x0ETGSTigozG--a5.h_mCTCRQla3ZLOHz). Passcode: f78d@5&x
+
+### Attendees
+* Keaven Anderson - Merck
+* Gabriel Becker
+* Bryant Chen - FDA
+* Rich Ianonne - RStudio
+* Tadeusz Lewandowski - Roche
+* Himanshu Pandya
+* Joseph Rickert - RStudio
+* Michael Stackhouse
+* Ben Staub
+* Pierre Wallet
+* Adrian Waddell - Roche
+* Yilong Zhang - Merck
+
+The agenda for the meeting:  
+
+* Working on the project board
+* Discussing open issues
+* Organizing for R/Pharma
+
+
+The group approved and merged Adrian's pull request on the [paper](https://github.com/RConsortium/rtrs-wg/blob/main/Papers/01_cell_values_derivation.Rmd). The majority of the meeting was devoted to working on the [kanban board](https://github.com/RConsortium/rtrs-wg/projects/1) to create and assign tasks necessary to make progress on the paper.
+
+Important assignments were to have the authors of the various table packages mentioned in the paper write the over sections for their packages.
+
+The group decided to wait until the descriptions of the various packages surveyed in the paper are written before reaching out to the authors to join the RTRS WG. It is not clear that developers who packages have not been written with a regulatory environment in mind would be interested.
+
+There was some discussion about distinguishing between tables packages and "utility" packages, useful for pre or post processing by not proper table packages. For example, the broom package does cell content generation, but is not a table package per se. Think of `lm()` + broom to be the equivalent of dplyr. They generate content for the tables, but not the tables themselves. It was agreed that after the paper is more complete it would be valuable to ask people from broom or tidymodels to comment. 
+
+There was a discussion about splitting the paper in two. (Rendering and Formatting might be its own paper). The consensus was that even if two papers are eventually produced, work ought to proceed in parallel in order ensure continuity in content and flow.
+
+On the topic of example tables, the group decided that everyone working for a pharma company should go back and ask their company colleagues for examples of tables that they consider to be particularly challenging. It was pointed out that there is a risk that every group might select the same type of table. So even with list of challenging tables suggested by practitioners, the group still has to develop a sufficient number of tables to adequately cover table design space.
+
+Adrian is giving  5 minute talk on RTRS. The content should include a summary of the WG and end with a slide on how people can get involved which include asking for examples of difficult tables. Several other members are either giving talks or workshops.
+
+JBR took the action to develop a slide about the RTRS WG that could be used by all presenters. The content should include:  
+
+* Who we are as a group
+* Describe the work we are doing
+* Ask people for examples of difficult tables
+
+It was decided that we should begin collecting references for the paper and not save that task for the end.
+
+The next meeting will be held on November 11, 2021 at 9:00 AM Pacific Time. The meeting was moved in order to avoid a possible conflict with the R/Pharma conference.
