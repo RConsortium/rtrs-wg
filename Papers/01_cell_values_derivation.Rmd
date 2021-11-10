@@ -41,6 +41,7 @@ papers will be:
    - pagination
    - titles, footnotes, cell references
 3. Listings
+4. Table Templates
 
 1. Creating Tables at Scale (Workflow, pipelining)
    - table templates (standards)
@@ -58,6 +59,7 @@ papers will be:
 
 1. Table Catalog??
 1. Transforming tables??
+
 
 In this paper we discuss key data derivation concepts behind tabulation.
 
