@@ -65,7 +65,7 @@ In response to a question there was a short discussion about the interactions of
 
 Joe took the action item to write to the authors of the packages listed in the paper to remind them to fill in their sections. (See the kanban board for packages and authors who have accepted assignments.)
 
-Joe, Gabe and Alexandra agreed to collaborate on the call for tables blog post. A google doc has been created to collaborate on the post: https://docs.google.com/document/d/1tM6v-bWjrKRjtDZaYdOtcbMQbCtjfvUHIulih6ONre0/edit
+**Joe, Gabe and Alexandra agreed to collaborate on the call for tables blog post.** A google doc has been created to collaborate on the post: https://docs.google.com/document/d/1tM6v-bWjrKRjtDZaYdOtcbMQbCtjfvUHIulih6ONre0/edit
 
 A proposed topic for the next meeting is whether users want templates for tables.
 
