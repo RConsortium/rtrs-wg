@@ -1,0 +1,72 @@
+---
+title: "RTRS_Minutes_2021-11-10"
+author: "Joseph Rickert"
+date: "11/10/2021"
+output: html_document
+---
+
+Minutes from 20210-11-10 RTRS meeting compiled by Joseph Rickert.
+
+### Attendees
+* Keaven Anderson - Merck
+* Gabriel Becker
+* Steven Hassendonckx - JnJ
+* Alexandra Lauer - Merck
+* Himanshu Pandya - Biogen
+* Joseph Rickert - RStudio
+* Tom Tensfeldt - Pfizer
+* Pierre Wallet - Novartis
+* Adrian Waddell - Roche
+* Yilong Zhang - Merck
+
+The meeting was recorded and the [video](
+https://rstudio.zoom.us/rec/share/z1sgLBU0RsGX9u6Q8jeYcl6WQvkufLGQy_pCONlE1MCNN3fKk1ZUGWhGltfDbI9Z.hYCLKznB2fgSfcts) is available. Passcode: V9W.=Qf8
+
+Joseph brought the meeting to order and asked those present to give their impressions about how RTRS presentations and whether it they generated any interest. Tom Tensfeldt noted that he saw RTRS mentioned twice at the conference, and that before R/Pharma is was unaware of the working group. He also noted that information about RC working groups is being circulated within Pfizer.
+
+Adrian noted that there were several talks at R/Pharma relating to RTRS
+
+1. Adrian's workshop: *Clinical Trials Data Analysis at Roche*
+2. Rich Iannone's workshop: *Clinical Tables in gt*
+3. The presentation by Ning Leng and others on *R Consortium working groups*.
+4: Yilong's workshop on *R for Clinical Study Reports and Submission*
+
+In his workshop, Adrian went through an end-to-end example: generate synthetic data -> derive CDISC data -> generate variables -> make tables. The workshop was sold out at 120 people. It was not recorded but there is repo for the workshop.
+
+Yilong noted that he received 
+
+Gabe reported a noticeable uptick in chatter on the rtables github repo from people outside of Roche since R/Pharma.
+
+Joe suggested that we could materials generated for the conference to raise awareness of the WG. Gabe noted that making progress on the white paper would be the best thing we could do to raise awareness.
+
+Adrian expressed a concern that the white papers has so far developed from a Roche point of view, and that we need more active participation from other companies.
+
+The discussion then turned to the call for tables that was made at R/Pharma. The intention is to collect examples of tables from the space of tables across all companies that represent the tables that are essential for submissions and deliverables.
+
+Tom offered to query his programming team for examples of tables needed at Pfizer.
+
+Joe suggested writing a blog post to promote our call for examples of table. The group clarified that the kinds of tables we are interested in are nontrivial tables, "Tables that we have struggled to create". Adrian noted he recently came across a difficult case of building a table where a model was rerun for different subsets.
+
+Alexandra expressed a concern that outside of big pharma other companies might we struggling with creating tables not considered by the WG to be especially difficult.
+
+Joe suggested a second blog post that provides simple examples, and Alexandra stated that she believed that these kinds of examples would be helpful in introducing SAS programmers and management to what R can do.
+
+Those present agreed that we are looking for the library of archetypes of tables. Tables that a person would need to have in order to be successful in promoting R for production use. Some of these would be difficult to construct, others would be more basic but essential. 
+
+It was agreed that two posts are needed. The first will ask for readers to describe tables that they would like to have but can not presently create with R. The second will provide examples of more basic but essential tables.
+
+The suggestion was made that the WG should also ask regulators to comment on the range of tables they must work with and their likes and dislikes. The group would also like to hear the opinions of regulators on listings. Gabe noted that Roche currently models listings as separate from tables and asks if other companies do that also. Would improvements on tables make listings unnecessary? Keaven mentioned that at Merck they would like to be able to drill down from tables to details, i.e. instrument the tables with data.
+
+At 42:20 into the video, Keaven asks for a list of tables supported by rtables. Thereafter follows a short discussion about the capabilities of rtables. (With rtables, it is possible to write R code to construct any table where the underlying computations are row dominant.)
+
+A table is described by its display. Computable displays are preferable, but anything that describes the table, even screen captures, will be helpful.
+
+In response to a question there was a short discussion about the interactions of tables and plots, a topic that is not currently in the paper. Doing this well is thought to take quite a bit of work.
+
+Joe took the action item to write to the authors of the packages listed in the paper to remind them to fill in their sections. (See the kanban board for packages and authors who have accepted assignments.)
+
+Joe, Gabe and Alexandra agreed to collaborate on the call for tables blog post. A google doc has been created to collaborate on the post: https://docs.google.com/document/d/1tM6v-bWjrKRjtDZaYdOtcbMQbCtjfvUHIulih6ONre0/edit
+
+A proposed topic for the next meeting is whether users want templates for tables.
+
+The next meeting will be held on 2021-12-02 at 9AM Pacific Time.
