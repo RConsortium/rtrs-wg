@@ -228,6 +228,7 @@ lyt <- basic_table() %>%
    analyze(c("SEX", "AGE"), afun = function(x) {
       if (is.numeric(x)) {
          in_rows(
+            "n" = sum(!is.na(x)),
             "Missing" = sum(is.na(x)),
             "Mean (sd)" = rcell(c(mean(x), sd(x)), format = "xx.xx (xx.xx)"), 
             "Median" = median(x),
