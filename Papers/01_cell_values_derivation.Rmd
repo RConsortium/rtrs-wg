@@ -137,7 +137,7 @@ adae <- rtables::ex_adae
 # Cell Content Derivation
 
 For this paper we look at cell content derivation. The different table packages (except for `broom`) can be grouped into
-frameworks that require the cell content to be per-calculated and available in a data frame and frameworks that come
+frameworks that require the cell content to be pre-calculated and available in a data frame and frameworks that come
 with specialized cell derivation methods.
 
 The table packages that rely on external ways of deriving the cell contents include `gt`, `flextable`, `huxtable`,
@@ -228,7 +228,7 @@ lyt <- basic_table() %>%
    analyze(c("SEX", "AGE"), afun = function(x) {
       if (is.numeric(x)) {
          in_rows(
-            "n" = sum(is.na(x)),
+            "Missing" = sum(is.na(x)),
             "Mean (sd)" = rcell(c(mean(x), sd(x)), format = "xx.xx (xx.xx)"), 
             "Median" = median(x),
             "Min - Max" = rcell(range(x), "xx.xx - xx.xx")
@@ -239,6 +239,30 @@ lyt <- basic_table() %>%
    })
 
 build_table(lyt, adsl)
+```
+
+```{r}
+tbl <- tplyr_table(adsl, ARM) %>% 
+  add_total_group(group_name = "All Patients") %>% 
+  add_layer(group_count(SEX, by = "Sex Categories n (%)") %>% 
+              set_format_strings(f_str("xx", n))) %>% 
+  add_layer(group_desc(AGE, by = "Age (years)") %>% 
+              set_format_strings("n"         = f_str("xx", n),
+                                 "Missing"   = f_str("xx", missing),
+                                 "Mean (sd)" = f_str("xx.xx (xx.xx)", mean, sd, empty = "NA"),
+                                 "Median"    = f_str("xx", median),
+                                 "Min - Max"  = f_str("xx - xx", min, max))) 
+
+build_tbl <- tbl %>% 
+  build() %>% 
+  dplyr::mutate_all(as.character) %>% 
+  dplyr::select(-starts_with("ord"))
+
+n_string <- header_n(tbl) %>% dplyr::mutate(header = sprintf("%s (N=%i)", ARM, n)) %>% dplyr::pull(header) %>% paste0(., collapse = " | ")
+
+build_tbl %>% 
+  add_column_headers(., s = paste0("| |", n_string, collapse = "")) %>% 
+  dplyr::relocate(ends_with("All Patients"), .after = last_col())
 ```
 
 ## Adverse Events Table
