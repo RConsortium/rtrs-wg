@@ -113,6 +113,9 @@ Computing a Table:
    - to a device (display, HTML, PDF,  txt, ...)
    - colors
 
+
+## Terminology
+
 Presentational Form Table:
 
 *A table is an arrangement of data in rows and columns, or possibly in a more complex structure.* (Wikipedia)
@@ -120,7 +123,9 @@ Presentational Form Table:
 * Cells
 * Columns
 * Rows
-* ...
+* Stubhead Label (gt), topleft (rtables)
+* row / column group label
+* ....
 
 # Other Important Requirements For Pharma
 
