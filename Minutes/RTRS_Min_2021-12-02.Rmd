@@ -1,0 +1,73 @@
+---
+title: "RTRS_Minutes_2021-12-2"
+author: "Joseph Rickert"
+date: "12/2/2021"
+output: html_document
+---
+Minutes from 20210-12-02 RTRS meeting compiled by Joseph Rickert.
+
+### Attendees
+* Keaven Anderson - Merck
+* Gabriel Becker
+* Joe Cheng - RStudio
+* Steven Hassendonckx - JnJ
+* Rich Iannone - RStudio
+* Alexandra Lauer - Merck
+* Himanshu Pandya - Biogen
+* Samir Parmar - Lilly
+* Joseph Rickert - RStudio
+* Tom Tensfeldt - Pfizer
+* Pierre Wallet - Novartis
+* Adrian Waddell - Roche
+* Yilong Zhang - Merck
+
+
+The meeting was recorded and the video is available [here](https://rstudio.zoom.us/rec/share/zpcJjIa4G3uK3fFmXgZtTxaKGotbPLGoBqRc8vromcqzutEbLlbQJ53WrRHVHA-P.fjepTeihSyj2zFzi), Passcode: A1tBC=.b
+
+**JR** began the meeting and listed three items for the agenda:  
+
+1. A final review of the blog post asking for tables. The [draft](https://docs.google.com/document/d/1tM6v-bWjrKRjtDZaYdOtcbMQbCtjfvUHIulih6ONre0/edit) is available as a google doc.   
+2.  Setting goals for completing the working paper
+3. A discussion of where we think we are going with respect to recommendations for how to build tables
+
+Those present agreed to review the post by Monday. **TT** noted that he has asked his team from Pfizer to provide examples of problematic tables.
+
+**JR** raised two additional issues for discussion:
+
+1. Specifying the scope of what we are trying to cover, noting that if we find that we can not construct tables using the packages available we will have to decide where to put in the effort.
+2. Whether the various R packages that build tables share a common terminology. For example, `Tplyr` speaks about *layers*. JR asked if this was a concept common to table building packages.
+
+**GB** responded that `rtables` does not make use of the notion of layers. A discussion of the concept of layers with respect to tables begins at **7:30** in the video.
+
+At **11:40**, **GB** suggests that *cells*, *rows* and *columns* are fundamental notions for tables, and that there is a concept of *group summaries*, groups of rows, that is shared by several packages. 
+
+**SP** notes that *row spanning* is a notion that is important at Lilly and offered to see if he could find examples that he could share. 
+
+**AW** suggests that the first part of our paper should be about how we derive cell values and notes that **YL's** [Book](https://r4csr.org/index.html) shows how to do this with `dplyr`.
+
+In response to a question about additional common terminology **GB** and **AW** suggest that *header*, *footer*, *referential footnotes* and maybe *top left* are candidates. Many of the pieces are common, but we do not have a common language. **GB** also noted that the Xinxin Wang's Ph.D. thesis, [*Tabular Abstraction, Editing, and Formatting*](https://uwspace.uwaterloo.ca/bitstream/handle/10012/10962/WANG_XINXIN_.pdf?sequence=1&isAllowed=y) offers some guidance. For example, this paper defines *tabulation* as the arrangement of values and not their computation. We have adopted this in the draft of our paper.
+
+The group agreed to add a section for terminology to the paper. 
+
+At **28:30**, **JR** asks if it necessary to describe the various uses pharma has for tables. **TT** notes that, at Pfizer, there is a mapping between study designs and the tables that are listed as defaults for those studies. **TT** agreed to look into whether he could share this mapping.
+
+**AW** suggested themes for three papers for the group:
+
+1. How to get cell values
+2. How to render
+3. How to create tables at scale
+.
+**GB** offered that a strong first paper would be to describe the things you can do to make tables in R now, and then show they are used construct tables for a pharma regulatory environment.
+
+It was noted that individuals working in pharma companies are not generally at liberty to decide what table package to use. They are constrained to use a workflow that specifies certain packages. Given this situation, **AW** suggested that in the first paper, we may want to show some examples of how to construct the same table using different frameworks, even if some of the frameworks are not optimal for making some particular table.
+
+Next, **JR** suggested that we set some goals for net year, and asks if we can set the goal to have the first paper done by August 2022. The group agreed that this was reasonable.
+
+At **40** minutes into the video, **AW** walks the group through the project [Kanban board](https://github.com/RConsortium/rtrs-wg/projects/1), and reviews assignments.
+
+**JR** agreed to find someone, perhaps from the FDA, to talk about the importance of listings. An alternative to listings might be to provide web based applications, e.g. shiny apps.
+
+Working group members, please review the Kanban board for your assigned tasks.
+
+The next meeting will be held at 9:00 AM Pacific Time on Thursday, January 6, 2022.
+
