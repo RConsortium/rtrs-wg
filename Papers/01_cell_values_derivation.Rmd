@@ -73,7 +73,7 @@ Open source projects in alphabetical order (remember, this is not a sales pitch,
 
 - `broom`: useful to create tables of statistical model fits
 - `flextable`:
-- `gt`:
+- `gt`: has a high-level and declarative interface for composing tables. Contains a variety of 'formatter' functions for transforming cell values from an input data frame to the desired reporting values (combines mutation and aesthetic styling with options for: scientific notation, uncertainty, ranges, percentages, suffixes, localized currency, etc.). Multiple output formats are supported with the same declarative interface (e.g., HTML, LaTeX/PDF, and RTF).
 - `huxtable`:
 - `mmtable2`:
 - `rtables`: defines a pipe-able grammar for declaring complex table structure layouts via nested splitting - in
