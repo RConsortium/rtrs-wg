@@ -66,32 +66,54 @@ In this paper we discuss key data derivation concepts behind tabulation.
 
 # Table R packages Overview
 
-R's table creation functionality has recently seen a lot of contribution via specialized R packages. In this section we
-provide an overview of packages what this working group has found to be useful in analyzing clinical trials data.
+R's table creation functionality has recently experienced of forward momentum with regard to individual contributions 
+via specialized R packages. In this section we provide an overview of the R packages what this working group has found 
+to be useful in tabulating clinical trials data.
 
-Open source projects in alphabetical order (remember, this is not a sales pitch, please be as objective as possible in describing the functionality of the package):
+**rtables**
 
-- `broom`: useful to create tables of statistical model fits
-- `flextable`:
-- `gt`: has a high-level and declarative interface for composing tables. Contains a variety of 'formatter' functions for transforming cell values from an input data frame to the desired reporting values (combines mutation and aesthetic styling with options for: scientific notation, uncertainty, ranges, percentages, suffixes, localized currency, etc.). Multiple output formats are supported with the same declarative interface (e.g., HTML, LaTeX/PDF, and RTF).
-- `huxtable`:
-- `mmtable2`:
-- `rtables`: defines a pipe-able grammar for declaring complex table structure layouts via nested splitting - in
+The `rtables` package defines a pipe-able grammar for declaring complex table structure layouts via nested splitting - in
 row- and column-space - and the specification of analysis functions which will calculate cell values within that
 structure. These pre-data table layouts are then applied to data to build the table, during which all necessary data
 grouping implied by the row and column splits, cell value calculation, and tabulation occurs automatically. Additional
 table features such as titles, footers, and referential footnotes are supported. ASCII, HTML, and PDF are supported as
 output formats for rendering tables.
-- `tableone`: 
-- `tables`: 
-- `tplyr`:
+
+**tplyr**
+
+
+**gt**
+
+The `gt` package has a high-level and declarative interface for composing tables. Contains a variety of 'formatter' 
+functions for transforming cell values from an input data frame to the desired reporting values (combines mutation 
+and aesthetic styling with options for: scientific notation, uncertainty, ranges, percentages, suffixes, localized 
+currency, etc.). Multiple output formats are supported with the same declarative interface (e.g., HTML, LaTeX/PDF, and RTF).
+
+**huxtable**
+
+
+**flextable**
+
+
+**knitr**
+
+
+**broom**
+
+The `broom` package is not focused on creating summary tables but rather it generates data frames containing model output. 
+This serves as a useful first step for creating summary tables of statistical modeling results in reporting. The table objects
+produced by `broom` essentially serve as inputs to any of the table-generation packages described in this survey.
+
+**Other Table Generation Packages**
+
+There are several other R packages that perform table generation suited for reporting. These include `tables`, 
+`kableExtra`, `pixiedust`, `tangram`, `stargazer`, `ztable`, `xtable`, `formattable`, `mmtable2`, `tableone`, etc.,
+and these packages are typically less-maintained than the aforementioned ones.
 
 `pharmaRTF`, `xtable`, `r2rtf`, `officer`, `pander`, `ttt` fit in to the discussion of the 2nd paper.
 
 Note that `DT`, `reactable` are not listed here as it is used to create interactive tables only. 
 
-
-Other R packages?:
 
 # What is a Table
 
