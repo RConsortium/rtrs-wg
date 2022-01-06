@@ -1,0 +1,37 @@
+---
+title: "RTRS_Minutes_2022-01-06"
+author: "Joseph Rickert"
+date: "1/6/2022"
+output: html_document
+---
+
+Minutes from 2022-01-06 RTRS meeting compiled by Joseph Rickert.
+
+### Attendees
+* Keaven Anderson - Merck
+* Gabriel Becker
+* Phil Bowsher - RStudio
+* Steven Hassendonckx - JnJ
+* Rich Iannone - RStudio
+* Alexandra Lauer - Merck
+* Tadeus Lewandowski - Roche
+* Nicholas Masel -JnJ
+* Michael Meyer - RStudio
+* Joseph Rickert - RStudio
+* Pierre Wallet - Novartis
+* Yilong Zhang - Merck
+
+
+The majority of the meeting was devoted to discussing the four example tables provided in response to our December 6, 2021 [blog post](https://www.r-consortium.org/blog/2021/12/06/difficult-pharma-stats-table) asking for samples of difficult to build Pharma tables. The submissions are in issues #29 through #32 in the [RTRS repo](https://github.com/RConsortium/rtrs-wg/issues).
+
+There was also a discussion about how the WG should respond to the submissions. It was agreed that we would provide at least one example solution and ideally multiple solutions using different packages in a "stackoverflow" fashion.
+
+Issue #30 refers to the [NNtable](https://github.com/NNpackages/NNtable) package. This package was added to list of relevant table packages to include in our white paper.
+
+Gabe Becker agreed to provide solutions to the four submissions using the [rtables](https://github.com/Roche/rtables). Other members will attempt solutions using different tables packages. Data to construct the solution tables could come from data sets supplied with the rtables or [safetyData](https://cran.r-project.org/package=safetyData) package on CRAN.
+
+A design issue that surfaced during the discussion of the submitted tables is that some of them posed problems that are more easily solved with a row based approach as opposed to a column dominant way of constructing tables.
+
+The meeting was recorded and the [video](https://rstudio.zoom.us/rec/share/GvXdaDjfTX6LP_rAdZxxPhWlajl9_MYq0ykNg3vGC2LNc-mn6xVfzoTBpUQKA7iT.wj7u6K6mDKgEXAuM) is available with passcode: BJ.2@7G!
+
+The next meeting will be held at 9AM Pacific Time on Thursday, February 3, 2022.
