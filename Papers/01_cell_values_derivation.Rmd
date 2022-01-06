@@ -95,6 +95,9 @@ currency, etc.). Multiple output formats are supported with the same declarative
 **flextable**
 
 
+**NNtable**
+
+
 **knitr**
 
 
