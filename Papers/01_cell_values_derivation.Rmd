@@ -316,7 +316,14 @@ e.g.  Comparing Biomarker Evaluable Population vs All
    - different per column
 
 ## Rounding Rules
-This might fit into the next paper.
+
+(This might fit into the next paper.)
+
+The default rounding algorithm in R since version 4.0 has been changed to align with the IEC 60559 standard (which uses the 'round-to-even' rule). While the new rounding scheme can be viewed as an improvement for many statistical applications, in the short term, the change can cause reproduciblity issues since for example older outputs will have different rounding applied compared to newer.
+
+Another issue with this change is the disjunct between rounding rules between R and Excel as SAS. Given that R users and their collaborators may also be Excel or SAS users, this change can certainly lead to inconsistencies across outputs and confusion in the long term (i.e., there is no indication presently that either Excel or SAS will change their default rounding scheme to match that of present-day R).
+
+For R packages that generate tables, any rounding applied by functions that use base R functionality like `round()` (for rounding numerical values) or `formatC()` (for formatting numerical values to strings in myriad ways) will have different outputs in R 3.6 or lower compared to R 4.0 or higher. It is up to the individual table-generation packages to see this as an important issue and generate solutions for rounding unexpectedly. R packages such as `round` exist to offer several rounding algorithms (through the `roundX()` function) but it's understandably difficult to offer a comprehensive solution as the new default rounding 'runs deep' in functions like `formatC()`.
 
 * Round half up
   - SAS, Excel
