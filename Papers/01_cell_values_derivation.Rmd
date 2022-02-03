@@ -100,6 +100,9 @@ currency, etc.). Multiple output formats are supported with the same declarative
 
 **knitr**
 
+While the main focus of `knitr` package has little to do with tables, the package exposes the `kable()` function which allows
+for rudimentary summary table generation based on an input data frame. Styling and formatting options are kept quite minimal by
+design.
 
 **broom**
 
