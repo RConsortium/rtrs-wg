@@ -3,8 +3,8 @@ title: "Tables in Pharma"
 author: "R Consortium Workstream Tables for Regulatory Submission"
 date: "6/3/2021"
 output:
-  html_document: default
   pdf_document: default
+  html_document: default
 subtitle: Cell Values Derivation and Simple Tabulation
 editor_options:
   chunk_output_type: console
@@ -16,7 +16,7 @@ knitr::opts_chunk$set(echo = TRUE)
 
 # Introduction
 
-Tables are a major component for analyzing clinical trials data and to communicate the results to the study teams, in
+Tables are a major component for analyzing clinical trials data and to communicate results to the study teams, in
 publications, and to the health authorities. Historically most tables for clinical trials submissions have been created
 with SAS but there is an ongoing industry effort to switch the programming language of choice to R.
 
@@ -25,44 +25,11 @@ to establish the requirements for an R based submission (the analytics part). Th
 source solutions that will settle in as the industry standard.
 
 This paper on table creation is the first paper from the  *R Consortium Tables for Regulatory Submission (RTRS)* working
-group. The aim is to publish a series of papers on table creation to analyze clinical trials data with R. The series of
-papers will be:
-
-1. Data Derivation for Tabulation & Table Data Structure
-   - (`dplyr` & `tidyr`, `rtables`, `Tplyr`, `tables`)
-   - Analytics & matching results (rounding rules)
-   - data structure & accessors and modifiers
-2. Table creation Process -- Industry
-   - stages
-3. Formatting & Rendering
-   - cell format
-   - (tables, titles and footnotes) & Rendering (html, pdf, txt, rtf, xml, markdown & rmarkdown, word, power point, tgen etc.)
-      - including `pharmaRTF`
-   - pagination
-   - titles, footnotes, cell references
-4. Listings
-5. Table Templates
-
-1. Creating Tables at Scale (Workflow, pipelining)
-   - table templates (standards)
-   - cross checks
-   - hybrid SAS and R projects
-   - saving table cell values
-2. clinicaltrials.gov submission
-3. Future Recommendations
-   - Interactive Tables and drill down capability
-      - shiny
-      - e.g. patient profile table, listings, graphs
-   - HTML website with tables as reviewing aid
-      - add more markup/formatting
-      - search/organizing
-
-1. Table Catalog??
-
-1. Transforming tables??
+group. The aim is to publish a series of papers on various aspects of table creation to analyze report clinical trials
+data with R.
 
 
-In this paper we discuss key data derivation concepts behind tabulation.
+
 
 
 # Table R packages Overview
@@ -346,6 +313,52 @@ For R packages that generate tables, any rounding applied by functions that use 
 
 
 # Conclusions
+
+
+
+
+# Appendix
+
+## Planned Papers
+
+The series of papers will be:
+
+1. Data Derivation for Tabulation & Table Data Structure
+   - (`dplyr` & `tidyr`, `rtables`, `Tplyr`, `tables`)
+   - Analytics & matching results (rounding rules)
+   - data structure & accessors and modifiers
+2. Table creation Process -- Industry
+   - stages
+3. Formatting & Rendering
+   - cell format
+   - (tables, titles and footnotes) & Rendering (html, pdf, txt, rtf, xml, markdown & rmarkdown, word, power point, tgen etc.)
+      - including `pharmaRTF`
+   - pagination
+   - titles, footnotes, cell references
+4. Listings
+5. Table Templates
+
+1. Creating Tables at Scale (Workflow, pipelining)
+   - table templates (standards)
+   - cross checks
+   - hybrid SAS and R projects
+   - saving table cell values
+2. clinicaltrials.gov submission
+3. Future Recommendations
+   - Interactive Tables and drill down capability
+      - shiny
+      - e.g. patient profile table, listings, graphs
+   - HTML website with tables as reviewing aid
+      - add more markup/formatting
+      - search/organizing
+
+1. Table Catalog??
+
+1. Transforming tables??
+
+
+In this paper we discuss key data derivation concepts behind tabulation.
+
 
 
 # Ressources
