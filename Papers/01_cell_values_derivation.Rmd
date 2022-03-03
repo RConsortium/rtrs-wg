@@ -95,6 +95,11 @@ currency, etc.). Multiple output formats are supported with the same declarative
 
 **flextable**
 
+'flextable' is providing a *grammar* for creating and customizing tables. The following formats are supported: 'Word' (*.docx), 
+'PowerPoint' (*.pptx), 'PDF' and 'HTML'. The syntax is the same for the user regardless of the type of output to be produced. 
+A set of functions allows the creation, definition of cell arrangement, addition of headers, formatting and definition of cell 
+content (i.e. text and or images). The package also offers a set of high-level functions that allow, for example, tabular 
+reporting of statistical models and the creation of complex cross tabulations. 
 
 **NNtable**
 
