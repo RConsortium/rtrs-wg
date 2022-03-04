@@ -44,3 +44,4 @@ To resolve the second question raised above, JR agreed to start drafting a post 
 The next meeting is scheduled for 9AM Pacific Time on Thursday, March 3, 2022.
 
 
+
