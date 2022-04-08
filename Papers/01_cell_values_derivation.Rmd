@@ -122,8 +122,6 @@ There are several other R packages that perform table generation suited for repo
 `kableExtra`, `pixiedust`, `tangram`, `stargazer`, `ztable`, `xtable`, `formattable`, `mmtable2`, `tableone`, etc.,
 and these packages are typically less-maintained than the aforementioned ones.
 
-`pharmaRTF`, `xtable`, `r2rtf`, `officer`, `pander`, `ttt` fit in to the discussion of the 2nd paper.
-
 Note that `DT`, `reactable` are not listed here as it is used to create interactive tables only. 
 
 
@@ -143,7 +141,7 @@ Computing a Table:
   - i.e. arrange cell values in a tabular form
   - titles, footnotes
   - cell, row, column references
-* Rendering & Formatting:
+* Rendering & Formatting (briefly mention, won't be a focus in this paper):
    - to a device (display, HTML, PDF,  txt, ...)
    - colors
 
@@ -163,7 +161,6 @@ Presentational Form Table:
 
 # Other Important Requirements For Pharma
 
-* Pagination
 * regulated (validation)
 
 # Data Used
@@ -326,24 +323,6 @@ e.g.  Comparing Biomarker Evaluable Population vs All
    - same for every cell
    - different per row group
    - different per column
-
-## Rounding Rules
-
-(This might fit into the next paper.)
-
-The default rounding algorithm in R since version 4.0 has been changed to align with the IEC 60559 standard (which uses the 'round-to-even' rule). While the new rounding scheme can be viewed as an improvement for many statistical applications, in the short term, the change can cause reproduciblity issues since for example older outputs will have different rounding applied compared to newer.
-
-Another issue with this change is the disjunct between rounding rules between R and Excel as SAS. Given that R users and their collaborators may also be Excel or SAS users, this change can certainly lead to inconsistencies across outputs and confusion in the long term (i.e., there is no indication presently that either Excel or SAS will change their default rounding scheme to match that of present-day R).
-
-For R packages that generate tables, any rounding applied by functions that use base R functionality like `round()` (for rounding numerical values) or `formatC()` (for formatting numerical values to strings in myriad ways) will have different outputs in R 3.6 or lower compared to R 4.0 or higher. It is up to the individual table-generation packages to see this as an important issue and generate solutions for rounding unexpectedly. R packages such as `round` exist to offer several rounding algorithms (through the `roundX()` function) but it's understandably difficult to offer a comprehensive solution as the new default rounding 'runs deep' in functions like `formatC()`.
-
-* Round half up
-  - SAS, Excel
-* R rounds to even.
-  - 3.* to 4.* difference?
-  - sprintf, formatC
-* Data precision based rounding
-
 
 # Conclusions
 

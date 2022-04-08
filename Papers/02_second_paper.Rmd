@@ -1,0 +1,56 @@
+---
+title: "Tables in Pharma"
+author: "R Consortium Workstream Tables for Regulatory Submission"
+date: "4/7/2022"
+output:
+  html_document: default
+  pdf_document: default
+subtitle: Rendering Tables
+editor_options:
+  chunk_output_type: console
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+# Introduction
+
+
+Briefly describe the R packages: `pharmaRTF`, `xtable`, `r2rtf`, `officer`, `pander`, `ttt`.
+
+Discuss Rendering & Formatting:
+
+   - Pagination
+   - to a device (display, HTML, PDF,  txt, ...)
+   - colors
+
+## Rounding Rules
+
+The default rounding algorithm in R since version 4.0 has been changed to align with the IEC 60559 standard (which uses the 'round-to-even' rule). While the new rounding scheme can be viewed as an improvement for many statistical applications, in the short term, the change can cause reproduciblity issues since for example older outputs will have different rounding applied compared to newer.
+
+Another issue with this change is the disjunct between rounding rules between R and Excel as SAS. Given that R users and their collaborators may also be Excel or SAS users, this change can certainly lead to inconsistencies across outputs and confusion in the long term (i.e., there is no indication presently that either Excel or SAS will change their default rounding scheme to match that of present-day R).
+
+For R packages that generate tables, any rounding applied by functions that use base R functionality like `round()` (for rounding numerical values) or `formatC()` (for formatting numerical values to strings in myriad ways) will have different outputs in R 3.6 or lower compared to R 4.0 or higher. It is up to the individual table-generation packages to see this as an important issue and generate solutions for rounding unexpectedly. R packages such as `round` exist to offer several rounding algorithms (through the `roundX()` function) but it's understandably difficult to offer a comprehensive solution as the new default rounding 'runs deep' in functions like `formatC()`.
+
+* Round half up
+  - SAS, Excel
+* R rounds to even.
+  - 3.* to 4.* difference?
+  - sprintf, formatC
+* Data precision based rounding
+
+# Conclusions
+
+
+# Ressources
+
+This section will be deleted, but the listed documents are useful to build the paper.
+
+- https://github.com/RConsortium/rtrs-wg/blob/main/Minutes/RTRS_Minutes_2021-05-06.Rmd
+- https://github.com/RConsortium/rtrs-wg/blob/main/Requirements/working-requirements/requirements.md
+- https://roche.github.io/rtables/articles/tabulation_concepts.html
+- https://roche.github.io/rtables/articles/tabulation_dplyr.html
+- https://phuse.s3.eu-central-1.amazonaws.com/Deliverables/Standard+Analyses+and+Code+Sharing/Analyses+%26+Displays+Associated+with+Demographics,+Disposition+and+Medication+in+Phase+2-4+Clinical+Trials+and+Integrated+Summary+Documents.pdf
+- https://advance.phuse.global/display/WEL/Safety+Analytics
+- https://phuse.global/Deliverables/1
