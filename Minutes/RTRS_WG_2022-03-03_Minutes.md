@@ -48,6 +48,5 @@ JR asked the group what the WG means by publishing; a paper for a journal or an 
 
 In the remaining time the WG updated the [kanban board](https://github.com/RConsortium/rtrs-wg/projects/1) with new "To do" tasks configured as issues with the idea that the extended WG membership could comment on the issues before the next meeting.
 
-
-
+The next meeting is scheduled for 9AM Pacific Time on Thursday, April 7, 2022.
 
