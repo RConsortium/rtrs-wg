@@ -1,6 +1,6 @@
 ## Minutes RTRS WG - 2022-04-07
 
-The minutes were compiled by Joseph Rickert.
+The minutes were compiled by Joseph Rickert
 
 ### Attendees
 * Gabriel Becker
