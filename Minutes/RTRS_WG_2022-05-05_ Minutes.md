@@ -40,7 +40,6 @@ JBR asked why Roche and the three unnamed companies formed a collaboration outsi
 
 Tad replied that the collaboration began before the formation of the R working groups, but also: management wanted to make sure that the collaboration did slow down internal development. Tom Tensfeldt said that his company has collaborated in similar arrangements; these arrangements are quite common. The problem with doing this kind of collaborative work under the umbrella of the R Consortium is the worry that doing the work in the open, as open source would slow down internal development. 
 
-
 JBR: This is a real challenge for the R Consortium.
 
 At **25:33** Adrian begins a demo of the Roche workflow.
