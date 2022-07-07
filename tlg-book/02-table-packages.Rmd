@@ -1,0 +1,42 @@
+# Overview table R packages {#tablepkgs}
+
+In this chapter summarizes various `R` packages to create tables. The current list
+is by no means complete, if you know another package that has been useful for you to
+analyze clinical trials data then please contribute to this chapter.
+
+## gt
+
+The `gt` package has a high-level and declarative interface for composing
+tables. Contains a variety of `formatter` functions for transforming cell values
+from an input data frame to the desired reporting values (combines mutation and
+aesthetic styling with options for: scientific notation, uncertainty, ranges,
+percentages, suffixes, localized currency, etc.). Multiple output formats are
+supported with the same declarative interface (e.g., HTML, LaTeX/PDF, and RTF).
+
+## rtables
+
+The `rtables` package defines a pipe-able grammar for declaring complex table
+structure layouts via nested splitting - in row- and column-space - and the
+specification of analysis functions which will calculate cell values within that
+structure. These pre-data table layouts are then applied to data to build the
+table, during which all necessary data grouping implied by the row and column
+splits, cell value calculation, and tabulation occurs automatically. Additional
+table features such as titles, footers, and referential footnotes are supported.
+ASCII, HTML, and PDF are supported as output formats for rendering tables.
+
+`rtables` source code is on [GitHub](https://github.com/roche/rtables) as well
+as the [documentation](https://roche.github.io/rtables/). `rtables` is also available
+on [CRAN](https://CRAN.R-project.org/package=rtables).
+
+## flextable
+
+`flextable` is providing a *grammar* for creating and customizing tables. The
+following formats are supported: 'Word' (*.docx), 'PowerPoint' (*.pptx), 'PDF'
+and 'HTML'. The syntax is the same for the user regardless of the type of output
+to be produced. A set of functions allows the creation, definition of cell
+arrangement, addition of headers, formatting and definition of cell content
+(i.e. text and or images). The package also offers a set of high-level functions
+that allow, for example, tabular reporting of statistical models and the
+creation of complex cross tabulations.
+
+

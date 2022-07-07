@@ -1,0 +1,78 @@
+
+# Formatting and Rendering Tables
+
+Table generation usually is a two step process
+
+1. Derive the cell value and tabulate them.
+1. Create the final table output, save it to a file to be shared with collaborators. 
+
+Chapter [Commonly Used Tables] focuses with the work involved in 1, in this chapter we
+discuss the various aspects of creating the final outputs that is commonly stored
+in a file with a particular file format (`pdf`, `txt`, `html`, or `rtf`).
+
+## Title & Footnotes
+
+Commonly rendered tables that are reported to the health authorities have titles
+and footnotes with information such as:
+
+- what is summarized in the table
+- database lock date
+- patient sub-population
+- notes by study team
+- notes regarding statistical algorithms chosen
+- provenance information including path to program and when the table was created
+
+Often footnotes include cell references.
+
+### Title and Footnotes in rtables
+
+The `basic_table` function in `rtables` has the argument `titles`, `subtitles`,
+`main_footer`, `prov_footer` to add titles and footnotes to tables. `rtables`
+also supports referential footnotes.
+
+So for example a basic demographics table created with `rtables` via `tern` with
+title and footnotes would look as follows:
+
+```{r,  comment=NA }
+lyt <- basic_table(
+  title = "Demographic Table - All Patients",
+  subtitles = c("Cutoff Date: June 01, 2022", "Arm B received a placebo."),
+  main_footer = c("Missing data is omitted.")
+) |>
+  split_cols_by("ARM") |>
+  analyze(c("AGE", "SEX"))
+
+build_table(lyt, adsl)
+```
+
+## Pagination
+
+Historically tables have been printed to paper for submissions. Hence large tables
+that would not fit onto a single printed page (e.g. letter & portrait) would have to 
+be split into multiple tables that can be printed to the preferred page size. This 
+process of splitting the table is called *pagination* of tables.
+
+Pagination is a complex task as it requires to repeat information so that the tables
+on each page are correct tables with all relevant information for context.
+
+### Pagination in rtables
+
+In `rtables` pagination can be done with the `paginate_table` function which has 
+a number of arguments to split the table, see the [example documentation](https://roche.github.io/rtables/reference/paginate.html).
+
+
+
+## Rendering Tables
+
+The choice of file format is often dictated by your companies processes to 
+include the tables in a report.
+
+### ASCII
+
+### PDF
+
+### HTML
+
+### RTF
+
+

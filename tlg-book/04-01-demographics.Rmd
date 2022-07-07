@@ -1,0 +1,18 @@
+---
+output: html_document
+editor_options: 
+  chunk_output_type: console
+---
+## Demographic Tables
+
+### rtables
+
+Using `rtables` and `tern`
+
+```{r, comment=NA}
+lyt <- basic_table() |>
+  split_cols_by("ARM") |>
+  summarize_vars(c("AGE", "SEX", "COUNTRY"))
+
+build_table(lyt, adsl)
+```

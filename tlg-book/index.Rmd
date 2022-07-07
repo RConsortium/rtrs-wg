@@ -1,0 +1,122 @@
+--- 
+title: "Tables in Clinical Trials with R"
+author: "R Consortium Tables Working Group"
+date: "`r Sys.Date()`"
+site: bookdown::bookdown_site
+documentclass: book
+bibliography: [book.bib, packages.bib]
+# url: your book url like https://bookdown.org/yihui/bookdown
+# cover-image: path to the social sharing image like images/cover.jpg
+description: |
+  Example code to create tables commonly used for analyzing clinical trials data.
+link-citations: yes
+github-repo: RConsortium/rtrs-wg
+editor_options: 
+  chunk_output_type: console
+---
+
+# About
+
+## Introduction
+
+In this book we present various aspects of creating tables with the `R` language
+to analyze and report clinical trials data. The book is initiated by the
+R Consortium working group *R Tables for Regulatory Submissions (RTRS)*.
+
+The R Consortium working group *R Tables for Regulatory Submissions (RTRS)* includes
+representation from several large pharmaceutical companies and CRO’s. The goal
+of the working group is to create standards for creating tables that meet the
+requirements of FDA submission documents, and hence enhance the suitability of R
+for FDA submissions. It is part of a larger R Consortium effort to facilitate
+the certification and validation of R packages and tools for FDA submissions
+thereby allowing drug developers to submit documentation for regulatory approval
+using the R programming environment in conjunction with open-source packages
+without the need for closed and often expensive proprietary tools.
+
+
+## Call for Contributions
+
+The content of this book is intended to grow via community contribution, so please
+add your subject matter expertise to this content by cloning the [github repository of this book](https://github.com/RConsortium/rtrs-wg) and make a pull request with your changes.
+
+We welcome all contribution, including but not limited to:
+
+ - summarizing table packages 
+ - adding new example tables
+ - clarifying requirements and analyses
+ - improving R code
+
+In case you are new to using git and GitHub but would like to make a
+contribution then please write an GitHub issue and we will reach out to you to
+add the content.
+
+
+The most convenient way to get started is to:
+
+  - clone the [GitHub repository of this book](https://github.com/RConsortium/rtrs-wg)
+  - install the [RStudio IDE](https://www.rstudio.com/products/rstudio/download/)
+  - Open the RStudio project in `rtrs-wg/tlg-book/tlg-book.Rproj`
+  - start working, see the [Bookdown documentation](https://bookdown.org/yihui/bookdown/), you can develop the book with the `bookdown::serve_book()` call.
+  - once ready to share your work [create a PR](https://docs.github.com/en/pull-requests/collaborating-with-pull-requests/proposing-changes-to-your-work-with-pull-requests/creating-a-pull-request)
+  - use [GitHub issues](https://github.com/RConsortium/rtrs-wg/issues) to communicate with us if you have difficulties
+
+
+## Data Used For Examples
+
+We use synthetic data for the examples in this book. The data is available from the
+`random.cidsc.data` R package which contains a number of datasets that follow the 
+[CDISC ADaM specifications](https://www.cdisc.org/standards/foundational/adam).
+
+```{r, eval=FALSE}
+remotes::install_github("insightsengineering/random.cdisc.data")
+```
+
+The data in `random.cdisc.data` is completely synthetic, meaning no patient data
+has been used to create it. The data is also fairly basic, meaning real study 
+data is has often more signal and patterns.
+
+```{r}
+data(package="random.cdisc.data")$results[, "Item"]
+```
+
+note that the prepending `c` stands for caches. So, for example the cached 
+synthetic subject level dataset `ADSL`:
+
+```{r}
+data("cadsl", package = "random.cdisc.data")
+head(cadsl)
+
+adsl <- cadsl
+```
+
+
+
+## Installing the R packages
+
+At some point we may switch to `renv` to install the `R` packages used 
+for this book. For right now you can install the packages yourself with:
+
+```{r, eval = FALSE}
+install.packages(c("rtables", "gt", "flextable", "remotes", "tidyverse", "bookdown"))
+
+remotes::install_github("insightsengineering/random.cdisc.data")
+remotes::install_github("insightsengineering/nestcolor")
+remotes::install_github("insightsengineering/tern")
+```
+
+```{r include=FALSE}
+# automatically create a bib database for R packages
+knitr::write_bib(c(
+  .packages(), 'bookdown', 'knitr', 'rmarkdown'
+), 'packages.bib')
+```
+
+
+You can then load the packages as follows:
+
+```{r}
+library(gt)
+library(rtables)
+library(tern)
+library(flextable)
+```
