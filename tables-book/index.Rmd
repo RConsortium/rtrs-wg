@@ -55,7 +55,7 @@ The most convenient way to get started is to:
 
   - clone the [GitHub repository of this book](https://github.com/RConsortium/rtrs-wg)
   - install the [RStudio IDE](https://www.rstudio.com/products/rstudio/download/)
-  - Open the RStudio project in `rtrs-wg/tlg-book/tlg-book.Rproj`
+  - Open the RStudio project in `rtrs-wg/tables-book/tables-book.Rproj`
   - start working, see the [Bookdown documentation](https://bookdown.org/yihui/bookdown/), you can develop the book with the `bookdown::serve_book()` call.
   - once ready to share your work [create a PR](https://docs.github.com/en/pull-requests/collaborating-with-pull-requests/proposing-changes-to-your-work-with-pull-requests/creating-a-pull-request)
   - use [GitHub issues](https://github.com/RConsortium/rtrs-wg/issues) to communicate with us if you have difficulties
