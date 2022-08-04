@@ -7,6 +7,29 @@ editor_options:
 
 ### rtables
 
+Using `rtables` only:
+
+```{r, comment= NA}
+a_demo_num <- function(x) {
+    in_rows(n = length(x),
+            "Mean (SD)" = rcell(c(mean(x, na.rm = TRUE),
+                                  sd(x, na.rm=TRUE)), format = "xx.x (xx.x)"),
+            "Median" = median(x,na.rm = TRUE),
+            "Min - Max" = rcell(range(x, na.rm = TRUE), format = "xx.x - xx.x"))
+}
+
+a_demo_fac <- function(x) {
+    in_rows(.list = c(c(n = length(x)), table(x)))
+}
+
+lyt <- basic_table() |>
+  split_cols_by("ARM") |>
+  analyze(c("AGE", "SEX", "COUNTRY"), afun = list(AGE = a_demo_num, SEX = a_demo_fac,
+                                                  COUNTRY = a_demo_fac))
+ 
+build_table(lyt, ex_adsl)
+```
+
 Using `rtables` and `tern`
 
 ```{r, comment=NA}
@@ -14,5 +37,5 @@ lyt <- basic_table() |>
   split_cols_by("ARM") |>
   summarize_vars(c("AGE", "SEX", "COUNTRY"))
 
-build_table(lyt, adsl)
+build_table(lyt, ex_adsl)
 ```
