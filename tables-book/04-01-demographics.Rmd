@@ -39,3 +39,106 @@ lyt <- basic_table() |>
 
 build_table(lyt, ex_adsl)
 ```
+
+
+### gt
+
+```{r, comment= NA}
+library(dplyr)
+library(tidyr)
+library(purrr)
+library(stringr)
+library(gt)
+
+# We will use ex_adsl but will assign a unit to the Age column
+
+gt_adsl <- ex_adsl
+attr(gt_adsl$AGE, "units") <- "Years"
+
+# This is customized summary function
+# It creates numeric and categorical summaries variables following the rtables exmaple
+
+custom_summary <- function(df, group_var, sum_var){
+  group_var <- ensym(group_var)
+  sum_var <- ensym(sum_var)
+  
+  is_categorical <- is.character(eval(expr(`$`(df, !!sum_var)))) | is.factor(eval(expr(`$`(df, !!sum_var)))) 
+  
+  if (is_categorical){
+    df <- df %>%
+      dplyr::group_by(!!group_var, !!sum_var) %>%
+      dplyr::summarise(n := n()) %>% 
+      dplyr::ungroup() %>% 
+      tidyr::pivot_wider(id_cols = !!sum_var, names_from = !!group_var, values_from = n, values_fill = 0) %>% 
+      dplyr::rename(label = !!sum_var) 
+    
+    totals <- df %>%
+      dplyr::summarise_if(is.numeric, .funs = sum) %>%
+      dplyr::mutate(label = "n") %>%
+      dplyr::relocate(label, 1)
+    
+    df <- rbind(totals, df) %>% 
+      dplyr::mutate_if(is.numeric, .funs = as.character)
+    
+    sum_unit <- ", n (%)"
+    
+  } else {
+    
+    sum_unit <- sprintf(" (%s)", attr(eval(expr(`$`(df, !!sum_var))), "units"))
+    
+    df <- df %>% 
+      dplyr::group_by(!!group_var) %>% 
+      dplyr::summarise(n = as.character(sum(!is.na(!!sum_var))),
+                       Mean_SD = sprintf("%4.1f (%3.1f)", mean(!!sum_var, na.rm = TRUE), sd(!!sum_var, na.rm = TRUE)),
+                       Median = as.character(median(!!sum_var, na.rm = TRUE)),
+                       Min_Max = sprintf("%4.1f - %4.1f", min(!!sum_var, na.rm = TRUE), max(!!sum_var, na.rm = TRUE))) %>% 
+      dplyr::ungroup() %>% 
+      tidyr::pivot_longer(cols = c(n, Mean_SD, Median, Min_Max), names_to = "label", values_to = "Value") %>% 
+      tidyr::pivot_wider(id_cols = "label", names_from = !!group_var, values_from = "Value") %>% 
+      dplyr::mutate(label = dplyr::recode(label, "Mean_SD" ="Mean (SD)", "Min_Max" = "Min - Max"))
+    
+  }
+  
+  df %>% 
+    dplyr::mutate(category = paste0(stringr::str_to_title(deparse(substitute(!!sum_var))),
+                                     sum_unit)) 
+}
+
+# Perform aggregation for variables Age, Sex and Country
+
+adsl_summary <- purrr::map_df(.x = vars(AGE, SEX, COUNTRY),
+                             .f = ~custom_summary(df = gt_adsl, group_var = ARM, sum_var = !!.x)) 
+
+# Count number of patients per Arm
+
+total_n_arm <- ex_adsl %>% 
+  dplyr::group_by(ARM) %>% 
+  dplyr::summarise(N = n()) %>% 
+  dplyr::ungroup() 
+
+# gt
+
+gt(adsl_summary, 
+   rowname_col = "label",
+   groupname_col = "category") %>%
+  tab_header(
+    title = "x.x: Study Subject Data",
+    subtitle = html("x.x.x: Demographic Characteristics<br>Table x.x.x.x: Demographic Characteristics - Full Analysis Set"),
+    preheader = c("Protocol: XXXXX", "Cutoff date: DDMMYYYY")
+  ) %>% 
+  tab_source_note("Source: ADSL DDMMYYYY hh:mm; Listing x.xx; SDTM package: DDMMYYYY") %>% 
+  opt_align_table_header(align = "left") %>% 
+  cols_align(align = c("center"),
+             columns = c("A: Drug X", "B: Placebo", "C: Combination")) %>% 
+  cols_align(align = "center",
+             columns = 1) %>% 
+  cols_label("A: Drug X" = html(sprintf("A: Drug X<br> N=%i (100%%)", total_n_arm$N[1])),
+             "B: Placebo" = html(sprintf("B: Placebo<br> N=%i (100%%)", total_n_arm$N[2])),
+             "C: Combination" = html(sprintf("C: Combination<br> N=%i (100%%)", total_n_arm$N[3]))) %>% 
+  tab_options(
+    page.orientation = "landscape",
+    page.numbering = TRUE,
+    page.header.use_tbl_headings = TRUE,
+    page.footer.use_tbl_notes = TRUE)
+```
+
