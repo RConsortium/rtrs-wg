@@ -1,5 +1,171 @@
-## Kaplan Meier Tables
+## Time to Event Analysis Tables
 
+### Cell Value Derivation for Time to Event Analysis
+
+```{r}
+library(dplyr)
+library(tidyr)
+library(stringr)
+library(purrr)
+library(survival)
+
+data("cadaette", package = "random.cdisc.data")
+head(cadaette)
+
+adtte <- cadaette %>% 
+  dplyr::filter(PARAMCD == "AETTE2", SAFFL == "Y")
+```
+
+Our standard TTE table consists of (a derivation of) four main parts:
+
+1. Descriptive stats including the number of subjects with an event, number of subjects censored and censoring reasons
+2. Hazard ratio with corresponding 95% CI from a (stratified) Cox model and a p-value from a stratified log rank test
+3. Median time to event Kaplan-Meier analysis
+4. Number of patients at risk at specified visits from Kaplan-Meier analysis (omitted here).
+
+```{r descr_stats}
+### Subject Count with events
+
+surv_tbl <- as.data.frame(summary(survfit(Surv(AVAL, CNSR==0) ~ TRT01A, data = adtte, conf.type = "log-log"))$table) %>%
+  dplyr::mutate(TRT01A = factor(str_remove(row.names(.), "TRT01A="), levels = levels(adtte$TRT01A)),
+                ind = FALSE)
+
+subj_count <- surv_tbl %>%
+  dplyr::mutate(pct = sprintf("%i (%5.1f)", events, 100*events/records),
+                label = "Number of subjects with serious adverse event, n (%)") %>%
+  dplyr::select(label, TRT01A, pct) %>%
+  tidyr::pivot_wider(id_cols = label, names_from = TRT01A, values_from = pct) %>%
+  dplyr::mutate(ind = FALSE)
+
+# Number of censored subjects
+
+cnsrd_subj_full <- surv_tbl %>% 
+  dplyr::mutate(pct = sprintf("%i (%4.1f)", records-events, 100*(records-events)/records),
+                CNSDTDSC = "Number of censored subjects, n (%)") %>% 
+  dplyr::select(CNSDTDSC, TRT01A, pct)
+  
+cnsrd_subj <- adtte %>% 
+  dplyr::group_by(TRT01A) %>%
+  dplyr::mutate(CNSR = CNSR/n()) %>%
+  dplyr::ungroup() %>%
+  dplyr::filter(CNSR != 0) %>%
+  dplyr::group_by(TRT01A, CNSDTDSC) %>%
+  dplyr::summarise(pct = sprintf("%i (%4.1f)", sum(CNSR != 0), 100*sum(CNSR))) %>%
+  dplyr::ungroup() %>%
+  dplyr::bind_rows(cnsrd_subj_full, .) %>% 
+  tidyr::pivot_wider(id_cols = CNSDTDSC, names_from = TRT01A, values_from = pct) %>%
+  dplyr::rename(label = CNSDTDSC) %>%
+  dplyr::mutate(ind = label != "Number of censored subjects, n (%)") %>% 
+  dplyr::arrange(ind)
+```
+
+```{r cox_mod}
+cph <- coxph(Surv(AVAL, CNSR==0) ~ TRT01A + STRATA1, ties = "exact", data = adtte)
+hr <- exp(coef(cph))
+ci_hr <- exp(confint(cph))
+
+# Hazard ratio and 95% CI
+
+df_hr <- cbind(ci_hr, hr) %>%
+  as.data.frame() %>%
+  dplyr::filter(grepl("TRT01A", row.names(.))) %>% 
+  dplyr::mutate(TRT01A = factor(str_remove(row.names(.), "TRT01A")),
+                ci = sprintf("[%4.1f, %4.1f]", round(!!sym("2.5 %"), 1), round(!!sym("97.5 %"), 1))) %>%
+  dplyr::select(TRT01A, hr, ci)
+
+# Log rank p-value
+
+log_rank_test <- purrr::map_df(.x = list(c("A: Drug X", "B: Placebo"),
+                                         c("A: Drug X", "C: Combination")),
+                               .f = ~{sdf <- survdiff(Surv(AVAL, CNSR==0) ~ TRT01A + STRATA1,
+                                                      data = adtte %>% dplyr::filter(TRT01A %in% .x));
+                               data.frame(TRT01A = .x[2],
+                                          pval = (1-pchisq(sdf$chisq, length(sdf$n)-1))/2)})
+
+df_hr_comp <- merge(df_hr, log_rank_test, by = "TRT01A") %>%
+  dplyr::mutate(hr = sprintf("%4.1f", round(hr, 1)),
+                pval = ifelse(pval < 0.0001, "<0.0001", sprintf("%6.4f", round(pval, 4)))) %>%
+  tidyr::pivot_longer(cols = c(hr, ci, pval), names_to = "label", values_to = "val") %>%
+  tidyr::pivot_wider(names_from = TRT01A, values_from = "val") %>%
+  dplyr::mutate(label = dplyr::recode(label,
+                                      "hr" = "Hazard ratio",
+                                      "ci" = "95% confidence interval",
+                                      "pval" = "p-value (one-sided stratified log rank)"),
+                ind = FALSE)
+```
+
+```{r km}
+median_survtime <- surv_tbl %>%
+  dplyr::mutate(ci = sprintf("[%4.2f, %4.2f]", !!sym("0.95LCL"), !!sym("0.95UCL")),
+                median = sprintf("%4.2f", median),
+                id = "") %>%
+  dplyr::select(TRT01A, id, median, ci) %>%
+  tidyr::pivot_longer(cols = c(id, median, ci), names_to = "label", values_to = "val") %>%
+  tidyr::pivot_wider(names_from = TRT01A, values_from = val) %>%
+  dplyr::mutate(ind = label != "id",
+                label = dplyr::recode(label, "median" = "Median (years)",
+                                      "ci" = "95% confidence interval",
+                                      "id" = "Time to first serious adverse event (a)"))
+
+min_max <- adtte %>%
+  dplyr::filter(!(AVAL == 0 & CNSR == 1)) %>% 
+  dplyr::group_by(TRT01A) %>%
+  dplyr::mutate(max_cnsr = !is.na(AVAL) & AVAL == max(AVAL, na.rm = TRUE) & CNSR == 1) %>%
+  dplyr::summarise(min_max = sprintf("%4.2f, %4.2f%s",
+                                     min(AVAL, na.rm = TRUE),
+                                     max(AVAL, na.rm = TRUE),
+                                     ifelse(sum(max_cnsr) > 0, "*", ""))) %>%
+  dplyr::ungroup() %>%
+  tidyr::pivot_wider(names_from = TRT01A, values_from = min_max) %>%
+  dplyr::mutate(label = "Min, Max (b)",
+                ind = TRUE)
+
+model_sum <- dplyr::bind_rows(subj_count, cnsrd_subj, df_hr_comp, median_survtime, min_max)
+```
+
+### rtables
+
+### gt
+
+```{r}
+header_n <- adtte %>%
+  dplyr::group_by(TRT01A) %>%
+  dplyr::summarise(TRT = sprintf("%s<br>N=%i (100%%)", unique(TRT01A), n())) %>%
+  dplyr::ungroup()
+
+
+### Begin table creation
+
+gt(model_sum) %>%
+  cols_hide(ind) %>%
+  tab_header(
+    title = "x.x: Safety Data",
+    subtitle = html("x.x.x: Time to First Serious Adverse Event<br>Table x.x.x.x: Safety Endpoint - Safety Analysis Set"),
+    preheader = c("Protocol: XXXXX", "Cutoff date: DDMMYYYY")
+  ) %>%
+  tab_source_note("Source: ADTTE DDMMYYYY hh:mm; Listing x.xx; SDTM package: DDMMYYYY") %>%
+  opt_align_table_header(align = "left") %>%
+  cols_align(align = c("center"),
+             columns = c("A: Drug X", "B: Placebo", "C: Combination")) %>%
+  cols_align(align = "left",
+             columns = "label") %>%
+  tab_style(style = cell_text(indent = pct(5)),
+            locations = cells_body(columns = 1,
+                                   rows = ind == TRUE)) %>%
+  sub_missing(columns = everything(), missing_text = "") %>%
+  cols_label("label" = "",
+             "A: Drug X" = html(header_n$TRT[1]),
+             "B: Placebo" = html(header_n$TRT[2]),
+             "C: Combination" = html(header_n$TRT[3])) %>%
+  tab_footnote(footnote = html("Serious adverse events are defines as (...). All p-values are exploratory.<br>(a) Product-limit (Kaplan-Meier) estimates. <br>(b) Minimum and maximum of event times. * Denotes censoring.<br>Hazard ratios are from a stratified Cox model of serious adverse event hazard rate, with terms for treatment groups and strata1. Ties were handled using the exact method. Hazard ratios of Placebo/ Combination over Drug X are presented, a HR < 1 denotes improvement compared to Drug X.")) %>%
+  tab_options(
+    table.font.names = "Courier new",
+    table.font.size = 9,
+    page.orientation = "landscape",
+    page.numbering = TRUE,
+    page.header.use_tbl_headings = TRUE,
+    page.footer.use_tbl_notes = TRUE)
+```
 
 
 
