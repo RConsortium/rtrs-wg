@@ -136,7 +136,6 @@ gt(adsl_summary,
              "B: Placebo" = html(sprintf("B: Placebo<br> N=%i (100%%)", total_n_arm$N[2])),
              "C: Combination" = html(sprintf("C: Combination<br> N=%i (100%%)", total_n_arm$N[3]))) %>% 
   tab_options(
-    table.font.names = "Courier new",
     table.font.size = 9,
     page.orientation = "landscape",
     page.numbering = TRUE,
