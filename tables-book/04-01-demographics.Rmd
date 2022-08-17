@@ -44,11 +44,7 @@ build_table(lyt, ex_adsl)
 ### gt
 
 ```{r, comment= NA}
-library(dplyr)
-library(tidyr)
-library(purrr)
-library(stringr)
-library(gt)
+library(tidyverse)
 
 # We will use ex_adsl but will assign a unit to the Age column
 
@@ -59,26 +55,24 @@ attr(gt_adsl$AGE, "units") <- "Years"
 # It creates numeric and categorical summaries variables following the rtables exmaple
 
 custom_summary <- function(df, group_var, sum_var){
-  group_var <- ensym(group_var)
-  sum_var <- ensym(sum_var)
+  group_var <- rlang::ensym(group_var)
+  sum_var <- rlang::ensym(sum_var)
   
   is_categorical <- is.character(eval(expr(`$`(df, !!sum_var)))) | is.factor(eval(expr(`$`(df, !!sum_var)))) 
   
   if (is_categorical){
-    df <- df %>%
-      dplyr::group_by(!!group_var, !!sum_var) %>%
-      dplyr::summarise(n := n()) %>% 
+    df <- df %>% 
+      dplyr::group_by(!!group_var) %>% 
+      dplyr::mutate(N = n()) %>% 
       dplyr::ungroup() %>% 
-      tidyr::pivot_wider(id_cols = !!sum_var, names_from = !!group_var, values_from = n, values_fill = 0) %>% 
-      dplyr::rename(label = !!sum_var) 
-    
-    totals <- df %>%
-      dplyr::summarise_if(is.numeric, .funs = sum) %>%
-      dplyr::mutate(label = "n") %>%
-      dplyr::relocate(label, 1)
-    
-    df <- rbind(totals, df) %>% 
-      dplyr::mutate_if(is.numeric, .funs = as.character)
+      dplyr::group_by(!!group_var, !!sum_var) %>% 
+      dplyr::summarize(val = n(),
+                       sd = 100*n()/mean(N)) %>% 
+      dplyr::ungroup() %>% 
+      tidyr::pivot_wider(id_cols = !!sum_var, names_from = !!group_var, values_from = c(val, sd)) %>% 
+      dplyr::rename(label = !!sum_var) %>% 
+      dplyr::mutate(isnum = FALSE,
+                    across(where(is.numeric), ~ifelse(is.na(.), 0, .))) 
     
     sum_unit <- ", n (%)"
     
@@ -88,14 +82,21 @@ custom_summary <- function(df, group_var, sum_var){
     
     df <- df %>% 
       dplyr::group_by(!!group_var) %>% 
-      dplyr::summarise(n = as.character(sum(!is.na(!!sum_var))),
-                       Mean_SD = sprintf("%4.1f (%3.1f)", mean(!!sum_var, na.rm = TRUE), sd(!!sum_var, na.rm = TRUE)),
-                       Median = as.character(median(!!sum_var, na.rm = TRUE)),
-                       Min_Max = sprintf("%4.1f - %4.1f", min(!!sum_var, na.rm = TRUE), max(!!sum_var, na.rm = TRUE))) %>% 
+      dplyr::summarize(n = sum(!is.na(!!sum_var)),
+                       mean = mean(!!sum_var, na.rm = TRUE),
+                       sd = sd(!!sum_var, na.rm = TRUE),
+                       median = median(!!sum_var, na.rm = TRUE),
+                       min = min(!!sum_var, na.rm = TRUE),
+                       max = max(!!sum_var, na.rm = TRUE),
+                       min_max = NA) %>% 
       dplyr::ungroup() %>% 
-      tidyr::pivot_longer(cols = c(n, Mean_SD, Median, Min_Max), names_to = "label", values_to = "Value") %>% 
-      tidyr::pivot_wider(id_cols = "label", names_from = !!group_var, values_from = "Value") %>% 
-      dplyr::mutate(label = dplyr::recode(label, "Mean_SD" ="Mean (SD)", "Min_Max" = "Min - Max"))
+      tidyr::pivot_longer(cols = c(n, mean, median, min_max), names_to = "label", values_to = "val") %>% 
+      dplyr::mutate(sd = ifelse(label == "mean", sd, NA),
+                max = ifelse(label == "min_max", max, NA),
+                min = ifelse(label == "min_max", min, NA),
+                label = dplyr::recode(label, "mean" = "Mean (SD)", "min_max" = "Min - Max", "median" = "Median")) %>% 
+      tidyr::pivot_wider(id_cols = label, names_from = !!group_var, values_from = c(val, sd, min, max)) %>% 
+      dplyr::mutate(isnum = TRUE)
     
   }
   
@@ -128,13 +129,32 @@ gt(adsl_summary,
   ) %>% 
   tab_source_note("Source: ADSL DDMMYYYY hh:mm; Listing x.xx; SDTM package: DDMMYYYY") %>% 
   opt_align_table_header(align = "left") %>% 
+  fmt_integer(columns = starts_with(c("val", "min", "max")), rows = label != "Mean (SD)") %>% 
+  fmt_number(columns = starts_with(c("val", "sd")), rows = label == "Mean (SD)", decimals = 1) %>% 
+  fmt_number(columns = starts_with("sd"), rows = isnum == FALSE, decimals = 1) %>% 
+  sub_missing(missing_text = "") %>% 
+  summary_rows(groups = c("Sex, n (%)", "Country, n (%)"),
+               columns = starts_with("val"),
+               fns = list(n = ~sum(.)),
+               missing_text = "",
+               formatter = fmt_integer) %>% 
+  cols_merge_n_pct(col_n = "val_A: Drug X", col_pct = "sd_A: Drug X") %>% 
+  cols_merge_n_pct(col_n = "val_B: Placebo", col_pct = "sd_B: Placebo") %>% 
+  cols_merge_n_pct(col_n = "val_C: Combination", col_pct = "sd_C: Combination") %>% 
+  cols_merge_range(col_begin = "min_A: Drug X", col_end = "max_A: Drug X", sep = " - ") %>% 
+  cols_merge_range(col_begin = "min_B: Placebo", col_end = "max_B: Placebo", sep = " - ") %>% 
+cols_merge_range(col_begin = "min_C: Combination", col_end = "max_C: Combination", sep = " - ") %>% 
+  cols_merge(columns = c("val_A: Drug X", "min_A: Drug X"), pattern = "{1}{2}") %>% 
+  cols_merge(columns = c("val_B: Placebo", "min_B: Placebo"), pattern = "{1}{2}") %>% 
+cols_merge(columns = c("val_C: Combination", "min_C: Combination"), pattern = "{1}{2}") %>% 
+  cols_hide(columns = isnum) %>% 
   cols_align(align = c("center"),
-             columns = c("A: Drug X", "B: Placebo", "C: Combination")) %>% 
+             columns = c("val_A: Drug X", "val_B: Placebo", "val_C: Combination")) %>% 
   cols_align(align = "center",
              columns = 1) %>% 
-  cols_label("A: Drug X" = html(sprintf("A: Drug X<br> N=%i (100%%)", total_n_arm$N[1])),
-             "B: Placebo" = html(sprintf("B: Placebo<br> N=%i (100%%)", total_n_arm$N[2])),
-             "C: Combination" = html(sprintf("C: Combination<br> N=%i (100%%)", total_n_arm$N[3]))) %>% 
+  cols_label("val_A: Drug X" = html(sprintf("A: Drug X<br> N=%i (100%%)", total_n_arm$N[1])),
+             "val_B: Placebo" = html(sprintf("B: Placebo<br> N=%i (100%%)", total_n_arm$N[2])),
+             "val_C: Combination" = html(sprintf("C: Combination<br> N=%i (100%%)", total_n_arm$N[3]))) %>% 
   tab_options(
     table.font.size = 9,
     page.orientation = "landscape",
