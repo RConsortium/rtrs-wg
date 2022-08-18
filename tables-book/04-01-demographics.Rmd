@@ -51,8 +51,8 @@ library(tidyverse)
 gt_adsl <- ex_adsl
 attr(gt_adsl$AGE, "units") <- "Years"
 
-# This is customized summary function
-# It creates numeric and categorical summaries variables following the rtables exmaple
+# This is a customized summary function
+# It creates numeric and categorical summaries for specified variables, following the rtables exmaple
 
 custom_summary <- function(df, group_var, sum_var){
   group_var <- rlang::ensym(group_var)
@@ -143,10 +143,10 @@ gt(adsl_summary,
   cols_merge_n_pct(col_n = "val_C: Combination", col_pct = "sd_C: Combination") %>% 
   cols_merge_range(col_begin = "min_A: Drug X", col_end = "max_A: Drug X", sep = " - ") %>% 
   cols_merge_range(col_begin = "min_B: Placebo", col_end = "max_B: Placebo", sep = " - ") %>% 
-cols_merge_range(col_begin = "min_C: Combination", col_end = "max_C: Combination", sep = " - ") %>% 
+  cols_merge_range(col_begin = "min_C: Combination", col_end = "max_C: Combination", sep = " - ") %>% 
   cols_merge(columns = c("val_A: Drug X", "min_A: Drug X"), pattern = "{1}{2}") %>% 
   cols_merge(columns = c("val_B: Placebo", "min_B: Placebo"), pattern = "{1}{2}") %>% 
-cols_merge(columns = c("val_C: Combination", "min_C: Combination"), pattern = "{1}{2}") %>% 
+  cols_merge(columns = c("val_C: Combination", "min_C: Combination"), pattern = "{1}{2}") %>% 
   cols_hide(columns = isnum) %>% 
   cols_align(align = c("center"),
              columns = c("val_A: Drug X", "val_B: Placebo", "val_C: Combination")) %>% 
