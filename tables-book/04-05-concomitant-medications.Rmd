@@ -1,0 +1,33 @@
+---
+output: html_document
+editor_options: 
+  chunk_output_type: console
+---
+## Concomitant Medications
+
+### gt
+
+```{r, comment=NA}
+library(dplyr)
+library(magrittr)
+library(gt)
+
+data("cadcm", package = "random.cdisc.data")
+gt_adcm <- cadcm %>%
+  select(USUBJID, CMDECOD, TRT01A)
+
+gt_adcm %>% gt()
+
+tab <-
+  gt_adcm %>%
+  gt(
+    rowname_col = "row",
+    groupname_col = "group"
+  ) %>%
+  tab_header(
+    title = "Conmed Example",
+    subtitle = md("Uses the *adcm* dataset from **random.cdisc.data**")
+  )
+tab
+
+```

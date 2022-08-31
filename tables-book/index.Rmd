@@ -4,14 +4,14 @@ author: "R Consortium Tables Working Group"
 date: "`r Sys.Date()`"
 site: bookdown::bookdown_site
 documentclass: book
-bibliography: [book.bib, packages.bib]
-# url: your book url like https://bookdown.org/yihui/bookdown
-# cover-image: path to the social sharing image like images/cover.jpg
+bibliography:
+- book.bib
+- packages.bib
 description: |
   Example code to create tables commonly used for analyzing clinical trials data.
 link-citations: yes
-github-repo: RConsortium/rtrs-wg
-editor_options: 
+github-repo: "RConsortium/rtrs-wg"
+editor_options:
   chunk_output_type: console
 ---
 

@@ -1,0 +1,24 @@
+---
+output: html_document
+editor_options: 
+  chunk_output_type: console
+---
+## Disposition
+
+### rtables
+
+```{r, comment=NA}
+library(dplyr)
+library(magrittr)
+library(rtables)
+
+data("cadsl", package = "random.cdisc.data")
+r_adsl <- cadsl %>%
+  select(USUBJID, EOSSTT, DCSREAS) %>%
+  filter(EOSSTT != "COMPLETED")
+
+lyt <- basic_table()
+
+build_table(lyt, r_adsl)
+
+```
