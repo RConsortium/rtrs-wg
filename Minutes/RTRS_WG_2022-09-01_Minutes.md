@@ -30,6 +30,8 @@ As it stands now the only packages for which example tables have been provided a
 * `tplyr` from Atorus
 * `r2rf` from Merck
 
+Note the the materials from a recent workshop on `tfrmt` are available [here](https://github.com/GSK-Biostatistics/tfrmt).
+
 **Action Items**
 1. RI will contact the `tfrmt` and `gtreg` authors
 2. JBR will contact the `tplyr` and `r2rf` authors
