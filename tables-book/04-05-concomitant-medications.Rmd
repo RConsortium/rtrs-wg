@@ -16,7 +16,8 @@ data("cadcm", package = "random.cdisc.data")
 gt_adcm <- cadcm %>%
   select(USUBJID, CMDECOD, TRT01A)
 
-gt_adcm %>% gt()
+## don't print it yet, uncomment when its ready
+##gt_adcm %>% gt()
 
 tab <-
   gt_adcm %>%
@@ -28,6 +29,7 @@ tab <-
     title = "Conmed Example",
     subtitle = md("Uses the *adcm* dataset from **random.cdisc.data**")
   )
-tab
+
+##tab
 
 ```

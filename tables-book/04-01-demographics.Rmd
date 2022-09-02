@@ -3,6 +3,7 @@ output: html_document
 editor_options: 
   chunk_output_type: console
 ---
+
 ## Demographic Tables
 
 ### rtables
@@ -22,7 +23,10 @@ a_demo_fac <- function(x) {
     in_rows(.list = c(c(n = length(x)), table(x)))
 }
 
-lyt <- basic_table() |>
+lyt <- basic_table(title = "x.x: Study Subject Data",
+                   subtitles= c("x.x.x: Demographic Characteristics",
+                                "Table x.x.x.x: Demographic Characteristics - Full Analysis Set"),
+                   prov_footer = "Source: ADSL DDMMYYYY hh:mm; Listing x.xx; SDTM package: DDMMYYYY") |>
   split_cols_by("ARM") |>
   analyze(c("AGE", "SEX", "COUNTRY"), afun = list(AGE = a_demo_num, SEX = a_demo_fac,
                                                   COUNTRY = a_demo_fac))
@@ -33,7 +37,10 @@ build_table(lyt, ex_adsl)
 Using `rtables` and `tern`
 
 ```{r, comment=NA}
-lyt <- basic_table() |>
+lyt <- basic_table(title = "x.x: Study Subject Data",
+                   subtitles= c("x.x.x: Demographic Characteristics",
+                                "Table x.x.x.x: Demographic Characteristics - Full Analysis Set"),
+                   prov_footer = "Source: ADSL DDMMYYYY hh:mm; Listing x.xx; SDTM package: DDMMYYYY") |>
   split_cols_by("ARM") |>
   summarize_vars(c("AGE", "SEX", "COUNTRY"))
 

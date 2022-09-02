@@ -1,8 +1,14 @@
+---
+output: html_document
+editor_options: 
+  chunk_output_type: console
+---
+
 ## Time to Event Analysis Tables
 
-### Cell Value Derivation for Time to Event Analysis
+### Data and models used throughout
 
-```{r}
+```{r, comment=NA}
 library(dplyr)
 library(tidyr)
 library(stringr)
@@ -13,8 +19,120 @@ data("cadaette", package = "random.cdisc.data")
 head(cadaette)
 
 adtte <- cadaette %>% 
-  dplyr::filter(PARAMCD == "AETTE2", SAFFL == "Y")
+    dplyr::filter(PARAMCD == "AETTE2", SAFFL == "Y")
+
 ```
+
+Cox Proportional Hazard fit:
+```{r}
+cph <- coxph(Surv(AVAL, CNSR==0) ~ TRT01A + STRATA1, ties = "exact", data = adtte)
+```
+
+Kaplan-Meier Model
+
+```{r}
+surv_tbl <- as.data.frame(summary(survfit(Surv(AVAL, CNSR==0) ~ TRT01A,
+                                          data = adtte, conf.type = "log-log"))$table) %>%
+    dplyr::mutate(TRT01A = factor(str_remove(row.names(.), "TRT01A="),
+                                  levels = levels(adtte$TRT01A)),
+                  ind = FALSE)
+
+```
+
+### rtables
+
+```{r, comment=NA}
+
+cnsr_counter <- function(df, .var, .N_col) {
+    x <- df[!duplicated(df$USUBJID), .var]
+    x <- x[x != "__none__"]
+    lapply(table(x), function(xi) rcell(xi*c(1, 1/.N_col), format = "xx (xx.xx%)"))
+}
+            
+a_count_subjs <- function(x, .N_col) {
+    in_rows("Subjects with Adverse Events n (%)" = rcell(length(unique(x)) * c(1, 1 / .N_col),
+                                                                           format = "xx (xx.xx%)"))
+}
+
+a_cph <- function(df, .var, .in_ref_col, .ref_full, full_cox_fit) {
+    if(.in_ref_col) {
+        ret <- replicate(3, list(rcell(NULL)))
+    } else {
+        curtrt <- df[[.var]][1]
+        coefs <- coef(full_cox_fit)
+        sel_pos <- grep(curtrt, names(coefs), fixed = TRUE)
+        hrval <- exp(coefs[sel_pos])
+        hrvalret <- rcell(hrval, format = "xx.x")
+        sdf <- survdiff(Surv(AVAL, CNSR==0) ~ TRT01A + STRATA1,
+                        data = rbind(df, .ref_full))
+        pval <- (1-pchisq(sdf$chisq, length(sdf$n)-1))/2
+        ci_val <- exp(unlist(confint(full_cox_fit)[sel_pos,]))
+        ret <- list(rcell(hrval, format = "xx.x"),
+                    rcell(ci_val, format = "(xx.x, xx.x)"),
+                    rcell(pval, format = "x.xxxx | (<0.0001)"))
+    }
+    in_rows(.list = ret, .names = c("Hazard ratio",
+                                    "95% confidence interval",
+                                    "p-value (one-sided stratified log rank)"))
+}
+
+a_tte <- function(df, .var,  kp_table) {
+    ind <- grep(df[[.var]][1], row.names(kp_table), fixed = TRUE)
+    minmax <- range(df[["AVAL"]])
+
+    mm_val_str <- format_value(minmax, format = "xx.x, xx.x")
+    rowfn <- list()
+    if(all(df$CNSR[df$AVAL == minmax[2]])) {
+        mm_val_str <- paste0(mm_val_str, "*")
+        rowfn <- "* indicates censoring"
+    }
+    in_rows(Median = kp_table[ind, "median", drop = TRUE],
+            "95% confidence interval" = unlist(kp_table[ind, c("0.95LCL", "0.95UCL")]),
+            "Min Max" = mm_val_str,
+            .formats = c("xx.xx",
+                         "xx.xx - xx.xx",
+                         "xx"), .row_footnotes = list(NULL, NULL, rowfn))
+}
+            
+
+adtte2 <- adtte %>%
+    mutate(CNSDTDSC = ifelse(CNSDTDSC == "", "__none__", CNSDTDSC))
+
+
+lyt <- basic_table(show_colcounts = TRUE,
+                   title = "x.x: Safety Data",
+                   subtitles = c("x.x.x: Time to First Serious Adverse Event",
+                                 "Table x.x.x.x: Safety Endpoint - Safety Analysis Set"),
+                   main_footer = c("Serious adverse events are defines as (...). All p-values are exploratory.",
+                                   "Hazard ratios are from a stratified Cox model of serious adverse event hazard rate,",
+                                   "with terms for treatment groups and strata1. Ties were handled using the exact",
+                                   "method. Hazard ratios of Placebo Combination over Drug X are presented, an",
+                                   "HR < 1 denotes improvement compared to Drug X."),
+                   prov_footer = "Source: ADTTE DDMMYYYY hh:mm; Listing x.xx; SDTM package: DDMMYYYY") %>%
+    ## column faceting
+    split_cols_by("ARM", ref_group = "A: Drug X") %>%
+    ## overall count
+    analyze("USUBJID", a_count_subjs, show_labels = "hidden") %>%
+    ## Censored Subjects Summary
+    analyze("CNSDTDSC", cnsr_counter, var_labels = "Censored Subjects", show_labels = "visible") %>%
+    ## CPH analysis
+    analyze("ARM", a_cph, extra_args = list(full_cox_fit = cph), show_labels = "hidden") %>%
+    ## Time-to-event analysis
+    analyze("ARM", a_tte, var_labels = "Time to first adverse event", show_labels = "visible",
+            extra_args = list(kp_table = surv_tbl),
+            table_names = "kapmeier")
+
+tbl_tte <- build_table(lyt, adtte2)
+
+fnotes_at_path(tbl_tte, c("ma_USUBJID_CNSDTDSC_ARM_kapmeier", "kapmeier")) <- "Product-limit (Kaplan-Meier) estimates."
+tbl_tte
+
+```
+    
+            
+    
+### Cell Value Derivation for gt of Time to Event Analysis
+
 
 Our standard TTE table consists of (a derivation of) four main parts:
 
@@ -26,9 +144,8 @@ Our standard TTE table consists of (a derivation of) four main parts:
 ```{r descr_stats}
 ### Subject Count with events
 
-surv_tbl <- as.data.frame(summary(survfit(Surv(AVAL, CNSR==0) ~ TRT01A, data = adtte, conf.type = "log-log"))$table) %>%
-  dplyr::mutate(TRT01A = factor(str_remove(row.names(.), "TRT01A="), levels = levels(adtte$TRT01A)),
-                ind = FALSE)
+## surv_tbl calculated above
+
 
 subj_count <- surv_tbl %>%
   dplyr::mutate(pct = sprintf("%i (%5.1f)", events, 100*events/records),
@@ -60,7 +177,7 @@ cnsrd_subj <- adtte %>%
 ```
 
 ```{r cox_mod}
-cph <- coxph(Surv(AVAL, CNSR==0) ~ TRT01A + STRATA1, ties = "exact", data = adtte)
+## cph calculated above
 hr <- exp(coef(cph))
 ci_hr <- exp(confint(cph))
 
@@ -123,7 +240,7 @@ min_max <- adtte %>%
 model_sum <- dplyr::bind_rows(subj_count, cnsrd_subj, df_hr_comp, median_survtime, min_max)
 ```
 
-### rtables
+
 
 ### gt
 

@@ -1,8 +1,55 @@
+---
+output: html_document
+editor_options: 
+  chunk_output_type: console
+---
+
 ## Event Tables
 
+We will use the `ex_adae` data included within the `formatters` package
+
+```{r, comment=NA}
+head(ex_adae)
+```
 
 ### Adverse Events
 
+ 
 
+#### `rtables` Only
 
+Adverse Events by ID
 
+```{r, comment=NA}
+s_events_patients <- function(x, labelstr, .N_col) {
+  in_rows(
+    "Patients with at least one event" =
+      rcell(length(unique(x)) * c(1, 1 / .N_col), format = "xx (xx.xx%)"),
+
+    "Total number of events" = rcell(length(x), format = "xx")
+  )
+}
+
+table_count_per_id <- function(df, termvar = "AEDECOD", idvar = "USUBJID") {
+
+  x <- df[[termvar]]
+  id <- df[[idvar]]
+
+  counts <- table(x[!duplicated(id)])
+
+  in_rows(
+    .list = as.vector(counts),
+    .labels = names(counts)
+  )
+}
+
+lyt <- basic_table(show_colcounts = TRUE) %>%
+    split_cols_by("ARM") %>%
+    analyze("USUBJID", afun = s_events_patients) %>%
+    split_rows_by("AEBODSYS", child_labels = "visible", section_div = "",
+                  split_fun = trim_levels_in_group("AEDECOD")) %>%
+    summarize_row_groups("USUBJID", cfun = s_events_patients) %>%
+    analyze("AEDECOD", table_count_per_id, show_labels = "hidden", indent_mod = -1)
+
+build_table(lyt, ex_adae, alt_counts_df = ex_adsl)
+```
