@@ -1,20 +1,58 @@
 # Overview table R packages {#tablepkgs}
 
-We summarizes various `R` packages to create production ready tables in clincial research. 
-The list is by no means complete, if you know another package that has been useful for you to
-create tables or listing using clinical trials data. 
+We summarize various `R` packages (ordered alphabetically) to 
+create production-ready tables in clinical research. 
+The list is by no means complete; if you know another package that has been useful for you to
+create tables or listing using clinical trial data. 
 Please contribute to this chapter.
 
-## gt
+## `flextable`
 
-The `gt` package has a high-level and declarative interface for composing
-tables. Contains a variety of `formatter` functions for transforming cell values
+The `flextable` ([website](https://ardata-fr.github.io/flextable-book/))
+package provides a *grammar* for creating and customizing tables. 
+The following output formats are supported: 
+
+  - 'Word' (`*.docx`), 
+  - 'PowerPoint' (`*.pptx`), 
+  - 'PDF'
+  - 'HTML'. 
+  
+The syntax to create table is the same 
+for the user regardless of the type of output to be produced. 
+A set of functions allows the creation, definition of cell
+arrangement, addition of headers, formatting and definition of cell content
+(i.e. text and or images). 
+The package also offers a set of high-level functions
+that allow, for example, tabular reporting of statistical models and the
+creation of complex cross tabulations.
+
+## `gt`
+
+The `gt` ([website](https://gt.rstudio.com/)) package provides
+a high-level and declarative interface for composing tables. 
+Contains a variety of `formatter` functions for transforming cell values
 from an input data frame to the desired reporting values (combines mutation and
 aesthetic styling with options for: scientific notation, uncertainty, ranges,
 percentages, suffixes, localized currency, etc.). Multiple output formats are
 supported with the same declarative interface (e.g., HTML, LaTeX/PDF, and RTF).
 
-## rtables
+## `r2rtf`
+
+The `r2rtf` ([website](https://merck.github.io/r2rtf/)) package 
+creates production-ready tables and figures in RTF format. 
+The R package is designed to
+
+- provide simple “verb” functions that correspond to each component of a table, to help you translate data frame(s) to a table in RTF file.
+- enables pipes (%>%).
+- only focus on table format.
+- Data manipulation and analysis 
+shall be handled by other R packages. (e.g., tidyverse)
+minimizes package dependency
+
+Chapter 1-9 of [The R for Clinical Study Reports and Submission](https://r4csr.org/) book 
+provides examples by using `r2rtf` package. 
+
+## `rtables`
 
 The `rtables` package defines a pipe-able grammar for declaring complex table
 structure layouts via nested splitting - in row- and column-space - and the
@@ -29,15 +67,6 @@ ASCII, HTML, and PDF are supported as output formats for rendering tables.
 as the [documentation](https://roche.github.io/rtables/). `rtables` is also available
 on [CRAN](https://CRAN.R-project.org/package=rtables).
 
-## flextable
 
-`flextable` is providing a *grammar* for creating and customizing tables. The
-following formats are supported: 'Word' (*.docx), 'PowerPoint' (*.pptx), 'PDF'
-and 'HTML'. The syntax is the same for the user regardless of the type of output
-to be produced. A set of functions allows the creation, definition of cell
-arrangement, addition of headers, formatting and definition of cell content
-(i.e. text and or images). The package also offers a set of high-level functions
-that allow, for example, tabular reporting of statistical models and the
-creation of complex cross tabulations.
 
 
