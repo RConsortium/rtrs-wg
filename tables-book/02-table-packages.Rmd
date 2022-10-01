@@ -1,8 +1,9 @@
 # Overview table R packages {#tablepkgs}
 
-In this chapter summarizes various `R` packages to create tables. The current list
-is by no means complete, if you know another package that has been useful for you to
-analyze clinical trials data then please contribute to this chapter.
+We summarizes various `R` packages to create production ready tables in clincial research. 
+The list is by no means complete, if you know another package that has been useful for you to
+create tables or listing using clinical trials data. 
+Please contribute to this chapter.
 
 ## gt
 
