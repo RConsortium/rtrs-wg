@@ -286,5 +286,189 @@ gt(model_sum) %>%
 
 
 
+### flextable
+
+First we define named vectors that will be used later as 
+labels for the table.
+
+```{r}
+# labels and notes ----
+description_labels <- c(SAE = "Number of subjects with serious adverse event", CENSOR_EVENTS = "Number of censored subjects",
+  HAZARD_RATIO = "Hazard ratio", TTF_SAE = "Time to first adverse event")
+subdescription_labels <- c(subdescription = "",
+  ALL = "Censored Subjects", EST = "Estimate", CONFINT = "95% confidence interval",
+  PVALUE = "one-sided stratified log rank p-value",
+  MEDIAN = "Median", RANGE = "Min Max")
+labels <- c(description_labels, subdescription_labels)
+
+additional_notes <- c(
+  "Serious adverse events are defines as (...). All p-values are exploratory.", 
+  paste("Hazard ratios are from a stratified Cox model", 
+        "of serious adverse event hazard rate, with terms for treatment groups and strata1.", 
+        "Ties were handled using the exact method. Hazard ratios of Placebo/ Combination over", 
+        "Drug X are presented, a HR < 1 denotes improvement compared to Drug X."))
+titles <- c(
+  "x.x: Safety Data",
+  "x.x.x: Time to First Serious Adverse Event",
+  "Table x.x.x.x: Safety Endpoint - Safety Analysis Set")
+```
+
+Data need to be prepared in a single data.frame, 
+a function is written to make the code simplier to organize.
+
+```{r}
+#' @noRd
+#' @description create a data.frame made of 
+#' several sub data.frame, each for a specific 
+#' calculation. Final result has two specific columns 
+#' 'description' and 'subdescription' that will 
+#' contain various labels or group labels.
+prepare_tte_df <- function(adtte, cph, surv_tbl) {
+  ## Number of subjects with serious adverse event ----
+  subj_count <- surv_tbl |>
+    select(TRT01A, n = events, records) |>
+    mutate(pct = n / records, description = "SAE", subdescription = "ALL")
+
+  ## Number of censored subjects ----
+  subj_censored <- subj_count |>
+    mutate(
+      n = records - n, pct = 1 - pct, description = "CENSOR_EVENTS",
+      subdescription = "ALL"
+    )
+
+  ## Number of censored subjects - detail per CNSDTDSC ----
+  subj_censored_detail <- adtte |>
+    filter(CNSR > 0) |>
+    count(TRT01A, CNSDTDSC) |>
+    left_join(subj_count |> select(TRT01A, records), by = "TRT01A") |>
+    mutate(pct = n / records, description = "CENSOR_EVENTS") |>
+    rename(subdescription = "CNSDTDSC")
+
+  ## Hazard ratio and 95% CI ----
+  coefs_hr <- cbind(exp(confint(cph)), y = exp(coef(cph))) |> as.data.frame() |>
+    rownames_to_column(var = "TRT01A") |>
+    filter(grepl("TRT01A", TRT01A)) |>
+    mutate(TRT01A = str_replace(TRT01A, "TRT01A", ""))
+
+  hr_dat <- bind_rows(
+    select(coefs_hr, TRT01A, LCL = `2.5 %`, UCL = `97.5 %`) |>
+      mutate(description = "HAZARD_RATIO", subdescription = "CONFINT"),
+    select(coefs_hr, TRT01A, y) |>
+      mutate(description = "HAZARD_RATIO", subdescription = "EST")
+  )
+
+  ## p-value (one-sided stratified log rank)	 ----
+  pval_dat <- purrr::map_df(
+    .x = list(c("A: Drug X", "B: Placebo"), c("A: Drug X", "C: Combination")),
+    .f = ~ {
+      sdf <- survdiff(Surv(AVAL, CNSR == 0) ~ TRT01A + STRATA1, data = adtte |> 
+                        dplyr::filter(TRT01A %in% .x))
+      data.frame(TRT01A = .x[2], description = "HAZARD_RATIO", subdescription = "PVALUE",
+        y = (1 - pchisq(sdf$chisq, length(sdf$n) - 1)) / 2)
+    }
+  )
+
+  ## Time to first serious adverse event ----
+  tfe_dat <- bind_rows(
+    surv_tbl |>
+      select(TRT01A, LCL = `0.95LCL`, UCL = `0.95UCL`) |>
+      mutate(description = "TTF_SAE", subdescription = "CONFINT"),
+    surv_tbl |>
+      select(TRT01A, y = median) |>
+      mutate(description = "TTF_SAE", subdescription = "MEDIAN"),
+    adtte |>
+      filter(!(AVAL == 0 & CNSR == 1)) |>
+      group_by(TRT01A) |>
+      mutate(max_cnsr = !is.na(AVAL) & AVAL == max(AVAL, na.rm = TRUE) & CNSR == 1) |>
+      summarise(
+        min = min(AVAL, na.rm = TRUE),
+        max = max(AVAL, na.rm = TRUE),
+        is_censored = sum(max_cnsr) > 0,
+        description = "TTF_SAE", subdescription = "RANGE"
+      )
+  )
+  
+  cnsdtdsc_levels <- unique(adtte$CNSDTDSC) |> sort() |> setdiff("")
+
+  dat <- bind_rows(subj_count, subj_censored, subj_censored_detail, hr_dat, pval_dat, tfe_dat) |> 
+    as_tibble() |>
+    ## factor for easy ordering ----
+    mutate(
+      description = factor(description, levels = c("SAE", "CENSOR_EVENTS", "HAZARD_RATIO", "TTF_SAE")),
+      subdescription = factor(subdescription,
+      levels = c("ALL", cnsdtdsc_levels, "NUSUBJID", "MEDIAN", "EST", "CONFINT", "PVALUE", "RANGE")))
+
+  dat
+}
+
+dat <- prepare_tte_df(adtte, cph, surv_tbl)
+dat
+```
+
+Now data.frame is ready to be formatted with `fmt_time_to_event()`. 
+The function handle each special cases to be covered so that 
+the four main parts are formatted as expected.
+
+```{r message=FALSE}
+library(glue)
+library(dplyr)
+# format fun ----
+fmt_time_to_event <- function(description, subdescription, y, cts, pcts, LCL, UCL, min, max, is_censored) {
+  case_when(
+    !is.na(cts) & !is.na(pcts) ~ glue('{sprintf("%.0f", cts)} ({sprintf("%.02f", pcts*100)}%)'),
+    !is.na(y) & !subdescription %in% "PVALUE" ~ glue('{sprintf("%.02f", y)}'),
+    !is.na(y) & subdescription %in% "PVALUE" ~ glue("{scales::label_pvalue()(y)}"),
+    !is.na(LCL) & !is.na(UCL) ~ glue('[{sprintf("%.02f", LCL)}, {sprintf("%.02f", UCL)}]'),
+    !is.na(LCL) & !is.na(UCL) ~ glue('[{sprintf("%.02f", LCL)}, {sprintf("%.02f", UCL)}]'),
+    !is.na(min) & !is.na(max) & is_censored ~ glue('{sprintf("%.02f", min)}, {sprintf("%.02f", max)}*'),
+    !is.na(min) & !is.na(max) & !is_censored ~ glue('{sprintf("%.02f", min)}, {sprintf("%.02f", max)}'),
+    TRUE ~ ""
+  )
+}
+```
+
+Now use `tabulator()` and `as_flextable()` together to create the table. 
+
+```{r}
+tab <- tabulator(dat,
+  rows = c("description", "subdescription"), columns = "TRT01A",
+  content_cell = as_paragraph(
+    fmt_time_to_event(
+      description = description, subdescription = subdescription,
+      y = y, cts = n, pcts = pct, LCL = LCL, UCL = UCL,
+      min = min, max = max, is_censored = is_censored))
+)
+ft <- as_flextable(x = tab, spread_first_col = TRUE, separate_with = "description", sep_w = 0) |>
+  # footnotes
+  footnote(
+    j = 1, i = ~ description %in% c("CENSOR_EVENTS", "SAE"),
+    ref_symbols = " (1)", value = as_paragraph(" Number of subjects (% of subjects)")
+  ) |>
+  footnote(
+    j = 1, i = ~ description %in% "TTF_SAE" & is.na(subdescription), ref_symbols = " (2)",
+    value = as_paragraph(" Product-limit (Kaplan-Meier) estimates.")
+  ) |>
+  footnote(
+    j = 1, i = ~ subdescription %in% "RANGE", ref_symbols = " (3)",
+    value = as_paragraph(" * indicates censoring")
+  ) |>
+  add_footer_lines(values = additional_notes) |>
+  # labels
+  labelizor(j = "subdescription", labels = labels, part = "all") |>
+  # indentation
+  prepend_chunks(i = ~ is.na(description), j = "subdescription", as_chunk("\t")) |>
+  align(i = ~ !is.na(description), align = "left") |>
+  autofit() |>
+  add_header_lines(values = titles) |>
+  hline_top(part = "header", border = fp_border_default(width = 0)) |>
+  hline(part = "header", i = 1:2, border = fp_border_default(width = 0))
+
+for (ARM_COD in names(ARM_COUNTS)) {
+  ft <- append_chunks(x = ft, part = "header", i = 4,
+    j = tabulator_colnames(tab, columns = "content_cell", TRT01A %in% !!ARM_COD),
+    as_chunk(ARM_COUNTS[ARM_COD], formatter = fmt_header_n))
+}
+ft
+```
 
 

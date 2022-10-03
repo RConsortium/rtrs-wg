@@ -46,10 +46,126 @@ table_count_per_id <- function(df, termvar = "AEDECOD", idvar = "USUBJID") {
 lyt <- basic_table(show_colcounts = TRUE) %>%
     split_cols_by("ARM") %>%
     analyze("USUBJID", afun = s_events_patients) %>%
-    split_rows_by("AEBODSYS", child_labels = "visible", section_div = "",
+    split_rows_by("AEBODSYS", child_labels = "visible", 
                   split_fun = trim_levels_in_group("AEDECOD")) %>%
     summarize_row_groups("USUBJID", cfun = s_events_patients) %>%
     analyze("AEDECOD", table_count_per_id, show_labels = "hidden", indent_mod = -1)
 
 build_table(lyt, ex_adae, alt_counts_df = ex_adsl)
 ```
+
+#### flextable
+
+```{r message=FALSE}
+library(tidyr)
+library(dplyr)
+library(forcats)
+ae_tabulator <- function(ADSL, ADAE){
+  
+  
+  subject_cts <- group_by(ADSL, ARM) |> 
+    summarise(n_subject = n())
+  
+  all_event_total_cts <- group_by(ADAE, ARM) |> 
+    summarise(n_usub = n_distinct(USUBJID), n_events = n())
+  
+  aebodsys_cts <- group_by(ADAE, ARM, AEBODSYS) |> 
+    summarise(n_usub = n_distinct(USUBJID), n_events = n(),
+              .groups = "drop")
+  
+  aedecod_cts <- group_by(ADAE, ARM, AEBODSYS, AEDECOD) |> 
+    summarise(n_usub = n_distinct(USUBJID), n_events = n(),
+              .groups = "drop")
+  
+  x <- bind_rows(all_event_total_cts, aebodsys_cts, aedecod_cts) |> 
+    mutate(
+      AEBODSYS = fct_expand(AEBODSYS, "ALL1") |> fct_relevel("ALL1"),
+      AEDECOD = fct_expand(AEDECOD, "ALL2") |> fct_relevel("ALL2")
+    ) |> 
+    left_join(subject_cts, by = "ARM") |> 
+    replace_na(replace = list(AEBODSYS = "ALL1", AEDECOD = "ALL2")) |>
+    arrange(AEBODSYS, AEDECOD) |> 
+    mutate(pct = n_usub / n_subject)
+  attr(x, "ARM_COUNTS") <- setNames(subject_cts$n_subject, subject_cts$ARM)
+  x
+  
+}
+```
+
+Labels for `flextable::labelizor()`:
+
+```{r}
+AEDECOD_LABELS <- c(
+  ALL1 = "Patients with at least one event", 
+  ALL2 = "Patients with at least one event", 
+  `GASTROINTESTINAL DISORDERS` = "Gastrointestinal Disorders", 
+  `NERVOUS SYSTEM DISORDERS` = "Nervous System Disorders", 
+  `VASCULAR DISORDERS` = "Vascular Disorders", 
+  `MUSCULOSKELETAL AND CONNECTIVE TISSUE DISORDERS` = "Musculoskeletal and Connective Tissue Disorders", 
+  `NAUSEA (INTERMITTENT)` = "Nausea (Intermittent)", 
+  HEADACHE = "Headache", 
+  `FAECES SOFT` = "Faeces Soft", 
+  HYPOTENSION = "Hypotension", 
+  `ABDOMINAL FULLNESS DUE TO GAS` = "Abdominal Fullness Due to Gas", 
+  `ORTHOSTATIC HYPOTENSION` = "Orthostatic Hypotension", 
+  `BACK PAIN` = "Back Pain", 
+  WEAKNESS = "Weakness", 
+  `GINGIVAL BLEEDING` = "Gingival Bleeding", 
+  `ABDOMINAL DISCOMFORT` = "Abdominal Discomfort", 
+  DIARRHEA = "Diarrhea"
+)
+HEADER_LABELS <- c(AEDECOD = "dictionary-derived term\n\tbody system or organ class",
+  nevents = "Total number\nof events", 
+  n = "n\n(% of subjects)",
+  "ARM A" = "Treatment A",
+  "ARM B" = "Treatment B"
+)
+```
+
+`tabulator()` call:
+
+```{r}
+dat <- ae_tabulator(ADSL = ex_adsl, ADAE = ex_adae)
+ARM_COUNTS <- attr(dat, "ARM_COUNTS")
+
+tab <- tabulator(
+  dat,
+  rows = c("AEBODSYS", "AEDECOD"),
+  columns = "ARM",
+  `n` = as_paragraph(fmt_n_percent(n_usub, pct)),
+  `nevents` = as_paragraph(n_events)
+)
+
+```
+
+flextable creation:
+
+```{r}
+ft <- as_flextable(tab, spread_first_col = TRUE, ) |> 
+  prepend_chunks(
+    i = ~ is.na(AEBODSYS), j = 1, 
+    as_chunk("\t")
+  )
+
+for(ARM_COD in names(ARM_COUNTS)){
+  ft <- append_chunks(
+    x = ft, 
+    part = "header", 
+    i = 1, 
+    j = tabulator_colnames(tab, columns = "n", ARM %in% !!ARM_COD),
+    as_chunk(ARM_COUNTS[ARM_COD], 
+             formatter = fmt_header_n)
+  )
+}
+ft <- labelizor(
+    ft, 
+    j = "AEDECOD", 
+    part = "body", 
+    labels = AEDECOD_LABELS) |> 
+  labelizor(part = "header", labels = HEADER_LABELS) |> 
+  align(j = 1, align = "left") |> 
+  autofit()
+
+ft
+```
+
