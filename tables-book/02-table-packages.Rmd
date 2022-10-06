@@ -66,7 +66,3 @@ ASCII, HTML, and PDF are supported as output formats for rendering tables.
 `rtables` source code is on [GitHub](https://github.com/roche/rtables) as well
 as the [documentation](https://roche.github.io/rtables/). `rtables` is also available
 on [CRAN](https://CRAN.R-project.org/package=rtables).
-
-
-
-
