@@ -8,7 +8,7 @@ Table generation usually is a two step process
 
 Chapter [Commonly Used Tables] focuses with the work involved in 1, in this chapter we
 discuss the various aspects of creating the final outputs that is commonly stored
-in a file with a particular file format (`pdf`, `txt`, `html`, or `rtf`).
+in a file with a particular file format (`pdf`, `txt`, `html`, `docx` or `rtf`).
 
 ## Title & Footnotes
 
@@ -45,6 +45,93 @@ lyt <- basic_table(
 build_table(lyt, adsl)
 ```
 
+### Title and Footnotes in flextable
+
+Titles and notes can be added and formatted with the 'flextable' package. It is possible to add them in the header and in the footer. Several methods are possible but for most needs, the `add_header_lines()` and `add_footer_lines()` functions will be the easiest to use.
+
+Let's create first a flextable from an aggregation that 
+will be used to illustrate the features.
+
+```{r}
+library(dplyr)
+z <- adsl |> 
+  group_by(ARM, SEX) |>
+  summarise(avg = mean(AGE), sd = sd(AGE)) |>
+  tabulator(rows = "SEX", columns = "ARM",
+    Y = as_paragraph(avg, " (", sd, ")")) |> 
+  as_flextable()
+z
+```
+
+The following shows how to add titles or notes:
+
+```{r}
+z |>
+  add_header_lines("hello world") |>
+  add_footer_lines("bye bye world")
+```
+
+For Word output, users can prepend a table number that will auto-incremente.
+
+```{r}
+docx_file <- tempfile(fileext = ".docx")
+ft <- add_header_lines(z, "hello world") |>
+  prepend_chunks(
+    i = 1, j = 1, part = "header", 
+    as_chunk("Table "), as_word_field("SEQ tab \u005C* Arabic"), 
+    as_chunk(": ")) |>
+  add_footer_lines("bye bye world") |>
+  theme_vanilla()
+save_as_docx(ft, ft, path = docx_file)
+```
+
+```{r include=FALSE, eval=!file.exists("img/flextable-title-ex-01.png") && require("doconv") && locatexec::exec_available("word")}
+doconv::to_miniature(filename = docx_file, fileout = "img/flextable-title-ex-01.png")
+```
+
+![](img/flextable-title-ex-01.png)
+
+Footnotes are also available in 'flextable' with function `footnote()`. 
+The function lets users add footnotes and references to it on the table.
+
+
+```{r}
+footnote(z, i = c(1, 2, 2), j = c(1, 5, 7), 
+         value = as_paragraph("hello world"), ref_symbols = "(1)")
+```
+
+
+## Captions
+
+A caption is a single paragraph of text describing the table it
+is associated to. Captions are often used because they allow you to
+cross-reference tables or list them in a 'list of tables' with the corresponding
+page numbers.
+
+### Captions in flextable
+
+The `set_caption()` function in 'flextable' is the recommanded way to add
+captions. 
+
+```{r}
+flextable(head(cars)) |>
+  set_caption(
+    caption = "a caption",
+    autonum = officer::run_autonum(seq_id = "tab", bkm = "flextable-label"))
+```
+
+In bookdown, use the syntax `\@ref(tab:flextable-label)` to create a linked 
+reference to the table. See an example of a reference: \@ref(tab:flextable-label).
+
+With 'Quarto', the R chunk code should be transformed as: 
+
+````r
+#| label: tbl-flextable-label
+#| tbl-cap: a caption
+flextable(head(cars))
+````
+
+
 ## Pagination
 
 Historically tables have been printed to paper for submissions. Hence large tables
@@ -60,7 +147,20 @@ on each page are correct tables with all relevant information for context.
 In `rtables` pagination can be done with the `paginate_table` function which has 
 a number of arguments to split the table, see the [example documentation](https://roche.github.io/rtables/reference/paginate.html).
 
+### Pagination in flextable
 
+In 'flextable', there is no concept of pagination. The recommended method is to
+create a flextable for each modality of a group and to separate them with a page
+break; from R, this implies looping over a set of modalities with a `for`
+statement or a call to the `lapply()` function. 
+
+Note this concept of page break is only valid for paginated documents, i.e.
+Word, PDF, eventually HTML with
+[paged.js](https://pagedjs.org/made-with-paged.js.html) formats. 
+
+In an 'R Markdown' document, the markdown code to insert a page break is
+`\newpage`; with the package 'officer', you have to use `body_add_break()` (for
+Word documents only).
 
 ## Rendering Tables
 
@@ -72,6 +172,8 @@ include the tables in a report.
 ### PDF
 
 ### HTML
+
+### WORD
 
 ### RTF
 

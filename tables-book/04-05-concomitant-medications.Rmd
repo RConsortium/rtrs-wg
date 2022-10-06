@@ -33,3 +33,71 @@ tab <-
 ##tab
 
 ```
+
+### flextable
+
+```{r}
+library(dplyr)
+library(forcats)
+
+data("cadcm", package = "random.cdisc.data")
+data("cadsl", package = "random.cdisc.data")
+
+
+cmdecod_levels <- c("N_CM", levels(cadcm$CMDECOD))
+cmclas_levels <- c("N_CM", levels(cadcm$CMCLAS))
+
+adcm <- cadcm |> 
+  select(CMDECOD, CMCLAS, TRT01A) |> 
+  mutate(
+    CMDECOD = factor(CMDECOD, levels = cmdecod_levels),
+    CMCLAS = factor(CMCLAS, levels = cmclas_levels)
+    )
+
+trt_count <- group_by(cadsl, TRT01A) |> 
+  summarise(n = n())
+trt_count <- setNames(trt_count$n, trt_count$TRT01A)
+
+ct_cm <- group_by(cadcm, TRT01A) |> 
+  summarise(n = n_distinct(USUBJID)) |> 
+  left_join(count(cadsl, TRT01A, name = "nall"), by = "TRT01A") |> 
+  mutate(pct = n / nall, nall = NULL,
+         CMCLAS = factor("N_CM", levels = cmclas_levels), 
+         CMDECOD = factor("N_CM", levels = cmdecod_levels))
+
+ct_adcm <- adcm |>
+  count(CMDECOD, CMCLAS, TRT01A) |> 
+  left_join(count(cadsl, TRT01A, name = "nall"), by = "TRT01A") |> 
+  mutate(pct = n / nall, nall = NULL)
+
+dat <- bind_rows(ct_cm, ct_adcm)
+
+tab <- tabulator(
+  dat, rows = c("CMCLAS", "CMDECOD"), columns = "TRT01A",
+  cts = as_paragraph(fmt_n_percent(n, pct)))
+
+ft <- as_flextable(tab, spread_first_col = TRUE) |> 
+  prepend_chunks(
+    i = ~ is.na(CMCLAS), j = 1, 
+    as_chunk("\t")
+  )
+
+for(TRT01A_COD in names(trt_count)){
+  ft <- append_chunks(
+    x = ft, 
+    part = "header", 
+    i = 1, 
+    j = tabulator_colnames(tab, columns = "cts", TRT01A %in% !!TRT01A_COD),
+    as_chunk(trt_count[TRT01A_COD], formatter = fmt_header_n)
+  )
+}
+ft <- autofit(ft) |> 
+  align(j = 1, align = "left") |> 
+  labelizor(part = "all", j = "CMDECOD", 
+            labels = c(CMDECOD="", 
+                       N_CM = "Number of sujects with any concomitant medication")) |> 
+  set_caption("Conmed Example\nUses the 'adcm' dataset from 'random.cdisc.data'")
+
+ft
+```
+

@@ -170,3 +170,85 @@ gt(adsl_summary,
     page.footer.use_tbl_notes = TRUE)
 ```
 
+### flextable
+
+The three steps in creating 'Demographic Tables' are:
+
+- summarize the information with the `flextable::summarizor()` function. 
+It computes a set of statistics for each variable by groups. It returns 
+a data.frame ready to be used by `flextable::tabulator()`.
+- Call `flextable::tabulator()` to specify how to arrange the rows and 
+columns and how to format the contents.
+- Finally create the flextable with the `as_flextable()` function.
+
+
+```{r}
+library(flextable)
+library(officer)
+
+set_flextable_defaults(
+  border.color = "#AAAAAA", font.family = "Arial",
+font.size = 9, padding = 3, line_spacing = 1.3
+)
+
+# data
+adsl <- select(ex_adsl, AGE, SEX, COUNTRY, ARM)
+
+# data tabulation
+tab_object <- summarizor(adsl, by = "ARM") |> 
+  mutate(variable = factor(variable, levels = c("AGE", "SEX", "COUNTRY"))) |> 
+  tabulator(
+    rows = c("variable", "stat"),
+    columns = "ARM",
+    content_cell = as_paragraph(
+      fmt_summarizor(
+        stat = stat, 
+        num1 = value1, num2 = value2, 
+        cts = cts, pcts = percent 
+      )
+    )
+  )
+as_flextable(x = tab_object)
+```
+
+First, we will define a named vector of labels. In the illustration, we use labels from the column attributes, hard-coded values and calculated values such as the column label where the number of subjects will be indicated.  
+
+```{r}
+# labels 
+arm_cpt <- count(adsl, ARM) |> 
+  mutate(label = paste0(ARM, "\n", "(N=", n, ")"))
+arm_labels <- set_names(arm_cpt$label, arm_cpt$ARM)
+
+col_labels <- map_chr(adsl, function(x) attr(x, "label"))
+
+labs <- c(arm_labels, col_labels, stat = "",
+    mean_sd = "Mean (SD)", median_iqr = "Median (IQR)",
+    range = "Range", missing = "Missing",
+    AGE = "Age (Years)", SEX = "Sex, n (%)")
+```
+
+Now let's use the labels and customize the ‘flextable’ output.
+
+```{r}
+values_colkeys <- tabulator_colnames(
+  tab_object, 
+  columns = "content_cell", 
+  type = "columns")
+
+# flextable
+ft <- as_flextable(x = tab_object, sep_w = 0, 
+                   separate_with = "variable", 
+                   spread_first_col = TRUE) |>
+  align(i = ~ !is.na(variable), align = "left") |> 
+  prepend_chunks(i = ~ is.na(variable), j  ="stat", as_chunk("\t") ) |> 
+  labelizor(j = c("stat", values_colkeys), 
+            labels = labs, part = "all") |> 
+  add_header_lines(
+    c("x.x: Study Subject Data",
+      "x.x.x: Demographic Characteristics",
+      "Table x.x.x.x: Demographic Characteristics - Full Analysis Set")) |> 
+  add_footer_lines("Source: ADSL DDMMYYYY hh:mm; Listing x.xx; SDTM package: DDMMYYYY")
+
+ft
+```
+
