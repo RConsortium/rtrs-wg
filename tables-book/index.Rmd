@@ -103,6 +103,8 @@ install.packages('flextable', repos = 'https://davidgohel.r-universe.dev')
 remotes::install_github("insightsengineering/random.cdisc.data")
 remotes::install_github("insightsengineering/nestcolor")
 remotes::install_github("insightsengineering/tern")
+
+install.packages("tables", repos = "https://R-Forge.R-project.org")
 ```
 
 ```{r include=FALSE}

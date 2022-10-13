@@ -6,7 +6,7 @@ editor_options:
 
 ## Event Tables
 
-We will use the `ex_adae` data included within the `formatters` package
+We will use the `ex_adae` data included within the `formatters` package.
 
 ```{r, comment=NA}
 head(formatters::ex_adae)
@@ -177,3 +177,47 @@ ft <- labelizor(
 ft
 ```
 
+#### tables
+
+The `tables` package normally generates tables from single datasets, while this
+kind of table requires information from two:  `adsl` and `ex_adae`.
+One way to handle this would be to add the `adsl` patient count 
+information to a copy of the `ex_adae` table.  In this code we
+use a different approach:  we generate one table of patient counts
+to produce the heading lines, and a second table with the adverse
+event data, then use `rbind` to combine the two tables.
+
+```{r}
+resetSession()
+
+library(tables)
+ex_adae <- formatters::ex_adae
+
+subject_counts <- table(adsl$ARM)
+
+countpercentid <- function(num, ARM) {
+  n <- length(unique(num))
+  sprintf("%d (%.2f%%)", 
+          length(unique(num)), 
+          100*n/subject_counts[ARM[1]])
+}
+
+count <- function(x) sprintf("(N=%d)", length(x))
+
+heading <- tabular(Heading("")*1*Heading("")*count ~ Heading()*ARM, data = adsl)
+
+body <- tabular( Heading("Patients with at least one event")*
+           Percent(denom = ARM, fn = countpercentid)*
+           Heading()*USUBJID +
+         Heading("Total number of events")*1 +
+         Heading()*AEBODSYS*
+           (Heading("Patients with at least one event")*
+              Percent(denom = ARM, fn = countpercentid)*
+              Heading()*USUBJID +
+            Heading("Total number of events")*1 +
+            Heading()*AEDECOD*DropEmpty()) ~ 
+           Heading()*ARM, 
+         data = ex_adae )
+
+rbind(heading, body)
+```
