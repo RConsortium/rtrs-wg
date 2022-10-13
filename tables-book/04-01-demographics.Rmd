@@ -11,6 +11,9 @@ editor_options:
 Using `rtables` only:
 
 ```{r, comment= NA}
+resetSession()
+library(rtables)
+
 a_demo_num <- function(x) {
     in_rows(n = length(x),
             "Mean (SD)" = rcell(c(mean(x, na.rm = TRUE),
@@ -37,6 +40,7 @@ build_table(lyt, ex_adsl)
 Using `rtables` and `tern`
 
 ```{r, comment=NA}
+library(tern)
 lyt <- basic_table(title = "x.x: Study Subject Data",
                    subtitles= c("x.x.x: Demographic Characteristics",
                                 "Table x.x.x.x: Demographic Characteristics - Full Analysis Set"),
@@ -51,10 +55,13 @@ build_table(lyt, ex_adsl)
 ### gt
 
 ```{r, comment= NA}
+resetSession()
+library(gt)
 library(tidyverse)
 
 # We will use ex_adsl but will assign a unit to the Age column
 
+ex_adsl <- formatters::ex_adsl
 gt_adsl <- ex_adsl
 attr(gt_adsl$AGE, "units") <- "Years"
 
@@ -183,7 +190,11 @@ columns and how to format the contents.
 
 
 ```{r}
+resetSession()
+ex_adsl <- formatters::ex_adsl
+
 library(flextable)
+library(tidyverse)
 library(officer)
 
 set_flextable_defaults(

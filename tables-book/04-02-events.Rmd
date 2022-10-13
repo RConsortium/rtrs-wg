@@ -9,7 +9,7 @@ editor_options:
 We will use the `ex_adae` data included within the `formatters` package
 
 ```{r, comment=NA}
-head(ex_adae)
+head(formatters::ex_adae)
 ```
 
 ### Adverse Events
@@ -21,6 +21,9 @@ head(ex_adae)
 Adverse Events by ID
 
 ```{r, comment=NA}
+resetSession()
+library(rtables)
+
 s_events_patients <- function(x, labelstr, .N_col) {
   in_rows(
     "Patients with at least one event" =
@@ -57,6 +60,10 @@ build_table(lyt, ex_adae, alt_counts_df = ex_adsl)
 #### flextable
 
 ```{r message=FALSE}
+resetSession()
+ex_adsl <- formatters::ex_adsl
+ex_adae <- formatters::ex_adae
+library(flextable)
 library(tidyr)
 library(dplyr)
 library(forcats)
@@ -136,6 +143,7 @@ tab <- tabulator(
   `nevents` = as_paragraph(n_events)
 )
 
+.ARM_COUNTS <- ARM_COUNTS
 ```
 
 flextable creation:

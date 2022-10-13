@@ -112,12 +112,33 @@ knitr::write_bib(c(
 ), 'packages.bib')
 ```
 
-
-You can then load the packages as follows:
+In each of the sections below, we will reset R to close to the
+present state
+at the start of the section, so readers can execute the demonstration
+code more or less independently of the other sections.  This is done using
+the functions defined below.  In your own documents, you wouldn't 
+need these resets.
 
 ```{r}
-library(gt)
-library(rtables)
-library(tern)
-library(flextable)
+# Get the list of attached packages and global environment objects
+currentState <- function() {
+  list(globals = ls(.GlobalEnv),
+       search = search())
+}
+
+resetSession <- function(state = .initial_state) {
+  # Clean up the search list
+  for (n in setdiff(search(), state$search)) {
+    detach(n, character.only = TRUE)
+  }
+  
+  # Clean up the global environment by deleting everything
+  # that wasn't there when `state` was constructed.
+  # Objects whose name starts with "." are not deleted.
+  
+  rm(list = setdiff(ls(.GlobalEnv), state$globals),
+     envir = .GlobalEnv)
+}
+.initial_state <- currentState()
 ```
+
