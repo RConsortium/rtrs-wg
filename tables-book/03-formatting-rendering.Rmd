@@ -34,6 +34,9 @@ So for example a basic demographics table created with `rtables` via `tern` with
 title and footnotes would look as follows:
 
 ```{r,  comment=NA }
+resetSession()
+library(rtables)
+
 lyt <- basic_table(
   title = "Demographic Table - All Patients",
   subtitles = c("Cutoff Date: June 01, 2022", "Arm B received a placebo."),
@@ -53,7 +56,10 @@ Let's create first a flextable from an aggregation that
 will be used to illustrate the features.
 
 ```{r}
+resetSession()
+library(flextable)
 library(dplyr)
+
 z <- adsl |> 
   group_by(ARM, SEX) |>
   summarise(avg = mean(AGE), sd = sd(AGE)) |>
@@ -137,6 +143,9 @@ The `set_caption()` function in 'flextable' is the recommanded way to add
 captions. 
 
 ```{r}
+resetSession()
+library(flextable)
+
 flextable(head(cars)) |>
   set_caption(
     caption = "a caption",
