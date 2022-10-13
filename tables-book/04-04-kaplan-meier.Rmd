@@ -9,6 +9,7 @@ editor_options:
 ### Data and models used throughout
 
 ```{r, comment=NA}
+resetSession()
 library(dplyr)
 library(tidyr)
 library(stringr)
@@ -36,12 +37,14 @@ surv_tbl <- as.data.frame(summary(survfit(Surv(AVAL, CNSR==0) ~ TRT01A,
     dplyr::mutate(TRT01A = factor(str_remove(row.names(.), "TRT01A="),
                                   levels = levels(adtte$TRT01A)),
                   ind = FALSE)
-
+.kmState <- currentState()
 ```
 
 ### rtables
 
 ```{r, comment=NA}
+resetSession(.kmState)
+library(rtables)
 
 cnsr_counter <- function(df, .var, .N_col) {
     x <- df[!duplicated(df$USUBJID), .var]
@@ -142,6 +145,8 @@ Our standard TTE table consists of (a derivation of) four main parts:
 4. Number of patients at risk at specified visits from Kaplan-Meier analysis (omitted here).
 
 ```{r descr_stats}
+resetSession(.kmState)
+library(gt)
 ### Subject Count with events
 
 ## surv_tbl calculated above
@@ -292,6 +297,12 @@ First we define named vectors that will be used later as
 labels for the table.
 
 ```{r}
+resetSession(.kmState)
+ARM_COUNTS <- .ARM_COUNTS # Restore from previous section
+
+library(flextable)
+library(tidyverse)
+
 # labels and notes ----
 description_labels <- c(SAE = "Number of subjects with serious adverse event", CENSOR_EVENTS = "Number of censored subjects",
   HAZARD_RATIO = "Hazard ratio", TTF_SAE = "Time to first adverse event")
