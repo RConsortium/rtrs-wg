@@ -100,6 +100,29 @@ footnote(z, i = c(1, 2, 2), j = c(1, 5, 7),
          value = as_paragraph("hello world"), ref_symbols = "(1)")
 ```
 
+### Titles and footnotes in the tables package
+
+The `tables` package concentrates on the table itself.  The titles
+are generally written as part of the surrounding document.  Footnotes
+would be added after constructing the table by modifying 
+individual entries.
+
+Alternatively, table objects can be converted to the format 
+supported by the `kableExtra` package, and customizations 
+can then be applied.  For example,
+
+```{r tablesKable}
+adsl <- cadsl
+library(tables)
+sd_in_parens <- function(x) paste0("(", round(sd(x), 1), ")")
+
+tab <- tabular(SEX ~ Heading()*ARM*
+                     Heading()*AGE*
+                     Heading()*(mean + sd_in_parens), 
+               data = adsl)
+
+tab |> toKable() |> kableExtra::footnote("This is a footnote")
+```
 
 ## Captions
 
@@ -131,6 +154,10 @@ With 'Quarto', the R chunk code should be transformed as:
 flextable(head(cars))
 ````
 
+### Captions in the tables package
+
+As with titles, captions would be added as part of the
+surrounding document rather than part of the table object.
 
 ## Pagination
 
@@ -161,6 +188,13 @@ Word, PDF, eventually HTML with
 In an 'R Markdown' document, the markdown code to insert a page break is
 `\newpage`; with the package 'officer', you have to use `body_add_break()` (for
 Word documents only).
+
+### Pagination in the tables package
+
+Tables that span multiple pages are supported in PDF output using
+the LaTeX `longtable` package, specified when converting to LaTeX.
+
+
 
 ## Rendering Tables
 
