@@ -113,21 +113,32 @@ are generally written as part of the surrounding document.  Footnotes
 would be added after constructing the table by modifying 
 individual entries.
 
-Alternatively, table objects can be converted to the format 
+Alternatively, only the footnote markers need to be added by modifying entries, and then the
+table object is converted to the format 
 supported by the `kableExtra` package, and customizations 
-can then be applied.  For example,
+can then be applied.
 
 ```{r tablesKable}
+resetSession()
 adsl <- cadsl
+
 library(tables)
-sd_in_parens <- function(x) paste0("(", round(sd(x), 1), ")")
+library(kableExtra)
+
+sd_in_parens <- function(x) sprintf("(%.1f)", sd(x))
 
 tab <- tabular(SEX ~ Heading()*ARM*
                      Heading()*AGE*
                      Heading()*(mean + sd_in_parens), 
                data = adsl)
 
-tab |> toKable() |> kableExtra::footnote("This is a footnote")
+rowLabels(tab)[1,1] <- paste(rowLabels(tab)[1,1], "<sup>a</sup>")
+tab[2,2] <- sprintf("%s%s", tab[2,2], "<sup>b</sup>")
+tab[2,3] <- sprintf("%.2f%s", tab[2,3], "<sup>b</sup>")
+
+toKable(tab) |>
+  kable_styling(full_width = FALSE) |>
+  add_footnote(c("This is a label footnote", "These are cell footnotes"))
 ```
 
 ## Captions
@@ -207,7 +218,7 @@ the LaTeX `longtable` package, specified when converting to LaTeX.
 
 ## Rendering Tables
 
-The choice of file format is often dictated by your companies processes to 
+The choice of file format is often dictated by your company's processes to 
 include the tables in a report.
 
 ### ASCII
