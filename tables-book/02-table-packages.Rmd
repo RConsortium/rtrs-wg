@@ -42,3 +42,24 @@ statistical models and the creation of complex cross tabulations.
 Source code is on [GitHub](https://github.com/davidgohel/flextable), a 
 [user manual](https://ardata-fr.github.io/flextable-book/) is available. 
 `flextable` is available on [CRAN](https://CRAN.R-project.org/package=flextable).
+
+## tables
+
+The `tables` package provides a formula-driven interface for
+computing the contents of tables and formatting them.  It was 
+inspired by `SAS PROC TABULATE`, but is not compatible with it.
+
+The user computes a table object by specifying a formula, with the
+left-hand
+side giving the rows, and the right-hand side giving the columns;
+the formula describes the summary functions to apply and how to
+organize them.  The objects can be subsetted or combined
+using matrix-like operations.  Tables can
+be rendered in plain text, LaTeX code to appear
+in a PDF document, or HTML code for a web document.
+
+The package is available from CRAN.  Source is maintained on R-forge
+at https://r-forge.r-project.org/projects/tables/ and mirrored on
+Github at https://github.com/rforge/tables/.  Vignettes in the package
+serve as a user manual.  Browse them at https://rdrr.io/cran/tables/, or install the package, then run
+`browseVignettes(package = "tables")`.
