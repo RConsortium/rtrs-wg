@@ -191,6 +191,8 @@ event data, then use `rbind` to combine the two tables.
 resetSession()
 
 library(tables)
+table_options(doCSS = TRUE)
+
 ex_adae <- formatters::ex_adae
 
 subject_counts <- table(adsl$ARM)
@@ -207,8 +209,7 @@ count <- function(x) sprintf("(N=%d)", length(x))
 heading <- tabular(Heading("")*1*Heading("")*count ~ Heading()*ARM, data = adsl)
 
 body <- tabular( Heading("Patients with at least one event")*
-           Percent(denom = ARM, fn = countpercentid)*
-           Heading()*USUBJID +
+           countpercentid*Arguments(ARM = ARM)*Heading()*USUBJID +
          Heading("Total number of events")*1 +
          Heading()*AEBODSYS*
            (Heading("Patients with at least one event")*
