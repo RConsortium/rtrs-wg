@@ -8,6 +8,8 @@ editor_options:
 ### gt
 
 ```{r, comment=NA}
+resetSession()
+
 library(dplyr)
 library(magrittr)
 library(gt)
@@ -37,6 +39,9 @@ tab <-
 ### flextable
 
 ```{r}
+resetSession()
+
+library(flextable)
 library(dplyr)
 library(forcats)
 

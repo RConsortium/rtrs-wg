@@ -8,6 +8,8 @@ editor_options:
 ### rtables
 
 ```{r, comment=NA}
+resetSession()
+
 library(dplyr)
 library(magrittr)
 library(rtables)
@@ -26,6 +28,8 @@ build_table(lyt, r_adsl)
 ### flextable
 
 ```{r}
+resetSession()
+
 library(survival)
 library(tidyverse)
 library(flextable)

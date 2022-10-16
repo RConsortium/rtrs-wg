@@ -173,7 +173,7 @@ Word documents only).
 
 ## Rendering Tables
 
-The choice of file format is often dictated by your companies processes to 
+The choice of file format is often dictated by your company's processes to 
 include the tables in a report.
 
 ### ASCII
