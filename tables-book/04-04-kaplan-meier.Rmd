@@ -551,12 +551,15 @@ eventCI <- function(ARM) {
   sprintf("[%.2f, %.2f]", vals$`0.95LCL`, vals$`0.95UCL`)
 }
 
-heading <- tabular(Heading("")*count ~ Heading()*ARM, data = adsl)
+heading <- tabular(Heading("")*count ~ 
+                   Heading()*ARM, 
+                   data = adsl)
 
 part1 <- tabular( Heading("Subjects with serious adverse events")*
-           events*Heading()*valuepercent*Arguments(ARM = TRT01A) ~ 
-           Heading()*TRT01A, 
-         data = surv_tbl )
+                    events*Heading()*
+                    valuepercent*Arguments(ARM = TRT01A) ~ 
+                  Heading()*TRT01A, 
+                  data = surv_tbl )
 
 part2 <- tabular( Heading("Number of censored subjects")*
                     blanks +

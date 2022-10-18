@@ -107,12 +107,13 @@ ft
 resetSession()
 adsl <- cadsl
 
+# Change the labels to title case
+
 levels(adsl$EOSSTT)  <- tools::toTitleCase(tolower(levels(adsl$EOSSTT)))
 levels(adsl$DCSREAS) <- tools::toTitleCase(tolower(levels(adsl$DCSREAS)))
 levels(adsl$DTHCAUS) <- tools::toTitleCase(tolower(levels(adsl$DTHCAUS)))
 
 library(tables)
-table_options(doCSS = TRUE)
 
 subject_counts <- table(adsl$ARM)
 
@@ -129,22 +130,27 @@ heading <- tabular(Heading("")*1*Heading("")*count  ~
              Heading()*TRT01A, data = adsl)
 
 part1 <- tabular( Heading("")*EOSSTT*DropEmpty()*
-                   Heading("")*1*
-                   Heading()*countpercentid*Arguments(ARM = TRT01A)*
-                     Heading()*USUBJID ~
-             Heading()*TRT01A, data = subset(adsl, EOSSTT != "Discontinued"))
+                    Heading("")*1*
+                    Heading()*countpercentid*Arguments(ARM = TRT01A)*
+                    Heading()*USUBJID ~
+                  Heading()*TRT01A, 
+                  data = subset(adsl, EOSSTT != "Discontinued"))
 
 part2 <- tabular( Heading("")*EOSSTT*
                     Heading("")*DCSREAS*DropEmpty()*
-                   Heading()*countpercentid*Arguments(ARM = TRT01A)*
-                     Heading()*USUBJID ~
-             Heading()*TRT01A, data = subset(adsl, EOSSTT == "Discontinued" & DCSREAS != "Death"))
+                    Heading()*countpercentid*Arguments(ARM = TRT01A)*
+                    Heading()*USUBJID ~
+                  Heading()*TRT01A, 
+                  data = subset(adsl, EOSSTT == "Discontinued" &
+                                      DCSREAS != "Death"))
 
 part3 <- tabular( Heading("")*DCSREAS*
                     Heading("")*DTHCAUS*DropEmpty()*
-                   Heading()*countpercentid*Arguments(ARM = TRT01A)*
-                     Heading()*USUBJID ~
-             Heading()*TRT01A, data = subset(adsl, EOSSTT == "Discontinued" & DCSREAS == "Death"))
+                    Heading()*countpercentid*Arguments(ARM = TRT01A)*
+                    Heading()*USUBJID ~
+                  Heading()*TRT01A, 
+                  data = subset(adsl, EOSSTT == "Discontinued" &
+                                      DCSREAS == "Death"))
 
 rbind(heading, part1, part2, part3)
 ```

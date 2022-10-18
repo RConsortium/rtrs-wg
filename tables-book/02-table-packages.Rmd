@@ -58,8 +58,7 @@ using matrix-like operations.  Tables can
 be rendered in plain text, LaTeX code to appear
 in a PDF document, or HTML code for a web document.
 
-The package is on CRAN, but this document currently requires
-the development version.  Source is maintained on R-forge
+The package is on CRAN.  Source is maintained on R-forge
 at https://r-forge.r-project.org/projects/tables/ and mirrored on
 Github at https://github.com/rforge/tables/.  Vignettes in the package
 serve as a user manual.  Browse them at https://rdrr.io/cran/tables/, or install the package, then run
@@ -67,6 +66,6 @@ serve as a user manual.  Browse them at https://rdrr.io/cran/tables/, or install
 
 ```{r echo = FALSE}
 if (!requireNamespace("tables", quietly = TRUE) ||
-    packageVersion("tables") < "0.9.9")
-  stop("This document requires tables version 0.9.9 or higher.")
+    packageVersion("tables") < "0.9.10")
+  stop("This document requires tables version 0.9.10 or higher.")
 ```

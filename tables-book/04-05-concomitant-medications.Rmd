@@ -127,14 +127,17 @@ countpercentid <- function(num, ARM) {
 
 count <- function(x) sprintf("(N=%d)", length(x))
 
-heading <- tabular(Heading("")*1*Heading("")*count ~ Heading()*ARM, data = adsl)
+heading <- tabular(Heading("")*1*Heading("")*count ~ 
+                   Heading()*ARM, 
+                   data = adsl)
 
-body <- tabular((  Heading("Any concomitant medication")*1 + 
-                   Heading()*CMCLAS*
-                     Heading()*CMDECOD*DropEmpty())*
+body <- tabular( (Heading("Any concomitant medication")*1 + 
+                  Heading()*CMCLAS*
+                    Heading()*CMDECOD*DropEmpty())*
                  Heading()*countpercentid*Arguments(ARM = TRT01A)*
-                 Heading()*USUBJID ~
-             Heading()*TRT01A, data = cadcm)
+                   Heading()*USUBJID ~
+                 Heading()*TRT01A, 
+                 data = cadcm)
 
 rbind(heading, body)
 ```

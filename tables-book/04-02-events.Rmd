@@ -206,19 +206,22 @@ countpercentid <- function(num, ARM) {
 
 count <- function(x) sprintf("(N=%d)", length(x))
 
-heading <- tabular(Heading("")*1*Heading("")*count ~ Heading()*ARM, data = adsl)
+heading <- tabular(Heading("")*1*
+                     Heading("")*count ~ 
+                   Heading()*ARM, data = adsl)
 
 body <- tabular( Heading("Patients with at least one event")*
-           countpercentid*Arguments(ARM = ARM)*Heading()*USUBJID +
-         Heading("Total number of events")*1 +
-         Heading()*AEBODSYS*
-           (Heading("Patients with at least one event")*
-              Percent(denom = ARM, fn = countpercentid)*
-              Heading()*USUBJID +
-            Heading("Total number of events")*1 +
-            Heading()*AEDECOD*DropEmpty()) ~ 
-           Heading()*ARM, 
-         data = ex_adae )
+                   countpercentid*Arguments(ARM = ARM)*
+                   Heading()*USUBJID +
+                 Heading("Total number of events")*1 +
+                 Heading()*AEBODSYS*
+                   (Heading("Patients with at least one event")*
+                      Percent(denom = ARM, fn = countpercentid)*
+                      Heading()*USUBJID +
+                    Heading("Total number of events")*1 +
+                    Heading()*AEDECOD*DropEmpty()) ~ 
+                 Heading()*ARM, 
+                 data = ex_adae )
 
 rbind(heading, body)
 ```

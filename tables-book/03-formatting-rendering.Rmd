@@ -118,7 +118,7 @@ table object is converted to the format
 supported by the `kableExtra` package, and customizations 
 can then be applied.
 
-```{r tablesKable}
+```{r}
 resetSession()
 adsl <- cadsl
 

@@ -287,9 +287,8 @@ tabular( Heading(n)*1 +
          AGE * (Heading("Mean (SD)")*meansd +
                 Heading("Median (IQR)")*medianiqr +
                 Heading("Min - Max")*minmax) +
-         (SEX + COUNTRY)*Heading()*Percent(denom = Equal(ARM),
-                               fn = countpercent)
-         ~ 
+         (SEX + COUNTRY)*Heading()*
+           Percent(denom = Equal(ARM), fn = countpercent) ~ 
          Heading()*ARM, 
          data = adsl )
 ```
