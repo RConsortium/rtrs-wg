@@ -18,5 +18,4 @@ Encoding: UTF-8
 Remotes: insightsengineering/random.cdisc.data,
   insightsengineering/nestcolor,
   insightsengineering/tern,
-  davidgohel/flextable,
-  rforge/tables/pkg/tables
+  davidgohel/flextable
