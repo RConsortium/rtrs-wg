@@ -482,4 +482,103 @@ for (ARM_COD in names(ARM_COUNTS)) {
 ft
 ```
 
+### tables
 
+```{r}
+resetSession(.kmState)
+
+library(tables)
+table_options(doCSS = TRUE)
+
+ex_adae <- formatters::ex_adae
+
+subject_counts <- table(adsl$ARM)
+
+countpercentid <- function(num, ARM) {
+  n <- length(unique(num))
+  sprintf("%d (%.2f%%)", 
+          length(unique(num)), 
+          100*n/subject_counts[ARM[1]])
+}
+
+valuepercent <- function(x, ARM) {
+  sprintf("%d (%.2f%%)", x, 100*x/subject_counts[ARM] )
+}
+
+blanks <- function(x) ""
+
+count <- function(x) sprintf("(N=%d)", length(x))
+
+hazardratio <- function(ARM) {
+  entry <- paste0("TRT01A", ARM)
+  coef <- coef(cph)
+  if (entry %in% names(coef)) sprintf("%.1f", exp(coef[entry]))
+  else ""
+}
+
+hazardratioconfint <- function(ARM) {
+  entry <- paste0("TRT01A", ARM)
+  confint <- confint(cph)
+  if (entry %in% rownames(confint)) {
+    confint <- as.numeric(confint[entry,])
+    sprintf("(%.1f, %.1f)", exp(confint[1]), exp(confint[2]))
+  } else ""
+}
+
+hazardpvalue <- function(ARM) {
+  if (ARM == "A: Drug X") ""
+  else {
+    twogroups <- c("A: Drug X", ARM)
+    sdf <- survdiff(Surv(AVAL, CNSR==0) ~ TRT01A + STRATA1,
+                   data = adtte, subset = TRT01A %in% twogroups)
+    pval <- (1-pchisq(sdf$chisq, length(sdf$n)-1))/2
+    sprintf("%.4f", pval)
+  }
+}
+
+Median <- function(ARM) {
+  vals <- subset(surv_tbl, TRT01A == ARM)
+  sprintf("%.2f", vals$median)
+}
+
+minmaxevent <- function(ARM) {
+  vals <- subset(adtte, TRT01A == ARM)
+  sprintf("%.2f, %.2f", min(vals$AVAL), max(vals$AVAL))
+}
+
+eventCI <- function(ARM) {
+  vals <- subset(surv_tbl, TRT01A == ARM)
+  sprintf("[%.2f, %.2f]", vals$`0.95LCL`, vals$`0.95UCL`)
+}
+
+heading <- tabular(Heading("")*count ~ 
+                   Heading()*ARM, 
+                   data = adsl)
+
+part1 <- tabular( Heading("Subjects with serious adverse events")*
+                    events*Heading()*
+                    valuepercent*Arguments(ARM = TRT01A) ~ 
+                  Heading()*TRT01A, 
+                  data = surv_tbl )
+
+part2 <- tabular( Heading("Number of censored subjects")*
+                    blanks +
+                  Factor(CNSDTDSC, "")*
+                    Heading()*countpercentid*Arguments(ARM = TRT01A)*
+                    Heading()*USUBJID ~
+                  Heading()*TRT01A, 
+                  data = subset(adtte, nchar(CNSDTDSC) > 0))
+
+part3 <- tabular( ( Heading("Hazard ratio")*hazardratio +
+                    Heading("95% confidence interval")*hazardratioconfint +
+                    Heading("p-value (one-sided stratified log rank)")*hazardpvalue +
+                    Heading("Time to first serious adverse event")*blanks +
+                    Heading("Median (years)")*Median +
+                    Heading("95% confidence interval")*eventCI +
+                    Heading("Min, Max")*minmaxevent)*
+                   Heading()*as.character(TRT01A)  ~
+                  Heading()*TRT01A,
+                  data = surv_tbl)
+
+rbind(heading, part1, part2, part3)
+```

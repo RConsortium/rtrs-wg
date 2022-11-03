@@ -100,3 +100,57 @@ ft <- ft |>
 ft
 ```
 
+
+### tables
+
+```{r}
+resetSession()
+adsl <- cadsl
+
+# Change the labels to title case
+
+levels(adsl$EOSSTT)  <- tools::toTitleCase(tolower(levels(adsl$EOSSTT)))
+levels(adsl$DCSREAS) <- tools::toTitleCase(tolower(levels(adsl$DCSREAS)))
+levels(adsl$DTHCAUS) <- tools::toTitleCase(tolower(levels(adsl$DTHCAUS)))
+
+library(tables)
+
+subject_counts <- table(adsl$ARM)
+
+countpercentid <- function(num, ARM) {
+  n <- length(unique(num))
+  sprintf("%d (%.2f%%)", 
+          length(unique(num)), 
+          100*n/subject_counts[ARM[1]])
+}
+
+count <- function(x) sprintf("(N=%d)", length(x))
+
+heading <- tabular(Heading("")*1*Heading("")*count  ~
+             Heading()*TRT01A, data = adsl)
+
+part1 <- tabular( Heading("")*EOSSTT*DropEmpty()*
+                    Heading("")*1*
+                    Heading()*countpercentid*Arguments(ARM = TRT01A)*
+                    Heading()*USUBJID ~
+                  Heading()*TRT01A, 
+                  data = subset(adsl, EOSSTT != "Discontinued"))
+
+part2 <- tabular( Heading("")*EOSSTT*
+                    Heading("")*DCSREAS*DropEmpty()*
+                    Heading()*countpercentid*Arguments(ARM = TRT01A)*
+                    Heading()*USUBJID ~
+                  Heading()*TRT01A, 
+                  data = subset(adsl, EOSSTT == "Discontinued" &
+                                      DCSREAS != "Death"))
+
+part3 <- tabular( Heading("")*DCSREAS*
+                    Heading("")*DTHCAUS*DropEmpty()*
+                    Heading()*countpercentid*Arguments(ARM = TRT01A)*
+                    Heading()*USUBJID ~
+                  Heading()*TRT01A, 
+                  data = subset(adsl, EOSSTT == "Discontinued" &
+                                      DCSREAS == "Death"))
+
+rbind(heading, part1, part2, part3)
+```

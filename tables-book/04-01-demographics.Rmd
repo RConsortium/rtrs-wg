@@ -263,3 +263,32 @@ ft <- as_flextable(x = tab_object, sep_w = 0,
 ft
 ```
 
+### tables
+
+```{r}
+resetSession()
+library(tables)
+table_options(doCSS = TRUE)
+
+meansd <- function(x) sprintf("%.1f (%.1f)", mean(x), sd(x))
+
+iqr <- function(x) quantile(x, 0.75) - quantile(x, 0.25)
+
+medianiqr <- function(x) sprintf("%.1f (%.1f)", median(x), iqr(x))
+
+minmax <- function(x) sprintf("%.1f - %.1f", min(x), max(x))
+
+countpercent <- function(num, denom) 
+  sprintf("%d (%.1f%%)", 
+          length(num), 
+          100*length(num)/length(denom))
+
+tabular( Heading(n)*1 +
+         AGE * (Heading("Mean (SD)")*meansd +
+                Heading("Median (IQR)")*medianiqr +
+                Heading("Min - Max")*minmax) +
+         (SEX + COUNTRY)*Heading()*
+           Percent(denom = Equal(ARM), fn = countpercent) ~ 
+         Heading()*ARM, 
+         data = adsl )
+```
