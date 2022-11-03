@@ -6,7 +6,7 @@ editor_options:
 
 ## Event Tables
 
-We will use the `ex_adae` data included within the `formatters` package
+We will use the `ex_adae` data included within the `formatters` package.
 
 ```{r, comment=NA}
 head(formatters::ex_adae)
