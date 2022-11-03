@@ -1,0 +1,473 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<title>Tables in Clinical Trials with R</title>
+<meta name="description" content="Example code to create tables commonly used for analyzing clinical trials data.">
+<meta name="generator" content="bookdown 0.29 and GitBook 2.6.7">
+<meta property="og:title" content="Tables in Clinical Trials with R">
+<meta property="og:type" content="book">
+<meta property="og:description" content="Example code to create tables commonly used for analyzing clinical trials data.">
+<meta name="github-repo" content="RConsortium/rtrs-wg">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Tables in Clinical Trials with R">
+<meta name="twitter:description" content="Example code to create tables commonly used for analyzing clinical trials data.">
+<meta name="author" content="R Consortium Tables Working Group">
+<meta name="date" content="2022-11-03">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black">
+<link rel="next" href="tablepkgs.html">
+<script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script><script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script><link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet">
+<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet">
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet">
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet">
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet">
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet">
+<link href="libs/gitbook-2.6.7/css/plugin-clipboard.css" rel="stylesheet">
+<link href="libs/anchor-sections-1.1.0/anchor-sections.css" rel="stylesheet">
+<link href="libs/anchor-sections-1.1.0/anchor-sections-hash.css" rel="stylesheet">
+<script src="libs/anchor-sections-1.1.0/anchor-sections.js"></script><link href="libs/tabwid-1.1.2/tabwid.css" rel="stylesheet">
+<script src="libs/kePrint-0.0.1/kePrint.js"></script><link href="libs/lightable-0.0.1/lightable.css" rel="stylesheet">
+<style type="text/css">
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { color: #008000; } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { color: #008000; font-weight: bold; } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+</style>
+<link rel="stylesheet" href="static/css/fira-code.css" type="text/css">
+<link rel="stylesheet" href="static/css/fira-sans-condensed.css" type="text/css">
+<link rel="stylesheet" href="static/css/arial.css" type="text/css">
+<link rel="stylesheet" href="static/css/open-sans.css" type="text/css">
+<link rel="stylesheet" href="static/css/style.css" type="text/css">
+</head>
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation"><ul class="summary">
+<li><a href="./">Using R to create tables for clinical trials</a></li>
+
+<li class="divider">
+<li class="chapter" data-level="1" data-path="index.html">
+<a href="index.html"><i class="fa fa-check"></i><b>1</b> About</a>
+<ul>
+<li class="chapter" data-level="1.1" data-path="index.html"><a href="index.html#introduction"><i class="fa fa-check"></i><b>1.1</b> Introduction</a></li>
+<li class="chapter" data-level="1.2" data-path="index.html"><a href="index.html#call-for-contributions"><i class="fa fa-check"></i><b>1.2</b> Call for Contributions</a></li>
+<li class="chapter" data-level="1.3" data-path="index.html"><a href="index.html#data-used-for-examples"><i class="fa fa-check"></i><b>1.3</b> Data Used For Examples</a></li>
+<li class="chapter" data-level="1.4" data-path="index.html"><a href="index.html#installing-the-r-packages"><i class="fa fa-check"></i><b>1.4</b> Installing the R packages</a></li>
+</ul>
+</li>
+<li class="chapter" data-level="2" data-path="tablepkgs.html">
+<a href="tablepkgs.html"><i class="fa fa-check"></i><b>2</b> Overview table R packages</a>
+<ul>
+<li class="chapter" data-level="2.1" data-path="tablepkgs.html"><a href="tablepkgs.html#gt"><i class="fa fa-check"></i><b>2.1</b> gt</a></li>
+<li class="chapter" data-level="2.2" data-path="tablepkgs.html"><a href="tablepkgs.html#r2rtf"><i class="fa fa-check"></i><b>2.2</b> r2rtf</a></li>
+<li class="chapter" data-level="2.3" data-path="tablepkgs.html"><a href="tablepkgs.html#rtables"><i class="fa fa-check"></i><b>2.3</b> rtables</a></li>
+<li class="chapter" data-level="2.4" data-path="tablepkgs.html"><a href="tablepkgs.html#flextable"><i class="fa fa-check"></i><b>2.4</b> flextable</a></li>
+<li class="chapter" data-level="2.5" data-path="tablepkgs.html"><a href="tablepkgs.html#tables"><i class="fa fa-check"></i><b>2.5</b> tables</a></li>
+</ul>
+</li>
+<li class="chapter" data-level="3" data-path="formatting-and-rendering-tables.html">
+<a href="formatting-and-rendering-tables.html"><i class="fa fa-check"></i><b>3</b> Formatting and Rendering Tables</a>
+<ul>
+<li class="chapter" data-level="3.1" data-path="formatting-and-rendering-tables.html">
+<a href="formatting-and-rendering-tables.html#title-footnotes"><i class="fa fa-check"></i><b>3.1</b> Title &amp; Footnotes</a>
+<ul>
+<li class="chapter" data-level="3.1.1" data-path="formatting-and-rendering-tables.html"><a href="formatting-and-rendering-tables.html#title-and-footnotes-in-rtables"><i class="fa fa-check"></i><b>3.1.1</b> Title and Footnotes in rtables</a></li>
+<li class="chapter" data-level="3.1.2" data-path="formatting-and-rendering-tables.html"><a href="formatting-and-rendering-tables.html#title-and-footnotes-in-flextable"><i class="fa fa-check"></i><b>3.1.2</b> Title and Footnotes in flextable</a></li>
+<li class="chapter" data-level="3.1.3" data-path="formatting-and-rendering-tables.html"><a href="formatting-and-rendering-tables.html#titles-and-footnotes-in-the-tables-package"><i class="fa fa-check"></i><b>3.1.3</b> Titles and footnotes in the tables package</a></li>
+</ul>
+</li>
+<li class="chapter" data-level="3.2" data-path="formatting-and-rendering-tables.html">
+<a href="formatting-and-rendering-tables.html#captions"><i class="fa fa-check"></i><b>3.2</b> Captions</a>
+<ul>
+<li class="chapter" data-level="3.2.1" data-path="formatting-and-rendering-tables.html"><a href="formatting-and-rendering-tables.html#captions-in-flextable"><i class="fa fa-check"></i><b>3.2.1</b> Captions in flextable</a></li>
+<li class="chapter" data-level="3.2.2" data-path="formatting-and-rendering-tables.html"><a href="formatting-and-rendering-tables.html#captions-in-the-tables-package"><i class="fa fa-check"></i><b>3.2.2</b> Captions in the tables package</a></li>
+</ul>
+</li>
+<li class="chapter" data-level="3.3" data-path="formatting-and-rendering-tables.html">
+<a href="formatting-and-rendering-tables.html#pagination"><i class="fa fa-check"></i><b>3.3</b> Pagination</a>
+<ul>
+<li class="chapter" data-level="3.3.1" data-path="formatting-and-rendering-tables.html"><a href="formatting-and-rendering-tables.html#pagination-in-rtables"><i class="fa fa-check"></i><b>3.3.1</b> Pagination in rtables</a></li>
+<li class="chapter" data-level="3.3.2" data-path="formatting-and-rendering-tables.html"><a href="formatting-and-rendering-tables.html#pagination-in-flextable"><i class="fa fa-check"></i><b>3.3.2</b> Pagination in flextable</a></li>
+<li class="chapter" data-level="3.3.3" data-path="formatting-and-rendering-tables.html"><a href="formatting-and-rendering-tables.html#pagination-in-the-tables-package"><i class="fa fa-check"></i><b>3.3.3</b> Pagination in the tables package</a></li>
+</ul>
+</li>
+<li class="chapter" data-level="3.4" data-path="formatting-and-rendering-tables.html">
+<a href="formatting-and-rendering-tables.html#rendering-tables"><i class="fa fa-check"></i><b>3.4</b> Rendering Tables</a>
+<ul>
+<li class="chapter" data-level="3.4.1" data-path="formatting-and-rendering-tables.html"><a href="formatting-and-rendering-tables.html#ascii"><i class="fa fa-check"></i><b>3.4.1</b> ASCII</a></li>
+<li class="chapter" data-level="3.4.2" data-path="formatting-and-rendering-tables.html"><a href="formatting-and-rendering-tables.html#pdf"><i class="fa fa-check"></i><b>3.4.2</b> PDF</a></li>
+<li class="chapter" data-level="3.4.3" data-path="formatting-and-rendering-tables.html"><a href="formatting-and-rendering-tables.html#html"><i class="fa fa-check"></i><b>3.4.3</b> HTML</a></li>
+<li class="chapter" data-level="3.4.4" data-path="formatting-and-rendering-tables.html"><a href="formatting-and-rendering-tables.html#word"><i class="fa fa-check"></i><b>3.4.4</b> WORD</a></li>
+<li class="chapter" data-level="3.4.5" data-path="formatting-and-rendering-tables.html"><a href="formatting-and-rendering-tables.html#rtf"><i class="fa fa-check"></i><b>3.4.5</b> RTF</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="chapter" data-level="4" data-path="commontables.html">
+<a href="commontables.html"><i class="fa fa-check"></i><b>4</b> Commonly Used Tables</a>
+<ul>
+<li class="chapter" data-level="4.1" data-path="commontables.html">
+<a href="commontables.html#demographic-tables"><i class="fa fa-check"></i><b>4.1</b> Demographic Tables</a>
+<ul>
+<li class="chapter" data-level="4.1.1" data-path="commontables.html"><a href="commontables.html#rtables-1"><i class="fa fa-check"></i><b>4.1.1</b> rtables</a></li>
+<li class="chapter" data-level="4.1.2" data-path="commontables.html"><a href="commontables.html#gt-1"><i class="fa fa-check"></i><b>4.1.2</b> gt</a></li>
+<li class="chapter" data-level="4.1.3" data-path="commontables.html"><a href="commontables.html#flextable-1"><i class="fa fa-check"></i><b>4.1.3</b> flextable</a></li>
+<li class="chapter" data-level="4.1.4" data-path="commontables.html"><a href="commontables.html#tables-1"><i class="fa fa-check"></i><b>4.1.4</b> tables</a></li>
+</ul>
+</li>
+<li class="chapter" data-level="4.2" data-path="commontables.html">
+<a href="commontables.html#event-tables"><i class="fa fa-check"></i><b>4.2</b> Event Tables</a>
+<ul>
+<li class="chapter" data-level="4.2.1" data-path="commontables.html"><a href="commontables.html#adverse-events"><i class="fa fa-check"></i><b>4.2.1</b> Adverse Events</a></li>
+</ul>
+</li>
+<li class="chapter" data-level="4.3" data-path="commontables.html"><a href="commontables.html#laboratory-tables"><i class="fa fa-check"></i><b>4.3</b> Laboratory Tables</a></li>
+<li class="chapter" data-level="4.4" data-path="commontables.html">
+<a href="commontables.html#time-to-event-analysis-tables"><i class="fa fa-check"></i><b>4.4</b> Time to Event Analysis Tables</a>
+<ul>
+<li class="chapter" data-level="4.4.1" data-path="commontables.html"><a href="commontables.html#data-and-models-used-throughout"><i class="fa fa-check"></i><b>4.4.1</b> Data and models used throughout</a></li>
+<li class="chapter" data-level="4.4.2" data-path="commontables.html"><a href="commontables.html#rtables-2"><i class="fa fa-check"></i><b>4.4.2</b> rtables</a></li>
+<li class="chapter" data-level="4.4.3" data-path="commontables.html"><a href="commontables.html#cell-value-derivation-for-gt-of-time-to-event-analysis"><i class="fa fa-check"></i><b>4.4.3</b> Cell Value Derivation for gt of Time to Event Analysis</a></li>
+<li class="chapter" data-level="4.4.4" data-path="commontables.html"><a href="commontables.html#gt-2"><i class="fa fa-check"></i><b>4.4.4</b> gt</a></li>
+<li class="chapter" data-level="4.4.5" data-path="commontables.html"><a href="commontables.html#flextable-3"><i class="fa fa-check"></i><b>4.4.5</b> flextable</a></li>
+<li class="chapter" data-level="4.4.6" data-path="commontables.html"><a href="commontables.html#tables-3"><i class="fa fa-check"></i><b>4.4.6</b> tables</a></li>
+</ul>
+</li>
+<li class="chapter" data-level="4.5" data-path="commontables.html">
+<a href="commontables.html#concomitant-medications"><i class="fa fa-check"></i><b>4.5</b> Concomitant Medications</a>
+<ul>
+<li class="chapter" data-level="4.5.1" data-path="commontables.html"><a href="commontables.html#gt-3"><i class="fa fa-check"></i><b>4.5.1</b> gt</a></li>
+<li class="chapter" data-level="4.5.2" data-path="commontables.html"><a href="commontables.html#flextable-4"><i class="fa fa-check"></i><b>4.5.2</b> flextable</a></li>
+<li class="chapter" data-level="4.5.3" data-path="commontables.html"><a href="commontables.html#tables-4"><i class="fa fa-check"></i><b>4.5.3</b> tables</a></li>
+</ul>
+</li>
+<li class="chapter" data-level="4.6" data-path="commontables.html">
+<a href="commontables.html#disposition"><i class="fa fa-check"></i><b>4.6</b> Disposition</a>
+<ul>
+<li class="chapter" data-level="4.6.1" data-path="commontables.html"><a href="commontables.html#rtables-3"><i class="fa fa-check"></i><b>4.6.1</b> rtables</a></li>
+<li class="chapter" data-level="4.6.2" data-path="commontables.html"><a href="commontables.html#flextable-5"><i class="fa fa-check"></i><b>4.6.2</b> flextable</a></li>
+<li class="chapter" data-level="4.6.3" data-path="commontables.html"><a href="commontables.html#tables-5"><i class="fa fa-check"></i><b>4.6.3</b> tables</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="chapter" data-level="" data-path="references.html"><a href="references.html"><i class="fa fa-check"></i>References</a></li>
+<li class="divider">
+<li><a href="https://github.com/rstudio/bookdown" target="blank">Published with bookdown</a></li>
+
+</ul></nav>
+</div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">Tables in Clinical Trials with R</a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-"><div id="header">
+<h1 class="title">Tables in Clinical Trials with R</h1>
+<p class="author"><em>R Consortium Tables Working Group</em></p>
+<p class="date"><em>2022-11-03</em></p>
+</div>
+<div id="about" class="section level1 hasAnchor" number="1">
+<h1>
+<span class="header-section-number">Chapter 1</span> About<a href="index.html#about" class="anchor-section" aria-label="Anchor link to header"></a>
+</h1>
+<div id="introduction" class="section level2 hasAnchor" number="1.1">
+<h2>
+<span class="header-section-number">1.1</span> Introduction<a href="index.html#introduction" class="anchor-section" aria-label="Anchor link to header"></a>
+</h2>
+<p>In this book we present various aspects of creating tables with the <code>R</code> language
+to analyze and report clinical trials data. The book is initiated by the
+R Consortium working group <em>R Tables for Regulatory Submissions (RTRS)</em>.</p>
+<p>The R Consortium working group <em>R Tables for Regulatory Submissions (RTRS)</em> includes
+representation from several large pharmaceutical companies and CRO’s. The goal
+of the working group is to create standards for creating tables that meet the
+requirements of FDA submission documents, and hence enhance the suitability of R
+for FDA submissions. It is part of a larger R Consortium effort to facilitate
+the certification and validation of R packages and tools for FDA submissions
+thereby allowing drug developers to submit documentation for regulatory approval
+using the R programming environment in conjunction with open-source packages
+without the need for closed and often expensive proprietary tools.</p>
+</div>
+<div id="call-for-contributions" class="section level2 hasAnchor" number="1.2">
+<h2>
+<span class="header-section-number">1.2</span> Call for Contributions<a href="index.html#call-for-contributions" class="anchor-section" aria-label="Anchor link to header"></a>
+</h2>
+<p>The content of this book is intended to grow via community contribution, so please
+add your subject matter expertise to this content by cloning the <a href="https://github.com/RConsortium/rtrs-wg">github repository of this book</a> and make a pull request with your changes.</p>
+<p>We welcome all contribution, including but not limited to:</p>
+<ul>
+<li>summarizing table packages</li>
+<li>adding new example tables</li>
+<li>clarifying requirements and analyses</li>
+<li>improving R code</li>
+</ul>
+<p>In case you are new to using git and GitHub but would like to make a
+contribution then please write an GitHub issue and we will reach out to you to
+add the content.</p>
+<p>The most convenient way to get started is to:</p>
+<ul>
+<li>clone the <a href="https://github.com/RConsortium/rtrs-wg">GitHub repository of this book</a>
+</li>
+<li>install the <a href="https://www.rstudio.com/products/rstudio/download/">RStudio IDE</a>
+</li>
+<li>Open the RStudio project in <code>rtrs-wg/tables-book/tables-book.Rproj</code>
+</li>
+<li>start working, see the <a href="https://bookdown.org/yihui/bookdown/">Bookdown documentation</a>, you can develop the book with the <code><a href="https://pkgs.rstudio.com/bookdown/reference/serve_book.html">bookdown::serve_book()</a></code> call.</li>
+<li>once ready to share your work <a href="https://docs.github.com/en/pull-requests/collaborating-with-pull-requests/proposing-changes-to-your-work-with-pull-requests/creating-a-pull-request">create a PR</a>
+</li>
+<li>use <a href="https://github.com/RConsortium/rtrs-wg/issues">GitHub issues</a> to communicate with us if you have difficulties</li>
+</ul>
+</div>
+<div id="data-used-for-examples" class="section level2 hasAnchor" number="1.3">
+<h2>
+<span class="header-section-number">1.3</span> Data Used For Examples<a href="index.html#data-used-for-examples" class="anchor-section" aria-label="Anchor link to header"></a>
+</h2>
+<p>We use synthetic data for the examples in this book. The data is available from the
+<code>random.cidsc.data</code> R package which contains a number of datasets that follow the
+<a href="https://www.cdisc.org/standards/foundational/adam">CDISC ADaM specifications</a>.</p>
+<div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu">remotes</span><span class="fu">::</span><span class="fu"><a href="https://remotes.r-lib.org/reference/install_github.html">install_github</a></span><span class="op">(</span><span class="st">"insightsengineering/random.cdisc.data"</span><span class="op">)</span></span></code></pre></div>
+<p>The data in <code>random.cdisc.data</code> is completely synthetic, meaning no patient data
+has been used to create it. The data is also fairly basic, meaning real study
+data is has often more signal and patterns.</p>
+<div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/utils/data.html">data</a></span><span class="op">(</span>package<span class="op">=</span><span class="st">"random.cdisc.data"</span><span class="op">)</span><span class="op">$</span><span class="va">results</span><span class="op">[</span>, <span class="st">"Item"</span><span class="op">]</span></span></code></pre></div>
+<pre><code> [1] "cadab"    "cadae"    "cadaette" "cadcm"    "caddv"    "cadeg"   
+ [7] "cadex"    "cadhy"    "cadlb"    "cadmh"    "cadpc"    "cadpp"   
+[13] "cadqs"    "cadrs"    "cadsl"    "cadsub"   "cadtr"    "cadtte"  
+[19] "cadvs"   </code></pre>
+<p>note that the prepending <code>c</code> stands for caches. So, for example the cached
+synthetic subject level dataset <code>ADSL</code>:</p>
+<div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/utils/data.html">data</a></span><span class="op">(</span><span class="st">"cadsl"</span>, package <span class="op">=</span> <span class="st">"random.cdisc.data"</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/utils/head.html">head</a></span><span class="op">(</span><span class="va">cadsl</span><span class="op">)</span></span></code></pre></div>
+<pre><code>  STUDYID               USUBJID SUBJID SITEID AGE  AGEU SEX
+1 AB12345  AB12345-CHN-3-id-128 id-128  CHN-3  32 YEARS   M
+2 AB12345 AB12345-CHN-15-id-262 id-262 CHN-15  35 YEARS   M
+3 AB12345  AB12345-RUS-3-id-378 id-378  RUS-3  30 YEARS   F
+4 AB12345 AB12345-CHN-11-id-220 id-220 CHN-11  26 YEARS   F
+5 AB12345  AB12345-CHN-7-id-267 id-267  CHN-7  40 YEARS   M
+6 AB12345 AB12345-CHN-15-id-201 id-201 CHN-15  49 YEARS   M
+                       RACE                 ETHNIC COUNTRY DTHFL         INVID
+1                     ASIAN     HISPANIC OR LATINO     CHN     Y  INV ID CHN-3
+2 BLACK OR AFRICAN AMERICAN NOT HISPANIC OR LATINO     CHN     N INV ID CHN-15
+3                     ASIAN NOT HISPANIC OR LATINO     RUS     N  INV ID RUS-3
+4                     ASIAN NOT HISPANIC OR LATINO     CHN     N INV ID CHN-11
+5                     ASIAN NOT HISPANIC OR LATINO     CHN     N  INV ID CHN-7
+6                     ASIAN NOT HISPANIC OR LATINO     CHN     Y INV ID CHN-15
+          INVNAM            ARM ARMCD         ACTARM ACTARMCD         TRT01P
+1  Dr. CHN-3 Doe      A: Drug X ARM A      A: Drug X    ARM A      A: Drug X
+2 Dr. CHN-15 Doe C: Combination ARM C C: Combination    ARM C C: Combination
+3  Dr. RUS-3 Doe C: Combination ARM C C: Combination    ARM C C: Combination
+4 Dr. CHN-11 Doe     B: Placebo ARM B     B: Placebo    ARM B     B: Placebo
+5  Dr. CHN-7 Doe     B: Placebo ARM B     B: Placebo    ARM B     B: Placebo
+6 Dr. CHN-15 Doe C: Combination ARM C C: Combination    ARM C C: Combination
+          TRT01A         TRT02P         TRT02A REGION1 STRATA1 STRATA2
+1      A: Drug X     B: Placebo      A: Drug X    Asia       C      S2
+2 C: Combination     B: Placebo C: Combination    Asia       C      S1
+3 C: Combination      A: Drug X     B: Placebo Eurasia       A      S1
+4     B: Placebo     B: Placebo     B: Placebo    Asia       B      S2
+5     B: Placebo C: Combination      A: Drug X    Asia       C      S1
+6 C: Combination     B: Placebo C: Combination    Asia       C      S2
+     BMRKR1 BMRKR2 ITTFL SAFFL BMEASIFL BEP01FL AEWITHFL     RANDDT
+1 14.424934 MEDIUM     Y     Y        Y       Y        N 2019-02-22
+2  4.055463    LOW     Y     Y        N       N        Y 2019-02-26
+3  2.803240   HIGH     Y     Y        Y       N        N 2019-02-24
+4 10.262734 MEDIUM     Y     Y        Y       Y        N 2019-02-27
+5  6.206763    LOW     Y     Y        N       N        N 2019-03-01
+6  6.906799 MEDIUM     Y     Y        Y       N        N 2019-03-05
+              TRTSDTM             TRTEDTM           TRT01SDTM
+1 2019-02-24 11:09:18 2022-02-12 03:55:58 2019-02-24 11:09:18
+2 2019-02-26 09:05:00 2022-02-26 02:32:36 2019-02-26 09:05:00
+3 2019-02-28 03:19:08 2022-02-27 20:46:44 2019-02-28 03:19:08
+4 2019-03-01 13:33:03 2022-03-01 07:00:39 2019-03-01 13:33:03
+5 2019-03-02 00:09:16 2022-03-01 17:36:52 2019-03-02 00:09:16
+6 2019-03-05 15:23:44 2022-02-19 03:34:25 2019-03-05 15:23:44
+            TRT01EDTM           TRT02SDTM           TRT02EDTM
+1 2021-02-11 22:06:46 2021-02-11 22:06:46 2022-02-12 03:55:58
+2 2021-02-25 20:43:24 2021-02-25 20:43:24 2022-02-26 02:32:36
+3 2021-02-27 14:57:32 2021-02-27 14:57:32 2022-02-27 20:46:44
+4 2021-03-01 01:11:27 2021-03-01 01:11:27 2022-03-01 07:00:39
+5 2021-03-01 11:47:40 2021-03-01 11:47:40 2022-03-01 17:36:52
+6 2021-02-18 21:45:13 2021-02-18 21:45:13 2022-02-19 03:34:25
+             AP01SDTM            AP01EDTM            AP02SDTM
+1 2019-02-24 11:09:18 2021-02-11 22:06:46 2021-02-11 22:06:46
+2 2019-02-26 09:05:00 2021-02-25 20:43:24 2021-02-25 20:43:24
+3 2019-02-28 03:19:08 2021-02-27 14:57:32 2021-02-27 14:57:32
+4 2019-03-01 13:33:03 2021-03-01 01:11:27 2021-03-01 01:11:27
+5 2019-03-02 00:09:16 2021-03-01 11:47:40 2021-03-01 11:47:40
+6 2019-03-05 15:23:44 2021-02-18 21:45:13 2021-02-18 21:45:13
+             AP02EDTM       EOSSTT       EOTSTT      EOSDT EOSDY DCSREAS
+1 2022-02-12 03:55:58 DISCONTINUED DISCONTINUED 2022-02-12  1084   DEATH
+2 2022-02-26 02:32:36    COMPLETED    COMPLETED 2022-02-26  1096    &lt;NA&gt;
+3 2022-02-27 20:46:44    COMPLETED    COMPLETED 2022-02-27  1096    &lt;NA&gt;
+4 2022-03-01 07:00:39    COMPLETED    COMPLETED 2022-03-01  1096    &lt;NA&gt;
+5 2022-03-01 17:36:52    COMPLETED    COMPLETED 2022-03-01  1096    &lt;NA&gt;
+6 2022-02-19 03:34:25 DISCONTINUED DISCONTINUED 2022-02-19  1082   DEATH
+       DTHDT       DTHCAUS        DTHCAT LDDTHELD LDDTHGR1   LSTALVDT DTHADY
+1 2022-03-06 ADVERSE EVENT ADVERSE EVENT       22     &lt;=30 2022-03-06   1106
+2       &lt;NA&gt;          &lt;NA&gt;          &lt;NA&gt;       NA     &lt;NA&gt; 2022-03-17     NA
+3       &lt;NA&gt;          &lt;NA&gt;          &lt;NA&gt;       NA     &lt;NA&gt; 2022-03-11     NA
+4       &lt;NA&gt;          &lt;NA&gt;          &lt;NA&gt;       NA     &lt;NA&gt; 2022-03-26     NA
+5       &lt;NA&gt;          &lt;NA&gt;          &lt;NA&gt;       NA     &lt;NA&gt; 2022-03-15     NA
+6 2022-02-22 ADVERSE EVENT ADVERSE EVENT        3     &lt;=30 2022-02-22   1085
+  ADTHAUT study_duration_secs
+1     Yes            63113904
+2    &lt;NA&gt;            63113904
+3    &lt;NA&gt;            63113904
+4    &lt;NA&gt;            63113904
+5    &lt;NA&gt;            63113904
+6     Yes            63113904</code></pre>
+<div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">adsl</span> <span class="op">&lt;-</span> <span class="va">cadsl</span></span></code></pre></div>
+</div>
+<div id="installing-the-r-packages" class="section level2 hasAnchor" number="1.4">
+<h2>
+<span class="header-section-number">1.4</span> Installing the R packages<a href="index.html#installing-the-r-packages" class="anchor-section" aria-label="Anchor link to header"></a>
+</h2>
+<p>At some point we may switch to <code>renv</code> to install the <code>R</code> packages used
+for this book. For right now you can install the packages yourself with:</p>
+<div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/utils/install.packages.html">install.packages</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"rtables"</span>, <span class="st">"gt"</span>, <span class="st">"remotes"</span>, <span class="st">"tidyverse"</span>, <span class="st">"bookdown"</span><span class="op">)</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/utils/install.packages.html">install.packages</a></span><span class="op">(</span><span class="st">'flextable'</span>, repos <span class="op">=</span> <span class="st">'https://davidgohel.r-universe.dev'</span><span class="op">)</span></span>
+<span></span>
+<span><span class="fu">remotes</span><span class="fu">::</span><span class="fu"><a href="https://remotes.r-lib.org/reference/install_github.html">install_github</a></span><span class="op">(</span><span class="st">"insightsengineering/random.cdisc.data"</span><span class="op">)</span></span>
+<span><span class="fu">remotes</span><span class="fu">::</span><span class="fu"><a href="https://remotes.r-lib.org/reference/install_github.html">install_github</a></span><span class="op">(</span><span class="st">"insightsengineering/nestcolor"</span><span class="op">)</span></span>
+<span><span class="fu">remotes</span><span class="fu">::</span><span class="fu"><a href="https://remotes.r-lib.org/reference/install_github.html">install_github</a></span><span class="op">(</span><span class="st">"insightsengineering/tern"</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># This document needs the unreleased tables v 0.9.9</span></span>
+<span><span class="fu">remotes</span><span class="fu">::</span><span class="fu"><a href="https://remotes.r-lib.org/reference/install_github.html">install_github</a></span><span class="op">(</span><span class="st">"rforge/tables/pkg/tables"</span><span class="op">)</span></span></code></pre></div>
+<p>In each of the sections below, we will reset R to close to the
+present state
+at the start of the section, so readers can execute the demonstration
+code more or less independently of the other sections. This is done using
+the functions defined below. In your own documents, you wouldn’t
+need these resets.</p>
+
+</div>
+</div>
+            </section>
+</div>
+        </div>
+      </div>
+
+<a href="tablepkgs.html" class="navigation navigation-next navigation-unique" aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+    </div>
+  </div>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script><script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script><script src="libs/gitbook-2.6.7/js/plugin-search.js"></script><script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script><script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script><script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script><script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script><script src="libs/gitbook-2.6.7/js/plugin-clipboard.js"></script><script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+"sharing": {
+"github": false,
+"facebook": true,
+"twitter": true,
+"linkedin": false,
+"weibo": false,
+"instapaper": false,
+"vk": false,
+"whatsapp": false,
+"all": ["facebook", "twitter", "linkedin", "weibo", "instapaper"]
+},
+"fontsettings": {
+"theme": "white",
+"family": "sans",
+"size": 2
+},
+"edit": {
+"link": "https://github.com/RConsortium/rtrs-wg/edit/main/index.Rmd",
+"text": "Edit"
+},
+"history": {
+"link": null,
+"text": null
+},
+"view": {
+"link": null,
+"text": null
+},
+"download": ["_main.pdf"],
+"search": {
+"engine": "fuse",
+"options": null
+},
+"toc": {
+"collapse": "subsection"
+}
+});
+});
+</script>
+</body>
+</html>

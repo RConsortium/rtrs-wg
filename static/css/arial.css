@@ -1,0 +1,28 @@
+@font-face {
+  font-family: 'Arial';
+  font-style: normal;
+  font-weight: 400;
+  src: local('Arial'), local('Arial-Regular'),
+       url('../fonts/arial.ttf') format('truetype'), /* Safari, Android, iOS */
+}
+@font-face {
+  font-family: 'Arial';
+  font-style: italic;
+  font-weight: 400;
+  src: local('Arial Italic'), local('Arial-Italic'),
+       url('../fonts/arial-italic.ttf') format('truetype'), /* Safari, Android, iOS */
+}
+@font-face {
+  font-family: 'Arial';
+  font-style: normal;
+  font-weight: 700;
+  src: local('Arial Bold'), local('Arial-Bold'),
+       url('../fonts/arial-bold.ttf') format('truetype'), /* Safari, Android, iOS */
+}
+@font-face {
+  font-family: 'Arial';
+  font-style: italic;
+  font-weight: 700;
+  src: local('Arial Bold Italic'), local('Arial-BoldItalic'),
+       url('../fonts/arial-bold-italic.ttf') format('truetype'), /* Safari, Android, iOS */
+}
