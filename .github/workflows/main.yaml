@@ -78,6 +78,6 @@ jobs:
         with:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           BRANCH: gh-pages # The branch the action should deploy to.
-          FOLDER: _book/
+          FOLDER: tables-book/_book/
           TARGET_FOLDER: '.' # The folder the action should deploy.
           CLEAN: true
