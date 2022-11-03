@@ -6,25 +6,6 @@ The list is by no means complete; if you know another package that has been usef
 create tables or listing using clinical trial data. 
 Please contribute to this chapter.
 
-## `flextable`
-
-The `flextable` ([website](https://ardata-fr.github.io/flextable-book/))
-package provides a *grammar* for creating and customizing tables. 
-The following output formats are supported: 
-
-  - 'Word' (`*.docx`), 
-  - 'PowerPoint' (`*.pptx`), 
-  - 'PDF'
-  - 'HTML'. 
-  
-The syntax to create table is the same 
-for the user regardless of the type of output to be produced. 
-A set of functions allows the creation, definition of cell
-arrangement, addition of headers, formatting and definition of cell content
-(i.e. text and or images). 
-The package also offers a set of high-level functions
-that allow, for example, tabular reporting of statistical models and the
-creation of complex cross tabulations.
 
 ## `gt`
 
