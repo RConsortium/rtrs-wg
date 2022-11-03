@@ -33,7 +33,7 @@ also supports referential footnotes.
 So for example a basic demographics table created with `rtables` via `tern` with
 title and footnotes would look as follows:
 
-```{r,  comment=NA }
+```{r, comment=NA }
 resetSession()
 library(rtables)
 
@@ -55,7 +55,7 @@ Titles and notes can be added and formatted with the 'flextable' package. It is 
 Let's create first a flextable from an aggregation that 
 will be used to illustrate the features.
 
-```{r}
+```{r message=FALSE}
 resetSession()
 library(flextable)
 library(dplyr)
@@ -80,7 +80,7 @@ z |>
 For Word output, users can prepend a table number that will auto-incremente.
 
 ```{r}
-docx_file <- tempfile(fileext = ".docx")
+docx_file <- "reports/flextable-title-01.docx"
 ft <- add_header_lines(z, "hello world") |>
   prepend_chunks(
     i = 1, j = 1, part = "header", 
@@ -91,11 +91,9 @@ ft <- add_header_lines(z, "hello world") |>
 save_as_docx(ft, ft, path = docx_file)
 ```
 
-```{r include=FALSE, eval=!file.exists("img/flextable-title-ex-01.png") && require("doconv") && locatexec::exec_available("word")}
-doconv::to_miniature(filename = docx_file, fileout = "img/flextable-title-ex-01.png")
-```
 
-![](img/flextable-title-ex-01.png)
+```{r echo=FALSE, link_preview=TRUE, path_to_doc = "reports/flextable-title-01.docx"}
+```
 
 Footnotes are also available in 'flextable' with function `footnote()`. 
 The function lets users add footnotes and references to it on the table.

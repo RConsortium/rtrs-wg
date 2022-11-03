@@ -7,7 +7,7 @@ create tables or listing using clinical trial data.
 Please contribute to this chapter.
 
 
-## `gt`
+## gt
 
 The `gt` ([website](https://gt.rstudio.com/)) package provides
 a high-level and declarative interface for composing tables. 
@@ -17,7 +17,7 @@ aesthetic styling with options for: scientific notation, uncertainty, ranges,
 percentages, suffixes, localized currency, etc.). Multiple output formats are
 supported with the same declarative interface (e.g., HTML, LaTeX/PDF, and RTF).
 
-## `r2rtf`
+## r2rtf
 
 The `r2rtf` ([website](https://merck.github.io/r2rtf/)) package 
 creates production-ready tables and figures in RTF format. 
@@ -33,7 +33,7 @@ minimizes package dependency
 Chapter 1-9 of [The R for Clinical Study Reports and Submission](https://r4csr.org/) book 
 provides examples by using `r2rtf` package. 
 
-## `rtables`
+## rtables
 
 The `rtables` package defines a pipe-able grammar for declaring complex table
 structure layouts via nested splitting - in row- and column-space - and the

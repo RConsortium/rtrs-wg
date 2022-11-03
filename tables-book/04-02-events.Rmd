@@ -149,7 +149,8 @@ tab <- tabulator(
 flextable creation:
 
 ```{r}
-ft <- as_flextable(tab, spread_first_col = TRUE, ) |> 
+ft <- as_flextable(tab, spread_first_col = TRUE) |> 
+  fontsize(size = 9, part = "all") |>
   prepend_chunks(
     i = ~ is.na(AEBODSYS), j = 1, 
     as_chunk("\t")

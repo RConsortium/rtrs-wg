@@ -122,7 +122,7 @@ code more or less independently of the other sections.  This is done using
 the functions defined below.  In your own documents, you wouldn't 
 need these resets.
 
-```{r}
+```{r include=FALSE}
 # Get the list of attached packages and global environment objects
 currentState <- function() {
   list(globals = ls(.GlobalEnv),
@@ -134,11 +134,11 @@ resetSession <- function(state = .initial_state) {
   for (n in setdiff(search(), state$search)) {
     detach(n, character.only = TRUE)
   }
-  
+
   # Clean up the global environment by deleting everything
   # that wasn't there when `state` was constructed.
   # Objects whose name starts with "." are not deleted.
-  
+
   rm(list = setdiff(ls(.GlobalEnv), state$globals),
      envir = .GlobalEnv)
 }

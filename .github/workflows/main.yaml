@@ -45,6 +45,15 @@ jobs:
 
       - uses: r-lib/actions/setup-r-dependencies@v2
 
+      - name: install github packages
+        run: |
+          install.packages("remotes")
+          remotes::install_github("insightsengineering/random.cdisc.data")
+          remotes::install_github("insightsengineering/nestcolor")
+          remotes::install_github("insightsengineering/tern")
+          remotes::install_github("davidgohel/flextable")
+        shell: Rscript {0}
+
       - name: Pandoc and Tinytex info
         run: |
           rmarkdown::find_pandoc()
@@ -69,6 +78,6 @@ jobs:
         with:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           BRANCH: gh-pages # The branch the action should deploy to.
-          FOLDER: _book/
+          FOLDER: tables-book/_book/
           TARGET_FOLDER: '.' # The folder the action should deploy.
           CLEAN: true
