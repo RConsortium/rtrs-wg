@@ -13,5 +13,5 @@ Imports: knitr, officer, magrittr, rmarkdown, tables, htmltools,
  rsvg, bookdown, doconv, callr, patchwork,
  ragg, remotes, downlit, gt, tables, Tplyr, rtables,
  flextable, forcats, glue, tidyverse, formatters,
- stringr, quantreg
+ stringr, quantreg, kableExtra
 Encoding: UTF-8
