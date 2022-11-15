@@ -84,7 +84,7 @@ tab <- tabulator(
 
 ft <- as_flextable(tab, spread_first_col = TRUE) |> 
   prepend_chunks(
-    i = ~ is.na(CMCLAS), j = 1, 
+    i = ~ is.na(CMCLAS) & seq_along(CMCLAS) > 1, j = 1, 
     as_chunk("\t")
   )
 
@@ -102,6 +102,7 @@ ft <- autofit(ft) |>
   labelizor(part = "all", j = "CMDECOD", 
             labels = c(CMDECOD="", 
                        N_CM = "Number of sujects with any concomitant medication")) |> 
+  hline_top(part = "header", border = fp_border_default(width=2)) |>
   set_caption("Conmed Example\nUses the 'adcm' dataset from 'random.cdisc.data'")
 
 ft

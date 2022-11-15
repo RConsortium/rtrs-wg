@@ -293,8 +293,6 @@ gt(model_sum) %>%
 
 ### flextable
 
-First we define named vectors that will be used later as 
-labels for the table.
 
 ```{r}
 resetSession(.kmState)
@@ -304,6 +302,8 @@ library(flextable)
 library(tidyverse)
 
 # labels and notes ----
+# named vectors that will be used later as 
+# labels for the table.
 description_labels <- c(SAE = "Number of subjects with serious adverse event", CENSOR_EVENTS = "Number of censored subjects",
   HAZARD_RATIO = "Hazard ratio", TTF_SAE = "Time to first adverse event")
 subdescription_labels <- c(subdescription = "",
@@ -322,12 +322,9 @@ titles <- c(
   "x.x: Safety Data",
   "x.x.x: Time to First Serious Adverse Event",
   "Table x.x.x.x: Safety Endpoint - Safety Analysis Set")
-```
 
-Data need to be prepared in a single data.frame, 
-a function is written to make the code simplier to organize.
-
-```{r}
+# Data need to be prepared in a single data.frame, 
+# a function is written to make the code simplier to organize.
 #' @noRd
 #' @description create a data.frame made of 
 #' several sub data.frame, each for a specific 
@@ -411,16 +408,12 @@ prepare_tte_df <- function(adtte, cph, surv_tbl) {
 
   dat
 }
-
 dat <- prepare_tte_df(adtte, cph, surv_tbl)
-dat
-```
 
-Now data.frame is ready to be formatted with `fmt_time_to_event()`. 
-The function handle each special cases to be covered so that 
-the four main parts are formatted as expected.
+# Now data.frame is ready to be formatted with `fmt_time_to_event()`. 
+# The function handle each special cases to be covered so that 
+# the four main parts are formatted as expected.
 
-```{r message=FALSE}
 library(glue)
 library(dplyr)
 # format fun ----
@@ -436,11 +429,9 @@ fmt_time_to_event <- function(description, subdescription, y, cts, pcts, LCL, UC
     TRUE ~ ""
   )
 }
-```
 
-Now use `tabulator()` and `as_flextable()` together to create the table. 
+# use `tabulator()` and `as_flextable()` together to create the table. 
 
-```{r}
 tab <- tabulator(dat,
   rows = c("description", "subdescription"), columns = "TRT01A",
   content_cell = as_paragraph(

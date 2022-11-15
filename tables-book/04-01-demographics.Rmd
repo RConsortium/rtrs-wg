@@ -179,15 +179,16 @@ gt(adsl_summary,
 
 ### flextable
 
-The two steps in creating 'Demographic Tables' are:
-
-- summarize the information with the `flextable::summarizor()` function. 
-It computes a set of statistics for each variable by groups. It returns 
-a data.frame ready to be used by `flextable::as_flextable()`.
-- Create the flextable with the `as_flextable()` function.
 
 
 ```{r}
+# The two steps in creating 'Demographic Tables' are:
+# 
+# - summarize the information with the `flextable::summarizor()` function. 
+# It computes a set of statistics for each variable by groups. It returns 
+# a data.frame ready to be used by `flextable::as_flextable()`.
+# - Create the flextable with the `as_flextable()` function.
+
 resetSession()
 ex_adsl <- formatters::ex_adsl
 
@@ -203,21 +204,12 @@ font.size = 10, padding = 3, line_spacing = 1.4
 # data
 adsl <- select(ex_adsl, AGE, SEX, COUNTRY, ARM)
 
-# data tabulation
-ft <- summarizor(adsl, by = "ARM") |> 
-  as_flextable()
-ft
-```
+# In the illustration, we use labels from the column attributes.  
 
-In the illustration, we use labels from the column attributes.  
-
-```{r}
 col_labels <- map_chr(adsl, function(x) attr(x, "label"))
-```
 
-Now let's use the labels and customize the ‘flextable’ output.
+# Now let's use the labels and customize the ‘flextable’ output.
 
-```{r}
 ft <- summarizor(adsl, by = "ARM") |>
   as_flextable(sep_w = 0, separate_with = "variable", 
                spread_first_col = TRUE) |>

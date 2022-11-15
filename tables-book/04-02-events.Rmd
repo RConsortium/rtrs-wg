@@ -97,41 +97,20 @@ ae_tabulator <- function(ADSL, ADAE){
   x
   
 }
-```
 
-Labels for `flextable::labelizor()`:
-
-```{r}
+# Labels for `flextable::labelizor()`:
 AEDECOD_LABELS <- c(
   ALL1 = "Patients with at least one event", 
-  ALL2 = "Patients with at least one event", 
-  `GASTROINTESTINAL DISORDERS` = "Gastrointestinal Disorders", 
-  `NERVOUS SYSTEM DISORDERS` = "Nervous System Disorders", 
-  `VASCULAR DISORDERS` = "Vascular Disorders", 
-  `MUSCULOSKELETAL AND CONNECTIVE TISSUE DISORDERS` = "Musculoskeletal and Connective Tissue Disorders", 
-  `NAUSEA (INTERMITTENT)` = "Nausea (Intermittent)", 
-  HEADACHE = "Headache", 
-  `FAECES SOFT` = "Faeces Soft", 
-  HYPOTENSION = "Hypotension", 
-  `ABDOMINAL FULLNESS DUE TO GAS` = "Abdominal Fullness Due to Gas", 
-  `ORTHOSTATIC HYPOTENSION` = "Orthostatic Hypotension", 
-  `BACK PAIN` = "Back Pain", 
-  WEAKNESS = "Weakness", 
-  `GINGIVAL BLEEDING` = "Gingival Bleeding", 
-  `ABDOMINAL DISCOMFORT` = "Abdominal Discomfort", 
-  DIARRHEA = "Diarrhea"
-)
-HEADER_LABELS <- c(AEDECOD = "dictionary-derived term\n\tbody system or organ class",
+  ALL2 = "Patients with at least one event")
+HEADER_LABELS <- c(
+  AEDECOD = "dictionary-derived term\n\tbody system or organ class",
   nevents = "Total number\nof events", 
   n = "n\n(% of subjects)",
   "ARM A" = "Treatment A",
   "ARM B" = "Treatment B"
 )
-```
 
-`tabulator()` call:
-
-```{r}
+# `tabulator()` call:
 dat <- ae_tabulator(ADSL = ex_adsl, ADAE = ex_adae)
 ARM_COUNTS <- attr(dat, "ARM_COUNTS")
 
@@ -144,11 +123,9 @@ tab <- tabulator(
 )
 
 .ARM_COUNTS <- ARM_COUNTS
-```
 
-flextable creation:
+# flextable creation:
 
-```{r}
 ft <- as_flextable(tab, spread_first_col = TRUE) |> 
   fontsize(size = 9, part = "all") |>
   prepend_chunks(
