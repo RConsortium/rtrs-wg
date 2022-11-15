@@ -70,8 +70,9 @@ ct_cm <- group_by(cadcm, TRT01A) |>
          CMCLAS = factor("N_CM", levels = cmclas_levels), 
          CMDECOD = factor("N_CM", levels = cmdecod_levels))
 
-ct_adcm <- adcm |>
-  count(CMDECOD, CMCLAS, TRT01A) |> 
+ct_adcm <- group_by(cadcm, TRT01A, CMCLAS, CMDECOD) |> 
+  summarize(n = n_distinct(USUBJID)) |> 
+  ungroup() |> 
   left_join(count(cadsl, TRT01A, name = "nall"), by = "TRT01A") |> 
   mutate(pct = n / nall, nall = NULL)
 
