@@ -11,28 +11,91 @@ editor_options:
 resetSession()
 
 library(dplyr)
-library(magrittr)
+library(tidyr)
 library(gt)
 
 data("cadcm", package = "random.cdisc.data")
-gt_adcm <- cadcm %>%
-  select(USUBJID, CMDECOD, TRT01A)
+data("cadsl", package = "random.cdisc.data")
+
+
+cmdecod_levels <- c("Number of sujects with any concomitant medication", levels(cadcm$CMDECOD))
+cmclas_levels <- c(NA, levels(cadcm$CMCLAS))
+
+adcm <- cadcm |> 
+  select(CMDECOD, CMCLAS, TRT01A) |> 
+  mutate(
+    CMDECOD = factor(CMDECOD, levels = cmdecod_levels),
+    CMCLAS = factor(CMCLAS, levels = cmclas_levels)
+    )
+
+ct_cm <- dplyr::group_by(cadcm, TRT01A) |> 
+  dplyr::summarize(n = dplyr::n_distinct(USUBJID)) |> 
+  dplyr::left_join(count(cadsl, TRT01A, name = "nall"), by = "TRT01A") |> 
+  dplyr::mutate(pct = n / nall, nall = NULL,
+                CMDECOD = factor("Number of sujects with any concomitant medication", levels = cmdecod_levels))
+
+ct_adcm <- dplyr::group_by(cadcm, TRT01A, CMCLAS, CMDECOD) |> 
+  dplyr::summarize(n = dplyr::n_distinct(USUBJID)) |> 
+  dplyr::left_join(count(cadsl, TRT01A, name = "nall"), by = "TRT01A") |> 
+  dplyr::mutate(pct = n / nall, nall = NULL)
+
+gt_adcm <- dplyr::bind_rows(ct_cm, ct_adcm) |>  
+  tidyr::pivot_wider(id_cols = c(CMCLAS, CMDECOD), names_from = TRT01A, values_from = c(n, pct)) 
 
 ## don't print it yet, uncomment when its ready
 ##gt_adcm %>% gt()
 
-tab <-
-  gt_adcm %>%
-  gt(
-    rowname_col = "row",
-    groupname_col = "group"
-  ) %>%
+trt_n <- cadsl |> 
+  dplyr::filter(SAFFL == "Y") |> 
+  dplyr::group_by(TRT01A) |> 
+  dplyr::summarize(n = sprintf("%s  \nN=%i (100%%)", unique(TRT01A), dplyr::n())) |> 
+  dplyr::ungroup()
+
+tab_n <- dplyr::pull(trt_n, n) |> 
+  as.list()
+names(tab_n) <- paste("n", dplyr::pull(trt_n, TRT01A), sep = "_")
+
+
+gt_adcm |> 
+  gt(rowname_col = "CMDECOD") |> 
   tab_header(
     title = "Conmed Example",
     subtitle = md("Uses the *adcm* dataset from **random.cdisc.data**")
-  )
-
-##tab
+  ) |> 
+  opt_align_table_header(align = "left") |> 
+  fmt_percent(columns = dplyr::starts_with("pct_"), decimals = 1) |> 
+  cols_merge_n_pct(col_n = "n_A: Drug X", col_pct = "pct_A: Drug X") |> 
+  cols_merge_n_pct(col_n = "n_B: Placebo", col_pct = "pct_B: Placebo") |> 
+  cols_merge_n_pct(col_n = "n_C: Combination", col_pct = "pct_C: Combination") |> 
+  tab_row_group(
+    label = "medcl A",
+    rows = CMCLAS == "medcl A"
+  ) |>
+  tab_row_group(
+    label = "medcl B",
+    rows = CMCLAS == "medcl B"
+  ) |>
+  tab_row_group(
+    label = "medcl C",
+    rows = CMCLAS == "medcl C"
+  ) |>
+  row_group_order(
+    groups = c(NA, paste("medcl", LETTERS[1:2])) 
+  ) |> 
+  cols_hide(CMCLAS) |> 
+  cols_label(.list = md(tab_n)) |> 
+  cols_width(
+    1 ~ px(500),
+    everything() ~ px(150)
+  ) |> 
+  cols_align(
+    align = "center",
+    columns = everything()
+  ) |> 
+  cols_align(
+    align = "left",
+    columns = 1
+  ) 
 
 ```
 
