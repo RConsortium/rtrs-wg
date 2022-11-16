@@ -52,6 +52,24 @@ process_link_preview_options  <- function(options){
   return(paste0(img_code, lnk_code))
 }
 
+currentState <- function() {
+  list(globals = ls(.GlobalEnv),
+       search = search())
+}
+
+resetSession <- function(state = .initial_state) {
+  # Clean up the search list
+  for (n in setdiff(search(), state$search)) {
+    detach(n, character.only = TRUE)
+  }
+
+  # Clean up the global environment by deleting everything
+  # that wasn't there when `state` was constructed.
+  # Objects whose name starts with "." are not deleted.
+
+  rm(list = setdiff(ls(.GlobalEnv), state$globals),
+     envir = .GlobalEnv)
+}
 
 opts_chunk$set(
   echo = TRUE,
@@ -67,3 +85,6 @@ knit_hooks$set(link_preview = function(before, options, envir) {
   }
 })
 
+if (!exists(".initial_state")) {
+  .initial_state <- currentState()
+}

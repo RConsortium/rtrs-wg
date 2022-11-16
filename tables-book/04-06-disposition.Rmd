@@ -67,12 +67,8 @@ dat <- bind_rows(
   part_death) |> 
   inner_join(part_header, by = "TRT01A") |> 
   mutate(percent = n / n_part, n_part = NULL)
-dat
-```
 
-Now the flextable creation with help of `tabulator()`. 
-
-```{r}
+# Now the flextable creation with help of `tabulator()`. 
 
 tab <- tabulator(
   dat,
@@ -80,7 +76,8 @@ tab <- tabulator(
   columns = "TRT01A",
   `content_cell` = as_paragraph(fmt_n_percent(n, percent))
 )
-ft <- as_flextable(tab, spread_first_col = TRUE)
+ft <- as_flextable(tab, spread_first_col = TRUE, 
+                   columns_alignment = "right" )
 
 TRT_COUNTS <- setNames(part_header$n_part, part_header$TRT01A)
 for (TRT_COD in names(TRT_COUNTS)) {
@@ -94,7 +91,7 @@ ft <- ft |>
     labels = c(labels, DCSREAS = "", ANY = "Number of patients", 
                COMPLETED = "Completed", DISCONTINUED = "Discontinued"), 
     j = "DCSREAS", part = "all") |> 
-  align(i = ~!is.na(EOSSTT), align = "left") |> 
+  align(i = ~!is.na(EOSSTT) | seq_along(EOSSTT) == 1, j = 1, align = "left") |> 
   prepend_chunks(i = ~is.na(EOSSTT), j = "DCSREAS", as_chunk("\t")) |> 
   autofit()
 ft
