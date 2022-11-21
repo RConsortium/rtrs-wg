@@ -231,6 +231,7 @@ ft
 
 ```{r}
 resetSession()
+ex_adsl <- formatters::ex_adsl
 library(tables)
 table_options(doCSS = TRUE)
 
