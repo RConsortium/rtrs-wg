@@ -402,15 +402,12 @@ synthetic subject level dataset <code>ADSL</code>:</p>
 <p>At some point we may switch to <code>renv</code> to install the <code>R</code> packages used
 for this book. For right now you can install the packages yourself with:</p>
 <details class="chunk-details"><summary class="chunk-summary"><span class="chunk-summary-text">Code</span></summary><div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/utils/install.packages.html">install.packages</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"rtables"</span>, <span class="st">"gt"</span>, <span class="st">"remotes"</span>, <span class="st">"tidyverse"</span>, <span class="st">"bookdown"</span><span class="op">)</span><span class="op">)</span></span>
+<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/utils/install.packages.html">install.packages</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"rtables"</span>, <span class="st">"gt"</span>, <span class="st">"remotes"</span>, <span class="st">"tidyverse"</span>, <span class="st">"bookdown"</span>, <span class="st">"tables"</span><span class="op">)</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/utils/install.packages.html">install.packages</a></span><span class="op">(</span><span class="st">'flextable'</span>, repos <span class="op">=</span> <span class="st">'https://davidgohel.r-universe.dev'</span><span class="op">)</span></span>
 <span></span>
 <span><span class="fu">remotes</span><span class="fu">::</span><span class="fu"><a href="https://remotes.r-lib.org/reference/install_github.html">install_github</a></span><span class="op">(</span><span class="st">"insightsengineering/random.cdisc.data"</span><span class="op">)</span></span>
 <span><span class="fu">remotes</span><span class="fu">::</span><span class="fu"><a href="https://remotes.r-lib.org/reference/install_github.html">install_github</a></span><span class="op">(</span><span class="st">"insightsengineering/nestcolor"</span><span class="op">)</span></span>
-<span><span class="fu">remotes</span><span class="fu">::</span><span class="fu"><a href="https://remotes.r-lib.org/reference/install_github.html">install_github</a></span><span class="op">(</span><span class="st">"insightsengineering/tern"</span><span class="op">)</span></span>
-<span></span>
-<span><span class="co"># This document needs the unreleased tables v 0.9.9</span></span>
-<span><span class="fu">remotes</span><span class="fu">::</span><span class="fu"><a href="https://remotes.r-lib.org/reference/install_github.html">install_github</a></span><span class="op">(</span><span class="st">"rforge/tables/pkg/tables"</span><span class="op">)</span></span></code></pre></div>
+<span><span class="fu">remotes</span><span class="fu">::</span><span class="fu"><a href="https://remotes.r-lib.org/reference/install_github.html">install_github</a></span><span class="op">(</span><span class="st">"insightsengineering/tern"</span><span class="op">)</span></span></code></pre></div>
 </details><p>In each of the sections below, we will reset R to close to the
 present state
 at the start of the section, so readers can execute the demonstration
