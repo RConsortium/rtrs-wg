@@ -254,5 +254,5 @@ tabular( Heading(n)*1 +
          (SEX + COUNTRY)*Heading()*
            Percent(denom = Equal(ARM), fn = countpercent) ~ 
          Heading()*ARM, 
-         data = adsl )
+         data = ex_adsl )
 ```
