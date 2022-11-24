@@ -83,7 +83,11 @@ gt_adcm |>
     groups = c(NA, paste("medcl", LETTERS[1:2])) 
   ) |> 
   cols_hide(CMCLAS) |> 
-  cols_label(.list = md(tab_n)) |> 
+  cols_label(
+    `n_A: Drug X` = md(tab_n[[1]]),
+    `n_B: Placebo` = md(tab_n[[2]]),
+    `n_C: Combination` = md(tab_n[[3]])
+  ) |> 
   cols_width(
     1 ~ px(500),
     everything() ~ px(150)
