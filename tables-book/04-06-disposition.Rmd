@@ -3,6 +3,7 @@ output: html_document
 editor_options: 
   chunk_output_type: console
 ---
+
 ## Disposition
 
 ### rtables
@@ -15,13 +16,17 @@ library(magrittr)
 library(rtables)
 
 data("cadsl", package = "random.cdisc.data")
-r_adsl <- cadsl %>%
-  select(USUBJID, EOSSTT, DCSREAS) %>%
-  filter(EOSSTT != "COMPLETED")
+adsl <- cadsl |>
+  select(USUBJID, TRT01A, EOSSTT, DCSREAS)
 
-lyt <- basic_table()
+lyt <- basic_table() |>
+  split_cols_by("TRT01A") |>
+  add_colcounts() |>
+  split_rows_by("EOSSTT") |>
+  split_rows_by("DCSREAS") |>
+  summarize_row_groups()
 
-build_table(lyt, r_adsl)
+build_table(lyt, adsl)
 
 ```
 
@@ -96,7 +101,6 @@ ft <- ft |>
   autofit()
 ft
 ```
-
 
 ### tables
 
