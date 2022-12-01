@@ -11,28 +11,95 @@ editor_options:
 resetSession()
 
 library(dplyr)
-library(magrittr)
+library(tidyr)
 library(gt)
 
 data("cadcm", package = "random.cdisc.data")
-gt_adcm <- cadcm %>%
-  select(USUBJID, CMDECOD, TRT01A)
+data("cadsl", package = "random.cdisc.data")
+
+
+cmdecod_levels <- c("Number of sujects with any concomitant medication", levels(cadcm$CMDECOD))
+cmclas_levels <- c(NA, levels(cadcm$CMCLAS))
+
+adcm <- cadcm |> 
+  select(CMDECOD, CMCLAS, TRT01A) |> 
+  mutate(
+    CMDECOD = factor(CMDECOD, levels = cmdecod_levels),
+    CMCLAS = factor(CMCLAS, levels = cmclas_levels)
+    )
+
+ct_cm <- dplyr::group_by(cadcm, TRT01A) |> 
+  dplyr::summarize(n = dplyr::n_distinct(USUBJID)) |> 
+  dplyr::left_join(count(cadsl, TRT01A, name = "nall"), by = "TRT01A") |> 
+  dplyr::mutate(pct = n / nall, nall = NULL,
+                CMDECOD = factor("Number of sujects with any concomitant medication", levels = cmdecod_levels))
+
+ct_adcm <- dplyr::group_by(cadcm, TRT01A, CMCLAS, CMDECOD) |> 
+  dplyr::summarize(n = dplyr::n_distinct(USUBJID)) |> 
+  dplyr::left_join(count(cadsl, TRT01A, name = "nall"), by = "TRT01A") |> 
+  dplyr::mutate(pct = n / nall, nall = NULL)
+
+gt_adcm <- dplyr::bind_rows(ct_cm, ct_adcm) |>  
+  tidyr::pivot_wider(id_cols = c(CMCLAS, CMDECOD), names_from = TRT01A, values_from = c(n, pct)) 
 
 ## don't print it yet, uncomment when its ready
 ##gt_adcm %>% gt()
 
-tab <-
-  gt_adcm %>%
-  gt(
-    rowname_col = "row",
-    groupname_col = "group"
-  ) %>%
+trt_n <- cadsl |> 
+  dplyr::filter(SAFFL == "Y") |> 
+  dplyr::group_by(TRT01A) |> 
+  dplyr::summarize(n = sprintf("%s  \nN=%i (100%%)", unique(TRT01A), dplyr::n())) |> 
+  dplyr::ungroup()
+
+tab_n <- dplyr::pull(trt_n, n) |> 
+  as.list()
+names(tab_n) <- paste("n", dplyr::pull(trt_n, TRT01A), sep = "_")
+
+
+gt_adcm |> 
+  gt(rowname_col = "CMDECOD") |> 
   tab_header(
     title = "Conmed Example",
     subtitle = md("Uses the *adcm* dataset from **random.cdisc.data**")
-  )
-
-##tab
+  ) |> 
+  opt_align_table_header(align = "left") |> 
+  fmt_percent(columns = dplyr::starts_with("pct_"), decimals = 1) |> 
+  cols_merge_n_pct(col_n = "n_A: Drug X", col_pct = "pct_A: Drug X") |> 
+  cols_merge_n_pct(col_n = "n_B: Placebo", col_pct = "pct_B: Placebo") |> 
+  cols_merge_n_pct(col_n = "n_C: Combination", col_pct = "pct_C: Combination") |> 
+  tab_row_group(
+    label = "medcl A",
+    rows = CMCLAS == "medcl A"
+  ) |>
+  tab_row_group(
+    label = "medcl B",
+    rows = CMCLAS == "medcl B"
+  ) |>
+  tab_row_group(
+    label = "medcl C",
+    rows = CMCLAS == "medcl C"
+  ) |>
+  row_group_order(
+    groups = c(NA, paste("medcl", LETTERS[1:2])) 
+  ) |> 
+  cols_hide(CMCLAS) |> 
+  cols_label(
+    `n_A: Drug X` = md(tab_n[[1]]),
+    `n_B: Placebo` = md(tab_n[[2]]),
+    `n_C: Combination` = md(tab_n[[3]])
+  ) |> 
+  cols_width(
+    1 ~ px(500),
+    everything() ~ px(150)
+  ) |> 
+  cols_align(
+    align = "center",
+    columns = everything()
+  ) |> 
+  cols_align(
+    align = "left",
+    columns = 1
+  ) 
 
 ```
 
@@ -70,8 +137,9 @@ ct_cm <- group_by(cadcm, TRT01A) |>
          CMCLAS = factor("N_CM", levels = cmclas_levels), 
          CMDECOD = factor("N_CM", levels = cmdecod_levels))
 
-ct_adcm <- adcm |>
-  count(CMDECOD, CMCLAS, TRT01A) |> 
+ct_adcm <- group_by(cadcm, TRT01A, CMCLAS, CMDECOD) |> 
+  summarize(n = n_distinct(USUBJID)) |> 
+  ungroup() |> 
   left_join(count(cadsl, TRT01A, name = "nall"), by = "TRT01A") |> 
   mutate(pct = n / nall, nall = NULL)
 
@@ -83,7 +151,7 @@ tab <- tabulator(
 
 ft <- as_flextable(tab, spread_first_col = TRUE) |> 
   prepend_chunks(
-    i = ~ is.na(CMCLAS), j = 1, 
+    i = ~ is.na(CMCLAS) & seq_along(CMCLAS) > 1, j = 1, 
     as_chunk("\t")
   )
 
@@ -101,6 +169,7 @@ ft <- autofit(ft) |>
   labelizor(part = "all", j = "CMDECOD", 
             labels = c(CMDECOD="", 
                        N_CM = "Number of sujects with any concomitant medication")) |> 
+  hline_top(part = "header", border = fp_border_default(width=2)) |>
   set_caption("Conmed Example\nUses the 'adcm' dataset from 'random.cdisc.data'")
 
 ft

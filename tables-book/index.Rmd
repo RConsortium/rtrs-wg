@@ -97,15 +97,13 @@ At some point we may switch to `renv` to install the `R` packages used
 for this book. For right now you can install the packages yourself with:
 
 ```{r, eval = FALSE}
-install.packages(c("rtables", "gt", "remotes", "tidyverse", "bookdown"))
+install.packages(c("rtables", "gt", "remotes", "tidyverse", "bookdown", "tables"))
 install.packages('flextable', repos = 'https://davidgohel.r-universe.dev')
 
 remotes::install_github("insightsengineering/random.cdisc.data")
 remotes::install_github("insightsengineering/nestcolor")
 remotes::install_github("insightsengineering/tern")
 
-# This document needs the unreleased tables v 0.9.9
-remotes::install_github("rforge/tables/pkg/tables")
 ```
 
 ```{r include=FALSE}
@@ -124,24 +122,6 @@ need these resets.
 
 ```{r include=FALSE}
 # Get the list of attached packages and global environment objects
-currentState <- function() {
-  list(globals = ls(.GlobalEnv),
-       search = search())
-}
-
-resetSession <- function(state = .initial_state) {
-  # Clean up the search list
-  for (n in setdiff(search(), state$search)) {
-    detach(n, character.only = TRUE)
-  }
-
-  # Clean up the global environment by deleting everything
-  # that wasn't there when `state` was constructed.
-  # Objects whose name starts with "." are not deleted.
-
-  rm(list = setdiff(ls(.GlobalEnv), state$globals),
-     envir = .GlobalEnv)
-}
 .initial_state <- currentState()
 ```
 
