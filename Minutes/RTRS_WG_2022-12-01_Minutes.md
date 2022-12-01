@@ -27,7 +27,6 @@ Possible conference opportunities include:
 * posit::conf (info to be available in Decenber)
 * R/Pharma - Nov?
 
-
 In anticapitation of haveing more table package developers interested in having their packages included in the document, the group agreed that we should publish clear inclusion criteria on the GitHub site. We would like to include all packages that are capable of producing the majority of the tables included in the document and exclude packages that provide only one or two table types.
 
 ** Action Items**
