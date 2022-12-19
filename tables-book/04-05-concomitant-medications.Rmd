@@ -5,7 +5,7 @@ editor_options:
 ---
 ## Concomitant Medications
 
-### gt
+### gt (with {gtsummary})
 
 ```{r, comment=NA}
 resetSession()
@@ -13,26 +13,40 @@ resetSession()
 library(dplyr)
 library(magrittr)
 library(gt)
+library(gtsummary)
 
 data("cadcm", package = "random.cdisc.data")
-gt_adcm <- cadcm %>%
-  select(USUBJID, CMDECOD, TRT01A)
+adcm1 <- cadcm |>
+  select(CMCLAS, COUNTRY, TRT01A)
 
-## don't print it yet, uncomment when its ready
-##gt_adcm %>% gt()
+tab1 <-
+  adcm1 |>
+  gt(groupname_col = "COUNTRY", "CMCLAS") |>
+  tab_header(
+    title = "Conmed Example",
+    subtitle = md("Uses the *adcm* dataset from **random.cdisc.data**")
+  ) |>
+  tab_spanner(
+    label = "Label",
+    columns = c(CMCLAS, TRT01A)
+  )
+tab1
 
-tab <-
-  gt_adcm %>%
-  gt(
-    rowname_col = "row",
-    groupname_col = "group"
-  ) %>%
+adcm2 <- cadcm |>
+  select(CMCLAS, COUNTRY, TRT01A)
+
+tab2 <-
+  adcm2 |>
+  tbl_summary(by = TRT01A, missing = "always") |>
+  add_overall() |>
+  add_n() |>
+  bold_labels() |>
+  as_gt() |>
   tab_header(
     title = "Conmed Example",
     subtitle = md("Uses the *adcm* dataset from **random.cdisc.data**")
   )
-
-##tab
+tab2
 
 ```
 
