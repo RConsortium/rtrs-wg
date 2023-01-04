@@ -1,6 +1,7 @@
 library(knitr)
 library(magrittr)
 library(ragg)
+library(systemfonts)
 library(random.cdisc.data)
 
 is_doconvable <- require("doconv") && locatexec::exec_available("word")
@@ -87,4 +88,26 @@ knit_hooks$set(link_preview = function(before, options, envir) {
 
 if (!exists(".initial_state")) {
   .initial_state <- currentState()
+}
+
+if(!grepl("fira", match_font("Fira Sans Condensed")$path, ignore.case = TRUE)){
+  register_font(name = "Fira Sans Condensed",
+                plain = list("static/fonts/fira-sans-condensed-v10-latin-regular.woff", 0),
+                bold = list("static/fonts/fira-sans-condensed-v10-latin-700.woff", 0),
+                italic = list("static/fonts/fira-sans-condensed-v10-latin-italic.woff", 0),
+                bolditalic = list("static/fonts/fira-sans-condensed-v10-latin-700italic.woff", 0)
+  )
+  register_font(name = "Fira Code",
+                plain = list("static/fonts/fira-code-v21-latin-regular.woff", 0),
+                bold = list("static/fonts/fira-code-v21-latin-700.woff", 0)
+  )
+
+}
+if(!grepl("OpenSans", match_font("Open Sans")$path, ignore.case = TRUE)){
+  register_font(name = "Open Sans",
+                plain = list("static/fonts/open-sans-v27-latin-regular.woff", 0),
+                bold = list("static/fonts/open-sans-v27-latin-700.woff", 0),
+                italic = list("static/fonts/open-sans-v27-latin-italic.woff", 0),
+                bolditalic = list("static/fonts/open-sans-v27-latin-700italic.woff", 0)
+  )
 }
