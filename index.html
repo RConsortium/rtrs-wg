@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <title>Tables in Clinical Trials with R</title>
 <meta name="description" content="Example code to create tables commonly used for analyzing clinical trials data.">
-<meta name="generator" content="bookdown 0.30 and GitBook 2.6.7">
+<meta name="generator" content="bookdown 0.31 and GitBook 2.6.7">
 <meta property="og:title" content="Tables in Clinical Trials with R">
 <meta property="og:type" content="book">
 <meta property="og:description" content="Example code to create tables commonly used for analyzing clinical trials data.">
@@ -15,7 +15,7 @@
 <meta name="twitter:title" content="Tables in Clinical Trials with R">
 <meta name="twitter:description" content="Example code to create tables commonly used for analyzing clinical trials data.">
 <meta name="author" content="R Consortium Tables Working Group">
-<meta name="date" content="2022-12-01">
+<meta name="date" content="2023-01-04">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="black">
@@ -238,7 +238,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
             <section class="normal" id="section-"><div id="header">
 <h1 class="title">Tables in Clinical Trials with R</h1>
 <p class="author"><em>R Consortium Tables Working Group</em></p>
-<p class="date"><em>2022-12-01</em></p>
+<p class="date"><em>2023-01-04</em></p>
 </div>
 <div id="about" class="section level1 hasAnchor" number="1">
 <h1>
@@ -298,100 +298,39 @@ add the content.</p>
 <p>We use synthetic data for the examples in this book. The data is available from the
 <code>random.cidsc.data</code> R package which contains a number of datasets that follow the
 <a href="https://www.cdisc.org/standards/foundational/adam">CDISC ADaM specifications</a>.</p>
-<details class="chunk-details"><summary class="chunk-summary"><span class="chunk-summary-text">Code</span></summary><div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
+<details class="chunk-details" open><summary class="chunk-summary"><span class="chunk-summary-text">Code</span></summary><div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu">remotes</span><span class="fu">::</span><span class="fu"><a href="https://remotes.r-lib.org/reference/install_github.html">install_github</a></span><span class="op">(</span><span class="st">"insightsengineering/random.cdisc.data"</span><span class="op">)</span></span></code></pre></div>
 </details><p>The data in <code>random.cdisc.data</code> is completely synthetic, meaning no patient data
 has been used to create it. The data is also fairly basic, meaning real study
 data is has often more signal and patterns.</p>
-<details class="chunk-details"><summary class="chunk-summary"><span class="chunk-summary-text">Code</span></summary><div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
+<details class="chunk-details" open><summary class="chunk-summary"><span class="chunk-summary-text">Code</span></summary><div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/utils/data.html">data</a></span><span class="op">(</span>package<span class="op">=</span><span class="st">"random.cdisc.data"</span><span class="op">)</span><span class="op">$</span><span class="va">results</span><span class="op">[</span>, <span class="st">"Item"</span><span class="op">]</span></span></code></pre></div>
 </details><pre><code> [1] "cadab"    "cadae"    "cadaette" "cadcm"    "caddv"    "cadeg"   
  [7] "cadex"    "cadhy"    "cadlb"    "cadmh"    "cadpc"    "cadpp"   
-[13] "cadqs"    "cadrs"    "cadsl"    "cadsub"   "cadtr"    "cadtte"  
-[19] "cadvs"   </code></pre>
+[13] "cadqlqc"  "cadqs"    "cadrs"    "cadsl"    "cadsub"   "cadtr"   
+[19] "cadtte"   "cadvs"   </code></pre>
 <p>note that the prepending <code>c</code> stands for caches. So, for example the cached
 synthetic subject level dataset <code>ADSL</code>:</p>
-<details class="chunk-details"><summary class="chunk-summary"><span class="chunk-summary-text">Code</span></summary><div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
+<details class="chunk-details" open><summary class="chunk-summary"><span class="chunk-summary-text">Code</span></summary><div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/utils/data.html">data</a></span><span class="op">(</span><span class="st">"cadsl"</span>, package <span class="op">=</span> <span class="st">"random.cdisc.data"</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/utils/head.html">head</a></span><span class="op">(</span><span class="va">cadsl</span><span class="op">)</span></span></code></pre></div>
-</details><pre><code>  STUDYID               USUBJID SUBJID SITEID AGE  AGEU SEX
-1 AB12345  AB12345-CHN-3-id-128 id-128  CHN-3  32 YEARS   M
-2 AB12345 AB12345-CHN-15-id-262 id-262 CHN-15  35 YEARS   M
-3 AB12345  AB12345-RUS-3-id-378 id-378  RUS-3  30 YEARS   F
-4 AB12345 AB12345-CHN-11-id-220 id-220 CHN-11  26 YEARS   F
-5 AB12345  AB12345-CHN-7-id-267 id-267  CHN-7  40 YEARS   M
-6 AB12345 AB12345-CHN-15-id-201 id-201 CHN-15  49 YEARS   M
-                       RACE                 ETHNIC COUNTRY DTHFL         INVID
-1                     ASIAN     HISPANIC OR LATINO     CHN     Y  INV ID CHN-3
-2 BLACK OR AFRICAN AMERICAN NOT HISPANIC OR LATINO     CHN     N INV ID CHN-15
-3                     ASIAN NOT HISPANIC OR LATINO     RUS     N  INV ID RUS-3
-4                     ASIAN NOT HISPANIC OR LATINO     CHN     N INV ID CHN-11
-5                     ASIAN NOT HISPANIC OR LATINO     CHN     N  INV ID CHN-7
-6                     ASIAN NOT HISPANIC OR LATINO     CHN     Y INV ID CHN-15
-          INVNAM            ARM ARMCD         ACTARM ACTARMCD         TRT01P
-1  Dr. CHN-3 Doe      A: Drug X ARM A      A: Drug X    ARM A      A: Drug X
-2 Dr. CHN-15 Doe C: Combination ARM C C: Combination    ARM C C: Combination
-3  Dr. RUS-3 Doe C: Combination ARM C C: Combination    ARM C C: Combination
-4 Dr. CHN-11 Doe     B: Placebo ARM B     B: Placebo    ARM B     B: Placebo
-5  Dr. CHN-7 Doe     B: Placebo ARM B     B: Placebo    ARM B     B: Placebo
-6 Dr. CHN-15 Doe C: Combination ARM C C: Combination    ARM C C: Combination
-          TRT01A         TRT02P         TRT02A REGION1 STRATA1 STRATA2
-1      A: Drug X     B: Placebo      A: Drug X    Asia       C      S2
-2 C: Combination     B: Placebo C: Combination    Asia       C      S1
-3 C: Combination      A: Drug X     B: Placebo Eurasia       A      S1
-4     B: Placebo     B: Placebo     B: Placebo    Asia       B      S2
-5     B: Placebo C: Combination      A: Drug X    Asia       C      S1
-6 C: Combination     B: Placebo C: Combination    Asia       C      S2
-     BMRKR1 BMRKR2 ITTFL SAFFL BMEASIFL BEP01FL AEWITHFL     RANDDT
-1 14.424934 MEDIUM     Y     Y        Y       Y        N 2019-02-22
-2  4.055463    LOW     Y     Y        N       N        Y 2019-02-26
-3  2.803240   HIGH     Y     Y        Y       N        N 2019-02-24
-4 10.262734 MEDIUM     Y     Y        Y       Y        N 2019-02-27
-5  6.206763    LOW     Y     Y        N       N        N 2019-03-01
-6  6.906799 MEDIUM     Y     Y        Y       N        N 2019-03-05
-              TRTSDTM             TRTEDTM           TRT01SDTM
-1 2019-02-24 11:09:18 2022-02-12 03:55:58 2019-02-24 11:09:18
-2 2019-02-26 09:05:00 2022-02-26 02:32:36 2019-02-26 09:05:00
-3 2019-02-28 03:19:08 2022-02-27 20:46:44 2019-02-28 03:19:08
-4 2019-03-01 13:33:03 2022-03-01 07:00:39 2019-03-01 13:33:03
-5 2019-03-02 00:09:16 2022-03-01 17:36:52 2019-03-02 00:09:16
-6 2019-03-05 15:23:44 2022-02-19 03:34:25 2019-03-05 15:23:44
-            TRT01EDTM           TRT02SDTM           TRT02EDTM
-1 2021-02-11 22:06:46 2021-02-11 22:06:46 2022-02-12 03:55:58
-2 2021-02-25 20:43:24 2021-02-25 20:43:24 2022-02-26 02:32:36
-3 2021-02-27 14:57:32 2021-02-27 14:57:32 2022-02-27 20:46:44
-4 2021-03-01 01:11:27 2021-03-01 01:11:27 2022-03-01 07:00:39
-5 2021-03-01 11:47:40 2021-03-01 11:47:40 2022-03-01 17:36:52
-6 2021-02-18 21:45:13 2021-02-18 21:45:13 2022-02-19 03:34:25
-             AP01SDTM            AP01EDTM            AP02SDTM
-1 2019-02-24 11:09:18 2021-02-11 22:06:46 2021-02-11 22:06:46
-2 2019-02-26 09:05:00 2021-02-25 20:43:24 2021-02-25 20:43:24
-3 2019-02-28 03:19:08 2021-02-27 14:57:32 2021-02-27 14:57:32
-4 2019-03-01 13:33:03 2021-03-01 01:11:27 2021-03-01 01:11:27
-5 2019-03-02 00:09:16 2021-03-01 11:47:40 2021-03-01 11:47:40
-6 2019-03-05 15:23:44 2021-02-18 21:45:13 2021-02-18 21:45:13
-             AP02EDTM       EOSSTT       EOTSTT      EOSDT EOSDY DCSREAS
-1 2022-02-12 03:55:58 DISCONTINUED DISCONTINUED 2022-02-12  1084   DEATH
-2 2022-02-26 02:32:36    COMPLETED    COMPLETED 2022-02-26  1096    &lt;NA&gt;
-3 2022-02-27 20:46:44    COMPLETED    COMPLETED 2022-02-27  1096    &lt;NA&gt;
-4 2022-03-01 07:00:39    COMPLETED    COMPLETED 2022-03-01  1096    &lt;NA&gt;
-5 2022-03-01 17:36:52    COMPLETED    COMPLETED 2022-03-01  1096    &lt;NA&gt;
-6 2022-02-19 03:34:25 DISCONTINUED DISCONTINUED 2022-02-19  1082   DEATH
-       DTHDT       DTHCAUS        DTHCAT LDDTHELD LDDTHGR1   LSTALVDT DTHADY
-1 2022-03-06 ADVERSE EVENT ADVERSE EVENT       22     &lt;=30 2022-03-06   1106
-2       &lt;NA&gt;          &lt;NA&gt;          &lt;NA&gt;       NA     &lt;NA&gt; 2022-03-17     NA
-3       &lt;NA&gt;          &lt;NA&gt;          &lt;NA&gt;       NA     &lt;NA&gt; 2022-03-11     NA
-4       &lt;NA&gt;          &lt;NA&gt;          &lt;NA&gt;       NA     &lt;NA&gt; 2022-03-26     NA
-5       &lt;NA&gt;          &lt;NA&gt;          &lt;NA&gt;       NA     &lt;NA&gt; 2022-03-15     NA
-6 2022-02-22 ADVERSE EVENT ADVERSE EVENT        3     &lt;=30 2022-02-22   1085
-  ADTHAUT study_duration_secs
-1     Yes            63113904
-2    &lt;NA&gt;            63113904
-3    &lt;NA&gt;            63113904
-4    &lt;NA&gt;            63113904
-5    &lt;NA&gt;            63113904
-6     Yes            63113904</code></pre>
-<details class="chunk-details"><summary class="chunk-summary"><span class="chunk-summary-text">Code</span></summary><div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
+</details><pre><code># A tibble: 6 × 56
+  STUDYID USUBJID     SUBJID SITEID   AGE AGEU  SEX   RACE  ETHNIC COUNTRY DTHFL
+  &lt;chr&gt;   &lt;chr&gt;       &lt;chr&gt;  &lt;chr&gt;  &lt;int&gt; &lt;fct&gt; &lt;fct&gt; &lt;fct&gt; &lt;fct&gt;  &lt;fct&gt;   &lt;fct&gt;
+1 AB12345 AB12345-CH… id-128 CHN-3     32 YEARS M     ASIAN HISPA… CHN     Y    
+2 AB12345 AB12345-CH… id-262 CHN-15    35 YEARS M     BLAC… NOT H… CHN     N    
+3 AB12345 AB12345-RU… id-378 RUS-3     30 YEARS F     ASIAN NOT H… RUS     N    
+4 AB12345 AB12345-CH… id-220 CHN-11    26 YEARS F     ASIAN NOT H… CHN     N    
+5 AB12345 AB12345-CH… id-267 CHN-7     40 YEARS M     ASIAN NOT H… CHN     N    
+6 AB12345 AB12345-CH… id-201 CHN-15    49 YEARS M     ASIAN NOT H… CHN     Y    
+# … with 45 more variables: INVID &lt;chr&gt;, INVNAM &lt;chr&gt;, ARM &lt;fct&gt;, ARMCD &lt;fct&gt;,
+#   ACTARM &lt;fct&gt;, ACTARMCD &lt;fct&gt;, TRT01P &lt;fct&gt;, TRT01A &lt;fct&gt;, TRT02P &lt;fct&gt;,
+#   TRT02A &lt;fct&gt;, REGION1 &lt;fct&gt;, STRATA1 &lt;fct&gt;, STRATA2 &lt;fct&gt;, BMRKR1 &lt;dbl&gt;,
+#   BMRKR2 &lt;fct&gt;, ITTFL &lt;fct&gt;, SAFFL &lt;fct&gt;, BMEASIFL &lt;fct&gt;, BEP01FL &lt;fct&gt;,
+#   AEWITHFL &lt;fct&gt;, RANDDT &lt;date&gt;, TRTSDTM &lt;dttm&gt;, TRTEDTM &lt;dttm&gt;,
+#   TRT01SDTM &lt;dttm&gt;, TRT01EDTM &lt;dttm&gt;, TRT02SDTM &lt;dttm&gt;, TRT02EDTM &lt;dttm&gt;,
+#   AP01SDTM &lt;dttm&gt;, AP01EDTM &lt;dttm&gt;, AP02SDTM &lt;dttm&gt;, AP02EDTM &lt;dttm&gt;, …</code></pre>
+<details class="chunk-details" open><summary class="chunk-summary"><span class="chunk-summary-text">Code</span></summary><div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">adsl</span> <span class="op">&lt;-</span> <span class="va">cadsl</span></span></code></pre></div>
 </details>
 </div>
@@ -401,7 +340,7 @@ synthetic subject level dataset <code>ADSL</code>:</p>
 </h2>
 <p>At some point we may switch to <code>renv</code> to install the <code>R</code> packages used
 for this book. For right now you can install the packages yourself with:</p>
-<details class="chunk-details"><summary class="chunk-summary"><span class="chunk-summary-text">Code</span></summary><div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
+<details class="chunk-details" open><summary class="chunk-summary"><span class="chunk-summary-text">Code</span></summary><div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/utils/install.packages.html">install.packages</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"rtables"</span>, <span class="st">"gt"</span>, <span class="st">"remotes"</span>, <span class="st">"tidyverse"</span>, <span class="st">"bookdown"</span>, <span class="st">"tables"</span><span class="op">)</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/utils/install.packages.html">install.packages</a></span><span class="op">(</span><span class="st">'flextable'</span>, repos <span class="op">=</span> <span class="st">'https://davidgohel.r-universe.dev'</span><span class="op">)</span></span>
 <span></span>
