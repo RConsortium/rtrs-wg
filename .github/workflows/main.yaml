@@ -50,6 +50,7 @@ jobs:
           install.packages("remotes")
           remotes::install_github("insightsengineering/random.cdisc.data")
           remotes::install_github("insightsengineering/nestcolor")
+          remotes::install_github("insightsengineering/formatters")
           remotes::install_github("Roche/rtables")
           remotes::install_github("insightsengineering/tern")
           remotes::install_github("davidgohel/flextable")
