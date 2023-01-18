@@ -104,7 +104,7 @@ footnote(z, i = c(1, 2, 2), j = c(1, 5, 7),
          value = as_paragraph("hello world"), ref_symbols = "(1)")
 ```
 
-### Titles and footnotes in the tables package
+### Titles and footnotes in tables
 
 The `tables` package concentrates on the table itself.  The titles
 are generally written as part of the surrounding document.  Footnotes
@@ -172,7 +172,7 @@ With 'Quarto', the R chunk code should be transformed as:
 flextable(head(cars))
 ````
 
-### Captions in the tables package
+### Captions in tables
 
 As with titles, captions would be added as part of the
 surrounding document rather than part of the table object.
@@ -207,7 +207,7 @@ In an 'R Markdown' document, the markdown code to insert a page break is
 `\newpage`; with the package 'officer', you have to use `body_add_break()` (for
 Word documents only).
 
-### Pagination in the tables package
+### Pagination in tables
 
 Tables that span multiple pages are supported in PDF output using
 the LaTeX `longtable` package, specified when converting to LaTeX.
