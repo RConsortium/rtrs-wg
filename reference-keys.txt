@@ -15,14 +15,14 @@ formatting-and-rendering-tables
 title-footnotes
 title-and-footnotes-in-rtables
 title-and-footnotes-in-flextable
-titles-and-footnotes-in-the-tables-package
+titles-and-footnotes-in-tables
 captions
 captions-in-flextable
-captions-in-the-tables-package
+captions-in-tables
 pagination
 pagination-in-rtables
 pagination-in-flextable
-pagination-in-the-tables-package
+pagination-in-tables
 rendering-tables
 ascii
 pdf
