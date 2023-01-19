@@ -227,6 +227,61 @@ ft <- summarizor(adsl, by = "ARM") |>
 ft
 ```
 
+### tfrmt
+
+Please note that the`tfrmt` package is intended for use with mock or ARD (analysis results data). 
+In this bookdown `data_demog` and `data_ae` are used within `tfrmt` examples (these datasets are stored in this package too). 
+These are based on the CDISC pilot data but have been modified into ARD - hence, differ from the other packages examples. 
+
+```{r}
+resetSession()
+library(tfrmt)
+library(dplyr)
+
+tfrmt(
+  # Add titles
+  title = "x.x: Study Subject Data",
+  subtitle = c("x.x.x: Demographic Characteristics.",
+               "Table x.x.x.x: Demographic Characteristics - Full Analysis Set"),
+
+  # Specify table features
+  group = rowlbl1,
+  label = rowlbl2,
+  column = column,
+  param = param,
+  value = value,
+
+  # Define cell formatting
+  body_plan = body_plan(
+    # Define rounding
+    frmt_structure(group_val = ".default", label_val = ".default", frmt("xx")),
+
+    frmt_structure(group_val = "Age (y)",
+                   label_val = c("Mean", "SD", "<65 yrs", "65-80 yrs", ">80 yrs"),
+                   frmt("xx.x")),
+
+    frmt_structure(group_val = "Sex",
+                   label_val = c("Male", "Female"),
+                   frmt("xx.x")),
+
+    frmt_structure(group_val = "Race (Origin)",
+                   label_val = c("Caucasian", "African Descent", "Hispanic", "Other"),
+                   frmt("xx.x")) ),
+
+  # Define columns
+  col_plan = col_plan(-starts_with("ord"), -grp)
+
+  ) %>%
+  print_to_gt(data_demog %>%
+                filter(rowlbl1 %in% c("Age (y)", "Sex", "Race (Origin)"),
+                      !(column %in% c("Total", "p-value"))) )
+```
+
+See this vignette for more details on formatting functions: [link to website](https://gsk-biostatistics.github.io/tfrmt/articles/body_plan.html)
+
+See this vignette for the completed table example: [link to website](https://gsk-biostatistics.github.io/tfrmt/articles/examples.html)
+
+
 ### tables
 
 ```{r}
