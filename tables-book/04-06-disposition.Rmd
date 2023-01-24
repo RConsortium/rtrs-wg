@@ -29,6 +29,115 @@ lyt <- basic_table() |>
 build_table(lyt, adsl)
 
 ```
+### gt
+
+```{r}
+resetSession()
+
+library(tidyverse)
+library(gt)
+
+gt_adsl <- cadsl |> 
+  dplyr::group_by(TRT01A) |> 
+  dplyr::mutate(n_total = dplyr::n()) |> 
+  dplyr::ungroup()
+
+header_n <- gt_adsl |> 
+  dplyr::group_by(TRT01A) |> 
+  dplyr::summarize(trt = sprintf("%s  \nN=%i (100%%)", unique(TRT01A), dplyr::n()),
+                   .groups = "drop") |> 
+  pull(trt) |> 
+  as.list()
+
+names(header_n) <- paste0("n_", levels(gt_adsl$TRT01A))
+  
+gt_sum <- gt_adsl |> 
+  dplyr::mutate(
+    DCSREAS = dplyr::case_when(EOSSTT %in% c("COMPLETED", "ONGOING") ~ as.character(EOSSTT),
+                               is.na(DTHCAUS) & EOSSTT == "DISCONTINUED" ~ as.character(DCSREAS),
+                               TRUE ~ paste(DCSREAS, DTHCAUS, sep = "_"))) |> 
+  dplyr::group_by(TRT01A, EOSSTT, DCSREAS) |> 
+  dplyr::summarize(
+    n = dplyr::n(),
+    pct = dplyr::n()/min(n_total),
+    .groups = "drop"
+    ) |> 
+  tidyr::pivot_wider(id_cols = c(EOSSTT, DCSREAS), names_from = TRT01A, values_from = c(n, pct))
+
+dth_lbl <- gt_sum |> 
+  dplyr::slice(1) |> 
+  dplyr::mutate(
+    across(where(is.numeric), ~NA_real_),
+           EOSSTT = "DISCONTINUED",
+           DCSREAS = "DEATH"
+  )
+  
+gt_disp <- dplyr::bind_rows(gt_sum, dth_lbl) |> 
+  dplyr::mutate(
+    EOSSTT = factor(EOSSTT,
+                    levels = c("COMPLETED", "ONGOING", "DISCONTINUED"),
+                    labels = c("Completed", "Ongoing", "Discontinued")),
+    DCSREAS = factor(DCSREAS,
+                     levels = c("COMPLETED", "ONGOING", "ADVERSE EVENT", "DEATH" ,"DEATH_ADVERSE EVENT", "DEATH_DISEASE PROGRESSION", "DEATH_LOST TO FOLLOW UP", "DEATH_MISSING", "DEATH_Post-study reporting of death", "DEATH_SUICIDE", "DEATH_UNKNOWN", "LACK OF EFFICACY", "PHYSICIAN DECISION", "PROTOCOL VIOLATION", "WITHDRAWAL BY PARENT/GUARDIAN", "WITHDRAWAL BY SUBJECT"),
+                     labels = c("Completed", "Ongoing", "Adverse Event", "Death", "Adverse Event ", "Disease Progression", "Lost to Follow Up", "Missing", "Post-Study Reporting of Death", "Suicide", "Unknown", "Lack of Efficacy", "Physician Decision", "Protocol Violation", "Withdrawal by Parent/ Guardian", "Withdrawal by Subject")) 
+    ) |> 
+  dplyr::arrange(EOSSTT, DCSREAS)
+
+
+gt_disp |> 
+  gt(rowname_col = "DCSREAS") |> 
+  tab_row_group(
+    label = "Discontinued",
+    rows = EOSSTT == "Discontinued"
+  ) |> 
+  row_group_order(
+    groups = c(NA, "Discontinued") 
+  ) |> 
+  cols_hide(EOSSTT) |> 
+  fmt_integer(
+    columns = starts_with("n_")
+  ) |> 
+  fmt_percent(
+    columns = starts_with("pct_"),
+    decimals = 1
+  ) |> 
+  sub_missing(
+    rows = DCSREAS == "Death",
+    missing_text = ""
+  ) |> 
+  cols_merge_n_pct(col_n = "n_A: Drug X", col_pct = "pct_A: Drug X") |> 
+  cols_merge_n_pct(col_n = "n_B: Placebo", col_pct = "pct_B: Placebo") |> 
+  cols_merge_n_pct(col_n = "n_C: Combination", col_pct = "pct_C: Combination") |> 
+    sub_missing(
+    rows = DCSREAS != "Death",
+    missing_text = 0
+  ) |> 
+  cols_align(
+    align = "center",
+    columns = everything()
+  ) |> 
+  cols_align(
+    align = "left",
+    columns = stub()
+  ) |> 
+  tab_stub_indent(
+    rows = 3:16,
+    indent = 2
+  ) |>
+  tab_stub_indent(
+    rows = 5:11,
+    indent = 5
+  ) |> 
+  cols_label(
+    `n_A: Drug X` = md(header_n[[1]]),
+    `n_B: Placebo` = md(header_n[[2]]),
+    `n_C: Combination` = md(header_n[[3]])
+  ) |> 
+  cols_width(
+    1 ~ px(500)
+  )
+```
+
 
 ### flextable
 
