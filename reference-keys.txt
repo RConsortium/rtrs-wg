@@ -54,5 +54,6 @@ flextable-4
 tables-4
 disposition
 rtables-3
+gt-4
 flextable-5
 tables-5
