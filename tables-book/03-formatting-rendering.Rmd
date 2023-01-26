@@ -106,10 +106,10 @@ footnote(z, i = c(1, 2, 2), j = c(1, 5, 7),
 
 ### Title and Footnotes in tfrmt
 
-The `tfrmt` function in `tfrmt` has includes the arguments `title`, `subtitle` 
-to add titles. Within the `footnote_plan` function the user can nest multiple 
-`footnote_structure`s to add footnotes with superscript reference symbols on 
-groups, columns or labels.
+The `tfrmt` function in the `tfrmt` package includes the arguments `title` and
+`subtitle` to add titles. Within the `footnote_plan` function, the user can nest 
+multiple `footnote_structure`s to add footnotes with superscript reference 
+symbols on groups, columns or labels.
 
 To demonstrate, this example will create a mock demography table:
 
