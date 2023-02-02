@@ -1,5 +1,5 @@
 tab:flextable-label
-tab:unnamed-chunk-43
+tab:unnamed-chunk-42
 about
 introduction
 call-for-contributions
@@ -49,12 +49,11 @@ gt-2
 flextable-3
 tables-3
 concomitant-medications
-rtables-3
 gt-3
 flextable-4
 tables-4
 disposition
-rtables-4
+rtables-3
 gt-4
 flextable-5
 tables-5
