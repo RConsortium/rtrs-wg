@@ -5,6 +5,43 @@ editor_options:
 ---
 ## Concomitant Medications
 
+### rtables
+
+```{r}
+resetSession()
+
+library(rtables)
+data("cadcm", package = "random.cdisc.data")
+data("cadsl", package = "random.cdisc.data")
+
+one_count_pct_gen <- function(label = NULL) {
+    function(x, .N_col) {
+       ret <- rcell(length(unique(x)) * c(1, 1/.N_col),
+                    format = "xx (xx.x%)")
+       if(!is.null(label))
+           obj_label(ret) <- label
+       ret
+    }
+}
+
+lyt <- basic_table(title = "Conmed Example",
+                   subtitles = "Uses the adcm dataset from random.cdisc.data",
+                   show_colcounts = TRUE) %>%
+    split_cols_by("ARM") %>%
+    analyze("USUBJID", afun = one_count_pct_gen("At Least One Concomittant Med")) %>%
+    split_rows_by("CMCLAS", split_fun = trim_levels_in_group("CMTRT")) %>%
+    analyze("CMTRT", afun = function(df, .N_col) {
+        cmtrtvec <- df$CMTRT
+        spl_usubj <- split(df$USUBJID, cmtrtvec)
+        fn <- one_count_pct_gen()
+        cells <- lapply(spl_usubj, fn, .N_col = .N_col)
+        names(cells) <- names(spl_usubj)
+        in_rows(.list = cells)
+    })
+
+build_table(lyt, cadcm, alt_counts_df = cadsl)
+```
+
 ### gt
 
 ```{r, comment=NA}
