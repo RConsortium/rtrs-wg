@@ -229,11 +229,38 @@ ft
 
 ### tables
 
+The `tables` package uses a different style
+than the other packages for tables such as this, where
+there are separate sections for age, sex and country
+breakdowns of the data.  Rather than putting
+the section heading on a separate line, it normally
+puts the heading in a separate column to the left
+of the other columns.
+
+For this demonstration, we will use the `kableExtra`
+package to modify the table into a format similar
+to the other packages.
+
 ```{r}
 resetSession()
+# function to convert column to subgroup
+col2grp <- function(tab, col) {
+  # Add the kableExtra workaround
+  table_options(doCSS = FALSE)
+  colvals <- rowLabels(tab)[, col]
+  rowLabels(tab) <- rowLabels(tab)[, -col]
+  newgroup <- !is.na(colvals) & colvals != ""
+  first <- which(newgroup)
+  last <- c(first[-1] - 1, nrow(tab))
+  tab <- toKable(tab, format="html")
+  for (i in seq_along(first))
+    tab <- kableExtra::group_rows(tab, colvals[first[i]],
+                                  first[i], last[i])
+  tab
+}
+
 ex_adsl <- formatters::ex_adsl
 library(tables)
-table_options(doCSS = TRUE)
 
 meansd <- function(x) sprintf("%.1f (%.1f)", mean(x), sd(x))
 
@@ -248,12 +275,16 @@ countpercent <- function(num, denom)
           length(num), 
           100*length(num)/length(denom))
 
-tabular( Heading(n)*1 +
-         AGE * (Heading("Mean (SD)")*meansd +
-                Heading("Median (IQR)")*medianiqr +
-                Heading("Min - Max")*minmax) +
-         (SEX + COUNTRY)*Heading()*
-           Percent(denom = Equal(ARM), fn = countpercent) ~ 
+tab <- tabular( Heading(n)*1 +
+         Heading("Age (Years)")*
+           AGE * (Heading("Mean (SD)")*meansd +
+                  Heading("Median (IQR)")*medianiqr +
+                  Heading("Min - Max")*minmax) +
+         (Heading("Sex, n, (%)")*SEX +
+          Heading("Country, n, (%)")*COUNTRY)*
+            Heading()*Percent(denom = Equal(ARM), fn = countpercent) ~ 
          Heading()*ARM, 
          data = ex_adsl )
+
+col2grp(tab, 1)
 ```
