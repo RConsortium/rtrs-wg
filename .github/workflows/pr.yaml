@@ -1,9 +1,9 @@
 on:
-  push:
+  pull_request:
     branches:
       - main
 
-name: bookdown
+name: pr-run-ok
 
 jobs:
   bookdown:
@@ -67,18 +67,3 @@ jobs:
           setwd('tables-book')
           rmarkdown::render_site(encoding = 'UTF-8')
         shell: Rscript {0}
-
-      - name: Automatic Linking
-        run: |
-          setwd('tables-book')
-          for(z in list.files(path = '_book', pattern = '\\.html', full.names = TRUE)) {downlit::downlit_html_path(in_path = z, out_path = z)}
-        shell: Rscript {0}
-
-      - name: Deploy 🚀
-        uses: JamesIves/github-pages-deploy-action@4.1.4
-        with:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          BRANCH: gh-pages # The branch the action should deploy to.
-          FOLDER: tables-book/_book/
-          TARGET_FOLDER: '.' # The folder the action should deploy.
-          CLEAN: true
