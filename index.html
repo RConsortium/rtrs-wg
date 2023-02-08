@@ -95,6 +95,28 @@ code span.va { color: #19177c; } /* Variable */
 code span.vs { color: #4070a0; } /* VerbatimString */
 code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
 </style>
+<style type="text/css">
+/* Used with Pandoc 2.11+ new --citeproc when CSL is used */
+div.csl-bib-body { }
+div.csl-entry {
+  clear: both;
+}
+.hanging div.csl-entry {
+  margin-left:2em;
+  text-indent:-2em;
+}
+div.csl-left-margin {
+  min-width:2em;
+  float:left;
+}
+div.csl-right-inline {
+  margin-left:2em;
+  padding-left:1em;
+}
+div.csl-indent {
+  margin-left: 2em;
+}
+</style>
 <link rel="stylesheet" href="static/css/fira-code.css" type="text/css">
 <link rel="stylesheet" href="static/css/fira-sans-condensed.css" type="text/css">
 <link rel="stylesheet" href="static/css/arial.css" type="text/css">
@@ -342,7 +364,7 @@ synthetic subject level dataset <code>ADSL</code>:</p>
 <p>At some point we may switch to <code>renv</code> to install the <code>R</code> packages used
 for this book. For right now you can install the packages yourself with:</p>
 <details class="chunk-details" open><summary class="chunk-summary"><span class="chunk-summary-text">Code</span></summary><div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/utils/install.packages.html">install.packages</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"rtables"</span>, <span class="st">"gt"</span>, <span class="st">"remotes"</span>, <span class="st">"tidyverse"</span>, <span class="st">"bookdown"</span>, <span class="st">"tables"</span><span class="op">)</span><span class="op">)</span></span>
+<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/utils/install.packages.html">install.packages</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"rtables"</span>, <span class="st">"gt"</span>, <span class="st">"remotes"</span>, <span class="st">"tidyverse"</span>, <span class="st">"bookdown"</span>, <span class="st">"tables"</span>, <span class="st">"r2rtf"</span><span class="op">)</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/utils/install.packages.html">install.packages</a></span><span class="op">(</span><span class="st">'flextable'</span>, repos <span class="op">=</span> <span class="st">'https://davidgohel.r-universe.dev'</span><span class="op">)</span></span>
 <span></span>
 <span><span class="fu">remotes</span><span class="fu">::</span><span class="fu"><a href="https://remotes.r-lib.org/reference/install_github.html">install_github</a></span><span class="op">(</span><span class="st">"insightsengineering/random.cdisc.data"</span><span class="op">)</span></span>

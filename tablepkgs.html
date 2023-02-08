@@ -96,6 +96,28 @@ code span.va { color: #19177c; } /* Variable */
 code span.vs { color: #4070a0; } /* VerbatimString */
 code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
 </style>
+<style type="text/css">
+/* Used with Pandoc 2.11+ new --citeproc when CSL is used */
+div.csl-bib-body { }
+div.csl-entry {
+  clear: both;
+}
+.hanging div.csl-entry {
+  margin-left:2em;
+  text-indent:-2em;
+}
+div.csl-left-margin {
+  min-width:2em;
+  float:left;
+}
+div.csl-right-inline {
+  margin-left:2em;
+  padding-left:1em;
+}
+div.csl-indent {
+  margin-left: 2em;
+}
+</style>
 <link rel="stylesheet" href="static/css/fira-code.css" type="text/css">
 <link rel="stylesheet" href="static/css/fira-sans-condensed.css" type="text/css">
 <link rel="stylesheet" href="static/css/arial.css" type="text/css">
@@ -250,7 +272,7 @@ Please contribute to this chapter.</p>
 <h2>
 <span class="header-section-number">2.1</span> gt<a href="tablepkgs.html#gt" class="anchor-section" aria-label="Anchor link to header"></a>
 </h2>
-<p>The <code>gt</code> (<a href="https://gt.rstudio.com/">website</a>) package provides
+<p>The <code>gt</code> package <span class="citation">(<a href="#ref-R-gt" role="doc-biblioref">Iannone et al. 2022</a>, <a href="https://gt.rstudio.com/" role="doc-biblioref">website</a>)</span> provides
 a high-level and declarative interface for composing tables.
 Contains a variety of <code>formatter</code> functions for transforming cell values
 from an input data frame to the desired reporting values (combines mutation and
@@ -262,7 +284,7 @@ supported with the same declarative interface (e.g., HTML, LaTeX/PDF, and RTF).<
 <h2>
 <span class="header-section-number">2.2</span> r2rtf<a href="tablepkgs.html#r2rtf" class="anchor-section" aria-label="Anchor link to header"></a>
 </h2>
-<p>The <code>r2rtf</code> (<a href="https://merck.github.io/r2rtf/">website</a>) package
+<p>The <code>r2rtf</code> package <span class="citation">(<a href="#ref-R-r2rtf" role="doc-biblioref"><strong>R-r2rtf?</strong></a>, <a href="https://merck.github.io/r2rtf/" role="doc-biblioref">website</a>)</span>
 creates production-ready tables and figures in RTF format.
 The R package is designed to</p>
 <ul>
@@ -280,7 +302,7 @@ provides examples by using <code>r2rtf</code> package.</p>
 <h2>
 <span class="header-section-number">2.3</span> rtables<a href="tablepkgs.html#rtables" class="anchor-section" aria-label="Anchor link to header"></a>
 </h2>
-<p>The <code>rtables</code> package defines a pipe-able grammar for declaring complex table
+<p>The <code>rtables</code> package <span class="citation">(<a href="#ref-R-rtables" role="doc-biblioref">Becker and Waddell 2022</a>)</span> defines a pipe-able grammar for declaring complex table
 structure layouts via nested splitting - in row- and column-space - and the
 specification of analysis functions which will calculate cell values within that
 structure. These pre-data table layouts are then applied to data to build the
@@ -296,7 +318,7 @@ on <a href="https://CRAN.R-project.org/package=rtables">CRAN</a>.</p>
 <h2>
 <span class="header-section-number">2.4</span> flextable<a href="tablepkgs.html#flextable" class="anchor-section" aria-label="Anchor link to header"></a>
 </h2>
-<p><code>flextable</code> is providing a <em>grammar</em> for creating and customizing tables. The
+<p><code>flextable</code> <span class="citation">(<a href="#ref-R-flextable" role="doc-biblioref">Gohel and Skintzos 2023</a>)</span> is providing a <em>grammar</em> for creating and customizing tables. The
 following formats are supported: ‘Word’ (<em>.docx), ‘PowerPoint’ (</em>.pptx), ‘PDF’
 ,‘HTML’ and R ‘Grid Graphics’. The syntax is the same for the user regardless of
 the type of output to be produced. A set of functions allows the creation,
@@ -312,7 +334,7 @@ statistical models and the creation of complex cross tabulations.</p>
 <h2>
 <span class="header-section-number">2.5</span> tables<a href="tablepkgs.html#tables" class="anchor-section" aria-label="Anchor link to header"></a>
 </h2>
-<p>The <code>tables</code> package provides a formula-driven interface for
+<p>The <code>tables</code> package <span class="citation">(<a href="#ref-R-tables" role="doc-biblioref">Murdoch 2022</a>)</span> provides a formula-driven interface for
 computing the contents of tables and formatting them. It was
 inspired by <code>SAS PROC TABULATE</code>, but is not compatible with it.</p>
 <p>The user computes a table object by specifying a formula, with the
@@ -329,6 +351,22 @@ Github at <a href="https://github.com/rforge/tables/" class="uri">https://github
 serve as a user manual. Browse them at <a href="https://rdrr.io/cran/tables/" class="uri">https://rdrr.io/cran/tables/</a>, or install the package, then run
 <code>browseVignettes(package = "tables")</code>.</p>
 
+</div>
+</div>
+<h3>References<a href="references.html#references" class="anchor-section" aria-label="Anchor link to header"></a>
+</h3>
+<div id="refs" class="references csl-bib-body hanging-indent">
+<div id="ref-R-rtables" class="csl-entry">
+Becker, Gabriel, and Adrian Waddell. 2022. <em>Rtables: Reporting Tables</em>.
+</div>
+<div id="ref-R-flextable" class="csl-entry">
+Gohel, David, and Panagiotis Skintzos. 2023. <em>Flextable: Functions for Tabular Reporting</em>.
+</div>
+<div id="ref-R-gt" class="csl-entry">
+Iannone, Richard, Joe Cheng, Barret Schloerke, Ellis Hughes, and JooYoung Seo. 2022. <em>Gt: Easily Create Presentation-Ready Display Tables</em>.
+</div>
+<div id="ref-R-tables" class="csl-entry">
+Murdoch, Duncan. 2022. <em>Tables: Formula-Driven Table Generation</em>. <a href="https://r-forge.r-project.org/projects/tables/">https://r-forge.r-project.org/projects/tables/</a>.
 </div>
 </div>
             </section>
