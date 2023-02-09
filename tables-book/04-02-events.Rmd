@@ -162,6 +162,8 @@ resetSession()
 library(tfrmt)
 library(dplyr)
 
+data_ae <- tfrmt::data_ae
+
 tfrmt(
   # Specify table features
   group = AEBODSYS,

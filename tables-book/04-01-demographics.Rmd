@@ -238,6 +238,8 @@ resetSession()
 library(tfrmt)
 library(dplyr)
 
+data_demog <- tfrmt::data_demog
+
 tfrmt(
   # Add titles
   title = "x.x: Study Subject Data",
