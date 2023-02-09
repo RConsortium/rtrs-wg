@@ -1,3 +1,10 @@
+
 `r if (knitr::is_html_output()) '
 # References {-}
 '`
+
+```{r echo=FALSE}
+# This comes last to clean up at the end of the
+# process.
+resetSession()
+```
