@@ -15,7 +15,7 @@
 <meta name="twitter:title" content="Chapter 2 Overview table R packages | Tables in Clinical Trials with R">
 <meta name="twitter:description" content="Example code to create tables commonly used for analyzing clinical trials data.">
 <meta name="author" content="R Consortium Tables Working Group">
-<meta name="date" content="2023-02-08">
+<meta name="date" content="2023-02-10">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="black">
@@ -151,7 +151,8 @@ div.csl-indent {
 <li class="chapter" data-level="2.2" data-path="tablepkgs.html"><a href="tablepkgs.html#r2rtf"><i class="fa fa-check"></i><b>2.2</b> r2rtf</a></li>
 <li class="chapter" data-level="2.3" data-path="tablepkgs.html"><a href="tablepkgs.html#rtables"><i class="fa fa-check"></i><b>2.3</b> rtables</a></li>
 <li class="chapter" data-level="2.4" data-path="tablepkgs.html"><a href="tablepkgs.html#flextable"><i class="fa fa-check"></i><b>2.4</b> flextable</a></li>
-<li class="chapter" data-level="2.5" data-path="tablepkgs.html"><a href="tablepkgs.html#tables"><i class="fa fa-check"></i><b>2.5</b> tables</a></li>
+<li class="chapter" data-level="2.5" data-path="tablepkgs.html"><a href="tablepkgs.html#tfrmt"><i class="fa fa-check"></i><b>2.5</b> tfrmt</a></li>
+<li class="chapter" data-level="2.6" data-path="tablepkgs.html"><a href="tablepkgs.html#tables"><i class="fa fa-check"></i><b>2.6</b> tables</a></li>
 </ul>
 </li>
 <li class="chapter" data-level="3" data-path="formatting-and-rendering-tables.html">
@@ -330,9 +331,26 @@ statistical models and the creation of complex cross tabulations.</p>
 <a href="https://ardata-fr.github.io/flextable-book/">user manual</a> is available.
 <code>flextable</code> is available on <a href="https://CRAN.R-project.org/package=flextable">CRAN</a>.</p>
 </div>
-<div id="tables" class="section level2 hasAnchor" number="2.5">
+<div id="tfrmt" class="section level2 hasAnchor" number="2.5">
 <h2>
-<span class="header-section-number">2.5</span> tables<a href="tablepkgs.html#tables" class="anchor-section" aria-label="Anchor link to header"></a>
+<span class="header-section-number">2.5</span> tfrmt<a href="tablepkgs.html#tfrmt" class="anchor-section" aria-label="Anchor link to header"></a>
+</h2>
+<p>The <code>tfrmt</code> (<a href="https://gsk-biostatistics.github.io/tfrmt/">website</a>) package
+provides a language for defining display-related metadata and table formatting
+before any data is available. This package offers an intuitive interface for
+defining and layering standard or custom formats, to which ARD (analysis
+results data) is supplied. It also presents the novel ability to easily
+generate mock displays using metadata that will be used for the actual
+displays. <code>tfrmt</code> is built on top of the <code>gt</code> package, which is intended to
+support a variety of output formats in the future. Table features (titles,
+header, footnotes, etc.) as well as specific formatting (e.g. rounding,
+scientific notation, alignment, spacing) are supported.</p>
+<p><code>tfrmt</code> source code is on <a href="https://github.com/GSK-Biostatistics/tfrmt">GitHub</a>.
+<code>tfrmt</code> is also available on <a href="https://CRAN.R-project.org/package=tfrmt">CRAN</a>.</p>
+</div>
+<div id="tables" class="section level2 hasAnchor" number="2.6">
+<h2>
+<span class="header-section-number">2.6</span> tables<a href="tablepkgs.html#tables" class="anchor-section" aria-label="Anchor link to header"></a>
 </h2>
 <p>The <code>tables</code> package <span class="citation">(<a href="#ref-R-tables" role="doc-biblioref">Murdoch 2022</a>)</span> provides a formula-driven interface for
 computing the contents of tables and formatting them. It was

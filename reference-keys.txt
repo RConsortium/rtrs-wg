@@ -10,6 +10,7 @@ gt
 r2rtf
 rtables
 flextable
+tfrmt
 tables
 formatting-and-rendering-tables
 title-footnotes
