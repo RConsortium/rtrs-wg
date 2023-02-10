@@ -244,7 +244,7 @@ to the other packages.
 ```{r}
 resetSession()
 # function to convert column to subgroup
-col2grp <- function(tab, col) {
+.tables_col2grp <- function(tab, col) {
   # Add the kableExtra workaround
   table_options(doCSS = FALSE)
   colvals <- rowLabels(tab)[, col]
@@ -255,7 +255,8 @@ col2grp <- function(tab, col) {
   tab <- toKable(tab, format="html")
   for (i in seq_along(first))
     tab <- kableExtra::group_rows(tab, colvals[first[i]],
-                                  first[i], last[i])
+                                  first[i], last[i],
+                                  label_row_css = "")
   tab
 }
 
@@ -286,5 +287,5 @@ tab <- tabular( Heading(n)*1 +
          Heading()*ARM, 
          data = ex_adsl )
 
-col2grp(tab, 1)
+.tables_col2grp(tab, 1)
 ```
