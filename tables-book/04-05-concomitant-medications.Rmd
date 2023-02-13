@@ -208,5 +208,5 @@ body <- tabular( (Heading("Any concomitant medication")*1 +
                  Heading()*TRT01A, 
                  data = cadcm)
 
-.tables_col2grp(rbind(heading, body), 1)
+useGroupLabels(rbind(heading, body), indent = "&emsp;")
 ```

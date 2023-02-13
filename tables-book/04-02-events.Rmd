@@ -165,9 +165,6 @@ use a different approach:  we generate one table of patient counts
 to produce the heading lines, and a second table with the adverse
 event data, then use `rbind` to combine the two tables.
 
-We also use the `.tables_col2grp` function that was defined
-in the demographics section to split the table into
-subsections.
 ```{r}
 resetSession()
 
@@ -205,5 +202,5 @@ body <- tabular( Heading("Patients with at least one event")*
                  data = ex_adae )
 
 tab <- rbind(heading, body)
-.tables_col2grp(tab, 1)
+useGroupLabels(tab, indent = "&emsp;")
 ```

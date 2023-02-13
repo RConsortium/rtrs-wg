@@ -263,5 +263,6 @@ part3 <- tabular( Heading("")*DCSREAS*
                   data = subset(adsl, EOSSTT == "Discontinued" &
                                       DCSREAS == "Death"))
 
-.tables_col2grp(rbind(heading, part1, part2, part3), 1)
+useGroupLabels(rbind(heading, part1, part2, part3), 
+               indent = "&emsp;")
 ```
