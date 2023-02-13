@@ -15,7 +15,7 @@
 <meta name="twitter:title" content="Tables in Clinical Trials with R">
 <meta name="twitter:description" content="Example code to create tables commonly used for analyzing clinical trials data.">
 <meta name="author" content="R Consortium Tables Working Group">
-<meta name="date" content="2023-02-10">
+<meta name="date" content="2023-02-13">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="black">
@@ -30,7 +30,6 @@
 <link href="libs/anchor-sections-1.1.0/anchor-sections.css" rel="stylesheet">
 <link href="libs/anchor-sections-1.1.0/anchor-sections-hash.css" rel="stylesheet">
 <script src="libs/anchor-sections-1.1.0/anchor-sections.js"></script><link href="libs/tabwid-1.1.2/tabwid.css" rel="stylesheet">
-<script src="libs/kePrint-0.0.1/kePrint.js"></script><link href="libs/lightable-0.0.1/lightable.css" rel="stylesheet">
 <style type="text/css">
 pre > code.sourceCode { white-space: pre; position: relative; }
 pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
@@ -262,7 +261,7 @@ div.csl-indent {
             <section class="normal" id="section-"><div id="header">
 <h1 class="title">Tables in Clinical Trials with R</h1>
 <p class="author"><em>R Consortium Tables Working Group</em></p>
-<p class="date"><em>2023-02-10</em></p>
+<p class="date"><em>2023-02-13</em></p>
 </div>
 <div id="about" class="section level1 hasAnchor" number="1">
 <h1>
@@ -326,14 +325,14 @@ add the content.</p>
 <code class="sourceCode R"><span><span class="fu">remotes</span><span class="fu">::</span><span class="fu"><a href="https://remotes.r-lib.org/reference/install_github.html">install_github</a></span><span class="op">(</span><span class="st">"insightsengineering/random.cdisc.data"</span><span class="op">)</span></span></code></pre></div>
 </details><p>The data in <code>random.cdisc.data</code> is completely synthetic, meaning no patient data
 has been used to create it. The data is also fairly basic, meaning real study
-data is has often more signal and patterns.</p>
+data often has more signal and patterns.</p>
 <details class="chunk-details" open><summary class="chunk-summary"><span class="chunk-summary-text">Code</span></summary><div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/utils/data.html">data</a></span><span class="op">(</span>package<span class="op">=</span><span class="st">"random.cdisc.data"</span><span class="op">)</span><span class="op">$</span><span class="va">results</span><span class="op">[</span>, <span class="st">"Item"</span><span class="op">]</span></span></code></pre></div>
 </details><pre><code> [1] "cadab"    "cadae"    "cadaette" "cadcm"    "caddv"    "cadeg"   
  [7] "cadex"    "cadhy"    "cadlb"    "cadmh"    "cadpc"    "cadpp"   
 [13] "cadqlqc"  "cadqs"    "cadrs"    "cadsl"    "cadsub"   "cadtr"   
 [19] "cadtte"   "cadvs"   </code></pre>
-<p>note that the prepending <code>c</code> stands for caches. So, for example the cached
+<p>In this document, the prepending <code>c</code> stands for caches. So, for example the cached
 synthetic subject level dataset <code>ADSL</code>:</p>
 <details class="chunk-details" open><summary class="chunk-summary"><span class="chunk-summary-text">Code</span></summary><div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/utils/data.html">data</a></span><span class="op">(</span><span class="st">"cadsl"</span>, package <span class="op">=</span> <span class="st">"random.cdisc.data"</span><span class="op">)</span></span>
@@ -365,13 +364,14 @@ synthetic subject level dataset <code>ADSL</code>:</p>
 <p>At some point we may switch to <code>renv</code> to install the <code>R</code> packages used
 for this book. For right now you can install the packages yourself with:</p>
 <details class="chunk-details" open><summary class="chunk-summary"><span class="chunk-summary-text">Code</span></summary><div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/utils/install.packages.html">install.packages</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"rtables"</span>, <span class="st">"gt"</span>, <span class="st">"remotes"</span>, <span class="st">"tidyverse"</span>, <span class="st">"bookdown"</span>, <span class="st">"tables"</span>, <span class="st">"r2rtf"</span><span class="op">)</span><span class="op">)</span></span>
+<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/utils/install.packages.html">install.packages</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"rtables"</span>, <span class="st">"gt"</span>, <span class="st">"remotes"</span>, <span class="st">"tidyverse"</span>, <span class="st">"bookdown"</span>, <span class="st">"r2rtf"</span><span class="op">)</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/utils/install.packages.html">install.packages</a></span><span class="op">(</span><span class="st">'flextable'</span>, repos <span class="op">=</span> <span class="st">'https://davidgohel.r-universe.dev'</span><span class="op">)</span></span>
 <span></span>
 <span><span class="fu">remotes</span><span class="fu">::</span><span class="fu"><a href="https://remotes.r-lib.org/reference/install_github.html">install_github</a></span><span class="op">(</span><span class="st">"insightsengineering/random.cdisc.data"</span><span class="op">)</span></span>
 <span><span class="fu">remotes</span><span class="fu">::</span><span class="fu"><a href="https://remotes.r-lib.org/reference/install_github.html">install_github</a></span><span class="op">(</span><span class="st">"insightsengineering/scda"</span><span class="op">)</span></span>
 <span><span class="fu">remotes</span><span class="fu">::</span><span class="fu"><a href="https://remotes.r-lib.org/reference/install_github.html">install_github</a></span><span class="op">(</span><span class="st">"insightsengineering/nestcolor"</span><span class="op">)</span></span>
-<span><span class="fu">remotes</span><span class="fu">::</span><span class="fu"><a href="https://remotes.r-lib.org/reference/install_github.html">install_github</a></span><span class="op">(</span><span class="st">"insightsengineering/tern"</span>, ref <span class="op">=</span> <span class="st">"v0.7.10"</span><span class="op">)</span></span></code></pre></div>
+<span><span class="fu">remotes</span><span class="fu">::</span><span class="fu"><a href="https://remotes.r-lib.org/reference/install_github.html">install_github</a></span><span class="op">(</span><span class="st">"insightsengineering/tern"</span>, ref <span class="op">=</span> <span class="st">"v0.7.10"</span><span class="op">)</span></span>
+<span><span class="fu">remotes</span><span class="fu">::</span><span class="fu"><a href="https://remotes.r-lib.org/reference/install_github.html">install_github</a></span><span class="op">(</span><span class="st">"dmurdoch/tables"</span><span class="op">)</span></span></code></pre></div>
 </details><p>In each of the sections below, we will reset R to close to the
 present state
 at the start of the section, so readers can execute the demonstration
