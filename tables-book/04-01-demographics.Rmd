@@ -237,30 +237,13 @@ the section heading on a separate line, it normally
 puts the heading in a separate column to the left
 of the other columns.
 
-For this demonstration, we will use the `kableExtra`
-package to modify the table into a format similar
-to the other packages.
-
 ```{r}
 resetSession()
-# function to convert column to subgroup
-col2grp <- function(tab, col) {
-  # Add the kableExtra workaround
-  table_options(doCSS = FALSE)
-  colvals <- rowLabels(tab)[, col]
-  rowLabels(tab) <- rowLabels(tab)[, -col]
-  newgroup <- !is.na(colvals) & colvals != ""
-  first <- which(newgroup)
-  last <- c(first[-1] - 1, nrow(tab))
-  tab <- toKable(tab, format="html")
-  for (i in seq_along(first))
-    tab <- kableExtra::group_rows(tab, colvals[first[i]],
-                                  first[i], last[i])
-  tab
-}
 
 ex_adsl <- formatters::ex_adsl
+
 library(tables)
+table_options(doCSS = TRUE)
 
 meansd <- function(x) sprintf("%.1f (%.1f)", mean(x), sd(x))
 
@@ -286,5 +269,5 @@ tab <- tabular( Heading(n)*1 +
          Heading()*ARM, 
          data = ex_adsl )
 
-col2grp(tab, 1)
+useGroupLabels(tab, indent = "&emsp;")
 ```
