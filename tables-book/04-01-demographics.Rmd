@@ -258,7 +258,9 @@ countpercent <- function(num, denom)
           length(num), 
           100*length(num)/length(denom))
 
-tab <- tabular( Heading(n)*1 +
+count <- function(x) sprintf("(N=%d)", length(x))
+
+tab <- tabular( Heading()*1*Heading()*count +
          Heading("Age (Years)")*
            AGE * (Heading("Mean (SD)")*meansd +
                   Heading("Median (IQR)")*medianiqr +

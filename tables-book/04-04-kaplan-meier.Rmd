@@ -542,34 +542,33 @@ eventCI <- function(ARM) {
   sprintf("[%.2f, %.2f]", vals$`0.95LCL`, vals$`0.95UCL`)
 }
 
-heading <- tabular(Heading("")*count ~ 
+heading <- tabular(Heading("")*1*Heading("")*count ~ 
                    Heading()*ARM, 
                    data = adsl)
 
-part1 <- tabular( Heading("Subjects with serious adverse events")*
+part1 <- tabular( Heading("Subjects with serious adverse events")*1*Heading("")*
                     events*Heading()*
                     valuepercent*Arguments(ARM = TRT01A) ~ 
                   Heading()*TRT01A, 
                   data = surv_tbl )
 
-part2 <- tabular( Heading("Number of censored subjects")*
-                    blanks +
-                  Factor(CNSDTDSC, "")*
-                    Heading()*countpercentid*Arguments(ARM = TRT01A)*
+part2 <- tabular( Heading("Number of censored subjects")*1*Factor(CNSDTDSC, "")*
+                Heading()*countpercentid*Arguments(ARM = TRT01A)*
                     Heading()*USUBJID ~
                   Heading()*TRT01A, 
                   data = subset(adtte, nchar(CNSDTDSC) > 0))
 
-part3 <- tabular( ( Heading("Hazard ratio")*hazardratio +
-                    Heading("95% confidence interval")*hazardratioconfint +
-                    Heading("p-value (one-sided stratified log rank)")*hazardpvalue +
-                    Heading("Time to first serious adverse event")*blanks +
-                    Heading("Median (years)")*Median +
-                    Heading("95% confidence interval")*eventCI +
-                    Heading("Min, Max")*minmaxevent)*
-                   Heading()*as.character(TRT01A)  ~
+part3 <- tabular( ( Heading("Hazard ratio")*1*Heading("")*hazardratio +
+                    Heading("95% confidence interval")*1*Heading("")*hazardratioconfint +
+                    Heading("p-value (one-sided stratified log rank)")*1*Heading("")*hazardpvalue +
+                    Heading("Time to first serious adverse event")*1*(
+                      Heading("Median (years)")*Median +
+                      Heading("95% confidence interval")*eventCI +
+                      Heading("Min, Max")*minmaxevent))*
+                    Heading()*as.character(TRT01A)  ~
                   Heading()*TRT01A,
                   data = surv_tbl)
 
-rbind(heading, part1, part2, part3)
+useGroupLabels(rbind(heading, part1, part2, part3),
+               indent = "&emsp;")
 ```

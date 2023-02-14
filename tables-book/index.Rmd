@@ -47,7 +47,7 @@ We welcome all contribution, including but not limited to:
  - improving R code
 
 In case you are new to using git and GitHub but would like to make a
-contribution then please write an GitHub issue and we will reach out to you to
+contribution then please write a GitHub issue and we will reach out to you to
 add the content.
 
 

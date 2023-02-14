@@ -113,7 +113,7 @@ individual entries.
 
 Alternatively for HTML output, only the footnote
 markers need to be added by modifying entries, and then
-the footnotes can be applied using `htmloptions(doFooter = TRUE, 
+the footnotes can be applied by using `toHTML(tab, options = list(doFooter = TRUE, 
 HTMLfooter = HTMLfootnotes(...))`.
 
 ```{r}
