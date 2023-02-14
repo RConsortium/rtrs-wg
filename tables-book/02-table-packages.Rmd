@@ -64,6 +64,22 @@ Source code is on [GitHub](https://github.com/davidgohel/flextable), a
 [user manual](https://ardata-fr.github.io/flextable-book/) is available. 
 `flextable` is available on [CRAN](https://CRAN.R-project.org/package=flextable).
 
+## tfrmt
+
+The `tfrmt` ([website](https://gsk-biostatistics.github.io/tfrmt/)) package 
+provides a language for defining display-related metadata and table formatting 
+before any data is available. This package offers an intuitive interface for 
+defining and layering standard or custom formats, to which ARD (analysis 
+results data) is supplied. It also presents the novel ability to easily 
+generate mock displays using metadata that will be used for the actual 
+displays. `tfrmt` is built on top of the `gt` package, which is intended to 
+support a variety of output formats in the future. Table features (titles, 
+header, footnotes, etc.) as well as specific formatting (e.g. rounding, 
+scientific notation, alignment, spacing) are supported.
+
+`tfrmt` source code is on [GitHub](https://github.com/GSK-Biostatistics/tfrmt). 
+`tfrmt` is also available on [CRAN](https://CRAN.R-project.org/package=tfrmt).
+
 ## tables
 
 The `tables` package [@R-tables] provides a formula-driven interface for
