@@ -213,23 +213,8 @@ ft
 
 ### tables
 
-```{r echo=-3}
+```{r}
 resetSession()
-# function col2grp to convert column to subgroup is used but not shown
-col2grp <- function(tab, col) {
-  # Add the kableExtra workaround
-  table_options(doCSS = FALSE)
-  colvals <- rowLabels(tab)[, col]
-  rowLabels(tab) <- rowLabels(tab)[, -col]
-  newgroup <- !is.na(colvals) & colvals != ""
-  first <- which(newgroup)
-  last <- c(first[-1] - 1, nrow(tab))
-  tab <- toKable(tab, format="html")
-  for (i in seq_along(first))
-    tab <- kableExtra::group_rows(tab, colvals[first[i]],
-                                  first[i], last[i])
-  tab
-}
 
 adsl <- cadsl
 
@@ -278,5 +263,6 @@ part3 <- tabular( Heading("")*DCSREAS*
                   data = subset(adsl, EOSSTT == "Discontinued" &
                                       DCSREAS == "Death"))
 
-col2grp(rbind(heading, part1, part2, part3), 1)
+useGroupLabels(rbind(heading, part1, part2, part3), 
+               indent = "&emsp;")
 ```
