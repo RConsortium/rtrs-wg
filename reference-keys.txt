@@ -1,5 +1,5 @@
 tab:flextable-label
-tab:unnamed-chunk-43
+tab:unnamed-chunk-44
 about
 introduction
 call-for-contributions
@@ -39,6 +39,7 @@ tables-1
 event-tables
 adverse-events
 rtables-only
+gt-2
 flextable-2
 tables-2
 laboratory-tables
@@ -46,16 +47,16 @@ time-to-event-analysis-tables
 data-and-models-used-throughout
 rtables-2
 cell-value-derivation-for-gt-of-time-to-event-analysis
-gt-2
+gt-3
 flextable-3
 tables-3
 concomitant-medications
 rtables-3
-gt-3
+gt-4
 flextable-4
 tables-4
 disposition
 rtables-4
-gt-4
+gt-5
 flextable-5
 tables-5
