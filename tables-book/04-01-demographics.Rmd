@@ -155,8 +155,8 @@ gt(adsl_summary,
     columns = starts_with("val"),
     fns = list(n = ~sum(.)),
     missing_text = "",
-    formatter = fmt_integer,
-    side = "top"
+    formatter = fmt_integer #,
+    # side = "top"
     ) |> 
   cols_merge_n_pct(col_n = "val_A: Drug X", col_pct = "sd_A: Drug X") |>
   cols_merge_n_pct(col_n = "val_B: Placebo", col_pct = "sd_B: Placebo") |> 

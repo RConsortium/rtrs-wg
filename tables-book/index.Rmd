@@ -97,10 +97,9 @@ At some point we may switch to `renv` to install the `R` packages used
 for this book. For right now you can install the packages yourself with:
 
 ```{r, eval = FALSE}
-install.packages(c("rtables", "remotes", "tidyverse", "bookdown", "r2rtf"))
+install.packages(c("rtables", "gt", "remotes", "tidyverse", "bookdown", "r2rtf"))
 install.packages('flextable', repos = 'https://davidgohel.r-universe.dev')
 
-remotes::install_github("rstudio/gt")
 remotes::install_github("insightsengineering/random.cdisc.data")
 remotes::install_github("insightsengineering/scda")
 remotes::install_github("insightsengineering/nestcolor")
