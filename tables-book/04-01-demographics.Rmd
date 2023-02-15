@@ -141,7 +141,7 @@ gt(adsl_summary,
    groupname_col = "category") |>
   tab_header(
     title = "x.x: Study Subject Data",
-    subtitle = html("x.x.x: Demographic Characteristics<br>Table x.x.x.x: Demographic Characteristics - Full Analysis Set"),
+    subtitle = md("x.x.x: Demographic Characteristics  \n  Table x.x.x.x: Demographic Characteristics - Full Analysis Set"),
     preheader = c("Protocol: XXXXX", "Cutoff date: DDMMYYYY")
   ) |> 
   tab_source_note("Source: ADSL DDMMYYYY hh:mm; Listing x.xx; SDTM package: DDMMYYYY") |> 

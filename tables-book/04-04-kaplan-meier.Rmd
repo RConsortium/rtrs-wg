@@ -264,7 +264,7 @@ gt(model_sum) |>
   cols_hide(ind) |>
   tab_header(
     title = "x.x: Safety Data",
-    subtitle = html("x.x.x: Time to First Serious Adverse Event  \n  Table x.x.x.x: Safety Endpoint - Safety Analysis Set"),
+    subtitle = md("x.x.x: Time to First Serious Adverse Event  \n  Table x.x.x.x: Safety Endpoint - Safety Analysis Set"),
     preheader = c("Protocol: XXXXX", "Cutoff date: DDMMYYYY")
   ) |> 
   tab_source_note("Source: ADTTE DDMMYYYY hh:mm; Listing x.xx; SDTM package: DDMMYYYY") |>
