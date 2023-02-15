@@ -229,9 +229,19 @@ ft
 
 ### tables
 
+The `tables` package uses a different style
+than the other packages for tables such as this, where
+there are separate sections for age, sex and country
+breakdowns of the data.  Rather than putting
+the section heading on a separate line, it normally
+puts the heading in a separate column to the left
+of the other columns.
+
 ```{r}
 resetSession()
+
 ex_adsl <- formatters::ex_adsl
+
 library(tables)
 table_options(doCSS = TRUE)
 
@@ -248,12 +258,18 @@ countpercent <- function(num, denom)
           length(num), 
           100*length(num)/length(denom))
 
-tabular( Heading(n)*1 +
-         AGE * (Heading("Mean (SD)")*meansd +
-                Heading("Median (IQR)")*medianiqr +
-                Heading("Min - Max")*minmax) +
-         (SEX + COUNTRY)*Heading()*
-           Percent(denom = Equal(ARM), fn = countpercent) ~ 
+count <- function(x) sprintf("(N=%d)", length(x))
+
+tab <- tabular( Heading()*1*Heading()*count +
+         Heading("Age (Years)")*
+           AGE * (Heading("Mean (SD)")*meansd +
+                  Heading("Median (IQR)")*medianiqr +
+                  Heading("Min - Max")*minmax) +
+         (Heading("Sex, n, (%)")*SEX +
+          Heading("Country, n, (%)")*COUNTRY)*
+            Heading()*Percent(denom = Equal(ARM), fn = countpercent) ~ 
          Heading()*ARM, 
          data = ex_adsl )
+
+useGroupLabels(tab, indent = "&emsp;")
 ```

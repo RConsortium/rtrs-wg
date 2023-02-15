@@ -188,10 +188,10 @@ heading <- tabular(Heading("")*1*
                      Heading("")*count ~ 
                    Heading()*ARM, data = adsl)
 
-body <- tabular( Heading("Patients with at least one event")*
-                   countpercentid*Arguments(ARM = ARM)*
+body <- tabular( Heading("Patients with at least one event")*1*
+                   Heading("")*countpercentid*Arguments(ARM = ARM)*
                    Heading()*USUBJID +
-                 Heading("Total number of events")*1 +
+                 Heading("Total number of events")*1*Heading("")*1 +
                  Heading()*AEBODSYS*
                    (Heading("Patients with at least one event")*
                       Percent(denom = ARM, fn = countpercentid)*
@@ -201,5 +201,6 @@ body <- tabular( Heading("Patients with at least one event")*
                  Heading()*ARM, 
                  data = ex_adae )
 
-rbind(heading, body)
+tab <- rbind(heading, body)
+useGroupLabels(tab, indent = "&emsp;")
 ```

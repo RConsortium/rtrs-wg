@@ -4,7 +4,7 @@ bookdown::gitbook:
   'static/css/arial.css',
   'static/css/open-sans.css',
   'static/css/style.css']
-  code_folding: hide
+  code_folding: show
   config:
     toc:
       before: |
