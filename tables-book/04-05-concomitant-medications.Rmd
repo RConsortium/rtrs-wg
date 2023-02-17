@@ -72,21 +72,18 @@ ct_cm <- dplyr::group_by(cadcm, TRT01A) |>
                 CMDECOD = factor("Number of sujects with any concomitant medication", levels = cmdecod_levels))
 
 ct_adcm <- dplyr::group_by(cadcm, TRT01A, CMCLAS, CMDECOD) |> 
-  dplyr::summarize(n = dplyr::n_distinct(USUBJID)) |> 
+  dplyr::summarize(n = dplyr::n_distinct(USUBJID), .groups = "drop") |> 
   dplyr::left_join(count(cadsl, TRT01A, name = "nall"), by = "TRT01A") |> 
   dplyr::mutate(pct = n / nall, nall = NULL)
 
 gt_adcm <- dplyr::bind_rows(ct_cm, ct_adcm) |>  
   tidyr::pivot_wider(id_cols = c(CMCLAS, CMDECOD), names_from = TRT01A, values_from = c(n, pct)) 
 
-## don't print it yet, uncomment when its ready
-##gt_adcm %>% gt()
 
 trt_n <- cadsl |> 
   dplyr::filter(SAFFL == "Y") |> 
   dplyr::group_by(TRT01A) |> 
-  dplyr::summarize(n = sprintf("%s  \nN=%i (100%%)", unique(TRT01A), dplyr::n())) |> 
-  dplyr::ungroup()
+  dplyr::summarize(n = sprintf("%s  \nN=%i (100%%)", unique(TRT01A), dplyr::n()), .groups = "drop") 
 
 tab_n <- dplyr::pull(trt_n, n) |> 
   as.list()
