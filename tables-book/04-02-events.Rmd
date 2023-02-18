@@ -4,7 +4,7 @@ editor_options:
   chunk_output_type: console
 ---
 
-## Event Tables
+## Adverse Event Tables
 
 We will use the `ex_adae` data included within the `formatters` package.
 
@@ -12,11 +12,8 @@ We will use the `ex_adae` data included within the `formatters` package.
 head(formatters::ex_adae)
 ```
 
-### Adverse Events
 
- 
-
-#### `rtables` Only
+### `rtables` Only
 
 Adverse Events by ID
 
@@ -57,7 +54,7 @@ lyt <- basic_table(show_colcounts = TRUE) %>%
 build_table(lyt, ex_adae, alt_counts_df = ex_adsl)
 ```
 
-#### gt
+### gt
 
 ```{r}
 resetSession()
@@ -180,7 +177,7 @@ ex_tbl |>
 ```
 
 
-#### flextable
+### flextable
 
 ```{r message=FALSE}
 resetSession()
@@ -278,7 +275,7 @@ ft <- labelizor(
 ft
 ```
 
-#### tables
+### tables
 
 The `tables` package normally generates tables from single datasets, while this
 kind of table requires information from two:  `adsl` and `ex_adae`.
