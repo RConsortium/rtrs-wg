@@ -36,8 +36,7 @@ rtables-1
 gt-1
 flextable-1
 tables-1
-event-tables
-adverse-events
+adverse-event-tables
 rtables-only
 gt-2
 flextable-2
