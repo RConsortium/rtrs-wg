@@ -317,7 +317,9 @@ body <- tabular( Heading("Patients with at least one event")*1*
                       Percent(denom = ARM, fn = countpercentid)*
                       Heading()*USUBJID +
                     Heading("Total number of events")*1 +
-                    Heading()*AEDECOD*DropEmpty()) ~ 
+                    Heading()*AEDECOD*DropEmpty()*
+                      Heading()*Percent(denom = ARM, fn = countpercentid)*
+                      Heading()*USUBJID) ~ 
                  Heading()*ARM, 
                  data = ex_adae )
 
