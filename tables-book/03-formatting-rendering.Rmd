@@ -24,7 +24,7 @@ and footnotes with information such as:
 
 Often footnotes include cell references.
 
-### Title and Footnotes in rtables
+### rtables
 
 The `basic_table` function in `rtables` has the argument `titles`, `subtitles`,
 `main_footer`, `prov_footer` to add titles and footnotes to tables. `rtables`
@@ -48,7 +48,7 @@ lyt <- basic_table(
 build_table(lyt, adsl)
 ```
 
-### Title and Footnotes in flextable
+### flextable
 
 Titles and notes can be added and formatted with the 'flextable' package. It is possible to add them in the header and in the footer. Several methods are possible but for most needs, the `add_header_lines()` and `add_footer_lines()` functions will be the easiest to use.
 
@@ -104,7 +104,7 @@ footnote(z, i = c(1, 2, 2), j = c(1, 5, 7),
          value = as_paragraph("hello world"), ref_symbols = "(1)")
 ```
 
-### Titles and footnotes in tables
+### tables
 
 The `tables` package concentrates on the table itself.  The titles
 are generally written as part of the surrounding document.  Footnotes
@@ -147,7 +147,7 @@ is associated to. Captions are often used because they allow you to
 cross-reference tables or list them in a 'list of tables' with the corresponding
 page numbers.
 
-### Captions in flextable
+### flextable
 
 The `set_caption()` function in 'flextable' is the recommanded way to add
 captions. 
@@ -173,7 +173,7 @@ With 'Quarto', the R chunk code should be transformed as:
 flextable(head(cars))
 ````
 
-### Captions in tables
+### tables
 
 As with titles, captions would be added as part of the
 surrounding document rather than part of the table object.
@@ -188,12 +188,12 @@ process of splitting the table is called *pagination* of tables.
 Pagination is a complex task as it requires to repeat information so that the tables
 on each page are correct tables with all relevant information for context.
 
-### Pagination in rtables
+### rtables
 
 In `rtables` pagination can be done with the `paginate_table` function which has 
 a number of arguments to split the table, see the [example documentation](https://roche.github.io/rtables/reference/paginate.html).
 
-### Pagination in flextable
+### flextable
 
 In 'flextable', there is no concept of pagination. The recommended method is to
 create a flextable for each modality of a group and to separate them with a page
@@ -208,7 +208,7 @@ In an 'R Markdown' document, the markdown code to insert a page break is
 `\newpage`; with the package 'officer', you have to use `body_add_break()` (for
 Word documents only).
 
-### Pagination in tables
+### tables
 
 Tables that span multiple pages are supported in PDF output using
 the LaTeX `longtable` package, specified when converting to LaTeX.
