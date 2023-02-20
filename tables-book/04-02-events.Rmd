@@ -30,15 +30,16 @@ s_events_patients <- function(x, labelstr, .N_col) {
   )
 }
 
-table_count_per_id <- function(df, termvar = "AEDECOD", idvar = "USUBJID") {
+table_count_per_id <- function(df, .N_col, termvar = "AEDECOD", idvar = "USUBJID") {
 
   x <- df[[termvar]]
   id <- df[[idvar]]
 
-  counts <- table(x[!duplicated(id)])
+  counts <- table(x[!duplicated(paste0(id, x))])
 
   in_rows(
-    .list = as.vector(counts),
+    .list = lapply(counts,
+                   function(xi) rcell(c(xi, xi/.N_col), "xx (xx.xx%)")),
     .labels = names(counts)
   )
 }
@@ -47,7 +48,8 @@ lyt <- basic_table(show_colcounts = TRUE) %>%
     split_cols_by("ARM") %>%
     analyze("USUBJID", afun = s_events_patients) %>%
     split_rows_by("AEBODSYS", child_labels = "visible", 
-                  split_fun = trim_levels_in_group("AEDECOD")) %>%
+                  split_fun = trim_levels_in_group("AEDECOD"),
+                  section_div = " ") %>%
     summarize_row_groups("USUBJID", cfun = s_events_patients) %>%
     analyze("AEDECOD", table_count_per_id, show_labels = "hidden", indent_mod = -1)
 
