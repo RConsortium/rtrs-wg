@@ -15,7 +15,7 @@
 <meta name="twitter:title" content="Chapter 3 Formatting and Rendering Tables | Tables in Clinical Trials with R">
 <meta name="twitter:description" content="Example code to create tables commonly used for analyzing clinical trials data.">
 <meta name="author" content="R Consortium Tables Working Group">
-<meta name="date" content="2023-02-18">
+<meta name="date" content="2023-02-20">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="black">
@@ -30,8 +30,8 @@
 <link href="libs/gitbook-2.6.7/css/plugin-clipboard.css" rel="stylesheet">
 <link href="libs/anchor-sections-1.1.0/anchor-sections.css" rel="stylesheet">
 <link href="libs/anchor-sections-1.1.0/anchor-sections-hash.css" rel="stylesheet">
-<script src="libs/anchor-sections-1.1.0/anchor-sections.js"></script><link href="libs/tabwid-1.1.2/tabwid.css" rel="stylesheet">
-<style type="text/css">
+<script src="libs/anchor-sections-1.1.0/anchor-sections.js"></script><link href="libs/tabwid-1.1.3/tabwid.css" rel="stylesheet">
+<script src="libs/tabwid-1.1.3/tabwid.js"></script><style type="text/css">
 pre > code.sourceCode { white-space: pre; position: relative; }
 pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
 pre > code.sourceCode > span:empty { height: 1.2em; }
@@ -160,24 +160,24 @@ div.csl-indent {
 <li class="chapter" data-level="3.1" data-path="formatting-and-rendering-tables.html">
 <a href="formatting-and-rendering-tables.html#title-footnotes"><i class="fa fa-check"></i><b>3.1</b> Title &amp; Footnotes</a>
 <ul>
-<li class="chapter" data-level="3.1.1" data-path="formatting-and-rendering-tables.html"><a href="formatting-and-rendering-tables.html#title-and-footnotes-in-rtables"><i class="fa fa-check"></i><b>3.1.1</b> Title and Footnotes in rtables</a></li>
-<li class="chapter" data-level="3.1.2" data-path="formatting-and-rendering-tables.html"><a href="formatting-and-rendering-tables.html#title-and-footnotes-in-flextable"><i class="fa fa-check"></i><b>3.1.2</b> Title and Footnotes in flextable</a></li>
-<li class="chapter" data-level="3.1.3" data-path="formatting-and-rendering-tables.html"><a href="formatting-and-rendering-tables.html#titles-and-footnotes-in-tables"><i class="fa fa-check"></i><b>3.1.3</b> Titles and footnotes in tables</a></li>
+<li class="chapter" data-level="3.1.1" data-path="formatting-and-rendering-tables.html"><a href="formatting-and-rendering-tables.html#rtables-1"><i class="fa fa-check"></i><b>3.1.1</b> rtables</a></li>
+<li class="chapter" data-level="3.1.2" data-path="formatting-and-rendering-tables.html"><a href="formatting-and-rendering-tables.html#flextable-1"><i class="fa fa-check"></i><b>3.1.2</b> flextable</a></li>
+<li class="chapter" data-level="3.1.3" data-path="formatting-and-rendering-tables.html"><a href="formatting-and-rendering-tables.html#tables-1"><i class="fa fa-check"></i><b>3.1.3</b> tables</a></li>
 </ul>
 </li>
 <li class="chapter" data-level="3.2" data-path="formatting-and-rendering-tables.html">
 <a href="formatting-and-rendering-tables.html#captions"><i class="fa fa-check"></i><b>3.2</b> Captions</a>
 <ul>
-<li class="chapter" data-level="3.2.1" data-path="formatting-and-rendering-tables.html"><a href="formatting-and-rendering-tables.html#captions-in-flextable"><i class="fa fa-check"></i><b>3.2.1</b> Captions in flextable</a></li>
-<li class="chapter" data-level="3.2.2" data-path="formatting-and-rendering-tables.html"><a href="formatting-and-rendering-tables.html#captions-in-tables"><i class="fa fa-check"></i><b>3.2.2</b> Captions in tables</a></li>
+<li class="chapter" data-level="3.2.1" data-path="formatting-and-rendering-tables.html"><a href="formatting-and-rendering-tables.html#flextable-2"><i class="fa fa-check"></i><b>3.2.1</b> flextable</a></li>
+<li class="chapter" data-level="3.2.2" data-path="formatting-and-rendering-tables.html"><a href="formatting-and-rendering-tables.html#tables-2"><i class="fa fa-check"></i><b>3.2.2</b> tables</a></li>
 </ul>
 </li>
 <li class="chapter" data-level="3.3" data-path="formatting-and-rendering-tables.html">
 <a href="formatting-and-rendering-tables.html#pagination"><i class="fa fa-check"></i><b>3.3</b> Pagination</a>
 <ul>
-<li class="chapter" data-level="3.3.1" data-path="formatting-and-rendering-tables.html"><a href="formatting-and-rendering-tables.html#pagination-in-rtables"><i class="fa fa-check"></i><b>3.3.1</b> Pagination in rtables</a></li>
-<li class="chapter" data-level="3.3.2" data-path="formatting-and-rendering-tables.html"><a href="formatting-and-rendering-tables.html#pagination-in-flextable"><i class="fa fa-check"></i><b>3.3.2</b> Pagination in flextable</a></li>
-<li class="chapter" data-level="3.3.3" data-path="formatting-and-rendering-tables.html"><a href="formatting-and-rendering-tables.html#pagination-in-tables"><i class="fa fa-check"></i><b>3.3.3</b> Pagination in tables</a></li>
+<li class="chapter" data-level="3.3.1" data-path="formatting-and-rendering-tables.html"><a href="formatting-and-rendering-tables.html#rtables-2"><i class="fa fa-check"></i><b>3.3.1</b> rtables</a></li>
+<li class="chapter" data-level="3.3.2" data-path="formatting-and-rendering-tables.html"><a href="formatting-and-rendering-tables.html#flextable-3"><i class="fa fa-check"></i><b>3.3.2</b> flextable</a></li>
+<li class="chapter" data-level="3.3.3" data-path="formatting-and-rendering-tables.html"><a href="formatting-and-rendering-tables.html#tables-3"><i class="fa fa-check"></i><b>3.3.3</b> tables</a></li>
 </ul>
 </li>
 <li class="chapter" data-level="3.4" data-path="formatting-and-rendering-tables.html">
@@ -198,10 +198,10 @@ div.csl-indent {
 <li class="chapter" data-level="4.1" data-path="commontables.html">
 <a href="commontables.html#demographic-tables"><i class="fa fa-check"></i><b>4.1</b> Demographic Tables</a>
 <ul>
-<li class="chapter" data-level="4.1.1" data-path="commontables.html"><a href="commontables.html#rtables-1"><i class="fa fa-check"></i><b>4.1.1</b> rtables</a></li>
+<li class="chapter" data-level="4.1.1" data-path="commontables.html"><a href="commontables.html#rtables-3"><i class="fa fa-check"></i><b>4.1.1</b> rtables</a></li>
 <li class="chapter" data-level="4.1.2" data-path="commontables.html"><a href="commontables.html#gt-1"><i class="fa fa-check"></i><b>4.1.2</b> gt</a></li>
-<li class="chapter" data-level="4.1.3" data-path="commontables.html"><a href="commontables.html#flextable-1"><i class="fa fa-check"></i><b>4.1.3</b> flextable</a></li>
-<li class="chapter" data-level="4.1.4" data-path="commontables.html"><a href="commontables.html#tables-1"><i class="fa fa-check"></i><b>4.1.4</b> tables</a></li>
+<li class="chapter" data-level="4.1.3" data-path="commontables.html"><a href="commontables.html#flextable-4"><i class="fa fa-check"></i><b>4.1.3</b> flextable</a></li>
+<li class="chapter" data-level="4.1.4" data-path="commontables.html"><a href="commontables.html#tables-4"><i class="fa fa-check"></i><b>4.1.4</b> tables</a></li>
 </ul>
 </li>
 <li class="chapter" data-level="4.2" data-path="commontables.html">
@@ -209,8 +209,8 @@ div.csl-indent {
 <ul>
 <li class="chapter" data-level="4.2.1" data-path="commontables.html"><a href="commontables.html#rtables-only"><i class="fa fa-check"></i><b>4.2.1</b> <code>rtables</code> Only</a></li>
 <li class="chapter" data-level="4.2.2" data-path="commontables.html"><a href="commontables.html#gt-2"><i class="fa fa-check"></i><b>4.2.2</b> gt</a></li>
-<li class="chapter" data-level="4.2.3" data-path="commontables.html"><a href="commontables.html#flextable-2"><i class="fa fa-check"></i><b>4.2.3</b> flextable</a></li>
-<li class="chapter" data-level="4.2.4" data-path="commontables.html"><a href="commontables.html#tables-2"><i class="fa fa-check"></i><b>4.2.4</b> tables</a></li>
+<li class="chapter" data-level="4.2.3" data-path="commontables.html"><a href="commontables.html#flextable-5"><i class="fa fa-check"></i><b>4.2.3</b> flextable</a></li>
+<li class="chapter" data-level="4.2.4" data-path="commontables.html"><a href="commontables.html#tables-5"><i class="fa fa-check"></i><b>4.2.4</b> tables</a></li>
 </ul>
 </li>
 <li class="chapter" data-level="4.3" data-path="commontables.html"><a href="commontables.html#laboratory-tables"><i class="fa fa-check"></i><b>4.3</b> Laboratory Tables</a></li>
@@ -218,33 +218,33 @@ div.csl-indent {
 <a href="commontables.html#time-to-event-analysis-tables"><i class="fa fa-check"></i><b>4.4</b> Time to Event Analysis Tables</a>
 <ul>
 <li class="chapter" data-level="4.4.1" data-path="commontables.html"><a href="commontables.html#data-and-models-used-throughout"><i class="fa fa-check"></i><b>4.4.1</b> Data and models used throughout</a></li>
-<li class="chapter" data-level="4.4.2" data-path="commontables.html"><a href="commontables.html#rtables-2"><i class="fa fa-check"></i><b>4.4.2</b> rtables</a></li>
+<li class="chapter" data-level="4.4.2" data-path="commontables.html"><a href="commontables.html#rtables-4"><i class="fa fa-check"></i><b>4.4.2</b> rtables</a></li>
 <li class="chapter" data-level="4.4.3" data-path="commontables.html"><a href="commontables.html#cell-value-derivation-for-gt-of-time-to-event-analysis"><i class="fa fa-check"></i><b>4.4.3</b> Cell Value Derivation for gt of Time to Event Analysis</a></li>
 <li class="chapter" data-level="4.4.4" data-path="commontables.html"><a href="commontables.html#gt-3"><i class="fa fa-check"></i><b>4.4.4</b> gt</a></li>
-<li class="chapter" data-level="4.4.5" data-path="commontables.html"><a href="commontables.html#flextable-3"><i class="fa fa-check"></i><b>4.4.5</b> flextable</a></li>
-<li class="chapter" data-level="4.4.6" data-path="commontables.html"><a href="commontables.html#tables-3"><i class="fa fa-check"></i><b>4.4.6</b> tables</a></li>
+<li class="chapter" data-level="4.4.5" data-path="commontables.html"><a href="commontables.html#flextable-6"><i class="fa fa-check"></i><b>4.4.5</b> flextable</a></li>
+<li class="chapter" data-level="4.4.6" data-path="commontables.html"><a href="commontables.html#tables-6"><i class="fa fa-check"></i><b>4.4.6</b> tables</a></li>
 </ul>
 </li>
 <li class="chapter" data-level="4.5" data-path="commontables.html">
 <a href="commontables.html#concomitant-medications"><i class="fa fa-check"></i><b>4.5</b> Concomitant Medications</a>
 <ul>
-<li class="chapter" data-level="4.5.1" data-path="commontables.html"><a href="commontables.html#rtables-3"><i class="fa fa-check"></i><b>4.5.1</b> rtables</a></li>
+<li class="chapter" data-level="4.5.1" data-path="commontables.html"><a href="commontables.html#rtables-5"><i class="fa fa-check"></i><b>4.5.1</b> rtables</a></li>
 <li class="chapter" data-level="4.5.2" data-path="commontables.html"><a href="commontables.html#gt-4"><i class="fa fa-check"></i><b>4.5.2</b> gt</a></li>
-<li class="chapter" data-level="4.5.3" data-path="commontables.html"><a href="commontables.html#flextable-4"><i class="fa fa-check"></i><b>4.5.3</b> flextable</a></li>
-<li class="chapter" data-level="4.5.4" data-path="commontables.html"><a href="commontables.html#tables-4"><i class="fa fa-check"></i><b>4.5.4</b> tables</a></li>
+<li class="chapter" data-level="4.5.3" data-path="commontables.html"><a href="commontables.html#flextable-7"><i class="fa fa-check"></i><b>4.5.3</b> flextable</a></li>
+<li class="chapter" data-level="4.5.4" data-path="commontables.html"><a href="commontables.html#tables-7"><i class="fa fa-check"></i><b>4.5.4</b> tables</a></li>
 </ul>
 </li>
 <li class="chapter" data-level="4.6" data-path="commontables.html">
 <a href="commontables.html#disposition"><i class="fa fa-check"></i><b>4.6</b> Disposition</a>
 <ul>
-<li class="chapter" data-level="4.6.1" data-path="commontables.html"><a href="commontables.html#rtables-4"><i class="fa fa-check"></i><b>4.6.1</b> rtables</a></li>
+<li class="chapter" data-level="4.6.1" data-path="commontables.html"><a href="commontables.html#rtables-6"><i class="fa fa-check"></i><b>4.6.1</b> rtables</a></li>
 </ul>
 </li>
 <li class="chapter" data-level="4.7" data-path="commontables.html">
 <a href="commontables.html#gt-5"><i class="fa fa-check"></i><b>4.7</b> gt</a>
 <ul>
-<li class="chapter" data-level="4.7.1" data-path="commontables.html"><a href="commontables.html#flextable-5"><i class="fa fa-check"></i><b>4.7.1</b> flextable</a></li>
-<li class="chapter" data-level="4.7.2" data-path="commontables.html"><a href="commontables.html#tables-5"><i class="fa fa-check"></i><b>4.7.2</b> tables</a></li>
+<li class="chapter" data-level="4.7.1" data-path="commontables.html"><a href="commontables.html#flextable-8"><i class="fa fa-check"></i><b>4.7.1</b> flextable</a></li>
+<li class="chapter" data-level="4.7.2" data-path="commontables.html"><a href="commontables.html#tables-8"><i class="fa fa-check"></i><b>4.7.2</b> tables</a></li>
 </ul>
 </li>
 </ul>
@@ -294,9 +294,9 @@ and footnotes with information such as:</p>
 <li>provenance information including path to program and when the table was created</li>
 </ul>
 <p>Often footnotes include cell references.</p>
-<div id="title-and-footnotes-in-rtables" class="section level3 hasAnchor" number="3.1.1">
+<div id="rtables-1" class="section level3 hasAnchor" number="3.1.1">
 <h3>
-<span class="header-section-number">3.1.1</span> Title and Footnotes in rtables<a href="formatting-and-rendering-tables.html#title-and-footnotes-in-rtables" class="anchor-section" aria-label="Anchor link to header"></a>
+<span class="header-section-number">3.1.1</span> rtables<a href="formatting-and-rendering-tables.html#rtables-1" class="anchor-section" aria-label="Anchor link to header"></a>
 </h3>
 <p>The <code>basic_table</code> function in <code>rtables</code> has the argument <code>titles</code>, <code>subtitles</code>,
 <code>main_footer</code>, <code>prov_footer</code> to add titles and footnotes to tables. <code>rtables</code>
@@ -332,9 +332,9 @@ SEX
 
 Missing data is omitted.</code></pre>
 </div>
-<div id="title-and-footnotes-in-flextable" class="section level3 hasAnchor" number="3.1.2">
+<div id="flextable-1" class="section level3 hasAnchor" number="3.1.2">
 <h3>
-<span class="header-section-number">3.1.2</span> Title and Footnotes in flextable<a href="formatting-and-rendering-tables.html#title-and-footnotes-in-flextable" class="anchor-section" aria-label="Anchor link to header"></a>
+<span class="header-section-number">3.1.2</span> flextable<a href="formatting-and-rendering-tables.html#flextable-1" class="anchor-section" aria-label="Anchor link to header"></a>
 </h3>
 <p>Titles and notes can be added and formatted with the ‘flextable’ package. It is possible to add them in the header and in the footer. Several methods are possible but for most needs, the <code><a href="https://davidgohel.github.io/flextable/reference/add_header_lines.html">add_header_lines()</a></code> and <code><a href="https://davidgohel.github.io/flextable/reference/add_footer_lines.html">add_footer_lines()</a></code> functions will be the easiest to use.</p>
 <p>Let’s create first a flextable from an aggregation that
@@ -351,174 +351,84 @@ will be used to illustrate the features.</p>
 <span>    Y <span class="op">=</span> <span class="fu"><a href="https://davidgohel.github.io/flextable/reference/as_paragraph.html">as_paragraph</a></span><span class="op">(</span><span class="va">avg</span>, <span class="st">" ("</span>, <span class="va">sd</span>, <span class="st">")"</span><span class="op">)</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
 <span>  <span class="fu"><a href="https://davidgohel.github.io/flextable/reference/as_flextable.html">as_flextable</a></span><span class="op">(</span><span class="op">)</span></span>
 <span><span class="va">z</span></span></code></pre></div>
-</details><template id="a614a820-ce37-4e7e-8269-568e6c95f84a"><style>
-.tabwid table{
-  border-spacing:0px !important;
-  border-collapse:collapse;
-  line-height:1;
-  margin-left:auto;
-  margin-right:auto;
-  border-width: 0;
-  border-color: transparent;
-  caption-side: top;
-}
-.tabwid-caption-bottom table{
-  caption-side: bottom;
-}
-.tabwid_left table{
-  margin-left:0;
-}
-.tabwid_right table{
-  margin-right:0;
-}
-.tabwid td, .tabwid th {
-    padding: 0;
-}
-.tabwid a {
-  text-decoration: none;
-}
-.tabwid thead {
-    background-color: transparent;
-}
-.tabwid tfoot {
-    background-color: transparent;
-}
-.tabwid table tr {
-background-color: transparent;
-}
-.katex-display {
-    margin: 0 0 !important;
-}
-</style>
-<div class="tabwid">
-<style>.cl-80e6dcc8{}.cl-80dd3b00{font-family:'DejaVu Sans';font-size:11pt;font-weight:normal;font-style:normal;text-decoration:none;color:rgba(0, 0, 0, 1.00);background-color:transparent;}.cl-80e21d6e{margin:0;text-align:left;border-bottom: 0 solid rgba(0, 0, 0, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);padding-bottom:5pt;padding-top:5pt;padding-left:5pt;padding-right:5pt;line-height: 1;background-color:transparent;}.cl-80e21d82{margin:0;text-align:left;border-bottom: 0 solid rgba(0, 0, 0, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);padding-bottom:0;padding-top:0;padding-left:0;padding-right:0;line-height: 1;background-color:transparent;}.cl-80e21d83{margin:0;text-align:center;border-bottom: 0 solid rgba(0, 0, 0, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);padding-bottom:5pt;padding-top:5pt;padding-left:5pt;padding-right:5pt;line-height: 1;background-color:transparent;}.cl-80e21d8c{margin:0;text-align:left;border-bottom: 0 solid rgba(0, 0, 0, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);padding-bottom:5pt;padding-top:5pt;padding-left:5pt;padding-right:5pt;line-height: 1;background-color:transparent;}.cl-80e21d8d{margin:0;text-align:left;border-bottom: 0 solid rgba(0, 0, 0, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);padding-bottom:0;padding-top:0;padding-left:0;padding-right:0;line-height: 1;background-color:transparent;}.cl-80e21d8e{margin:0;text-align:center;border-bottom: 0 solid rgba(0, 0, 0, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);padding-bottom:5pt;padding-top:5pt;padding-left:5pt;padding-right:5pt;line-height: 1;background-color:transparent;}.cl-80e23aec{width:0.562in;background-color:transparent;vertical-align: bottom;border-bottom: 1.5pt solid rgba(102, 102, 102, 1.00);border-top: 1.5pt solid rgba(102, 102, 102, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-80e23b00{width:0.079in;background-color:transparent;vertical-align: middle;border-bottom: 0 solid rgba(0, 0, 0, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-80e23b01{width:1.015in;background-color:transparent;vertical-align: middle;border-bottom: 1.5pt solid rgba(102, 102, 102, 1.00);border-top: 1.5pt solid rgba(102, 102, 102, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-80e23b02{width:1.065in;background-color:transparent;vertical-align: middle;border-bottom: 1.5pt solid rgba(102, 102, 102, 1.00);border-top: 1.5pt solid rgba(102, 102, 102, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-80e23b0a{width:1.442in;background-color:transparent;vertical-align: middle;border-bottom: 1.5pt solid rgba(102, 102, 102, 1.00);border-top: 1.5pt solid rgba(102, 102, 102, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-80e23b0b{width:0.562in;background-color:transparent;vertical-align: top;border-bottom: 0 solid rgba(0, 0, 0, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-80e23b14{width:0.079in;background-color:transparent;vertical-align: top;border-bottom: 0 solid rgba(0, 0, 0, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-80e23b15{width:1.015in;background-color:transparent;vertical-align: top;border-bottom: 0 solid rgba(0, 0, 0, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-80e23b16{width:1.065in;background-color:transparent;vertical-align: top;border-bottom: 0 solid rgba(0, 0, 0, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-80e23b1e{width:1.442in;background-color:transparent;vertical-align: top;border-bottom: 0 solid rgba(0, 0, 0, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-80e23b1f{width:0.562in;background-color:transparent;vertical-align: top;border-bottom: 1.5pt solid rgba(102, 102, 102, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-80e23b20{width:1.015in;background-color:transparent;vertical-align: top;border-bottom: 1.5pt solid rgba(102, 102, 102, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-80e23b28{width:1.065in;background-color:transparent;vertical-align: top;border-bottom: 1.5pt solid rgba(102, 102, 102, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-80e23b29{width:1.442in;background-color:transparent;vertical-align: top;border-bottom: 1.5pt solid rgba(102, 102, 102, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}</style>
-<table data-quarto-disable-processing="true" class="cl-80e6dcc8">
+</details><div class="tabwid">
+<style>.cl-bc0e53ae{}.cl-bc048900{font-family:'DejaVu Sans';font-size:11pt;font-weight:normal;font-style:normal;text-decoration:none;color:rgba(0, 0, 0, 1.00);background-color:transparent;}.cl-bc0950de{margin:0;text-align:left;border-bottom: 0 solid rgba(0, 0, 0, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);padding-bottom:5pt;padding-top:5pt;padding-left:5pt;padding-right:5pt;line-height: 1;background-color:transparent;}.cl-bc0950f2{margin:0;text-align:left;border-bottom: 0 solid rgba(0, 0, 0, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);padding-bottom:0;padding-top:0;padding-left:0;padding-right:0;line-height: 1;background-color:transparent;}.cl-bc0950f3{margin:0;text-align:center;border-bottom: 0 solid rgba(0, 0, 0, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);padding-bottom:5pt;padding-top:5pt;padding-left:5pt;padding-right:5pt;line-height: 1;background-color:transparent;}.cl-bc0950f4{margin:0;text-align:left;border-bottom: 0 solid rgba(0, 0, 0, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);padding-bottom:5pt;padding-top:5pt;padding-left:5pt;padding-right:5pt;line-height: 1;background-color:transparent;}.cl-bc0950fc{margin:0;text-align:left;border-bottom: 0 solid rgba(0, 0, 0, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);padding-bottom:0;padding-top:0;padding-left:0;padding-right:0;line-height: 1;background-color:transparent;}.cl-bc0950fd{margin:0;text-align:center;border-bottom: 0 solid rgba(0, 0, 0, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);padding-bottom:5pt;padding-top:5pt;padding-left:5pt;padding-right:5pt;line-height: 1;background-color:transparent;}.cl-bc096dbc{width:0.562in;background-color:transparent;vertical-align: bottom;border-bottom: 1.5pt solid rgba(102, 102, 102, 1.00);border-top: 1.5pt solid rgba(102, 102, 102, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-bc096dc6{width:0.079in;background-color:transparent;vertical-align: middle;border-bottom: 0 solid rgba(0, 0, 0, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-bc096dd0{width:1.015in;background-color:transparent;vertical-align: middle;border-bottom: 1.5pt solid rgba(102, 102, 102, 1.00);border-top: 1.5pt solid rgba(102, 102, 102, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-bc096dda{width:1.065in;background-color:transparent;vertical-align: middle;border-bottom: 1.5pt solid rgba(102, 102, 102, 1.00);border-top: 1.5pt solid rgba(102, 102, 102, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-bc096ddb{width:1.442in;background-color:transparent;vertical-align: middle;border-bottom: 1.5pt solid rgba(102, 102, 102, 1.00);border-top: 1.5pt solid rgba(102, 102, 102, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-bc096ddc{width:0.562in;background-color:transparent;vertical-align: top;border-bottom: 0 solid rgba(0, 0, 0, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-bc096de4{width:0.079in;background-color:transparent;vertical-align: top;border-bottom: 0 solid rgba(0, 0, 0, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-bc096de5{width:1.015in;background-color:transparent;vertical-align: top;border-bottom: 0 solid rgba(0, 0, 0, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-bc096de6{width:1.065in;background-color:transparent;vertical-align: top;border-bottom: 0 solid rgba(0, 0, 0, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-bc096dee{width:1.442in;background-color:transparent;vertical-align: top;border-bottom: 0 solid rgba(0, 0, 0, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-bc096def{width:0.562in;background-color:transparent;vertical-align: top;border-bottom: 1.5pt solid rgba(102, 102, 102, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-bc096df0{width:1.015in;background-color:transparent;vertical-align: top;border-bottom: 1.5pt solid rgba(102, 102, 102, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-bc096df8{width:1.065in;background-color:transparent;vertical-align: top;border-bottom: 1.5pt solid rgba(102, 102, 102, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-bc096df9{width:1.442in;background-color:transparent;vertical-align: top;border-bottom: 1.5pt solid rgba(102, 102, 102, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}</style>
+<table data-quarto-disable-processing="true" class="cl-bc0e53ae">
 <thead><tr style="overflow-wrap:break-word;">
-<th class="cl-80e23aec"><p class="cl-80e21d6e"><span class="cl-80dd3b00">SEX</span></p></th>
-<th class="cl-80e23b00"><p class="cl-80e21d82"><span class="cl-80dd3b00"></span></p></th>
-<th class="cl-80e23b01"><p class="cl-80e21d83"><span class="cl-80dd3b00">A: Drug X</span></p></th>
-<th class="cl-80e23b00"><p class="cl-80e21d82"><span class="cl-80dd3b00"></span></p></th>
-<th class="cl-80e23b02"><p class="cl-80e21d83"><span class="cl-80dd3b00">B: Placebo</span></p></th>
-<th class="cl-80e23b00"><p class="cl-80e21d82"><span class="cl-80dd3b00"></span></p></th>
-<th class="cl-80e23b0a"><p class="cl-80e21d83"><span class="cl-80dd3b00">C: Combination</span></p></th>
+<th class="cl-bc096dbc"><p class="cl-bc0950de"><span class="cl-bc048900">SEX</span></p></th>
+<th class="cl-bc096dc6"><p class="cl-bc0950f2"><span class="cl-bc048900"></span></p></th>
+<th class="cl-bc096dd0"><p class="cl-bc0950f3"><span class="cl-bc048900">A: Drug X</span></p></th>
+<th class="cl-bc096dc6"><p class="cl-bc0950f2"><span class="cl-bc048900"></span></p></th>
+<th class="cl-bc096dda"><p class="cl-bc0950f3"><span class="cl-bc048900">B: Placebo</span></p></th>
+<th class="cl-bc096dc6"><p class="cl-bc0950f2"><span class="cl-bc048900"></span></p></th>
+<th class="cl-bc096ddb"><p class="cl-bc0950f3"><span class="cl-bc048900">C: Combination</span></p></th>
 </tr></thead>
 <tbody>
 <tr style="overflow-wrap:break-word;">
-<td class="cl-80e23b0b"><p class="cl-80e21d8c"><span class="cl-80dd3b00">F</span></p></td>
-<td class="cl-80e23b14"><p class="cl-80e21d8d"><span class="cl-80dd3b00"></span></p></td>
-<td class="cl-80e23b15"><p class="cl-80e21d8e"><span class="cl-80dd3b00">32.8</span><span class="cl-80dd3b00"> (</span><span class="cl-80dd3b00">6.1</span><span class="cl-80dd3b00">)</span></p></td>
-<td class="cl-80e23b14"><p class="cl-80e21d8d"><span class="cl-80dd3b00"></span></p></td>
-<td class="cl-80e23b16"><p class="cl-80e21d8e"><span class="cl-80dd3b00">34.2</span><span class="cl-80dd3b00"> (</span><span class="cl-80dd3b00">7.0</span><span class="cl-80dd3b00">)</span></p></td>
-<td class="cl-80e23b14"><p class="cl-80e21d8d"><span class="cl-80dd3b00"></span></p></td>
-<td class="cl-80e23b1e"><p class="cl-80e21d8e"><span class="cl-80dd3b00">35.2</span><span class="cl-80dd3b00"> (</span><span class="cl-80dd3b00">7.4</span><span class="cl-80dd3b00">)</span></p></td>
+<td class="cl-bc096ddc"><p class="cl-bc0950f4"><span class="cl-bc048900">F</span></p></td>
+<td class="cl-bc096de4"><p class="cl-bc0950fc"><span class="cl-bc048900"></span></p></td>
+<td class="cl-bc096de5"><p class="cl-bc0950fd"><span class="cl-bc048900">32.8</span><span class="cl-bc048900"> (</span><span class="cl-bc048900">6.1</span><span class="cl-bc048900">)</span></p></td>
+<td class="cl-bc096de4"><p class="cl-bc0950fc"><span class="cl-bc048900"></span></p></td>
+<td class="cl-bc096de6"><p class="cl-bc0950fd"><span class="cl-bc048900">34.2</span><span class="cl-bc048900"> (</span><span class="cl-bc048900">7.0</span><span class="cl-bc048900">)</span></p></td>
+<td class="cl-bc096de4"><p class="cl-bc0950fc"><span class="cl-bc048900"></span></p></td>
+<td class="cl-bc096dee"><p class="cl-bc0950fd"><span class="cl-bc048900">35.2</span><span class="cl-bc048900"> (</span><span class="cl-bc048900">7.4</span><span class="cl-bc048900">)</span></p></td>
 </tr>
 <tr style="overflow-wrap:break-word;">
-<td class="cl-80e23b1f"><p class="cl-80e21d8c"><span class="cl-80dd3b00">M</span></p></td>
-<td class="cl-80e23b14"><p class="cl-80e21d8d"><span class="cl-80dd3b00"></span></p></td>
-<td class="cl-80e23b20"><p class="cl-80e21d8e"><span class="cl-80dd3b00">35.2</span><span class="cl-80dd3b00"> (</span><span class="cl-80dd3b00">7.0</span><span class="cl-80dd3b00">)</span></p></td>
-<td class="cl-80e23b14"><p class="cl-80e21d8d"><span class="cl-80dd3b00"></span></p></td>
-<td class="cl-80e23b28"><p class="cl-80e21d8e"><span class="cl-80dd3b00">37.3</span><span class="cl-80dd3b00"> (</span><span class="cl-80dd3b00">8.9</span><span class="cl-80dd3b00">)</span></p></td>
-<td class="cl-80e23b14"><p class="cl-80e21d8d"><span class="cl-80dd3b00"></span></p></td>
-<td class="cl-80e23b29"><p class="cl-80e21d8e"><span class="cl-80dd3b00">35.7</span><span class="cl-80dd3b00"> (</span><span class="cl-80dd3b00">8.2</span><span class="cl-80dd3b00">)</span></p></td>
+<td class="cl-bc096def"><p class="cl-bc0950f4"><span class="cl-bc048900">M</span></p></td>
+<td class="cl-bc096de4"><p class="cl-bc0950fc"><span class="cl-bc048900"></span></p></td>
+<td class="cl-bc096df0"><p class="cl-bc0950fd"><span class="cl-bc048900">35.2</span><span class="cl-bc048900"> (</span><span class="cl-bc048900">7.0</span><span class="cl-bc048900">)</span></p></td>
+<td class="cl-bc096de4"><p class="cl-bc0950fc"><span class="cl-bc048900"></span></p></td>
+<td class="cl-bc096df8"><p class="cl-bc0950fd"><span class="cl-bc048900">37.3</span><span class="cl-bc048900"> (</span><span class="cl-bc048900">8.9</span><span class="cl-bc048900">)</span></p></td>
+<td class="cl-bc096de4"><p class="cl-bc0950fc"><span class="cl-bc048900"></span></p></td>
+<td class="cl-bc096df9"><p class="cl-bc0950fd"><span class="cl-bc048900">35.7</span><span class="cl-bc048900"> (</span><span class="cl-bc048900">8.2</span><span class="cl-bc048900">)</span></p></td>
 </tr>
 </tbody>
 </table>
-</div></template><div class="flextable-shadow-host" id="9da1b8b0-0338-472d-a49f-c2370e701051"></div>
-<script>
-var dest = document.getElementById("9da1b8b0-0338-472d-a49f-c2370e701051");
-var template = document.getElementById("a614a820-ce37-4e7e-8269-568e6c95f84a");
-var fantome = dest.attachShadow({mode: 'open'});
-var templateContent = template.content;
-fantome.appendChild(templateContent);
-</script><p>The following shows how to add titles or notes:</p>
+</div>
+<p>The following shows how to add titles or notes:</p>
 <details class="chunk-details" open><summary class="chunk-summary"><span class="chunk-summary-text">Code</span></summary><div class="sourceCode" id="cb11"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">z</span> <span class="op">|&gt;</span></span>
 <span>  <span class="fu"><a href="https://davidgohel.github.io/flextable/reference/add_header_lines.html">add_header_lines</a></span><span class="op">(</span><span class="st">"hello world"</span><span class="op">)</span> <span class="op">|&gt;</span></span>
 <span>  <span class="fu"><a href="https://davidgohel.github.io/flextable/reference/add_footer_lines.html">add_footer_lines</a></span><span class="op">(</span><span class="st">"bye bye world"</span><span class="op">)</span></span></code></pre></div>
-</details><template id="e52beb21-b864-4551-9745-9716cbc4ff2b"><style>
-.tabwid table{
-  border-spacing:0px !important;
-  border-collapse:collapse;
-  line-height:1;
-  margin-left:auto;
-  margin-right:auto;
-  border-width: 0;
-  border-color: transparent;
-  caption-side: top;
-}
-.tabwid-caption-bottom table{
-  caption-side: bottom;
-}
-.tabwid_left table{
-  margin-left:0;
-}
-.tabwid_right table{
-  margin-right:0;
-}
-.tabwid td, .tabwid th {
-    padding: 0;
-}
-.tabwid a {
-  text-decoration: none;
-}
-.tabwid thead {
-    background-color: transparent;
-}
-.tabwid tfoot {
-    background-color: transparent;
-}
-.tabwid table tr {
-background-color: transparent;
-}
-.katex-display {
-    margin: 0 0 !important;
-}
-</style>
-<div class="tabwid">
-<style>.cl-810fa5a4{}.cl-8106f8e6{font-family:'DejaVu Sans';font-size:11pt;font-weight:normal;font-style:normal;text-decoration:none;color:rgba(0, 0, 0, 1.00);background-color:transparent;}.cl-810abc4c{margin:0;text-align:left;border-bottom: 0 solid rgba(0, 0, 0, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);padding-bottom:5pt;padding-top:5pt;padding-left:5pt;padding-right:5pt;line-height: 1;background-color:transparent;}.cl-810abc56{margin:0;text-align:left;border-bottom: 0 solid rgba(0, 0, 0, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);padding-bottom:0;padding-top:0;padding-left:0;padding-right:0;line-height: 1;background-color:transparent;}.cl-810abc60{margin:0;text-align:center;border-bottom: 0 solid rgba(0, 0, 0, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);padding-bottom:5pt;padding-top:5pt;padding-left:5pt;padding-right:5pt;line-height: 1;background-color:transparent;}.cl-810abc6a{margin:0;text-align:left;border-bottom: 0 solid rgba(0, 0, 0, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);padding-bottom:5pt;padding-top:5pt;padding-left:5pt;padding-right:5pt;line-height: 1;background-color:transparent;}.cl-810abc6b{margin:0;text-align:left;border-bottom: 0 solid rgba(0, 0, 0, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);padding-bottom:0;padding-top:0;padding-left:0;padding-right:0;line-height: 1;background-color:transparent;}.cl-810abc74{margin:0;text-align:center;border-bottom: 0 solid rgba(0, 0, 0, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);padding-bottom:5pt;padding-top:5pt;padding-left:5pt;padding-right:5pt;line-height: 1;background-color:transparent;}.cl-810abc75{margin:0;text-align:left;border-bottom: 0 solid rgba(0, 0, 0, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);padding-bottom:5pt;padding-top:5pt;padding-left:5pt;padding-right:5pt;line-height: 1;background-color:transparent;}.cl-810ad826{width:0.562in;background-color:transparent;vertical-align: bottom;border-bottom: 1.5pt solid rgba(102, 102, 102, 1.00);border-top: 1.5pt solid rgba(102, 102, 102, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-810ad830{width:0.079in;background-color:transparent;vertical-align: middle;border-bottom: 0 solid rgba(0, 0, 0, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-810ad831{width:1.015in;background-color:transparent;vertical-align: middle;border-bottom: 1.5pt solid rgba(102, 102, 102, 1.00);border-top: 1.5pt solid rgba(102, 102, 102, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-810ad83a{width:1.065in;background-color:transparent;vertical-align: middle;border-bottom: 1.5pt solid rgba(102, 102, 102, 1.00);border-top: 1.5pt solid rgba(102, 102, 102, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-810ad844{width:1.442in;background-color:transparent;vertical-align: middle;border-bottom: 1.5pt solid rgba(102, 102, 102, 1.00);border-top: 1.5pt solid rgba(102, 102, 102, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-810ad845{width:0.562in;background-color:transparent;vertical-align: top;border-bottom: 0 solid rgba(0, 0, 0, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-810ad84e{width:0.079in;background-color:transparent;vertical-align: top;border-bottom: 0 solid rgba(0, 0, 0, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-810ad84f{width:1.015in;background-color:transparent;vertical-align: top;border-bottom: 0 solid rgba(0, 0, 0, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-810ad850{width:1.065in;background-color:transparent;vertical-align: top;border-bottom: 0 solid rgba(0, 0, 0, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-810ad858{width:1.442in;background-color:transparent;vertical-align: top;border-bottom: 0 solid rgba(0, 0, 0, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-810ad859{width:0.562in;background-color:transparent;vertical-align: top;border-bottom: 1.5pt solid rgba(102, 102, 102, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-810ad862{width:1.015in;background-color:transparent;vertical-align: top;border-bottom: 1.5pt solid rgba(102, 102, 102, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-810ad863{width:1.065in;background-color:transparent;vertical-align: top;border-bottom: 1.5pt solid rgba(102, 102, 102, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-810ad86c{width:1.442in;background-color:transparent;vertical-align: top;border-bottom: 1.5pt solid rgba(102, 102, 102, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-810ad86d{width:0.562in;background-color:transparent;vertical-align: middle;border-bottom: 0 solid rgba(255, 255, 255, 0.00);border-top: 0 solid rgba(255, 255, 255, 0.00);border-left: 0 solid rgba(255, 255, 255, 0.00);border-right: 0 solid rgba(255, 255, 255, 0.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-810ad876{width:0.079in;background-color:transparent;vertical-align: middle;border-bottom: 0 solid rgba(255, 255, 255, 0.00);border-top: 0 solid rgba(255, 255, 255, 0.00);border-left: 0 solid rgba(255, 255, 255, 0.00);border-right: 0 solid rgba(255, 255, 255, 0.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-810ad877{width:1.015in;background-color:transparent;vertical-align: middle;border-bottom: 0 solid rgba(255, 255, 255, 0.00);border-top: 0 solid rgba(255, 255, 255, 0.00);border-left: 0 solid rgba(255, 255, 255, 0.00);border-right: 0 solid rgba(255, 255, 255, 0.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-810ad880{width:1.065in;background-color:transparent;vertical-align: middle;border-bottom: 0 solid rgba(255, 255, 255, 0.00);border-top: 0 solid rgba(255, 255, 255, 0.00);border-left: 0 solid rgba(255, 255, 255, 0.00);border-right: 0 solid rgba(255, 255, 255, 0.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-810ad881{width:1.442in;background-color:transparent;vertical-align: middle;border-bottom: 0 solid rgba(255, 255, 255, 0.00);border-top: 0 solid rgba(255, 255, 255, 0.00);border-left: 0 solid rgba(255, 255, 255, 0.00);border-right: 0 solid rgba(255, 255, 255, 0.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}</style>
-<table data-quarto-disable-processing="true" class="cl-810fa5a4">
+</details><div class="tabwid">
+<style>.cl-bc367460{}.cl-bc2e170c{font-family:'DejaVu Sans';font-size:11pt;font-weight:normal;font-style:normal;text-decoration:none;color:rgba(0, 0, 0, 1.00);background-color:transparent;}.cl-bc31b088{margin:0;text-align:left;border-bottom: 0 solid rgba(0, 0, 0, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);padding-bottom:5pt;padding-top:5pt;padding-left:5pt;padding-right:5pt;line-height: 1;background-color:transparent;}.cl-bc31b092{margin:0;text-align:left;border-bottom: 0 solid rgba(0, 0, 0, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);padding-bottom:0;padding-top:0;padding-left:0;padding-right:0;line-height: 1;background-color:transparent;}.cl-bc31b09c{margin:0;text-align:center;border-bottom: 0 solid rgba(0, 0, 0, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);padding-bottom:5pt;padding-top:5pt;padding-left:5pt;padding-right:5pt;line-height: 1;background-color:transparent;}.cl-bc31b0a6{margin:0;text-align:left;border-bottom: 0 solid rgba(0, 0, 0, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);padding-bottom:5pt;padding-top:5pt;padding-left:5pt;padding-right:5pt;line-height: 1;background-color:transparent;}.cl-bc31b0a7{margin:0;text-align:left;border-bottom: 0 solid rgba(0, 0, 0, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);padding-bottom:0;padding-top:0;padding-left:0;padding-right:0;line-height: 1;background-color:transparent;}.cl-bc31b0b0{margin:0;text-align:center;border-bottom: 0 solid rgba(0, 0, 0, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);padding-bottom:5pt;padding-top:5pt;padding-left:5pt;padding-right:5pt;line-height: 1;background-color:transparent;}.cl-bc31b0b1{margin:0;text-align:left;border-bottom: 0 solid rgba(0, 0, 0, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);padding-bottom:5pt;padding-top:5pt;padding-left:5pt;padding-right:5pt;line-height: 1;background-color:transparent;}.cl-bc31cabe{width:0.562in;background-color:transparent;vertical-align: bottom;border-bottom: 1.5pt solid rgba(102, 102, 102, 1.00);border-top: 1.5pt solid rgba(102, 102, 102, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-bc31cac8{width:0.079in;background-color:transparent;vertical-align: middle;border-bottom: 0 solid rgba(0, 0, 0, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-bc31cad2{width:1.015in;background-color:transparent;vertical-align: middle;border-bottom: 1.5pt solid rgba(102, 102, 102, 1.00);border-top: 1.5pt solid rgba(102, 102, 102, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-bc31cad3{width:1.065in;background-color:transparent;vertical-align: middle;border-bottom: 1.5pt solid rgba(102, 102, 102, 1.00);border-top: 1.5pt solid rgba(102, 102, 102, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-bc31cad4{width:1.442in;background-color:transparent;vertical-align: middle;border-bottom: 1.5pt solid rgba(102, 102, 102, 1.00);border-top: 1.5pt solid rgba(102, 102, 102, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-bc31cadc{width:0.562in;background-color:transparent;vertical-align: top;border-bottom: 0 solid rgba(0, 0, 0, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-bc31cadd{width:0.079in;background-color:transparent;vertical-align: top;border-bottom: 0 solid rgba(0, 0, 0, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-bc31cae6{width:1.015in;background-color:transparent;vertical-align: top;border-bottom: 0 solid rgba(0, 0, 0, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-bc31cae7{width:1.065in;background-color:transparent;vertical-align: top;border-bottom: 0 solid rgba(0, 0, 0, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-bc31caf0{width:1.442in;background-color:transparent;vertical-align: top;border-bottom: 0 solid rgba(0, 0, 0, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-bc31cafa{width:0.562in;background-color:transparent;vertical-align: top;border-bottom: 1.5pt solid rgba(102, 102, 102, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-bc31cb04{width:1.015in;background-color:transparent;vertical-align: top;border-bottom: 1.5pt solid rgba(102, 102, 102, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-bc31cb05{width:1.065in;background-color:transparent;vertical-align: top;border-bottom: 1.5pt solid rgba(102, 102, 102, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-bc31cb06{width:1.442in;background-color:transparent;vertical-align: top;border-bottom: 1.5pt solid rgba(102, 102, 102, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-bc31cb0e{width:0.562in;background-color:transparent;vertical-align: middle;border-bottom: 0 solid rgba(255, 255, 255, 0.00);border-top: 0 solid rgba(255, 255, 255, 0.00);border-left: 0 solid rgba(255, 255, 255, 0.00);border-right: 0 solid rgba(255, 255, 255, 0.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-bc31cb0f{width:0.079in;background-color:transparent;vertical-align: middle;border-bottom: 0 solid rgba(255, 255, 255, 0.00);border-top: 0 solid rgba(255, 255, 255, 0.00);border-left: 0 solid rgba(255, 255, 255, 0.00);border-right: 0 solid rgba(255, 255, 255, 0.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-bc31cb18{width:1.015in;background-color:transparent;vertical-align: middle;border-bottom: 0 solid rgba(255, 255, 255, 0.00);border-top: 0 solid rgba(255, 255, 255, 0.00);border-left: 0 solid rgba(255, 255, 255, 0.00);border-right: 0 solid rgba(255, 255, 255, 0.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-bc31cb19{width:1.065in;background-color:transparent;vertical-align: middle;border-bottom: 0 solid rgba(255, 255, 255, 0.00);border-top: 0 solid rgba(255, 255, 255, 0.00);border-left: 0 solid rgba(255, 255, 255, 0.00);border-right: 0 solid rgba(255, 255, 255, 0.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-bc31cb22{width:1.442in;background-color:transparent;vertical-align: middle;border-bottom: 0 solid rgba(255, 255, 255, 0.00);border-top: 0 solid rgba(255, 255, 255, 0.00);border-left: 0 solid rgba(255, 255, 255, 0.00);border-right: 0 solid rgba(255, 255, 255, 0.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}</style>
+<table data-quarto-disable-processing="true" class="cl-bc367460">
 <thead>
-<tr style="overflow-wrap:break-word;"><th colspan="7" class="cl-810ad826"><p class="cl-810abc4c"><span class="cl-8106f8e6">hello world</span></p></th></tr>
+<tr style="overflow-wrap:break-word;"><th colspan="7" class="cl-bc31cabe"><p class="cl-bc31b088"><span class="cl-bc2e170c">hello world</span></p></th></tr>
 <tr style="overflow-wrap:break-word;">
-<th class="cl-810ad826"><p class="cl-810abc4c"><span class="cl-8106f8e6">SEX</span></p></th>
-<th class="cl-810ad830"><p class="cl-810abc56"><span class="cl-8106f8e6"></span></p></th>
-<th class="cl-810ad831"><p class="cl-810abc60"><span class="cl-8106f8e6">A: Drug X</span></p></th>
-<th class="cl-810ad830"><p class="cl-810abc56"><span class="cl-8106f8e6"></span></p></th>
-<th class="cl-810ad83a"><p class="cl-810abc60"><span class="cl-8106f8e6">B: Placebo</span></p></th>
-<th class="cl-810ad830"><p class="cl-810abc56"><span class="cl-8106f8e6"></span></p></th>
-<th class="cl-810ad844"><p class="cl-810abc60"><span class="cl-8106f8e6">C: Combination</span></p></th>
+<th class="cl-bc31cabe"><p class="cl-bc31b088"><span class="cl-bc2e170c">SEX</span></p></th>
+<th class="cl-bc31cac8"><p class="cl-bc31b092"><span class="cl-bc2e170c"></span></p></th>
+<th class="cl-bc31cad2"><p class="cl-bc31b09c"><span class="cl-bc2e170c">A: Drug X</span></p></th>
+<th class="cl-bc31cac8"><p class="cl-bc31b092"><span class="cl-bc2e170c"></span></p></th>
+<th class="cl-bc31cad3"><p class="cl-bc31b09c"><span class="cl-bc2e170c">B: Placebo</span></p></th>
+<th class="cl-bc31cac8"><p class="cl-bc31b092"><span class="cl-bc2e170c"></span></p></th>
+<th class="cl-bc31cad4"><p class="cl-bc31b09c"><span class="cl-bc2e170c">C: Combination</span></p></th>
 </tr>
 </thead>
 <tbody>
 <tr style="overflow-wrap:break-word;">
-<td class="cl-810ad845"><p class="cl-810abc6a"><span class="cl-8106f8e6">F</span></p></td>
-<td class="cl-810ad84e"><p class="cl-810abc6b"><span class="cl-8106f8e6"></span></p></td>
-<td class="cl-810ad84f"><p class="cl-810abc74"><span class="cl-8106f8e6">32.8</span><span class="cl-8106f8e6"> (</span><span class="cl-8106f8e6">6.1</span><span class="cl-8106f8e6">)</span></p></td>
-<td class="cl-810ad84e"><p class="cl-810abc6b"><span class="cl-8106f8e6"></span></p></td>
-<td class="cl-810ad850"><p class="cl-810abc74"><span class="cl-8106f8e6">34.2</span><span class="cl-8106f8e6"> (</span><span class="cl-8106f8e6">7.0</span><span class="cl-8106f8e6">)</span></p></td>
-<td class="cl-810ad84e"><p class="cl-810abc6b"><span class="cl-8106f8e6"></span></p></td>
-<td class="cl-810ad858"><p class="cl-810abc74"><span class="cl-8106f8e6">35.2</span><span class="cl-8106f8e6"> (</span><span class="cl-8106f8e6">7.4</span><span class="cl-8106f8e6">)</span></p></td>
+<td class="cl-bc31cadc"><p class="cl-bc31b0a6"><span class="cl-bc2e170c">F</span></p></td>
+<td class="cl-bc31cadd"><p class="cl-bc31b0a7"><span class="cl-bc2e170c"></span></p></td>
+<td class="cl-bc31cae6"><p class="cl-bc31b0b0"><span class="cl-bc2e170c">32.8</span><span class="cl-bc2e170c"> (</span><span class="cl-bc2e170c">6.1</span><span class="cl-bc2e170c">)</span></p></td>
+<td class="cl-bc31cadd"><p class="cl-bc31b0a7"><span class="cl-bc2e170c"></span></p></td>
+<td class="cl-bc31cae7"><p class="cl-bc31b0b0"><span class="cl-bc2e170c">34.2</span><span class="cl-bc2e170c"> (</span><span class="cl-bc2e170c">7.0</span><span class="cl-bc2e170c">)</span></p></td>
+<td class="cl-bc31cadd"><p class="cl-bc31b0a7"><span class="cl-bc2e170c"></span></p></td>
+<td class="cl-bc31caf0"><p class="cl-bc31b0b0"><span class="cl-bc2e170c">35.2</span><span class="cl-bc2e170c"> (</span><span class="cl-bc2e170c">7.4</span><span class="cl-bc2e170c">)</span></p></td>
 </tr>
 <tr style="overflow-wrap:break-word;">
-<td class="cl-810ad859"><p class="cl-810abc6a"><span class="cl-8106f8e6">M</span></p></td>
-<td class="cl-810ad84e"><p class="cl-810abc6b"><span class="cl-8106f8e6"></span></p></td>
-<td class="cl-810ad862"><p class="cl-810abc74"><span class="cl-8106f8e6">35.2</span><span class="cl-8106f8e6"> (</span><span class="cl-8106f8e6">7.0</span><span class="cl-8106f8e6">)</span></p></td>
-<td class="cl-810ad84e"><p class="cl-810abc6b"><span class="cl-8106f8e6"></span></p></td>
-<td class="cl-810ad863"><p class="cl-810abc74"><span class="cl-8106f8e6">37.3</span><span class="cl-8106f8e6"> (</span><span class="cl-8106f8e6">8.9</span><span class="cl-8106f8e6">)</span></p></td>
-<td class="cl-810ad84e"><p class="cl-810abc6b"><span class="cl-8106f8e6"></span></p></td>
-<td class="cl-810ad86c"><p class="cl-810abc74"><span class="cl-8106f8e6">35.7</span><span class="cl-8106f8e6"> (</span><span class="cl-8106f8e6">8.2</span><span class="cl-8106f8e6">)</span></p></td>
+<td class="cl-bc31cafa"><p class="cl-bc31b0a6"><span class="cl-bc2e170c">M</span></p></td>
+<td class="cl-bc31cadd"><p class="cl-bc31b0a7"><span class="cl-bc2e170c"></span></p></td>
+<td class="cl-bc31cb04"><p class="cl-bc31b0b0"><span class="cl-bc2e170c">35.2</span><span class="cl-bc2e170c"> (</span><span class="cl-bc2e170c">7.0</span><span class="cl-bc2e170c">)</span></p></td>
+<td class="cl-bc31cadd"><p class="cl-bc31b0a7"><span class="cl-bc2e170c"></span></p></td>
+<td class="cl-bc31cb05"><p class="cl-bc31b0b0"><span class="cl-bc2e170c">37.3</span><span class="cl-bc2e170c"> (</span><span class="cl-bc2e170c">8.9</span><span class="cl-bc2e170c">)</span></p></td>
+<td class="cl-bc31cadd"><p class="cl-bc31b0a7"><span class="cl-bc2e170c"></span></p></td>
+<td class="cl-bc31cb06"><p class="cl-bc31b0b0"><span class="cl-bc2e170c">35.7</span><span class="cl-bc2e170c"> (</span><span class="cl-bc2e170c">8.2</span><span class="cl-bc2e170c">)</span></p></td>
 </tr>
 </tbody>
-<tfoot><tr style="overflow-wrap:break-word;"><td colspan="7" class="cl-810ad86d"><p class="cl-810abc75"><span class="cl-8106f8e6">bye bye world</span></p></td></tr></tfoot>
+<tfoot><tr style="overflow-wrap:break-word;"><td colspan="7" class="cl-bc31cb0e"><p class="cl-bc31b0b1"><span class="cl-bc2e170c">bye bye world</span></p></td></tr></tfoot>
 </table>
-</div></template><div class="flextable-shadow-host" id="4d141595-3ebe-41d3-9329-e5a4915c76fe"></div>
-<script>
-var dest = document.getElementById("4d141595-3ebe-41d3-9329-e5a4915c76fe");
-var template = document.getElementById("e52beb21-b864-4551-9745-9716cbc4ff2b");
-var fantome = dest.attachShadow({mode: 'open'});
-var templateContent = template.content;
-fantome.appendChild(templateContent);
-</script><p>For Word output, users can prepend a table number that will auto-incremente.</p>
+</div>
+<p>For Word output, users can prepend a table number that will auto-incremente.</p>
 <details class="chunk-details" open><summary class="chunk-summary"><span class="chunk-summary-text">Code</span></summary><div class="sourceCode" id="cb12"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">docx_file</span> <span class="op">&lt;-</span> <span class="st">"reports/flextable-title-01.docx"</span></span>
 <span><span class="va">ft</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://davidgohel.github.io/flextable/reference/add_header_lines.html">add_header_lines</a></span><span class="op">(</span><span class="va">z</span>, <span class="st">"hello world"</span><span class="op">)</span> <span class="op">|&gt;</span></span>
@@ -538,91 +448,45 @@ The function lets users add footnotes and references to it on the table.</p>
 <details class="chunk-details" open><summary class="chunk-summary"><span class="chunk-summary-text">Code</span></summary><div class="sourceCode" id="cb13"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://davidgohel.github.io/flextable/reference/footnote.html">footnote</a></span><span class="op">(</span><span class="va">z</span>, i <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">1</span>, <span class="fl">2</span>, <span class="fl">2</span><span class="op">)</span>, j <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">1</span>, <span class="fl">5</span>, <span class="fl">7</span><span class="op">)</span>, </span>
 <span>         value <span class="op">=</span> <span class="fu"><a href="https://davidgohel.github.io/flextable/reference/as_paragraph.html">as_paragraph</a></span><span class="op">(</span><span class="st">"hello world"</span><span class="op">)</span>, ref_symbols <span class="op">=</span> <span class="st">"(1)"</span><span class="op">)</span></span></code></pre></div>
-</details><template id="996aa6b9-60bb-40bd-9c57-b341cc23083f"><style>
-.tabwid table{
-  border-spacing:0px !important;
-  border-collapse:collapse;
-  line-height:1;
-  margin-left:auto;
-  margin-right:auto;
-  border-width: 0;
-  border-color: transparent;
-  caption-side: top;
-}
-.tabwid-caption-bottom table{
-  caption-side: bottom;
-}
-.tabwid_left table{
-  margin-left:0;
-}
-.tabwid_right table{
-  margin-right:0;
-}
-.tabwid td, .tabwid th {
-    padding: 0;
-}
-.tabwid a {
-  text-decoration: none;
-}
-.tabwid thead {
-    background-color: transparent;
-}
-.tabwid tfoot {
-    background-color: transparent;
-}
-.tabwid table tr {
-background-color: transparent;
-}
-.katex-display {
-    margin: 0 0 !important;
-}
-</style>
-<div class="tabwid">
-<style>.cl-819e92d2{}.cl-819605a4{font-family:'DejaVu Sans';font-size:11pt;font-weight:normal;font-style:normal;text-decoration:none;color:rgba(0, 0, 0, 1.00);background-color:transparent;}.cl-819605c2{font-family:'DejaVu Sans';font-size:6.6pt;font-weight:normal;font-style:normal;text-decoration:none;color:rgba(0, 0, 0, 1.00);background-color:transparent;position: relative;bottom:3.3pt;}.cl-8199c9aa{margin:0;text-align:left;border-bottom: 0 solid rgba(0, 0, 0, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);padding-bottom:5pt;padding-top:5pt;padding-left:5pt;padding-right:5pt;line-height: 1;background-color:transparent;}.cl-8199c9be{margin:0;text-align:left;border-bottom: 0 solid rgba(0, 0, 0, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);padding-bottom:0;padding-top:0;padding-left:0;padding-right:0;line-height: 1;background-color:transparent;}.cl-8199c9bf{margin:0;text-align:center;border-bottom: 0 solid rgba(0, 0, 0, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);padding-bottom:5pt;padding-top:5pt;padding-left:5pt;padding-right:5pt;line-height: 1;background-color:transparent;}.cl-8199c9c0{margin:0;text-align:left;border-bottom: 0 solid rgba(0, 0, 0, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);padding-bottom:5pt;padding-top:5pt;padding-left:5pt;padding-right:5pt;line-height: 1;background-color:transparent;}.cl-8199c9c8{margin:0;text-align:left;border-bottom: 0 solid rgba(0, 0, 0, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);padding-bottom:0;padding-top:0;padding-left:0;padding-right:0;line-height: 1;background-color:transparent;}.cl-8199c9d2{margin:0;text-align:center;border-bottom: 0 solid rgba(0, 0, 0, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);padding-bottom:5pt;padding-top:5pt;padding-left:5pt;padding-right:5pt;line-height: 1;background-color:transparent;}.cl-8199c9dc{margin:0;text-align:left;border-bottom: 0 solid rgba(0, 0, 0, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);padding-bottom:5pt;padding-top:5pt;padding-left:5pt;padding-right:5pt;line-height: 1;background-color:transparent;}.cl-8199e4f8{width:0.562in;background-color:transparent;vertical-align: bottom;border-bottom: 1.5pt solid rgba(102, 102, 102, 1.00);border-top: 1.5pt solid rgba(102, 102, 102, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-8199e502{width:0.079in;background-color:transparent;vertical-align: middle;border-bottom: 0 solid rgba(0, 0, 0, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-8199e50c{width:1.015in;background-color:transparent;vertical-align: middle;border-bottom: 1.5pt solid rgba(102, 102, 102, 1.00);border-top: 1.5pt solid rgba(102, 102, 102, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-8199e50d{width:1.065in;background-color:transparent;vertical-align: middle;border-bottom: 1.5pt solid rgba(102, 102, 102, 1.00);border-top: 1.5pt solid rgba(102, 102, 102, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-8199e520{width:1.442in;background-color:transparent;vertical-align: middle;border-bottom: 1.5pt solid rgba(102, 102, 102, 1.00);border-top: 1.5pt solid rgba(102, 102, 102, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-8199e521{width:0.562in;background-color:transparent;vertical-align: top;border-bottom: 0 solid rgba(0, 0, 0, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-8199e52a{width:0.079in;background-color:transparent;vertical-align: top;border-bottom: 0 solid rgba(0, 0, 0, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-8199e52b{width:1.015in;background-color:transparent;vertical-align: top;border-bottom: 0 solid rgba(0, 0, 0, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-8199e534{width:1.065in;background-color:transparent;vertical-align: top;border-bottom: 0 solid rgba(0, 0, 0, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-8199e535{width:1.442in;background-color:transparent;vertical-align: top;border-bottom: 0 solid rgba(0, 0, 0, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-8199e536{width:0.562in;background-color:transparent;vertical-align: top;border-bottom: 1.5pt solid rgba(102, 102, 102, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-8199e53e{width:1.015in;background-color:transparent;vertical-align: top;border-bottom: 1.5pt solid rgba(102, 102, 102, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-8199e53f{width:1.065in;background-color:transparent;vertical-align: top;border-bottom: 1.5pt solid rgba(102, 102, 102, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-8199e540{width:1.442in;background-color:transparent;vertical-align: top;border-bottom: 1.5pt solid rgba(102, 102, 102, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-8199e548{width:0.562in;background-color:transparent;vertical-align: middle;border-bottom: 0 solid rgba(255, 255, 255, 0.00);border-top: 0 solid rgba(255, 255, 255, 0.00);border-left: 0 solid rgba(255, 255, 255, 0.00);border-right: 0 solid rgba(255, 255, 255, 0.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-8199e549{width:0.079in;background-color:transparent;vertical-align: middle;border-bottom: 0 solid rgba(255, 255, 255, 0.00);border-top: 0 solid rgba(255, 255, 255, 0.00);border-left: 0 solid rgba(255, 255, 255, 0.00);border-right: 0 solid rgba(255, 255, 255, 0.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-8199e54a{width:1.015in;background-color:transparent;vertical-align: middle;border-bottom: 0 solid rgba(255, 255, 255, 0.00);border-top: 0 solid rgba(255, 255, 255, 0.00);border-left: 0 solid rgba(255, 255, 255, 0.00);border-right: 0 solid rgba(255, 255, 255, 0.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-8199e552{width:1.065in;background-color:transparent;vertical-align: middle;border-bottom: 0 solid rgba(255, 255, 255, 0.00);border-top: 0 solid rgba(255, 255, 255, 0.00);border-left: 0 solid rgba(255, 255, 255, 0.00);border-right: 0 solid rgba(255, 255, 255, 0.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-8199e553{width:1.442in;background-color:transparent;vertical-align: middle;border-bottom: 0 solid rgba(255, 255, 255, 0.00);border-top: 0 solid rgba(255, 255, 255, 0.00);border-left: 0 solid rgba(255, 255, 255, 0.00);border-right: 0 solid rgba(255, 255, 255, 0.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}</style>
-<table data-quarto-disable-processing="true" class="cl-819e92d2">
+</details><div class="tabwid">
+<style>.cl-bcc2c73a{}.cl-bcba57b2{font-family:'DejaVu Sans';font-size:11pt;font-weight:normal;font-style:normal;text-decoration:none;color:rgba(0, 0, 0, 1.00);background-color:transparent;}.cl-bcba57bc{font-family:'DejaVu Sans';font-size:6.6pt;font-weight:normal;font-style:normal;text-decoration:none;color:rgba(0, 0, 0, 1.00);background-color:transparent;position: relative;bottom:3.3pt;}.cl-bcbe0d1c{margin:0;text-align:left;border-bottom: 0 solid rgba(0, 0, 0, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);padding-bottom:5pt;padding-top:5pt;padding-left:5pt;padding-right:5pt;line-height: 1;background-color:transparent;}.cl-bcbe0d30{margin:0;text-align:left;border-bottom: 0 solid rgba(0, 0, 0, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);padding-bottom:0;padding-top:0;padding-left:0;padding-right:0;line-height: 1;background-color:transparent;}.cl-bcbe0d31{margin:0;text-align:center;border-bottom: 0 solid rgba(0, 0, 0, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);padding-bottom:5pt;padding-top:5pt;padding-left:5pt;padding-right:5pt;line-height: 1;background-color:transparent;}.cl-bcbe0d3a{margin:0;text-align:left;border-bottom: 0 solid rgba(0, 0, 0, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);padding-bottom:5pt;padding-top:5pt;padding-left:5pt;padding-right:5pt;line-height: 1;background-color:transparent;}.cl-bcbe0d44{margin:0;text-align:left;border-bottom: 0 solid rgba(0, 0, 0, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);padding-bottom:0;padding-top:0;padding-left:0;padding-right:0;line-height: 1;background-color:transparent;}.cl-bcbe0d45{margin:0;text-align:center;border-bottom: 0 solid rgba(0, 0, 0, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);padding-bottom:5pt;padding-top:5pt;padding-left:5pt;padding-right:5pt;line-height: 1;background-color:transparent;}.cl-bcbe0d4e{margin:0;text-align:left;border-bottom: 0 solid rgba(0, 0, 0, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);padding-bottom:5pt;padding-top:5pt;padding-left:5pt;padding-right:5pt;line-height: 1;background-color:transparent;}.cl-bcbe2748{width:0.562in;background-color:transparent;vertical-align: bottom;border-bottom: 1.5pt solid rgba(102, 102, 102, 1.00);border-top: 1.5pt solid rgba(102, 102, 102, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-bcbe275c{width:0.079in;background-color:transparent;vertical-align: middle;border-bottom: 0 solid rgba(0, 0, 0, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-bcbe275d{width:1.015in;background-color:transparent;vertical-align: middle;border-bottom: 1.5pt solid rgba(102, 102, 102, 1.00);border-top: 1.5pt solid rgba(102, 102, 102, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-bcbe2766{width:1.065in;background-color:transparent;vertical-align: middle;border-bottom: 1.5pt solid rgba(102, 102, 102, 1.00);border-top: 1.5pt solid rgba(102, 102, 102, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-bcbe2767{width:1.442in;background-color:transparent;vertical-align: middle;border-bottom: 1.5pt solid rgba(102, 102, 102, 1.00);border-top: 1.5pt solid rgba(102, 102, 102, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-bcbe2770{width:0.562in;background-color:transparent;vertical-align: top;border-bottom: 0 solid rgba(0, 0, 0, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-bcbe2771{width:0.079in;background-color:transparent;vertical-align: top;border-bottom: 0 solid rgba(0, 0, 0, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-bcbe2772{width:1.015in;background-color:transparent;vertical-align: top;border-bottom: 0 solid rgba(0, 0, 0, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-bcbe277a{width:1.065in;background-color:transparent;vertical-align: top;border-bottom: 0 solid rgba(0, 0, 0, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-bcbe277b{width:1.442in;background-color:transparent;vertical-align: top;border-bottom: 0 solid rgba(0, 0, 0, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-bcbe277c{width:0.562in;background-color:transparent;vertical-align: top;border-bottom: 1.5pt solid rgba(102, 102, 102, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-bcbe2784{width:1.015in;background-color:transparent;vertical-align: top;border-bottom: 1.5pt solid rgba(102, 102, 102, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-bcbe2785{width:1.065in;background-color:transparent;vertical-align: top;border-bottom: 1.5pt solid rgba(102, 102, 102, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-bcbe2786{width:1.442in;background-color:transparent;vertical-align: top;border-bottom: 1.5pt solid rgba(102, 102, 102, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-bcbe278e{width:0.562in;background-color:transparent;vertical-align: middle;border-bottom: 0 solid rgba(255, 255, 255, 0.00);border-top: 0 solid rgba(255, 255, 255, 0.00);border-left: 0 solid rgba(255, 255, 255, 0.00);border-right: 0 solid rgba(255, 255, 255, 0.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-bcbe278f{width:0.079in;background-color:transparent;vertical-align: middle;border-bottom: 0 solid rgba(255, 255, 255, 0.00);border-top: 0 solid rgba(255, 255, 255, 0.00);border-left: 0 solid rgba(255, 255, 255, 0.00);border-right: 0 solid rgba(255, 255, 255, 0.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-bcbe2798{width:1.015in;background-color:transparent;vertical-align: middle;border-bottom: 0 solid rgba(255, 255, 255, 0.00);border-top: 0 solid rgba(255, 255, 255, 0.00);border-left: 0 solid rgba(255, 255, 255, 0.00);border-right: 0 solid rgba(255, 255, 255, 0.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-bcbe2799{width:1.065in;background-color:transparent;vertical-align: middle;border-bottom: 0 solid rgba(255, 255, 255, 0.00);border-top: 0 solid rgba(255, 255, 255, 0.00);border-left: 0 solid rgba(255, 255, 255, 0.00);border-right: 0 solid rgba(255, 255, 255, 0.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-bcbe279a{width:1.442in;background-color:transparent;vertical-align: middle;border-bottom: 0 solid rgba(255, 255, 255, 0.00);border-top: 0 solid rgba(255, 255, 255, 0.00);border-left: 0 solid rgba(255, 255, 255, 0.00);border-right: 0 solid rgba(255, 255, 255, 0.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}</style>
+<table data-quarto-disable-processing="true" class="cl-bcc2c73a">
 <thead><tr style="overflow-wrap:break-word;">
-<th class="cl-8199e4f8"><p class="cl-8199c9aa"><span class="cl-819605a4">SEX</span></p></th>
-<th class="cl-8199e502"><p class="cl-8199c9be"><span class="cl-819605a4"></span></p></th>
-<th class="cl-8199e50c"><p class="cl-8199c9bf"><span class="cl-819605a4">A: Drug X</span></p></th>
-<th class="cl-8199e502"><p class="cl-8199c9be"><span class="cl-819605a4"></span></p></th>
-<th class="cl-8199e50d"><p class="cl-8199c9bf"><span class="cl-819605a4">B: Placebo</span></p></th>
-<th class="cl-8199e502"><p class="cl-8199c9be"><span class="cl-819605a4"></span></p></th>
-<th class="cl-8199e520"><p class="cl-8199c9bf"><span class="cl-819605a4">C: Combination</span></p></th>
+<th class="cl-bcbe2748"><p class="cl-bcbe0d1c"><span class="cl-bcba57b2">SEX</span></p></th>
+<th class="cl-bcbe275c"><p class="cl-bcbe0d30"><span class="cl-bcba57b2"></span></p></th>
+<th class="cl-bcbe275d"><p class="cl-bcbe0d31"><span class="cl-bcba57b2">A: Drug X</span></p></th>
+<th class="cl-bcbe275c"><p class="cl-bcbe0d30"><span class="cl-bcba57b2"></span></p></th>
+<th class="cl-bcbe2766"><p class="cl-bcbe0d31"><span class="cl-bcba57b2">B: Placebo</span></p></th>
+<th class="cl-bcbe275c"><p class="cl-bcbe0d30"><span class="cl-bcba57b2"></span></p></th>
+<th class="cl-bcbe2767"><p class="cl-bcbe0d31"><span class="cl-bcba57b2">C: Combination</span></p></th>
 </tr></thead>
 <tbody>
 <tr style="overflow-wrap:break-word;">
-<td class="cl-8199e521"><p class="cl-8199c9c0"><span class="cl-819605a4">F</span><span class="cl-819605c2">(1)</span></p></td>
-<td class="cl-8199e52a"><p class="cl-8199c9c8"><span class="cl-819605a4"></span></p></td>
-<td class="cl-8199e52b"><p class="cl-8199c9d2"><span class="cl-819605a4">32.8</span><span class="cl-819605a4"> (</span><span class="cl-819605a4">6.1</span><span class="cl-819605a4">)</span></p></td>
-<td class="cl-8199e52a"><p class="cl-8199c9c8"><span class="cl-819605a4"></span></p></td>
-<td class="cl-8199e534"><p class="cl-8199c9d2"><span class="cl-819605a4">34.2</span><span class="cl-819605a4"> (</span><span class="cl-819605a4">7.0</span><span class="cl-819605a4">)</span></p></td>
-<td class="cl-8199e52a"><p class="cl-8199c9c8"><span class="cl-819605a4"></span></p></td>
-<td class="cl-8199e535"><p class="cl-8199c9d2"><span class="cl-819605a4">35.2</span><span class="cl-819605a4"> (</span><span class="cl-819605a4">7.4</span><span class="cl-819605a4">)</span></p></td>
+<td class="cl-bcbe2770"><p class="cl-bcbe0d3a"><span class="cl-bcba57b2">F</span><span class="cl-bcba57bc">(1)</span></p></td>
+<td class="cl-bcbe2771"><p class="cl-bcbe0d44"><span class="cl-bcba57b2"></span></p></td>
+<td class="cl-bcbe2772"><p class="cl-bcbe0d45"><span class="cl-bcba57b2">32.8</span><span class="cl-bcba57b2"> (</span><span class="cl-bcba57b2">6.1</span><span class="cl-bcba57b2">)</span></p></td>
+<td class="cl-bcbe2771"><p class="cl-bcbe0d44"><span class="cl-bcba57b2"></span></p></td>
+<td class="cl-bcbe277a"><p class="cl-bcbe0d45"><span class="cl-bcba57b2">34.2</span><span class="cl-bcba57b2"> (</span><span class="cl-bcba57b2">7.0</span><span class="cl-bcba57b2">)</span></p></td>
+<td class="cl-bcbe2771"><p class="cl-bcbe0d44"><span class="cl-bcba57b2"></span></p></td>
+<td class="cl-bcbe277b"><p class="cl-bcbe0d45"><span class="cl-bcba57b2">35.2</span><span class="cl-bcba57b2"> (</span><span class="cl-bcba57b2">7.4</span><span class="cl-bcba57b2">)</span></p></td>
 </tr>
 <tr style="overflow-wrap:break-word;">
-<td class="cl-8199e536"><p class="cl-8199c9c0"><span class="cl-819605a4">M</span></p></td>
-<td class="cl-8199e52a"><p class="cl-8199c9c8"><span class="cl-819605a4"></span></p></td>
-<td class="cl-8199e53e"><p class="cl-8199c9d2"><span class="cl-819605a4">35.2</span><span class="cl-819605a4"> (</span><span class="cl-819605a4">7.0</span><span class="cl-819605a4">)</span></p></td>
-<td class="cl-8199e52a"><p class="cl-8199c9c8"><span class="cl-819605a4"></span></p></td>
-<td class="cl-8199e53f"><p class="cl-8199c9d2"><span class="cl-819605a4">37.3</span><span class="cl-819605a4"> (</span><span class="cl-819605a4">8.9</span><span class="cl-819605a4">)</span><span class="cl-819605c2">(1)</span></p></td>
-<td class="cl-8199e52a"><p class="cl-8199c9c8"><span class="cl-819605a4"></span></p></td>
-<td class="cl-8199e540"><p class="cl-8199c9d2"><span class="cl-819605a4">35.7</span><span class="cl-819605a4"> (</span><span class="cl-819605a4">8.2</span><span class="cl-819605a4">)</span><span class="cl-819605c2">(1)</span></p></td>
+<td class="cl-bcbe277c"><p class="cl-bcbe0d3a"><span class="cl-bcba57b2">M</span></p></td>
+<td class="cl-bcbe2771"><p class="cl-bcbe0d44"><span class="cl-bcba57b2"></span></p></td>
+<td class="cl-bcbe2784"><p class="cl-bcbe0d45"><span class="cl-bcba57b2">35.2</span><span class="cl-bcba57b2"> (</span><span class="cl-bcba57b2">7.0</span><span class="cl-bcba57b2">)</span></p></td>
+<td class="cl-bcbe2771"><p class="cl-bcbe0d44"><span class="cl-bcba57b2"></span></p></td>
+<td class="cl-bcbe2785"><p class="cl-bcbe0d45"><span class="cl-bcba57b2">37.3</span><span class="cl-bcba57b2"> (</span><span class="cl-bcba57b2">8.9</span><span class="cl-bcba57b2">)</span><span class="cl-bcba57bc">(1)</span></p></td>
+<td class="cl-bcbe2771"><p class="cl-bcbe0d44"><span class="cl-bcba57b2"></span></p></td>
+<td class="cl-bcbe2786"><p class="cl-bcbe0d45"><span class="cl-bcba57b2">35.7</span><span class="cl-bcba57b2"> (</span><span class="cl-bcba57b2">8.2</span><span class="cl-bcba57b2">)</span><span class="cl-bcba57bc">(1)</span></p></td>
 </tr>
 </tbody>
-<tfoot><tr style="overflow-wrap:break-word;"><td colspan="7" class="cl-8199e548"><p class="cl-8199c9dc"><span class="cl-819605c2">(1)</span><span class="cl-819605a4">hello world</span></p></td></tr></tfoot>
+<tfoot><tr style="overflow-wrap:break-word;"><td colspan="7" class="cl-bcbe278e"><p class="cl-bcbe0d4e"><span class="cl-bcba57bc">(1)</span><span class="cl-bcba57b2">hello world</span></p></td></tr></tfoot>
 </table>
-</div></template><div class="flextable-shadow-host" id="be8cc619-7402-4d78-81b9-9672737a80f5"></div>
-<script>
-var dest = document.getElementById("be8cc619-7402-4d78-81b9-9672737a80f5");
-var template = document.getElementById("996aa6b9-60bb-40bd-9c57-b341cc23083f");
-var fantome = dest.attachShadow({mode: 'open'});
-var templateContent = template.content;
-fantome.appendChild(templateContent);
-</script>
 </div>
-<div id="titles-and-footnotes-in-tables" class="section level3 hasAnchor" number="3.1.3">
+</div>
+<div id="tables-1" class="section level3 hasAnchor" number="3.1.3">
 <h3>
-<span class="header-section-number">3.1.3</span> Titles and footnotes in tables<a href="formatting-and-rendering-tables.html#titles-and-footnotes-in-tables" class="anchor-section" aria-label="Anchor link to header"></a>
+<span class="header-section-number">3.1.3</span> tables<a href="formatting-and-rendering-tables.html#tables-1" class="anchor-section" aria-label="Anchor link to header"></a>
 </h3>
 <p>The <code>tables</code> package concentrates on the table itself. The titles
 are generally written as part of the surrounding document. Footnotes
@@ -715,9 +579,9 @@ the footnotes can be applied by using <code>toHTML(tab, options = list(doFooter 
 is associated to. Captions are often used because they allow you to
 cross-reference tables or list them in a ‘list of tables’ with the corresponding
 page numbers.</p>
-<div id="captions-in-flextable" class="section level3 hasAnchor" number="3.2.1">
+<div id="flextable-2" class="section level3 hasAnchor" number="3.2.1">
 <h3>
-<span class="header-section-number">3.2.1</span> Captions in flextable<a href="formatting-and-rendering-tables.html#captions-in-flextable" class="anchor-section" aria-label="Anchor link to header"></a>
+<span class="header-section-number">3.2.1</span> flextable<a href="formatting-and-rendering-tables.html#flextable-2" class="anchor-section" aria-label="Anchor link to header"></a>
 </h3>
 <p>The <code><a href="https://davidgohel.github.io/flextable/reference/set_caption.html">set_caption()</a></code> function in ‘flextable’ is the recommanded way to add
 captions.</p>
@@ -729,91 +593,46 @@ captions.</p>
 <span>  <span class="fu"><a href="https://davidgohel.github.io/flextable/reference/set_caption.html">set_caption</a></span><span class="op">(</span></span>
 <span>    caption <span class="op">=</span> <span class="st">"a caption"</span>,</span>
 <span>    autonum <span class="op">=</span> <span class="fu">officer</span><span class="fu">::</span><span class="fu"><a href="https://davidgohel.github.io/officer/reference/run_autonum.html">run_autonum</a></span><span class="op">(</span>seq_id <span class="op">=</span> <span class="st">"tab"</span>, bkm <span class="op">=</span> <span class="st">"flextable-label"</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
-</details><template id="4f8551c2-6a62-4af0-9552-4456c4717584"><style>
-.tabwid table{
-  border-spacing:0px !important;
-  border-collapse:collapse;
-  line-height:1;
-  margin-left:auto;
-  margin-right:auto;
-  border-width: 0;
-  border-color: transparent;
-  caption-side: top;
-}
-.tabwid-caption-bottom table{
-  caption-side: bottom;
-}
-.tabwid_left table{
-  margin-left:0;
-}
-.tabwid_right table{
-  margin-right:0;
-}
-.tabwid td, .tabwid th {
-    padding: 0;
-}
-.tabwid a {
-  text-decoration: none;
-}
-.tabwid thead {
-    background-color: transparent;
-}
-.tabwid tfoot {
-    background-color: transparent;
-}
-.tabwid table tr {
-background-color: transparent;
-}
-.katex-display {
-    margin: 0 0 !important;
-}
-</style>
-<div class="tabwid">
-<style>.cl-81dcd10a{}.cl-81d505ce{font-family:'DejaVu Sans';font-size:11pt;font-weight:normal;font-style:normal;text-decoration:none;color:rgba(0, 0, 0, 1.00);background-color:transparent;}.cl-81d87880{margin:0;text-align:right;border-bottom: 0 solid rgba(0, 0, 0, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);padding-bottom:5pt;padding-top:5pt;padding-left:5pt;padding-right:5pt;line-height: 1;background-color:transparent;}.cl-81d88f82{width:0.75in;background-color:transparent;vertical-align: middle;border-bottom: 2pt solid rgba(102, 102, 102, 1.00);border-top: 2pt solid rgba(102, 102, 102, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-81d88f96{width:0.75in;background-color:transparent;vertical-align: middle;border-bottom: 0 solid rgba(0, 0, 0, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-81d88fa0{width:0.75in;background-color:transparent;vertical-align: middle;border-bottom: 2pt solid rgba(102, 102, 102, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}</style>
-<table data-quarto-disable-processing="true" class="cl-81dcd10a">
-<caption>
+</details><div class="tabwid">
+<style>.cl-bd00f226{}.cl-bcf91f6a{font-family:'DejaVu Sans';font-size:11pt;font-weight:normal;font-style:normal;text-decoration:none;color:rgba(0, 0, 0, 1.00);background-color:transparent;}.cl-bcfc7f5c{margin:0;text-align:right;border-bottom: 0 solid rgba(0, 0, 0, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);padding-bottom:5pt;padding-top:5pt;padding-left:5pt;padding-right:5pt;line-height: 1;background-color:transparent;}.cl-bcfc96f4{width:0.75in;background-color:transparent;vertical-align: middle;border-bottom: 2pt solid rgba(102, 102, 102, 1.00);border-top: 2pt solid rgba(102, 102, 102, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-bcfc96fe{width:0.75in;background-color:transparent;vertical-align: middle;border-bottom: 0 solid rgba(0, 0, 0, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-bcfc9708{width:0.75in;background-color:transparent;vertical-align: middle;border-bottom: 2pt solid rgba(102, 102, 102, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}</style>
+<table data-quarto-disable-processing="true" class="cl-bd00f226">
+<caption style="margin:0pt;text-align:center;border-bottom: 0.00pt solid transparent;border-top: 0.00pt solid transparent;border-left: 0.00pt solid transparent;border-right: 0.00pt solid transparent;padding-top:3pt;padding-bottom:3pt;padding-left:3pt;padding-right:3pt;line-height: 1;background-color:transparent;">
 <span id="tab:flextable-label">Table 3.1: </span><span>a caption</span>
 </caption>
 
 <thead><tr style="overflow-wrap:break-word;">
-<th class="cl-81d88f82"><p class="cl-81d87880"><span class="cl-81d505ce">speed</span></p></th>
-<th class="cl-81d88f82"><p class="cl-81d87880"><span class="cl-81d505ce">dist</span></p></th>
+<th class="cl-bcfc96f4"><p class="cl-bcfc7f5c"><span class="cl-bcf91f6a">speed</span></p></th>
+<th class="cl-bcfc96f4"><p class="cl-bcfc7f5c"><span class="cl-bcf91f6a">dist</span></p></th>
 </tr></thead>
 <tbody>
 <tr style="overflow-wrap:break-word;">
-<td class="cl-81d88f96"><p class="cl-81d87880"><span class="cl-81d505ce">4</span></p></td>
-<td class="cl-81d88f96"><p class="cl-81d87880"><span class="cl-81d505ce">2</span></p></td>
+<td class="cl-bcfc96fe"><p class="cl-bcfc7f5c"><span class="cl-bcf91f6a">4</span></p></td>
+<td class="cl-bcfc96fe"><p class="cl-bcfc7f5c"><span class="cl-bcf91f6a">2</span></p></td>
 </tr>
 <tr style="overflow-wrap:break-word;">
-<td class="cl-81d88f96"><p class="cl-81d87880"><span class="cl-81d505ce">4</span></p></td>
-<td class="cl-81d88f96"><p class="cl-81d87880"><span class="cl-81d505ce">10</span></p></td>
+<td class="cl-bcfc96fe"><p class="cl-bcfc7f5c"><span class="cl-bcf91f6a">4</span></p></td>
+<td class="cl-bcfc96fe"><p class="cl-bcfc7f5c"><span class="cl-bcf91f6a">10</span></p></td>
 </tr>
 <tr style="overflow-wrap:break-word;">
-<td class="cl-81d88f96"><p class="cl-81d87880"><span class="cl-81d505ce">7</span></p></td>
-<td class="cl-81d88f96"><p class="cl-81d87880"><span class="cl-81d505ce">4</span></p></td>
+<td class="cl-bcfc96fe"><p class="cl-bcfc7f5c"><span class="cl-bcf91f6a">7</span></p></td>
+<td class="cl-bcfc96fe"><p class="cl-bcfc7f5c"><span class="cl-bcf91f6a">4</span></p></td>
 </tr>
 <tr style="overflow-wrap:break-word;">
-<td class="cl-81d88f96"><p class="cl-81d87880"><span class="cl-81d505ce">7</span></p></td>
-<td class="cl-81d88f96"><p class="cl-81d87880"><span class="cl-81d505ce">22</span></p></td>
+<td class="cl-bcfc96fe"><p class="cl-bcfc7f5c"><span class="cl-bcf91f6a">7</span></p></td>
+<td class="cl-bcfc96fe"><p class="cl-bcfc7f5c"><span class="cl-bcf91f6a">22</span></p></td>
 </tr>
 <tr style="overflow-wrap:break-word;">
-<td class="cl-81d88f96"><p class="cl-81d87880"><span class="cl-81d505ce">8</span></p></td>
-<td class="cl-81d88f96"><p class="cl-81d87880"><span class="cl-81d505ce">16</span></p></td>
+<td class="cl-bcfc96fe"><p class="cl-bcfc7f5c"><span class="cl-bcf91f6a">8</span></p></td>
+<td class="cl-bcfc96fe"><p class="cl-bcfc7f5c"><span class="cl-bcf91f6a">16</span></p></td>
 </tr>
 <tr style="overflow-wrap:break-word;">
-<td class="cl-81d88fa0"><p class="cl-81d87880"><span class="cl-81d505ce">9</span></p></td>
-<td class="cl-81d88fa0"><p class="cl-81d87880"><span class="cl-81d505ce">10</span></p></td>
+<td class="cl-bcfc9708"><p class="cl-bcfc7f5c"><span class="cl-bcf91f6a">9</span></p></td>
+<td class="cl-bcfc9708"><p class="cl-bcfc7f5c"><span class="cl-bcf91f6a">10</span></p></td>
 </tr>
 </tbody>
 </table>
-</div></template><div class="flextable-shadow-host" id="e777b248-f1fc-434d-86ad-a0ec5324b0fb"></div>
-<script>
-var dest = document.getElementById("e777b248-f1fc-434d-86ad-a0ec5324b0fb");
-var template = document.getElementById("4f8551c2-6a62-4af0-9552-4456c4717584");
-var fantome = dest.attachShadow({mode: 'open'});
-var templateContent = template.content;
-fantome.appendChild(templateContent);
-</script><p>In bookdown, use the syntax <code>\@ref(tab:flextable-label)</code> to create a linked
+</div>
+<p>In bookdown, use the syntax <code>\@ref(tab:flextable-label)</code> to create a linked
 reference to the table. See an example of a reference: <a href="formatting-and-rendering-tables.html#tab:flextable-label">3.1</a>.</p>
 <p>With ‘Quarto’, the R chunk code should be transformed as:</p>
 <details class="chunk-details" open><summary class="chunk-summary"><span class="chunk-summary-text">Code</span></summary><div class="sourceCode" id="cb16"><pre class="downlit sourceCode r">
@@ -822,9 +641,9 @@ reference to the table. See an example of a reference: <a href="formatting-and-r
 <span><span class="fu"><a href="https://davidgohel.github.io/flextable/reference/flextable.html">flextable</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/utils/head.html">head</a></span><span class="op">(</span><span class="va">cars</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
 </details>
 </div>
-<div id="captions-in-tables" class="section level3 hasAnchor" number="3.2.2">
+<div id="tables-2" class="section level3 hasAnchor" number="3.2.2">
 <h3>
-<span class="header-section-number">3.2.2</span> Captions in tables<a href="formatting-and-rendering-tables.html#captions-in-tables" class="anchor-section" aria-label="Anchor link to header"></a>
+<span class="header-section-number">3.2.2</span> tables<a href="formatting-and-rendering-tables.html#tables-2" class="anchor-section" aria-label="Anchor link to header"></a>
 </h3>
 <p>As with titles, captions would be added as part of the
 surrounding document rather than part of the table object.</p>
@@ -840,16 +659,16 @@ be split into multiple tables that can be printed to the preferred page size. Th
 process of splitting the table is called <em>pagination</em> of tables.</p>
 <p>Pagination is a complex task as it requires to repeat information so that the tables
 on each page are correct tables with all relevant information for context.</p>
-<div id="pagination-in-rtables" class="section level3 hasAnchor" number="3.3.1">
+<div id="rtables-2" class="section level3 hasAnchor" number="3.3.1">
 <h3>
-<span class="header-section-number">3.3.1</span> Pagination in rtables<a href="formatting-and-rendering-tables.html#pagination-in-rtables" class="anchor-section" aria-label="Anchor link to header"></a>
+<span class="header-section-number">3.3.1</span> rtables<a href="formatting-and-rendering-tables.html#rtables-2" class="anchor-section" aria-label="Anchor link to header"></a>
 </h3>
 <p>In <code>rtables</code> pagination can be done with the <code>paginate_table</code> function which has
 a number of arguments to split the table, see the <a href="https://roche.github.io/rtables/reference/paginate.html">example documentation</a>.</p>
 </div>
-<div id="pagination-in-flextable" class="section level3 hasAnchor" number="3.3.2">
+<div id="flextable-3" class="section level3 hasAnchor" number="3.3.2">
 <h3>
-<span class="header-section-number">3.3.2</span> Pagination in flextable<a href="formatting-and-rendering-tables.html#pagination-in-flextable" class="anchor-section" aria-label="Anchor link to header"></a>
+<span class="header-section-number">3.3.2</span> flextable<a href="formatting-and-rendering-tables.html#flextable-3" class="anchor-section" aria-label="Anchor link to header"></a>
 </h3>
 <p>In ‘flextable’, there is no concept of pagination. The recommended method is to
 create a flextable for each modality of a group and to separate them with a page
@@ -862,9 +681,9 @@ Word, PDF, eventually HTML with
 <code>\newpage</code>; with the package ‘officer’, you have to use <code><a href="https://davidgohel.github.io/officer/reference/body_add_break.html">body_add_break()</a></code> (for
 Word documents only).</p>
 </div>
-<div id="pagination-in-tables" class="section level3 hasAnchor" number="3.3.3">
+<div id="tables-3" class="section level3 hasAnchor" number="3.3.3">
 <h3>
-<span class="header-section-number">3.3.3</span> Pagination in tables<a href="formatting-and-rendering-tables.html#pagination-in-tables" class="anchor-section" aria-label="Anchor link to header"></a>
+<span class="header-section-number">3.3.3</span> tables<a href="formatting-and-rendering-tables.html#tables-3" class="anchor-section" aria-label="Anchor link to header"></a>
 </h3>
 <p>Tables that span multiple pages are supported in PDF output using
 the LaTeX <code>longtable</code> package, specified when converting to LaTeX.</p>

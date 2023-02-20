@@ -15,7 +15,7 @@
 <meta name="twitter:title" content="References | Tables in Clinical Trials with R">
 <meta name="twitter:description" content="Example code to create tables commonly used for analyzing clinical trials data.">
 <meta name="author" content="R Consortium Tables Working Group">
-<meta name="date" content="2023-02-18">
+<meta name="date" content="2023-02-20">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="black">
@@ -29,8 +29,8 @@
 <link href="libs/gitbook-2.6.7/css/plugin-clipboard.css" rel="stylesheet">
 <link href="libs/anchor-sections-1.1.0/anchor-sections.css" rel="stylesheet">
 <link href="libs/anchor-sections-1.1.0/anchor-sections-hash.css" rel="stylesheet">
-<script src="libs/anchor-sections-1.1.0/anchor-sections.js"></script><link href="libs/tabwid-1.1.2/tabwid.css" rel="stylesheet">
-<style type="text/css">
+<script src="libs/anchor-sections-1.1.0/anchor-sections.js"></script><link href="libs/tabwid-1.1.3/tabwid.css" rel="stylesheet">
+<script src="libs/tabwid-1.1.3/tabwid.js"></script><style type="text/css">
 pre > code.sourceCode { white-space: pre; position: relative; }
 pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
 pre > code.sourceCode > span:empty { height: 1.2em; }
@@ -159,24 +159,24 @@ div.csl-indent {
 <li class="chapter" data-level="3.1" data-path="formatting-and-rendering-tables.html">
 <a href="formatting-and-rendering-tables.html#title-footnotes"><i class="fa fa-check"></i><b>3.1</b> Title &amp; Footnotes</a>
 <ul>
-<li class="chapter" data-level="3.1.1" data-path="formatting-and-rendering-tables.html"><a href="formatting-and-rendering-tables.html#title-and-footnotes-in-rtables"><i class="fa fa-check"></i><b>3.1.1</b> Title and Footnotes in rtables</a></li>
-<li class="chapter" data-level="3.1.2" data-path="formatting-and-rendering-tables.html"><a href="formatting-and-rendering-tables.html#title-and-footnotes-in-flextable"><i class="fa fa-check"></i><b>3.1.2</b> Title and Footnotes in flextable</a></li>
-<li class="chapter" data-level="3.1.3" data-path="formatting-and-rendering-tables.html"><a href="formatting-and-rendering-tables.html#titles-and-footnotes-in-tables"><i class="fa fa-check"></i><b>3.1.3</b> Titles and footnotes in tables</a></li>
+<li class="chapter" data-level="3.1.1" data-path="formatting-and-rendering-tables.html"><a href="formatting-and-rendering-tables.html#rtables-1"><i class="fa fa-check"></i><b>3.1.1</b> rtables</a></li>
+<li class="chapter" data-level="3.1.2" data-path="formatting-and-rendering-tables.html"><a href="formatting-and-rendering-tables.html#flextable-1"><i class="fa fa-check"></i><b>3.1.2</b> flextable</a></li>
+<li class="chapter" data-level="3.1.3" data-path="formatting-and-rendering-tables.html"><a href="formatting-and-rendering-tables.html#tables-1"><i class="fa fa-check"></i><b>3.1.3</b> tables</a></li>
 </ul>
 </li>
 <li class="chapter" data-level="3.2" data-path="formatting-and-rendering-tables.html">
 <a href="formatting-and-rendering-tables.html#captions"><i class="fa fa-check"></i><b>3.2</b> Captions</a>
 <ul>
-<li class="chapter" data-level="3.2.1" data-path="formatting-and-rendering-tables.html"><a href="formatting-and-rendering-tables.html#captions-in-flextable"><i class="fa fa-check"></i><b>3.2.1</b> Captions in flextable</a></li>
-<li class="chapter" data-level="3.2.2" data-path="formatting-and-rendering-tables.html"><a href="formatting-and-rendering-tables.html#captions-in-tables"><i class="fa fa-check"></i><b>3.2.2</b> Captions in tables</a></li>
+<li class="chapter" data-level="3.2.1" data-path="formatting-and-rendering-tables.html"><a href="formatting-and-rendering-tables.html#flextable-2"><i class="fa fa-check"></i><b>3.2.1</b> flextable</a></li>
+<li class="chapter" data-level="3.2.2" data-path="formatting-and-rendering-tables.html"><a href="formatting-and-rendering-tables.html#tables-2"><i class="fa fa-check"></i><b>3.2.2</b> tables</a></li>
 </ul>
 </li>
 <li class="chapter" data-level="3.3" data-path="formatting-and-rendering-tables.html">
 <a href="formatting-and-rendering-tables.html#pagination"><i class="fa fa-check"></i><b>3.3</b> Pagination</a>
 <ul>
-<li class="chapter" data-level="3.3.1" data-path="formatting-and-rendering-tables.html"><a href="formatting-and-rendering-tables.html#pagination-in-rtables"><i class="fa fa-check"></i><b>3.3.1</b> Pagination in rtables</a></li>
-<li class="chapter" data-level="3.3.2" data-path="formatting-and-rendering-tables.html"><a href="formatting-and-rendering-tables.html#pagination-in-flextable"><i class="fa fa-check"></i><b>3.3.2</b> Pagination in flextable</a></li>
-<li class="chapter" data-level="3.3.3" data-path="formatting-and-rendering-tables.html"><a href="formatting-and-rendering-tables.html#pagination-in-tables"><i class="fa fa-check"></i><b>3.3.3</b> Pagination in tables</a></li>
+<li class="chapter" data-level="3.3.1" data-path="formatting-and-rendering-tables.html"><a href="formatting-and-rendering-tables.html#rtables-2"><i class="fa fa-check"></i><b>3.3.1</b> rtables</a></li>
+<li class="chapter" data-level="3.3.2" data-path="formatting-and-rendering-tables.html"><a href="formatting-and-rendering-tables.html#flextable-3"><i class="fa fa-check"></i><b>3.3.2</b> flextable</a></li>
+<li class="chapter" data-level="3.3.3" data-path="formatting-and-rendering-tables.html"><a href="formatting-and-rendering-tables.html#tables-3"><i class="fa fa-check"></i><b>3.3.3</b> tables</a></li>
 </ul>
 </li>
 <li class="chapter" data-level="3.4" data-path="formatting-and-rendering-tables.html">
@@ -197,10 +197,10 @@ div.csl-indent {
 <li class="chapter" data-level="4.1" data-path="commontables.html">
 <a href="commontables.html#demographic-tables"><i class="fa fa-check"></i><b>4.1</b> Demographic Tables</a>
 <ul>
-<li class="chapter" data-level="4.1.1" data-path="commontables.html"><a href="commontables.html#rtables-1"><i class="fa fa-check"></i><b>4.1.1</b> rtables</a></li>
+<li class="chapter" data-level="4.1.1" data-path="commontables.html"><a href="commontables.html#rtables-3"><i class="fa fa-check"></i><b>4.1.1</b> rtables</a></li>
 <li class="chapter" data-level="4.1.2" data-path="commontables.html"><a href="commontables.html#gt-1"><i class="fa fa-check"></i><b>4.1.2</b> gt</a></li>
-<li class="chapter" data-level="4.1.3" data-path="commontables.html"><a href="commontables.html#flextable-1"><i class="fa fa-check"></i><b>4.1.3</b> flextable</a></li>
-<li class="chapter" data-level="4.1.4" data-path="commontables.html"><a href="commontables.html#tables-1"><i class="fa fa-check"></i><b>4.1.4</b> tables</a></li>
+<li class="chapter" data-level="4.1.3" data-path="commontables.html"><a href="commontables.html#flextable-4"><i class="fa fa-check"></i><b>4.1.3</b> flextable</a></li>
+<li class="chapter" data-level="4.1.4" data-path="commontables.html"><a href="commontables.html#tables-4"><i class="fa fa-check"></i><b>4.1.4</b> tables</a></li>
 </ul>
 </li>
 <li class="chapter" data-level="4.2" data-path="commontables.html">
@@ -208,8 +208,8 @@ div.csl-indent {
 <ul>
 <li class="chapter" data-level="4.2.1" data-path="commontables.html"><a href="commontables.html#rtables-only"><i class="fa fa-check"></i><b>4.2.1</b> <code>rtables</code> Only</a></li>
 <li class="chapter" data-level="4.2.2" data-path="commontables.html"><a href="commontables.html#gt-2"><i class="fa fa-check"></i><b>4.2.2</b> gt</a></li>
-<li class="chapter" data-level="4.2.3" data-path="commontables.html"><a href="commontables.html#flextable-2"><i class="fa fa-check"></i><b>4.2.3</b> flextable</a></li>
-<li class="chapter" data-level="4.2.4" data-path="commontables.html"><a href="commontables.html#tables-2"><i class="fa fa-check"></i><b>4.2.4</b> tables</a></li>
+<li class="chapter" data-level="4.2.3" data-path="commontables.html"><a href="commontables.html#flextable-5"><i class="fa fa-check"></i><b>4.2.3</b> flextable</a></li>
+<li class="chapter" data-level="4.2.4" data-path="commontables.html"><a href="commontables.html#tables-5"><i class="fa fa-check"></i><b>4.2.4</b> tables</a></li>
 </ul>
 </li>
 <li class="chapter" data-level="4.3" data-path="commontables.html"><a href="commontables.html#laboratory-tables"><i class="fa fa-check"></i><b>4.3</b> Laboratory Tables</a></li>
@@ -217,33 +217,33 @@ div.csl-indent {
 <a href="commontables.html#time-to-event-analysis-tables"><i class="fa fa-check"></i><b>4.4</b> Time to Event Analysis Tables</a>
 <ul>
 <li class="chapter" data-level="4.4.1" data-path="commontables.html"><a href="commontables.html#data-and-models-used-throughout"><i class="fa fa-check"></i><b>4.4.1</b> Data and models used throughout</a></li>
-<li class="chapter" data-level="4.4.2" data-path="commontables.html"><a href="commontables.html#rtables-2"><i class="fa fa-check"></i><b>4.4.2</b> rtables</a></li>
+<li class="chapter" data-level="4.4.2" data-path="commontables.html"><a href="commontables.html#rtables-4"><i class="fa fa-check"></i><b>4.4.2</b> rtables</a></li>
 <li class="chapter" data-level="4.4.3" data-path="commontables.html"><a href="commontables.html#cell-value-derivation-for-gt-of-time-to-event-analysis"><i class="fa fa-check"></i><b>4.4.3</b> Cell Value Derivation for gt of Time to Event Analysis</a></li>
 <li class="chapter" data-level="4.4.4" data-path="commontables.html"><a href="commontables.html#gt-3"><i class="fa fa-check"></i><b>4.4.4</b> gt</a></li>
-<li class="chapter" data-level="4.4.5" data-path="commontables.html"><a href="commontables.html#flextable-3"><i class="fa fa-check"></i><b>4.4.5</b> flextable</a></li>
-<li class="chapter" data-level="4.4.6" data-path="commontables.html"><a href="commontables.html#tables-3"><i class="fa fa-check"></i><b>4.4.6</b> tables</a></li>
+<li class="chapter" data-level="4.4.5" data-path="commontables.html"><a href="commontables.html#flextable-6"><i class="fa fa-check"></i><b>4.4.5</b> flextable</a></li>
+<li class="chapter" data-level="4.4.6" data-path="commontables.html"><a href="commontables.html#tables-6"><i class="fa fa-check"></i><b>4.4.6</b> tables</a></li>
 </ul>
 </li>
 <li class="chapter" data-level="4.5" data-path="commontables.html">
 <a href="commontables.html#concomitant-medications"><i class="fa fa-check"></i><b>4.5</b> Concomitant Medications</a>
 <ul>
-<li class="chapter" data-level="4.5.1" data-path="commontables.html"><a href="commontables.html#rtables-3"><i class="fa fa-check"></i><b>4.5.1</b> rtables</a></li>
+<li class="chapter" data-level="4.5.1" data-path="commontables.html"><a href="commontables.html#rtables-5"><i class="fa fa-check"></i><b>4.5.1</b> rtables</a></li>
 <li class="chapter" data-level="4.5.2" data-path="commontables.html"><a href="commontables.html#gt-4"><i class="fa fa-check"></i><b>4.5.2</b> gt</a></li>
-<li class="chapter" data-level="4.5.3" data-path="commontables.html"><a href="commontables.html#flextable-4"><i class="fa fa-check"></i><b>4.5.3</b> flextable</a></li>
-<li class="chapter" data-level="4.5.4" data-path="commontables.html"><a href="commontables.html#tables-4"><i class="fa fa-check"></i><b>4.5.4</b> tables</a></li>
+<li class="chapter" data-level="4.5.3" data-path="commontables.html"><a href="commontables.html#flextable-7"><i class="fa fa-check"></i><b>4.5.3</b> flextable</a></li>
+<li class="chapter" data-level="4.5.4" data-path="commontables.html"><a href="commontables.html#tables-7"><i class="fa fa-check"></i><b>4.5.4</b> tables</a></li>
 </ul>
 </li>
 <li class="chapter" data-level="4.6" data-path="commontables.html">
 <a href="commontables.html#disposition"><i class="fa fa-check"></i><b>4.6</b> Disposition</a>
 <ul>
-<li class="chapter" data-level="4.6.1" data-path="commontables.html"><a href="commontables.html#rtables-4"><i class="fa fa-check"></i><b>4.6.1</b> rtables</a></li>
+<li class="chapter" data-level="4.6.1" data-path="commontables.html"><a href="commontables.html#rtables-6"><i class="fa fa-check"></i><b>4.6.1</b> rtables</a></li>
 </ul>
 </li>
 <li class="chapter" data-level="4.7" data-path="commontables.html">
 <a href="commontables.html#gt-5"><i class="fa fa-check"></i><b>4.7</b> gt</a>
 <ul>
-<li class="chapter" data-level="4.7.1" data-path="commontables.html"><a href="commontables.html#flextable-5"><i class="fa fa-check"></i><b>4.7.1</b> flextable</a></li>
-<li class="chapter" data-level="4.7.2" data-path="commontables.html"><a href="commontables.html#tables-5"><i class="fa fa-check"></i><b>4.7.2</b> tables</a></li>
+<li class="chapter" data-level="4.7.1" data-path="commontables.html"><a href="commontables.html#flextable-8"><i class="fa fa-check"></i><b>4.7.1</b> flextable</a></li>
+<li class="chapter" data-level="4.7.2" data-path="commontables.html"><a href="commontables.html#tables-8"><i class="fa fa-check"></i><b>4.7.2</b> tables</a></li>
 </ul>
 </li>
 </ul>
