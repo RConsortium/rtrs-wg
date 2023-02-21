@@ -326,5 +326,5 @@ body <- tabular( Heading("Patients with at least one event")*1*
                  data = ex_adae )
 
 tab <- rbind(heading, body)
-useGroupLabels(tab, indent = "&emsp;")
+useGroupLabels(tab, indent = "&emsp;", extraLines = 1)
 ```
