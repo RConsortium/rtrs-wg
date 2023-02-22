@@ -4,7 +4,7 @@ editor_options:
   chunk_output_type: console
 ---
 
-## Event Tables
+## Adverse Event Tables
 
 We will use the `ex_adae` data included within the `formatters` package.
 
@@ -12,11 +12,8 @@ We will use the `ex_adae` data included within the `formatters` package.
 head(formatters::ex_adae)
 ```
 
-### Adverse Events
 
- 
-
-#### `rtables` Only
+### `rtables` Only
 
 Adverse Events by ID
 
@@ -33,15 +30,16 @@ s_events_patients <- function(x, labelstr, .N_col) {
   )
 }
 
-table_count_per_id <- function(df, termvar = "AEDECOD", idvar = "USUBJID") {
+table_count_per_id <- function(df, .N_col, termvar = "AEDECOD", idvar = "USUBJID") {
 
   x <- df[[termvar]]
   id <- df[[idvar]]
 
-  counts <- table(x[!duplicated(id)])
+  counts <- table(x[!duplicated(paste0(id, x))])
 
   in_rows(
-    .list = as.vector(counts),
+    .list = lapply(counts,
+                   function(xi) rcell(c(xi, xi/.N_col), "xx (xx.xx%)")),
     .labels = names(counts)
   )
 }
@@ -50,14 +48,15 @@ lyt <- basic_table(show_colcounts = TRUE) %>%
     split_cols_by("ARM") %>%
     analyze("USUBJID", afun = s_events_patients) %>%
     split_rows_by("AEBODSYS", child_labels = "visible", 
-                  split_fun = trim_levels_in_group("AEDECOD")) %>%
+                  split_fun = trim_levels_in_group("AEDECOD"),
+                  section_div = " ") %>%
     summarize_row_groups("USUBJID", cfun = s_events_patients) %>%
     analyze("AEDECOD", table_count_per_id, show_labels = "hidden", indent_mod = -1)
 
 build_table(lyt, ex_adae, alt_counts_df = ex_adsl)
 ```
 
-#### gt
+### gt
 
 ```{r}
 resetSession()
@@ -180,7 +179,7 @@ ex_tbl |>
 ```
 
 
-#### flextable
+### flextable
 
 ```{r message=FALSE}
 resetSession()
@@ -278,7 +277,7 @@ ft <- labelizor(
 ft
 ```
 
-#### tables
+### tables
 
 The `tables` package normally generates tables from single datasets, while this
 kind of table requires information from two:  `adsl` and `ex_adae`.
@@ -320,10 +319,12 @@ body <- tabular( Heading("Patients with at least one event")*1*
                       Percent(denom = ARM, fn = countpercentid)*
                       Heading()*USUBJID +
                     Heading("Total number of events")*1 +
-                    Heading()*AEDECOD*DropEmpty()) ~ 
+                    Heading()*AEDECOD*DropEmpty()*
+                      Heading()*Percent(denom = ARM, fn = countpercentid)*
+                      Heading()*USUBJID) ~ 
                  Heading()*ARM, 
                  data = ex_adae )
 
 tab <- rbind(heading, body)
-useGroupLabels(tab, indent = "&emsp;")
+useGroupLabels(tab, indent = "&emsp;", extraLines = 1)
 ```
