@@ -157,19 +157,19 @@ labels <- tools::toTitleCase(tolower(levels(adsl$DCSREAS)))
 names(labels) <- levels(adsl$DCSREAS)
 
 # data parts calculations
-part_header <- adsl |> count(TRT01A, name = "n_part")
+part_header <- adsl |> dplyr::count(TRT01A, name = "n_part")
 
 part_completed <- adsl |> filter(EOSSTT %in% "COMPLETED") |> 
   mutate(DCSREAS = "") |>
-  count(TRT01A, EOSSTT, DCSREAS)
+  dplyr::count(TRT01A, EOSSTT, DCSREAS)
 
 part_discontinued <- adsl |> 
   filter(EOSSTT %in% "DISCONTINUED") |> 
-  count(TRT01A, EOSSTT, DCSREAS)
+  dplyr::count(TRT01A, EOSSTT, DCSREAS)
 
 part_death <- cadsl |> 
   filter(EOSSTT %in% "DISCONTINUED", DCSREAS %in% "DEATH") |> 
-  count(TRT01A, EOSSTT, DTHCAUS) |> 
+  dplyr::count(TRT01A, EOSSTT, DTHCAUS) |> 
   mutate(EOSSTT = forcats::fct_expand(EOSSTT, "Death Cause"),
          EOSSTT = "Death Cause",
          DTHCAUS = tools::toTitleCase(tolower(DTHCAUS))

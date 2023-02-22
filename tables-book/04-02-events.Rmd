@@ -79,102 +79,104 @@ col_lbls <- header_n |>
   ) |> 
   dplyr::group_split(ARMN) 
 
-summary_ex <- merge(ex_adae, header_n, by = "ARM") |> 
+sum_ex <- merge(ex_adae, header_n, by = "ARM") |> 
   dplyr::group_by(ARM) |> 
   dplyr::summarize(
-    n = dplyr::n_distinct(USUBJID),
-    n_indiv = dplyr::n(),
-    pct_tot = n/mean(N),
+    n_oe = dplyr::n_distinct(USUBJID),
+    pct_oe = n_oe/mean(N),
+    n_tot = dplyr::n(),
     .groups = "drop"
-  ) |> 
-  dplyr::mutate(AEDECOD = "Patients with at least one event")
+  )
 
-indivsummary_ex <- merge(ex_adae, header_n, by = "ARM") |> 
+sum_aebodsys <- merge(ex_adae, header_n, by = "ARM") |> 
   dplyr::group_by(ARM, AEBODSYS) |> 
   dplyr::summarize(
-    n = dplyr::n_distinct(USUBJID),
-    pct_tot = n/mean(N),
-    n_indiv = dplyr::n(),
+    n_oe = dplyr::n_distinct(USUBJID),
+    pct_oe = n_oe/mean(N),
+    n_tot = dplyr::n(),
     .groups = "drop"
-  ) |> 
-  dplyr::mutate(AEDECOD = "Patients with at least one event")
+  )
 
-bodsys_summary <- merge(ex_adae, header_n, by = "ARM") |> 
+sum_aedecod <- merge(ex_adae, header_n, by = "ARM") |> 
   dplyr::group_by(ARM, AEBODSYS, AEDECOD) |> 
   dplyr::summarize(
-    n = dplyr::n_distinct(USUBJID),
-    pct_tot = n/mean(N),
-    n_indiv = dplyr::n(),
+    n_oe = dplyr::n_distinct(USUBJID),
+    pct_oe = n_oe/mean(N),
     .groups = "drop"
-  ) 
+  )
 
-ex_tbl <- dplyr::bind_rows(summary_ex, indivsummary_ex, bodsys_summary) |> 
-  tidyr::pivot_wider(
-    id_cols = c(AEBODSYS, AEDECOD), 
-    names_from = ARM, 
-    values_from = c(n, pct_tot, n_indiv)
-    ) |> 
+ex_tbl <- dplyr::bind_rows(sum_ex, sum_aebodsys, sum_aedecod) |> 
+  tidyr::pivot_longer(cols = c(n_oe, n_tot), names_to = "lbl", values_to = "n") |> 
   dplyr::mutate(
-    across(where(is.numeric), ~ifelse(is.na(.), 0, .)),
-    AEBODSYS = forcats::fct_na_value_to_level(AEBODSYS, level = " ")
-      )
+    pct_oe = ifelse(lbl == "n_tot", NA_real_, pct_oe)
+  ) |> 
+  pivot_wider(id_cols = c(AEBODSYS, AEDECOD, lbl), names_from = ARM, values_from = c(n, pct_oe)) |> 
+  dplyr::mutate(
+    AEDECOD = forcats::fct_relevel(
+      .f = dplyr::case_when(
+        is.na(AEDECOD) & lbl == "n_tot" ~ "Total number of events",
+        is.na(AEDECOD) & lbl == "n_oe" ~ "Patients with at least one event",
+        TRUE ~ AEDECOD
+      ),
+      c("Patients with at least one event", "Total number of events"),
+      after = 0
+      ),
+    AEBODSYS = forcats::fct_relevel(
+      forcats::fct_na_value_to_level(
+        AEBODSYS,
+        level = " "
+        ),
+      " ",
+      after = 0
+    )
+  ) |> 
+  dplyr::filter(!(lbl == "n_tot" & !(AEDECOD %in% c("Patients with at least one event", "Total number of events")))) |> 
+  dplyr::arrange(AEBODSYS, AEDECOD)
 
 ex_tbl |> 
   gt(
     rowname_col = "AEDECOD",
     groupname_col = "AEBODSYS"
   ) |> 
+  cols_hide(columns = "lbl") |> 
   fmt_percent(
     columns = starts_with("pct"),
     decimals = 1
   ) |> 
   cols_merge_n_pct(
     col_n = "n_A: Drug X",
-    col_pct = "pct_tot_A: Drug X"
+    col_pct = "pct_oe_A: Drug X"
   ) |> 
   cols_merge_n_pct(
     col_n = "n_B: Placebo",
-    col_pct = "pct_tot_B: Placebo"
+    col_pct = "pct_oe_B: Placebo"
   ) |> 
   cols_merge_n_pct(
     col_n = "n_C: Combination",
-    col_pct = "pct_tot_C: Combination"
-  ) |> 
-  tab_spanner(
-    label = md(col_lbls[[1]]),
-    columns = c("n_A: Drug X", "n_indiv_A: Drug X")
-  ) |> 
-  tab_spanner(
-    label = md(col_lbls[[2]]),
-    columns = c("n_B: Placebo", "n_indiv_B: Placebo")
-  ) |> 
-  tab_spanner(
-    label = md(col_lbls[[3]]),
-    columns = c("n_C: Combination", "n_indiv_C: Combination")
+    col_pct = "pct_oe_C: Combination"
   ) |> 
   cols_label(
-    .list = list(
-      "n_A: Drug X" = md("n  \n  (% of subjects)"),
-      "n_indiv_A: Drug X" = md("Total number  \n  of events"),
-      "n_B: Placebo" = md("n  \n  (% of subjects)"),
-      "n_indiv_B: Placebo" = md("Total number  \n  of events"),
-      "n_C: Combination" = md("n  \n  (% of subjects)"),
-      "n_indiv_C: Combination" = md("Total number  \n  of events")
-    )
+    "n_A: Drug X" = md(col_lbls[[1]]),
+    "n_B: Placebo" = md(col_lbls[[2]]),
+    "n_C: Combination" = md(col_lbls[[3]])
   ) |> 
   cols_align(
-    columns = 3:11,
+    columns = 3:9,
     align = "center"
+  ) |> 
+  cols_align(
+    columns = 1:2,
+    align = "left"
   ) |> 
   cols_width(
     .list = list(
       1:2 ~ px(250),
-      3:11 ~ px(100)
+      3:9 ~ px(120)
     )
   ) |> 
   tab_stub_indent(
     rows = 2:18,
-    indent = 2
+    indent = 3
   )
 ```
 
