@@ -30,7 +30,7 @@ build_table(lyt, adsl)
 
 ```
 
-## gt
+### gt
 
 ```{r}
 resetSession()
