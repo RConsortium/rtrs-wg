@@ -264,3 +264,69 @@ part3 <- tabular( Heading("")*DCSREAS*
 
 rbind(heading, part1, part2, part3)
 ```
+
+### tidytlg
+
+```{r}
+resetSession()
+library(dplyr)
+library(tidytlg)
+
+data("cadsl", package = "random.cdisc.data")
+
+adsl <- cadsl %>% 
+  mutate(COMPFL = case_when(EOSSTT == "COMPLETED" ~ "Y",
+                            TRUE ~ "N"))
+
+disc <- adsl %>% 
+  filter(EOSSTT == "DISCONTINUED")
+
+dth <- adsl %>% 
+  filter(DTHFL == "Y")
+
+# Create analysis population counts
+tbl1 <- freq(adsl,
+             rowvar = "SAFFL",
+             colvar = "ARM",
+             statlist = statlist("n"),
+             rowtext = "Analysis Set: Safety Population",
+             subset = SAFFL == "Y")
+
+# Create counts (percentages) for completed patients
+tbl2 <- freq(adsl,
+             rowvar = "COMPFL",
+             colvar = "ARM",
+             statlist = statlist("n (x.x%)"),
+             rowtext = "Completed",
+             subset = COMPFL == "Y")
+
+# Create counts (percentages) for discontinued reasons
+tbl3 <- freq(disc,
+             denom_df = adsl,
+             rowvar = "DCSREAS",
+             colvar = "ARM",
+             statlist = statlist("n (x.x%)"),
+             row_header = "Discontinued")
+
+# Create counts (percentages) for death reasons
+tbl4 <- freq(dth,
+             denom_df = adsl,
+             rowvar = "DTHCAUS",
+             colvar = "ARM",
+             statlist = statlist("n (x.x%)"),
+             row_header = "Death Cause")
+
+# combine analysis results together
+tbl <- bind_table(tbl1, tbl2, tbl3, tbl4)
+
+# output the analysis results
+gentlg(huxme       = tbl,
+       format      = "HTML",
+       print.hux = FALSE,
+       file        = "Table x.x.x.x",
+       orientation = "portrait",
+       title = "Study Disposition Summary",
+       colheader = c("","A: Drug X","B: Placebo","C: Combination"))
+```
+
+
