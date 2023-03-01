@@ -5,6 +5,43 @@ editor_options:
 ---
 ## Concomitant Medications
 
+### rtables
+
+```{r}
+resetSession()
+
+library(rtables)
+data("cadcm", package = "random.cdisc.data")
+data("cadsl", package = "random.cdisc.data")
+
+one_count_pct_gen <- function(label = NULL) {
+    function(x, .N_col) {
+       ret <- rcell(length(unique(x)) * c(1, 1/.N_col),
+                    format = "xx (xx.x%)")
+       if(!is.null(label))
+           obj_label(ret) <- label
+       ret
+    }
+}
+
+lyt <- basic_table(title = "Conmed Example",
+                   subtitles = "Uses the adcm dataset from random.cdisc.data",
+                   show_colcounts = TRUE) %>%
+    split_cols_by("ARM") %>%
+    analyze("USUBJID", afun = one_count_pct_gen("At Least One Concomittant Med")) %>%
+    split_rows_by("CMCLAS", split_fun = trim_levels_in_group("CMTRT")) %>%
+    analyze("CMTRT", afun = function(df, .N_col) {
+        cmtrtvec <- df$CMTRT
+        spl_usubj <- split(df$USUBJID, cmtrtvec)
+        fn <- one_count_pct_gen()
+        cells <- lapply(spl_usubj, fn, .N_col = .N_col)
+        names(cells) <- names(spl_usubj)
+        in_rows(.list = cells)
+    })
+
+build_table(lyt, cadcm, alt_counts_df = cadsl)
+```
+
 ### gt
 
 ```{r, comment=NA}
@@ -35,21 +72,18 @@ ct_cm <- dplyr::group_by(cadcm, TRT01A) |>
                 CMDECOD = factor("Number of sujects with any concomitant medication", levels = cmdecod_levels))
 
 ct_adcm <- dplyr::group_by(cadcm, TRT01A, CMCLAS, CMDECOD) |> 
-  dplyr::summarize(n = dplyr::n_distinct(USUBJID)) |> 
+  dplyr::summarize(n = dplyr::n_distinct(USUBJID), .groups = "drop") |> 
   dplyr::left_join(count(cadsl, TRT01A, name = "nall"), by = "TRT01A") |> 
   dplyr::mutate(pct = n / nall, nall = NULL)
 
 gt_adcm <- dplyr::bind_rows(ct_cm, ct_adcm) |>  
   tidyr::pivot_wider(id_cols = c(CMCLAS, CMDECOD), names_from = TRT01A, values_from = c(n, pct)) 
 
-## don't print it yet, uncomment when its ready
-##gt_adcm %>% gt()
 
 trt_n <- cadsl |> 
   dplyr::filter(SAFFL == "Y") |> 
   dplyr::group_by(TRT01A) |> 
-  dplyr::summarize(n = sprintf("%s  \nN=%i (100%%)", unique(TRT01A), dplyr::n())) |> 
-  dplyr::ungroup()
+  dplyr::summarize(n = sprintf("%s  \nN=%i (100%%)", unique(TRT01A), dplyr::n()), .groups = "drop") 
 
 tab_n <- dplyr::pull(trt_n, n) |> 
   as.list()
@@ -200,7 +234,7 @@ heading <- tabular(Heading("")*1*Heading("")*count ~
                    Heading()*ARM, 
                    data = adsl)
 
-body <- tabular( (Heading("Any concomitant medication")*1 + 
+body <- tabular( (Heading("Any concomitant medication")*1*Heading("")*1 + 
                   Heading()*CMCLAS*
                     Heading()*CMDECOD*DropEmpty())*
                  Heading()*countpercentid*Arguments(ARM = TRT01A)*
@@ -208,7 +242,7 @@ body <- tabular( (Heading("Any concomitant medication")*1 +
                  Heading()*TRT01A, 
                  data = cadcm)
 
-rbind(heading, body)
+useGroupLabels(rbind(heading, body), indent = "&emsp;")
 ```
 
 ### tidytlg

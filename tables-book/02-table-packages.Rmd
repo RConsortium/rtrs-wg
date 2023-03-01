@@ -9,7 +9,7 @@ Please contribute to this chapter.
 
 ## gt
 
-The `gt` ([website](https://gt.rstudio.com/)) package provides
+The `gt` package [@R-gt, [website](https://gt.rstudio.com/)] provides
 a high-level and declarative interface for composing tables. 
 Contains a variety of `formatter` functions for transforming cell values
 from an input data frame to the desired reporting values (combines mutation and
@@ -19,7 +19,7 @@ supported with the same declarative interface (e.g., HTML, LaTeX/PDF, and RTF).
 
 ## r2rtf
 
-The `r2rtf` ([website](https://merck.github.io/r2rtf/)) package 
+The `r2rtf` package [@R-r2rtf, [website](https://merck.github.io/r2rtf/)]
 creates production-ready tables and figures in RTF format. 
 The R package is designed to
 
@@ -33,9 +33,10 @@ minimizes package dependency
 Chapter 1-9 of [The R for Clinical Study Reports and Submission](https://r4csr.org/) book 
 provides examples by using `r2rtf` package. 
 
+
 ## rtables
 
-The `rtables` package defines a pipe-able grammar for declaring complex table
+The `rtables` package [@R-rtables] defines a pipe-able grammar for declaring complex table
 structure layouts via nested splitting - in row- and column-space - and the
 specification of analysis functions which will calculate cell values within that
 structure. These pre-data table layouts are then applied to data to build the
@@ -50,7 +51,7 @@ on [CRAN](https://CRAN.R-project.org/package=rtables).
 
 ## flextable
 
-`flextable` is providing a *grammar* for creating and customizing tables. The
+`flextable` [@R-flextable] is providing a *grammar* for creating and customizing tables. The
 following formats are supported: 'Word' (*.docx), 'PowerPoint' (*.pptx), 'PDF'
 ,'HTML' and R 'Grid Graphics'. The syntax is the same for the user regardless of
 the type of output to be produced. A set of functions allows the creation,
@@ -63,9 +64,25 @@ Source code is on [GitHub](https://github.com/davidgohel/flextable), a
 [user manual](https://ardata-fr.github.io/flextable-book/) is available. 
 `flextable` is available on [CRAN](https://CRAN.R-project.org/package=flextable).
 
+## tfrmt
+
+The `tfrmt` ([website](https://gsk-biostatistics.github.io/tfrmt/)) package 
+provides a language for defining display-related metadata and table formatting 
+before any data is available. This package offers an intuitive interface for 
+defining and layering standard or custom formats, to which ARD (analysis 
+results data) is supplied. It also presents the novel ability to easily 
+generate mock displays using metadata that will be used for the actual 
+displays. `tfrmt` is built on top of the `gt` package, which is intended to 
+support a variety of output formats in the future. Table features (titles, 
+header, footnotes, etc.) as well as specific formatting (e.g. rounding, 
+scientific notation, alignment, spacing) are supported.
+
+`tfrmt` source code is on [GitHub](https://github.com/GSK-Biostatistics/tfrmt). 
+`tfrmt` is also available on [CRAN](https://CRAN.R-project.org/package=tfrmt).
+
 ## tables
 
-The `tables` package provides a formula-driven interface for
+The `tables` package [@R-tables] provides a formula-driven interface for
 computing the contents of tables and formatting them.  It was 
 inspired by `SAS PROC TABULATE`, but is not compatible with it.
 
@@ -90,6 +107,7 @@ if (!requireNamespace("tables", quietly = TRUE) ||
   stop("This document requires tables version 0.9.10 or higher.")
 ```
 
+<<<<<<< HEAD
 ## tidytlg
 
 Tidytlg provides a framework for creating tables, listings, and graphs (TLGs) using 
@@ -101,3 +119,11 @@ to produce rtf/html output.
 
 `tidytlg` source code is on [GitHub](https://github.com/pharmaverse/tidytlg) as well
 as the [documentation](https://pharmaverse.github.io/tidytlg/main/).
+=======
+```{r include=FALSE}
+# automatically create a bib database for R packages
+knitr::write_bib(c(
+  "gt", "r2rtf", "rtables", "flextable", "tables"
+), 'packages.bib')
+```
+>>>>>>> origin/main

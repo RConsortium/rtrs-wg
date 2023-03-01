@@ -47,7 +47,7 @@ We welcome all contribution, including but not limited to:
  - improving R code
 
 In case you are new to using git and GitHub but would like to make a
-contribution then please write an GitHub issue and we will reach out to you to
+contribution then please write a GitHub issue and we will reach out to you to
 add the content.
 
 
@@ -73,13 +73,13 @@ remotes::install_github("insightsengineering/random.cdisc.data")
 
 The data in `random.cdisc.data` is completely synthetic, meaning no patient data
 has been used to create it. The data is also fairly basic, meaning real study 
-data is has often more signal and patterns.
+data often has more signal and patterns.
 
 ```{r}
 data(package="random.cdisc.data")$results[, "Item"]
 ```
 
-note that the prepending `c` stands for caches. So, for example the cached 
+In this document, the prepending `c` stands for caches. So, for example the cached 
 synthetic subject level dataset `ADSL`:
 
 ```{r}
@@ -97,20 +97,15 @@ At some point we may switch to `renv` to install the `R` packages used
 for this book. For right now you can install the packages yourself with:
 
 ```{r, eval = FALSE}
-install.packages(c("rtables", "gt", "remotes", "tidyverse", "bookdown", "tables"))
+install.packages(c("rtables", "gt", "remotes", "tidyverse", "bookdown", "r2rtf"))
 install.packages('flextable', repos = 'https://davidgohel.r-universe.dev')
 
 remotes::install_github("insightsengineering/random.cdisc.data")
 remotes::install_github("insightsengineering/scda")
 remotes::install_github("insightsengineering/nestcolor")
 remotes::install_github("insightsengineering/tern", ref = "v0.7.10")
-```
-
-```{r include=FALSE}
-# automatically create a bib database for R packages
-knitr::write_bib(c(
-  .packages(), 'bookdown', 'knitr', 'rmarkdown'
-), 'packages.bib')
+remotes::install_github("dmurdoch/tables")
+remotes::install_github("pharmaverse/tidytlg")
 ```
 
 In each of the sections below, we will reset R to close to the

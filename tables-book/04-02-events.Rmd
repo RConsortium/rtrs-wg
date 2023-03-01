@@ -4,7 +4,7 @@ editor_options:
   chunk_output_type: console
 ---
 
-## Event Tables
+## Adverse Event Tables
 
 We will use the `ex_adae` data included within the `formatters` package.
 
@@ -12,11 +12,8 @@ We will use the `ex_adae` data included within the `formatters` package.
 head(formatters::ex_adae)
 ```
 
-### Adverse Events
 
- 
-
-#### `rtables` Only
+### `rtables` Only
 
 Adverse Events by ID
 
@@ -33,15 +30,16 @@ s_events_patients <- function(x, labelstr, .N_col) {
   )
 }
 
-table_count_per_id <- function(df, termvar = "AEDECOD", idvar = "USUBJID") {
+table_count_per_id <- function(df, .N_col, termvar = "AEDECOD", idvar = "USUBJID") {
 
   x <- df[[termvar]]
   id <- df[[idvar]]
 
-  counts <- table(x[!duplicated(id)])
+  counts <- table(x[!duplicated(paste0(id, x))])
 
   in_rows(
-    .list = as.vector(counts),
+    .list = lapply(counts,
+                   function(xi) rcell(c(xi, xi/.N_col), "xx (xx.xx%)")),
     .labels = names(counts)
   )
 }
@@ -50,14 +48,138 @@ lyt <- basic_table(show_colcounts = TRUE) %>%
     split_cols_by("ARM") %>%
     analyze("USUBJID", afun = s_events_patients) %>%
     split_rows_by("AEBODSYS", child_labels = "visible", 
-                  split_fun = trim_levels_in_group("AEDECOD")) %>%
+                  split_fun = trim_levels_in_group("AEDECOD"),
+                  section_div = " ") %>%
     summarize_row_groups("USUBJID", cfun = s_events_patients) %>%
     analyze("AEDECOD", table_count_per_id, show_labels = "hidden", indent_mod = -1)
 
 build_table(lyt, ex_adae, alt_counts_df = ex_adsl)
 ```
 
-#### flextable
+### gt
+
+```{r}
+resetSession()
+
+library(tidyverse)
+library(gt)
+
+ex_adsl <- formatters::ex_adsl
+ex_adae <- formatters::ex_adae
+
+header_n <- ex_adsl |> 
+  dplyr::group_by(ARM) |> 
+  dplyr::summarize(
+    N = dplyr::n_distinct(USUBJID)
+  ) 
+
+col_lbls <- header_n |> 
+  dplyr::transmute(
+    ARMN = sprintf("%s  \n  (N=%i)", ARM, N)
+  ) |> 
+  dplyr::group_split(ARMN) 
+
+summary_ex <- merge(ex_adae, header_n, by = "ARM") |> 
+  dplyr::group_by(ARM) |> 
+  dplyr::summarize(
+    n = dplyr::n_distinct(USUBJID),
+    n_indiv = dplyr::n(),
+    pct_tot = n/mean(N),
+    .groups = "drop"
+  ) |> 
+  dplyr::mutate(AEDECOD = "Patients with at least one event")
+
+indivsummary_ex <- merge(ex_adae, header_n, by = "ARM") |> 
+  dplyr::group_by(ARM, AEBODSYS) |> 
+  dplyr::summarize(
+    n = dplyr::n_distinct(USUBJID),
+    pct_tot = n/mean(N),
+    n_indiv = dplyr::n(),
+    .groups = "drop"
+  ) |> 
+  dplyr::mutate(AEDECOD = "Patients with at least one event")
+
+bodsys_summary <- merge(ex_adae, header_n, by = "ARM") |> 
+  dplyr::group_by(ARM, AEBODSYS, AEDECOD) |> 
+  dplyr::summarize(
+    n = dplyr::n_distinct(USUBJID),
+    pct_tot = n/mean(N),
+    n_indiv = dplyr::n(),
+    .groups = "drop"
+  ) 
+
+ex_tbl <- dplyr::bind_rows(summary_ex, indivsummary_ex, bodsys_summary) |> 
+  tidyr::pivot_wider(
+    id_cols = c(AEBODSYS, AEDECOD), 
+    names_from = ARM, 
+    values_from = c(n, pct_tot, n_indiv)
+    ) |> 
+  dplyr::mutate(
+    across(where(is.numeric), ~ifelse(is.na(.), 0, .)),
+    AEBODSYS = forcats::fct_na_value_to_level(AEBODSYS, level = " ")
+      )
+
+ex_tbl |> 
+  gt(
+    rowname_col = "AEDECOD",
+    groupname_col = "AEBODSYS"
+  ) |> 
+  fmt_percent(
+    columns = starts_with("pct"),
+    decimals = 1
+  ) |> 
+  cols_merge_n_pct(
+    col_n = "n_A: Drug X",
+    col_pct = "pct_tot_A: Drug X"
+  ) |> 
+  cols_merge_n_pct(
+    col_n = "n_B: Placebo",
+    col_pct = "pct_tot_B: Placebo"
+  ) |> 
+  cols_merge_n_pct(
+    col_n = "n_C: Combination",
+    col_pct = "pct_tot_C: Combination"
+  ) |> 
+  tab_spanner(
+    label = md(col_lbls[[1]]),
+    columns = c("n_A: Drug X", "n_indiv_A: Drug X")
+  ) |> 
+  tab_spanner(
+    label = md(col_lbls[[2]]),
+    columns = c("n_B: Placebo", "n_indiv_B: Placebo")
+  ) |> 
+  tab_spanner(
+    label = md(col_lbls[[3]]),
+    columns = c("n_C: Combination", "n_indiv_C: Combination")
+  ) |> 
+  cols_label(
+    .list = list(
+      "n_A: Drug X" = md("n  \n  (% of subjects)"),
+      "n_indiv_A: Drug X" = md("Total number  \n  of events"),
+      "n_B: Placebo" = md("n  \n  (% of subjects)"),
+      "n_indiv_B: Placebo" = md("Total number  \n  of events"),
+      "n_C: Combination" = md("n  \n  (% of subjects)"),
+      "n_indiv_C: Combination" = md("Total number  \n  of events")
+    )
+  ) |> 
+  cols_align(
+    columns = 3:11,
+    align = "center"
+  ) |> 
+  cols_width(
+    .list = list(
+      1:2 ~ px(250),
+      3:11 ~ px(100)
+    )
+  ) |> 
+  tab_stub_indent(
+    rows = 2:18,
+    indent = 2
+  )
+```
+
+
+### flextable
 
 ```{r message=FALSE}
 resetSession()
@@ -155,7 +277,7 @@ ft <- labelizor(
 ft
 ```
 
-#### tables
+### tables
 
 The `tables` package normally generates tables from single datasets, while this
 kind of table requires information from two:  `adsl` and `ex_adae`.
@@ -188,20 +310,23 @@ heading <- tabular(Heading("")*1*
                      Heading("")*count ~ 
                    Heading()*ARM, data = adsl)
 
-body <- tabular( Heading("Patients with at least one event")*
-                   countpercentid*Arguments(ARM = ARM)*
+body <- tabular( Heading("Patients with at least one event")*1*
+                   Heading("")*countpercentid*Arguments(ARM = ARM)*
                    Heading()*USUBJID +
-                 Heading("Total number of events")*1 +
+                 Heading("Total number of events")*1*Heading("")*1 +
                  Heading()*AEBODSYS*
                    (Heading("Patients with at least one event")*
                       Percent(denom = ARM, fn = countpercentid)*
                       Heading()*USUBJID +
                     Heading("Total number of events")*1 +
-                    Heading()*AEDECOD*DropEmpty()) ~ 
+                    Heading()*AEDECOD*DropEmpty()*
+                      Heading()*Percent(denom = ARM, fn = countpercentid)*
+                      Heading()*USUBJID) ~ 
                  Heading()*ARM, 
                  data = ex_adae )
 
-rbind(heading, body)
+tab <- rbind(heading, body)
+useGroupLabels(tab, indent = "&emsp;", extraLines = 1)
 ```
 
 #### tidytlg

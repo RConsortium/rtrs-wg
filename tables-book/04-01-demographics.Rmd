@@ -75,16 +75,18 @@ custom_summary <- function(df, group_var, sum_var){
   is_categorical <- is.character(eval(expr(`$`(df, !!sum_var)))) | is.factor(eval(expr(`$`(df, !!sum_var)))) 
   
   if (is_categorical){
-    df <- df %>% 
-      dplyr::group_by(!!group_var) %>% 
-      dplyr::mutate(N = n()) %>% 
-      dplyr::ungroup() %>% 
-      dplyr::group_by(!!group_var, !!sum_var) %>% 
-      dplyr::summarize(val = n(),
-                       sd = 100*n()/mean(N)) %>% 
-      dplyr::ungroup() %>% 
-      tidyr::pivot_wider(id_cols = !!sum_var, names_from = !!group_var, values_from = c(val, sd)) %>% 
-      dplyr::rename(label = !!sum_var) %>% 
+    df <- df  |>  
+      dplyr::group_by(!!group_var) |> 
+      dplyr::mutate(N = n()) |> 
+      dplyr::ungroup() |> 
+      dplyr::group_by(!!group_var, !!sum_var) |> 
+      dplyr::summarize(
+        val = n(),
+        sd = 100*n()/mean(N),
+        .groups = "drop"
+        ) |>
+      tidyr::pivot_wider(id_cols = !!sum_var, names_from = !!group_var, values_from = c(val, sd)) |> 
+      dplyr::rename(label = !!sum_var) |> 
       dplyr::mutate(isnum = FALSE,
                     across(where(is.numeric), ~ifelse(is.na(.), 0, .))) 
     
@@ -94,27 +96,29 @@ custom_summary <- function(df, group_var, sum_var){
     
     sum_unit <- sprintf(" (%s)", attr(eval(expr(`$`(df, !!sum_var))), "units"))
     
-    df <- df %>% 
-      dplyr::group_by(!!group_var) %>% 
-      dplyr::summarize(n = sum(!is.na(!!sum_var)),
-                       mean = mean(!!sum_var, na.rm = TRUE),
-                       sd = sd(!!sum_var, na.rm = TRUE),
-                       median = median(!!sum_var, na.rm = TRUE),
-                       min = min(!!sum_var, na.rm = TRUE),
-                       max = max(!!sum_var, na.rm = TRUE),
-                       min_max = NA) %>% 
-      dplyr::ungroup() %>% 
-      tidyr::pivot_longer(cols = c(n, mean, median, min_max), names_to = "label", values_to = "val") %>% 
+    df <- df |> 
+      dplyr::group_by(!!group_var) |> 
+      dplyr::summarize(
+        n = sum(!is.na(!!sum_var)),
+        mean = mean(!!sum_var, na.rm = TRUE),
+        sd = sd(!!sum_var, na.rm = TRUE),
+        median = median(!!sum_var, na.rm = TRUE),
+        min = min(!!sum_var, na.rm = TRUE),
+        max = max(!!sum_var, na.rm = TRUE),
+        min_max = NA,
+        .groups = "drop"
+        ) |> 
+      tidyr::pivot_longer(cols = c(n, mean, median, min_max), names_to = "label", values_to = "val") |> 
       dplyr::mutate(sd = ifelse(label == "mean", sd, NA),
                 max = ifelse(label == "min_max", max, NA),
                 min = ifelse(label == "min_max", min, NA),
-                label = dplyr::recode(label, "mean" = "Mean (SD)", "min_max" = "Min - Max", "median" = "Median")) %>% 
-      tidyr::pivot_wider(id_cols = label, names_from = !!group_var, values_from = c(val, sd, min, max)) %>% 
+                label = dplyr::recode(label, "mean" = "Mean (SD)", "min_max" = "Min - Max", "median" = "Median")) |>  
+      tidyr::pivot_wider(id_cols = label, names_from = !!group_var, values_from = c(val, sd, min, max)) |> 
       dplyr::mutate(isnum = TRUE)
     
   }
   
-  df %>% 
+  df |> 
     dplyr::mutate(category = paste0(stringr::str_to_title(deparse(substitute(!!sum_var))),
                                      sum_unit)) 
 }
@@ -126,49 +130,51 @@ adsl_summary <- purrr::map_df(.x = vars(AGE, SEX, COUNTRY),
 
 # Count number of patients per Arm
 
-total_n_arm <- ex_adsl %>% 
-  dplyr::group_by(ARM) %>% 
-  dplyr::summarise(N = n()) %>% 
-  dplyr::ungroup() 
+total_n_arm <- ex_adsl |>
+  dplyr::group_by(ARM) |> 
+  dplyr::summarise(N = n(), .groups = "drop")
 
 # gt
 
 gt(adsl_summary, 
    rowname_col = "label",
-   groupname_col = "category") %>%
+   groupname_col = "category") |>
   tab_header(
     title = "x.x: Study Subject Data",
-    subtitle = html("x.x.x: Demographic Characteristics<br>Table x.x.x.x: Demographic Characteristics - Full Analysis Set"),
+    subtitle = md("x.x.x: Demographic Characteristics  \n  Table x.x.x.x: Demographic Characteristics - Full Analysis Set"),
     preheader = c("Protocol: XXXXX", "Cutoff date: DDMMYYYY")
-  ) %>% 
-  tab_source_note("Source: ADSL DDMMYYYY hh:mm; Listing x.xx; SDTM package: DDMMYYYY") %>% 
-  opt_align_table_header(align = "left") %>% 
-  fmt_integer(columns = starts_with(c("val", "min", "max")), rows = label != "Mean (SD)") %>% 
-  fmt_number(columns = starts_with(c("val", "sd")), rows = label == "Mean (SD)", decimals = 1) %>% 
-  fmt_number(columns = starts_with("sd"), rows = isnum == FALSE, decimals = 1) %>% 
-  sub_missing(missing_text = "") %>% 
-  summary_rows(groups = c("Sex, n (%)", "Country, n (%)"),
-               columns = starts_with("val"),
-               fns = list(n = ~sum(.)),
-               missing_text = "",
-               formatter = fmt_integer) %>% 
-  cols_merge_n_pct(col_n = "val_A: Drug X", col_pct = "sd_A: Drug X") %>% 
-  cols_merge_n_pct(col_n = "val_B: Placebo", col_pct = "sd_B: Placebo") %>% 
-  cols_merge_n_pct(col_n = "val_C: Combination", col_pct = "sd_C: Combination") %>% 
-  cols_merge_range(col_begin = "min_A: Drug X", col_end = "max_A: Drug X", sep = " - ") %>% 
-  cols_merge_range(col_begin = "min_B: Placebo", col_end = "max_B: Placebo", sep = " - ") %>% 
-  cols_merge_range(col_begin = "min_C: Combination", col_end = "max_C: Combination", sep = " - ") %>% 
-  cols_merge(columns = c("val_A: Drug X", "min_A: Drug X"), pattern = "{1}{2}") %>% 
-  cols_merge(columns = c("val_B: Placebo", "min_B: Placebo"), pattern = "{1}{2}") %>% 
-  cols_merge(columns = c("val_C: Combination", "min_C: Combination"), pattern = "{1}{2}") %>% 
-  cols_hide(columns = isnum) %>% 
+  ) |> 
+  tab_source_note("Source: ADSL DDMMYYYY hh:mm; Listing x.xx; SDTM package: DDMMYYYY") |> 
+  opt_align_table_header(align = "left") |> 
+  fmt_integer(columns = starts_with(c("val", "min", "max")), rows = label != "Mean (SD)") |> 
+  fmt_number(columns = starts_with(c("val", "sd")), rows = label == "Mean (SD)", decimals = 1) |> 
+  fmt_number(columns = starts_with("sd"), rows = isnum == FALSE, decimals = 1) |> 
+  sub_missing(missing_text = "") |> 
+  summary_rows(
+    groups = c("Sex, n (%)", "Country, n (%)"),
+    columns = starts_with("val"),
+    fns = list(n = ~sum(.)),
+    missing_text = "",
+    formatter = fmt_integer #,
+    # side = "top"
+    ) |> 
+  cols_merge_n_pct(col_n = "val_A: Drug X", col_pct = "sd_A: Drug X") |>
+  cols_merge_n_pct(col_n = "val_B: Placebo", col_pct = "sd_B: Placebo") |> 
+  cols_merge_n_pct(col_n = "val_C: Combination", col_pct = "sd_C: Combination") |> 
+  cols_merge_range(col_begin = "min_A: Drug X", col_end = "max_A: Drug X", sep = " - ") |> 
+  cols_merge_range(col_begin = "min_B: Placebo", col_end = "max_B: Placebo", sep = " - ") |> 
+  cols_merge_range(col_begin = "min_C: Combination", col_end = "max_C: Combination", sep = " - ") |> 
+  cols_merge(columns = c("val_A: Drug X", "min_A: Drug X"), pattern = "{1}{2}") |> 
+  cols_merge(columns = c("val_B: Placebo", "min_B: Placebo"), pattern = "{1}{2}") |> 
+  cols_merge(columns = c("val_C: Combination", "min_C: Combination"), pattern = "{1}{2}") |> 
+  cols_hide(columns = isnum) |> 
   cols_align(align = c("center"),
-             columns = c("val_A: Drug X", "val_B: Placebo", "val_C: Combination")) %>% 
+             columns = c("val_A: Drug X", "val_B: Placebo", "val_C: Combination")) |> 
   cols_align(align = "center",
-             columns = 1) %>% 
-  cols_label("val_A: Drug X" = html(sprintf("A: Drug X<br> N=%i (100%%)", total_n_arm$N[1])),
-             "val_B: Placebo" = html(sprintf("B: Placebo<br> N=%i (100%%)", total_n_arm$N[2])),
-             "val_C: Combination" = html(sprintf("C: Combination<br> N=%i (100%%)", total_n_arm$N[3]))) %>% 
+             columns = 1) |> 
+  cols_label("val_A: Drug X" = md(sprintf("A: Drug X  \n  N=%i (100%%)", total_n_arm$N[1])),
+             "val_B: Placebo" = md(sprintf("B: Placebo  \n  N=%i (100%%)", total_n_arm$N[2])),
+             "val_C: Combination" = md(sprintf("C: Combination  \n  N=%i (100%%)", total_n_arm$N[3]))) |> 
   tab_options(
     table.font.size = 9,
     page.orientation = "landscape",
@@ -229,9 +235,19 @@ ft
 
 ### tables
 
+The `tables` package uses a different style
+than the other packages for tables such as this, where
+there are separate sections for age, sex and country
+breakdowns of the data.  Rather than putting
+the section heading on a separate line, it normally
+puts the heading in a separate column to the left
+of the other columns.
+
 ```{r}
 resetSession()
+
 ex_adsl <- formatters::ex_adsl
+
 library(tables)
 table_options(doCSS = TRUE)
 
@@ -248,14 +264,20 @@ countpercent <- function(num, denom)
           length(num), 
           100*length(num)/length(denom))
 
-tabular( Heading(n)*1 +
-         AGE * (Heading("Mean (SD)")*meansd +
-                Heading("Median (IQR)")*medianiqr +
-                Heading("Min - Max")*minmax) +
-         (SEX + COUNTRY)*Heading()*
-           Percent(denom = Equal(ARM), fn = countpercent) ~ 
+count <- function(x) sprintf("(N=%d)", length(x))
+
+tab <- tabular( Heading()*1*Heading()*count +
+         Heading("Age (Years)")*
+           AGE * (Heading("Mean (SD)")*meansd +
+                  Heading("Median (IQR)")*medianiqr +
+                  Heading("Min - Max")*minmax) +
+         (Heading("Sex, n, (%)")*SEX +
+          Heading("Country, n, (%)")*COUNTRY)*
+            Heading()*Percent(denom = Equal(ARM), fn = countpercent) ~ 
          Heading()*ARM, 
          data = ex_adsl )
+
+useGroupLabels(tab, indent = "&emsp;")
 ```
 
 ### tidytlg

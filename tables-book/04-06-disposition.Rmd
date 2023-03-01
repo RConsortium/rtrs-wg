@@ -29,6 +29,7 @@ lyt <- basic_table() |>
 build_table(lyt, adsl)
 
 ```
+
 ### gt
 
 ```{r}
@@ -215,6 +216,7 @@ ft
 
 ```{r}
 resetSession()
+
 adsl <- cadsl
 
 # Change the labels to title case
@@ -262,7 +264,8 @@ part3 <- tabular( Heading("")*DCSREAS*
                   data = subset(adsl, EOSSTT == "Discontinued" &
                                       DCSREAS == "Death"))
 
-rbind(heading, part1, part2, part3)
+useGroupLabels(rbind(heading, part1, part2, part3), 
+               indent = "&emsp;")
 ```
 
 ### tidytlg
