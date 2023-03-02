@@ -1,37 +1,62 @@
 <!DOCTYPE html>
 <html lang="" xml:lang="">
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<meta charset="utf-8">
-<meta http-equiv="X-UA-Compatible" content="IE=edge">
-<title>Chapter 3 Formatting and Rendering Tables | Tables in Clinical Trials with R</title>
-<meta name="description" content="Example code to create tables commonly used for analyzing clinical trials data.">
-<meta name="generator" content="bookdown 0.32 and GitBook 2.6.7">
-<meta property="og:title" content="Chapter 3 Formatting and Rendering Tables | Tables in Clinical Trials with R">
-<meta property="og:type" content="book">
-<meta property="og:description" content="Example code to create tables commonly used for analyzing clinical trials data.">
-<meta name="github-repo" content="RConsortium/rtrs-wg">
-<meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Chapter 3 Formatting and Rendering Tables | Tables in Clinical Trials with R">
-<meta name="twitter:description" content="Example code to create tables commonly used for analyzing clinical trials data.">
-<meta name="author" content="R Consortium Tables Working Group">
-<meta name="date" content="2023-03-02">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<meta name="apple-mobile-web-app-capable" content="yes">
-<meta name="apple-mobile-web-app-status-bar-style" content="black">
-<link rel="prev" href="tablepkgs.html">
-<link rel="next" href="commontables.html">
-<script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script><script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script><link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet">
-<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet">
-<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet">
-<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet">
-<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet">
-<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet">
-<link href="libs/gitbook-2.6.7/css/plugin-clipboard.css" rel="stylesheet">
-<link href="libs/anchor-sections-1.1.0/anchor-sections.css" rel="stylesheet">
-<link href="libs/anchor-sections-1.1.0/anchor-sections-hash.css" rel="stylesheet">
-<script src="libs/anchor-sections-1.1.0/anchor-sections.js"></script><link href="libs/tabwid-1.1.3/tabwid.css" rel="stylesheet">
-<script src="libs/tabwid-1.1.3/tabwid.js"></script><style type="text/css">
+
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>Chapter 3 Formatting and Rendering Tables | Tables in Clinical Trials with R</title>
+  <meta name="description" content="Example code to create tables commonly used for analyzing clinical trials data." />
+  <meta name="generator" content="bookdown 0.32 and GitBook 2.6.7" />
+
+  <meta property="og:title" content="Chapter 3 Formatting and Rendering Tables | Tables in Clinical Trials with R" />
+  <meta property="og:type" content="book" />
+  
+  <meta property="og:description" content="Example code to create tables commonly used for analyzing clinical trials data." />
+  <meta name="github-repo" content="RConsortium/rtrs-wg" />
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="Chapter 3 Formatting and Rendering Tables | Tables in Clinical Trials with R" />
+  
+  <meta name="twitter:description" content="Example code to create tables commonly used for analyzing clinical trials data." />
+  
+
+<meta name="author" content="R Consortium Tables Working Group" />
+
+
+<meta name="date" content="2023-03-02" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+  
+  
+<link rel="prev" href="tablepkgs.html"/>
+<link rel="next" href="commontables.html"/>
+<script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-clipboard.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+<link href="libs/anchor-sections-1.1.0/anchor-sections.css" rel="stylesheet" />
+<link href="libs/anchor-sections-1.1.0/anchor-sections-hash.css" rel="stylesheet" />
+<script src="libs/anchor-sections-1.1.0/anchor-sections.js"></script>
+<link href="libs/tabwid-1.1.3/tabwid.css" rel="stylesheet" />
+<script src="libs/tabwid-1.1.3/tabwid.js"></script>
+
+
+<style type="text/css">
 pre > code.sourceCode { white-space: pre; position: relative; }
 pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
 pre > code.sourceCode > span:empty { height: 1.2em; }
@@ -95,6 +120,7 @@ code span.va { color: #19177c; } /* Variable */
 code span.vs { color: #4070a0; } /* VerbatimString */
 code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
 </style>
+
 <style type="text/css">
 /* Used with Pandoc 2.11+ new --citeproc when CSL is used */
 div.csl-bib-body { }
@@ -117,12 +143,14 @@ div.csl-indent {
   margin-left: 2em;
 }
 </style>
-<link rel="stylesheet" href="static/css/fira-code.css" type="text/css">
-<link rel="stylesheet" href="static/css/fira-sans-condensed.css" type="text/css">
-<link rel="stylesheet" href="static/css/arial.css" type="text/css">
-<link rel="stylesheet" href="static/css/open-sans.css" type="text/css">
-<link rel="stylesheet" href="static/css/style.css" type="text/css">
+
+<link rel="stylesheet" href="static/css/fira-code.css" type="text/css" />
+<link rel="stylesheet" href="static/css/fira-sans-condensed.css" type="text/css" />
+<link rel="stylesheet" href="static/css/arial.css" type="text/css" />
+<link rel="stylesheet" href="static/css/open-sans.css" type="text/css" />
+<link rel="stylesheet" href="static/css/style.css" type="text/css" />
 </head>
+
 <body>
 
 
@@ -130,21 +158,20 @@ div.csl-indent {
   <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
 
     <div class="book-summary">
-      <nav role="navigation"><ul class="summary">
+      <nav role="navigation">
+
+<ul class="summary">
 <li><a href="./">Using R to create tables for clinical trials</a></li>
 
-<li class="divider">
-<li class="chapter" data-level="1" data-path="index.html">
-<a href="index.html"><i class="fa fa-check"></i><b>1</b> About</a>
+<li class="divider"></li>
+<li class="chapter" data-level="1" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i><b>1</b> About</a>
 <ul>
 <li class="chapter" data-level="1.1" data-path="index.html"><a href="index.html#introduction"><i class="fa fa-check"></i><b>1.1</b> Introduction</a></li>
 <li class="chapter" data-level="1.2" data-path="index.html"><a href="index.html#call-for-contributions"><i class="fa fa-check"></i><b>1.2</b> Call for Contributions</a></li>
 <li class="chapter" data-level="1.3" data-path="index.html"><a href="index.html#data-used-for-examples"><i class="fa fa-check"></i><b>1.3</b> Data Used For Examples</a></li>
 <li class="chapter" data-level="1.4" data-path="index.html"><a href="index.html#installing-the-r-packages"><i class="fa fa-check"></i><b>1.4</b> Installing the R packages</a></li>
-</ul>
-</li>
-<li class="chapter" data-level="2" data-path="tablepkgs.html">
-<a href="tablepkgs.html"><i class="fa fa-check"></i><b>2</b> Overview table R packages</a>
+</ul></li>
+<li class="chapter" data-level="2" data-path="tablepkgs.html"><a href="tablepkgs.html"><i class="fa fa-check"></i><b>2</b> Overview table R packages</a>
 <ul>
 <li class="chapter" data-level="2.1" data-path="tablepkgs.html"><a href="tablepkgs.html#gt"><i class="fa fa-check"></i><b>2.1</b> gt</a></li>
 <li class="chapter" data-level="2.2" data-path="tablepkgs.html"><a href="tablepkgs.html#r2rtf"><i class="fa fa-check"></i><b>2.2</b> r2rtf</a></li>
@@ -152,72 +179,55 @@ div.csl-indent {
 <li class="chapter" data-level="2.4" data-path="tablepkgs.html"><a href="tablepkgs.html#flextable"><i class="fa fa-check"></i><b>2.4</b> flextable</a></li>
 <li class="chapter" data-level="2.5" data-path="tablepkgs.html"><a href="tablepkgs.html#tfrmt"><i class="fa fa-check"></i><b>2.5</b> tfrmt</a></li>
 <li class="chapter" data-level="2.6" data-path="tablepkgs.html"><a href="tablepkgs.html#tables"><i class="fa fa-check"></i><b>2.6</b> tables</a></li>
-</ul>
-</li>
-<li class="chapter" data-level="3" data-path="formatting-and-rendering-tables.html">
-<a href="formatting-and-rendering-tables.html"><i class="fa fa-check"></i><b>3</b> Formatting and Rendering Tables</a>
+</ul></li>
+<li class="chapter" data-level="3" data-path="formatting-and-rendering-tables.html"><a href="formatting-and-rendering-tables.html"><i class="fa fa-check"></i><b>3</b> Formatting and Rendering Tables</a>
 <ul>
-<li class="chapter" data-level="3.1" data-path="formatting-and-rendering-tables.html">
-<a href="formatting-and-rendering-tables.html#title-footnotes"><i class="fa fa-check"></i><b>3.1</b> Title &amp; Footnotes</a>
+<li class="chapter" data-level="3.1" data-path="formatting-and-rendering-tables.html"><a href="formatting-and-rendering-tables.html#title-footnotes"><i class="fa fa-check"></i><b>3.1</b> Title &amp; Footnotes</a>
 <ul>
 <li class="chapter" data-level="3.1.1" data-path="formatting-and-rendering-tables.html"><a href="formatting-and-rendering-tables.html#rtables-1"><i class="fa fa-check"></i><b>3.1.1</b> rtables</a></li>
 <li class="chapter" data-level="3.1.2" data-path="formatting-and-rendering-tables.html"><a href="formatting-and-rendering-tables.html#flextable-1"><i class="fa fa-check"></i><b>3.1.2</b> flextable</a></li>
 <li class="chapter" data-level="3.1.3" data-path="formatting-and-rendering-tables.html"><a href="formatting-and-rendering-tables.html#tables-1"><i class="fa fa-check"></i><b>3.1.3</b> tables</a></li>
-</ul>
-</li>
-<li class="chapter" data-level="3.2" data-path="formatting-and-rendering-tables.html">
-<a href="formatting-and-rendering-tables.html#captions"><i class="fa fa-check"></i><b>3.2</b> Captions</a>
+</ul></li>
+<li class="chapter" data-level="3.2" data-path="formatting-and-rendering-tables.html"><a href="formatting-and-rendering-tables.html#captions"><i class="fa fa-check"></i><b>3.2</b> Captions</a>
 <ul>
 <li class="chapter" data-level="3.2.1" data-path="formatting-and-rendering-tables.html"><a href="formatting-and-rendering-tables.html#flextable-2"><i class="fa fa-check"></i><b>3.2.1</b> flextable</a></li>
 <li class="chapter" data-level="3.2.2" data-path="formatting-and-rendering-tables.html"><a href="formatting-and-rendering-tables.html#tables-2"><i class="fa fa-check"></i><b>3.2.2</b> tables</a></li>
-</ul>
-</li>
-<li class="chapter" data-level="3.3" data-path="formatting-and-rendering-tables.html">
-<a href="formatting-and-rendering-tables.html#pagination"><i class="fa fa-check"></i><b>3.3</b> Pagination</a>
+</ul></li>
+<li class="chapter" data-level="3.3" data-path="formatting-and-rendering-tables.html"><a href="formatting-and-rendering-tables.html#pagination"><i class="fa fa-check"></i><b>3.3</b> Pagination</a>
 <ul>
 <li class="chapter" data-level="3.3.1" data-path="formatting-and-rendering-tables.html"><a href="formatting-and-rendering-tables.html#rtables-2"><i class="fa fa-check"></i><b>3.3.1</b> rtables</a></li>
 <li class="chapter" data-level="3.3.2" data-path="formatting-and-rendering-tables.html"><a href="formatting-and-rendering-tables.html#flextable-3"><i class="fa fa-check"></i><b>3.3.2</b> flextable</a></li>
 <li class="chapter" data-level="3.3.3" data-path="formatting-and-rendering-tables.html"><a href="formatting-and-rendering-tables.html#tables-3"><i class="fa fa-check"></i><b>3.3.3</b> tables</a></li>
-</ul>
-</li>
-<li class="chapter" data-level="3.4" data-path="formatting-and-rendering-tables.html">
-<a href="formatting-and-rendering-tables.html#rendering-tables"><i class="fa fa-check"></i><b>3.4</b> Rendering Tables</a>
+</ul></li>
+<li class="chapter" data-level="3.4" data-path="formatting-and-rendering-tables.html"><a href="formatting-and-rendering-tables.html#rendering-tables"><i class="fa fa-check"></i><b>3.4</b> Rendering Tables</a>
 <ul>
 <li class="chapter" data-level="3.4.1" data-path="formatting-and-rendering-tables.html"><a href="formatting-and-rendering-tables.html#ascii"><i class="fa fa-check"></i><b>3.4.1</b> ASCII</a></li>
 <li class="chapter" data-level="3.4.2" data-path="formatting-and-rendering-tables.html"><a href="formatting-and-rendering-tables.html#pdf"><i class="fa fa-check"></i><b>3.4.2</b> PDF</a></li>
 <li class="chapter" data-level="3.4.3" data-path="formatting-and-rendering-tables.html"><a href="formatting-and-rendering-tables.html#html"><i class="fa fa-check"></i><b>3.4.3</b> HTML</a></li>
 <li class="chapter" data-level="3.4.4" data-path="formatting-and-rendering-tables.html"><a href="formatting-and-rendering-tables.html#word"><i class="fa fa-check"></i><b>3.4.4</b> WORD</a></li>
 <li class="chapter" data-level="3.4.5" data-path="formatting-and-rendering-tables.html"><a href="formatting-and-rendering-tables.html#rtf"><i class="fa fa-check"></i><b>3.4.5</b> RTF</a></li>
-</ul>
-</li>
-</ul>
-</li>
-<li class="chapter" data-level="4" data-path="commontables.html">
-<a href="commontables.html"><i class="fa fa-check"></i><b>4</b> Commonly Used Tables</a>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="4" data-path="commontables.html"><a href="commontables.html"><i class="fa fa-check"></i><b>4</b> Commonly Used Tables</a>
 <ul>
-<li class="chapter" data-level="4.1" data-path="commontables.html">
-<a href="commontables.html#demographic-tables"><i class="fa fa-check"></i><b>4.1</b> Demographic Tables</a>
+<li class="chapter" data-level="4.1" data-path="commontables.html"><a href="commontables.html#demographic-tables"><i class="fa fa-check"></i><b>4.1</b> Demographic Tables</a>
 <ul>
 <li class="chapter" data-level="4.1.1" data-path="commontables.html"><a href="commontables.html#rtables-3"><i class="fa fa-check"></i><b>4.1.1</b> rtables</a></li>
 <li class="chapter" data-level="4.1.2" data-path="commontables.html"><a href="commontables.html#gt-1"><i class="fa fa-check"></i><b>4.1.2</b> gt</a></li>
 <li class="chapter" data-level="4.1.3" data-path="commontables.html"><a href="commontables.html#flextable-4"><i class="fa fa-check"></i><b>4.1.3</b> flextable</a></li>
 <li class="chapter" data-level="4.1.4" data-path="commontables.html"><a href="commontables.html#tables-4"><i class="fa fa-check"></i><b>4.1.4</b> tables</a></li>
 <li class="chapter" data-level="4.1.5" data-path="commontables.html"><a href="commontables.html#tidytlg"><i class="fa fa-check"></i><b>4.1.5</b> tidytlg</a></li>
-</ul>
-</li>
-<li class="chapter" data-level="4.2" data-path="commontables.html">
-<a href="commontables.html#adverse-event-tables"><i class="fa fa-check"></i><b>4.2</b> Adverse Event Tables</a>
+</ul></li>
+<li class="chapter" data-level="4.2" data-path="commontables.html"><a href="commontables.html#adverse-event-tables"><i class="fa fa-check"></i><b>4.2</b> Adverse Event Tables</a>
 <ul>
 <li class="chapter" data-level="4.2.1" data-path="commontables.html"><a href="commontables.html#rtables-only"><i class="fa fa-check"></i><b>4.2.1</b> <code>rtables</code> Only</a></li>
 <li class="chapter" data-level="4.2.2" data-path="commontables.html"><a href="commontables.html#gt-2"><i class="fa fa-check"></i><b>4.2.2</b> gt</a></li>
 <li class="chapter" data-level="4.2.3" data-path="commontables.html"><a href="commontables.html#flextable-5"><i class="fa fa-check"></i><b>4.2.3</b> flextable</a></li>
 <li class="chapter" data-level="4.2.4" data-path="commontables.html"><a href="commontables.html#tables-5"><i class="fa fa-check"></i><b>4.2.4</b> tables</a></li>
 <li class="chapter" data-level="4.2.5" data-path="commontables.html"><a href="commontables.html#tidytlg-1"><i class="fa fa-check"></i><b>4.2.5</b> tidytlg</a></li>
-</ul>
-</li>
+</ul></li>
 <li class="chapter" data-level="4.3" data-path="commontables.html"><a href="commontables.html#laboratory-tables"><i class="fa fa-check"></i><b>4.3</b> Laboratory Tables</a></li>
-<li class="chapter" data-level="4.4" data-path="commontables.html">
-<a href="commontables.html#time-to-event-analysis-tables"><i class="fa fa-check"></i><b>4.4</b> Time to Event Analysis Tables</a>
+<li class="chapter" data-level="4.4" data-path="commontables.html"><a href="commontables.html#time-to-event-analysis-tables"><i class="fa fa-check"></i><b>4.4</b> Time to Event Analysis Tables</a>
 <ul>
 <li class="chapter" data-level="4.4.1" data-path="commontables.html"><a href="commontables.html#data-and-models-used-throughout"><i class="fa fa-check"></i><b>4.4.1</b> Data and models used throughout</a></li>
 <li class="chapter" data-level="4.4.2" data-path="commontables.html"><a href="commontables.html#rtables-4"><i class="fa fa-check"></i><b>4.4.2</b> rtables</a></li>
@@ -226,36 +236,32 @@ div.csl-indent {
 <li class="chapter" data-level="4.4.5" data-path="commontables.html"><a href="commontables.html#flextable-6"><i class="fa fa-check"></i><b>4.4.5</b> flextable</a></li>
 <li class="chapter" data-level="4.4.6" data-path="commontables.html"><a href="commontables.html#tables-6"><i class="fa fa-check"></i><b>4.4.6</b> tables</a></li>
 <li class="chapter" data-level="4.4.7" data-path="commontables.html"><a href="commontables.html#tidytlg-2"><i class="fa fa-check"></i><b>4.4.7</b> tidytlg</a></li>
-</ul>
-</li>
-<li class="chapter" data-level="4.5" data-path="commontables.html">
-<a href="commontables.html#concomitant-medications"><i class="fa fa-check"></i><b>4.5</b> Concomitant Medications</a>
+</ul></li>
+<li class="chapter" data-level="4.5" data-path="commontables.html"><a href="commontables.html#concomitant-medications"><i class="fa fa-check"></i><b>4.5</b> Concomitant Medications</a>
 <ul>
 <li class="chapter" data-level="4.5.1" data-path="commontables.html"><a href="commontables.html#rtables-5"><i class="fa fa-check"></i><b>4.5.1</b> rtables</a></li>
 <li class="chapter" data-level="4.5.2" data-path="commontables.html"><a href="commontables.html#gt-4"><i class="fa fa-check"></i><b>4.5.2</b> gt</a></li>
 <li class="chapter" data-level="4.5.3" data-path="commontables.html"><a href="commontables.html#flextable-7"><i class="fa fa-check"></i><b>4.5.3</b> flextable</a></li>
 <li class="chapter" data-level="4.5.4" data-path="commontables.html"><a href="commontables.html#tables-7"><i class="fa fa-check"></i><b>4.5.4</b> tables</a></li>
 <li class="chapter" data-level="4.5.5" data-path="commontables.html"><a href="commontables.html#tidytlg-3"><i class="fa fa-check"></i><b>4.5.5</b> tidytlg</a></li>
-</ul>
-</li>
-<li class="chapter" data-level="4.6" data-path="commontables.html">
-<a href="commontables.html#disposition"><i class="fa fa-check"></i><b>4.6</b> Disposition</a>
+</ul></li>
+<li class="chapter" data-level="4.6" data-path="commontables.html"><a href="commontables.html#disposition"><i class="fa fa-check"></i><b>4.6</b> Disposition</a>
 <ul>
 <li class="chapter" data-level="4.6.1" data-path="commontables.html"><a href="commontables.html#rtables-6"><i class="fa fa-check"></i><b>4.6.1</b> rtables</a></li>
 <li class="chapter" data-level="4.6.2" data-path="commontables.html"><a href="commontables.html#gt-5"><i class="fa fa-check"></i><b>4.6.2</b> gt</a></li>
 <li class="chapter" data-level="4.6.3" data-path="commontables.html"><a href="commontables.html#flextable-8"><i class="fa fa-check"></i><b>4.6.3</b> flextable</a></li>
 <li class="chapter" data-level="4.6.4" data-path="commontables.html"><a href="commontables.html#tables-8"><i class="fa fa-check"></i><b>4.6.4</b> tables</a></li>
 <li class="chapter" data-level="4.6.5" data-path="commontables.html"><a href="commontables.html#tidytlg-4"><i class="fa fa-check"></i><b>4.6.5</b> tidytlg</a></li>
-</ul>
-</li>
-</ul>
-</li>
+</ul></li>
+</ul></li>
 <li class="chapter" data-level="" data-path="references.html"><a href="references.html"><i class="fa fa-check"></i>References</a></li>
-<li class="divider">
+<li class="divider"></li>
 <li><a href="https://github.com/rstudio/bookdown" target="blank">Published with bookdown</a></li>
 
-</ul></nav>
-</div>
+</ul>
+
+      </nav>
+    </div>
 
     <div class="book-body">
       <div class="body-inner">
@@ -268,10 +274,9 @@ div.csl-indent {
         <div class="page-wrapper" tabindex="-1" role="main">
           <div class="page-inner">
 
-            <section class="normal" id="section-"><div id="formatting-and-rendering-tables" class="section level1 hasAnchor" number="3">
-<h1>
-<span class="header-section-number">Chapter 3</span> Formatting and Rendering Tables<a href="formatting-and-rendering-tables.html#formatting-and-rendering-tables" class="anchor-section" aria-label="Anchor link to header"></a>
-</h1>
+            <section class="normal" id="section-">
+<div id="formatting-and-rendering-tables" class="section level1 hasAnchor" number="3">
+<h1><span class="header-section-number">Chapter 3</span> Formatting and Rendering Tables<a href="formatting-and-rendering-tables.html#formatting-and-rendering-tables" class="anchor-section" aria-label="Anchor link to header"></a></h1>
 <p>Table generation usually is a two step process</p>
 <ol style="list-style-type: decimal">
 <li>Derive the cell value and tabulate them.</li>
@@ -281,9 +286,7 @@ div.csl-indent {
 discuss the various aspects of creating the final outputs that is commonly stored
 in a file with a particular file format (<code>pdf</code>, <code>txt</code>, <code>html</code>, <code>docx</code> or <code>rtf</code>).</p>
 <div id="title-footnotes" class="section level2 hasAnchor" number="3.1">
-<h2>
-<span class="header-section-number">3.1</span> Title &amp; Footnotes<a href="formatting-and-rendering-tables.html#title-footnotes" class="anchor-section" aria-label="Anchor link to header"></a>
-</h2>
+<h2><span class="header-section-number">3.1</span> Title &amp; Footnotes<a href="formatting-and-rendering-tables.html#title-footnotes" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <p>Commonly rendered tables that are reported to the health authorities have titles
 and footnotes with information such as:</p>
 <ul>
@@ -296,28 +299,27 @@ and footnotes with information such as:</p>
 </ul>
 <p>Often footnotes include cell references.</p>
 <div id="rtables-1" class="section level3 hasAnchor" number="3.1.1">
-<h3>
-<span class="header-section-number">3.1.1</span> rtables<a href="formatting-and-rendering-tables.html#rtables-1" class="anchor-section" aria-label="Anchor link to header"></a>
-</h3>
+<h3><span class="header-section-number">3.1.1</span> rtables<a href="formatting-and-rendering-tables.html#rtables-1" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>The <code>basic_table</code> function in <code>rtables</code> has the argument <code>titles</code>, <code>subtitles</code>,
 <code>main_footer</code>, <code>prov_footer</code> to add titles and footnotes to tables. <code>rtables</code>
 also supports referential footnotes.</p>
 <p>So for example a basic demographics table created with <code>rtables</code> via <code>tern</code> with
 title and footnotes would look as follows:</p>
-<details class="chunk-details" open><summary class="chunk-summary"><span class="chunk-summary-text">Code</span></summary><div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="fu">resetSession</span><span class="op">(</span><span class="op">)</span></span>
-<span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/insightsengineering/rtables">rtables</a></span><span class="op">)</span></span>
-<span></span>
-<span><span class="va">lyt</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/rtables/man/basic_table.html">basic_table</a></span><span class="op">(</span></span>
-<span>  title <span class="op">=</span> <span class="st">"Demographic Table - All Patients"</span>,</span>
-<span>  subtitles <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"Cutoff Date: June 01, 2022"</span>, <span class="st">"Arm B received a placebo."</span><span class="op">)</span>,</span>
-<span>  main_footer <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"Missing data is omitted."</span><span class="op">)</span></span>
-<span><span class="op">)</span> <span class="op">|&gt;</span></span>
-<span>  <span class="fu"><a href="https://rdrr.io/pkg/rtables/man/split_cols_by.html">split_cols_by</a></span><span class="op">(</span><span class="st">"ARM"</span><span class="op">)</span> <span class="op">|&gt;</span></span>
-<span>  <span class="fu"><a href="https://rdrr.io/pkg/rtables/man/analyze.html">analyze</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"AGE"</span>, <span class="st">"SEX"</span><span class="op">)</span><span class="op">)</span></span>
-<span></span>
-<span><span class="fu"><a href="https://rdrr.io/pkg/rtables/man/build_table.html">build_table</a></span><span class="op">(</span><span class="va">lyt</span>, <span class="va">adsl</span><span class="op">)</span></span></code></pre></div>
-</details><pre><code>Demographic Table - All Patients
+<details class=chunk-details open><summary class=chunk-summary><span class=chunk-summary-text>Code</span></summary>
+<div class="sourceCode" id="cb8"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb8-1"><a href="formatting-and-rendering-tables.html#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="fu">resetSession</span>()</span>
+<span id="cb8-2"><a href="formatting-and-rendering-tables.html#cb8-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(rtables)</span>
+<span id="cb8-3"><a href="formatting-and-rendering-tables.html#cb8-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-4"><a href="formatting-and-rendering-tables.html#cb8-4" aria-hidden="true" tabindex="-1"></a>lyt <span class="ot">&lt;-</span> <span class="fu">basic_table</span>(</span>
+<span id="cb8-5"><a href="formatting-and-rendering-tables.html#cb8-5" aria-hidden="true" tabindex="-1"></a>  <span class="at">title =</span> <span class="st">&quot;Demographic Table - All Patients&quot;</span>,</span>
+<span id="cb8-6"><a href="formatting-and-rendering-tables.html#cb8-6" aria-hidden="true" tabindex="-1"></a>  <span class="at">subtitles =</span> <span class="fu">c</span>(<span class="st">&quot;Cutoff Date: June 01, 2022&quot;</span>, <span class="st">&quot;Arm B received a placebo.&quot;</span>),</span>
+<span id="cb8-7"><a href="formatting-and-rendering-tables.html#cb8-7" aria-hidden="true" tabindex="-1"></a>  <span class="at">main_footer =</span> <span class="fu">c</span>(<span class="st">&quot;Missing data is omitted.&quot;</span>)</span>
+<span id="cb8-8"><a href="formatting-and-rendering-tables.html#cb8-8" aria-hidden="true" tabindex="-1"></a>) <span class="sc">|&gt;</span></span>
+<span id="cb8-9"><a href="formatting-and-rendering-tables.html#cb8-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">split_cols_by</span>(<span class="st">&quot;ARM&quot;</span>) <span class="sc">|&gt;</span></span>
+<span id="cb8-10"><a href="formatting-and-rendering-tables.html#cb8-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">analyze</span>(<span class="fu">c</span>(<span class="st">&quot;AGE&quot;</span>, <span class="st">&quot;SEX&quot;</span>))</span>
+<span id="cb8-11"><a href="formatting-and-rendering-tables.html#cb8-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-12"><a href="formatting-and-rendering-tables.html#cb8-12" aria-hidden="true" tabindex="-1"></a><span class="fu">build_table</span>(lyt, adsl)</span></code></pre></div>
+</details>
+<pre><code>Demographic Table - All Patients
 Cutoff Date: June 01, 2022
 Arm B received a placebo.
 
@@ -334,161 +336,57 @@ SEX
 Missing data is omitted.</code></pre>
 </div>
 <div id="flextable-1" class="section level3 hasAnchor" number="3.1.2">
-<h3>
-<span class="header-section-number">3.1.2</span> flextable<a href="formatting-and-rendering-tables.html#flextable-1" class="anchor-section" aria-label="Anchor link to header"></a>
-</h3>
-<p>Titles and notes can be added and formatted with the ‘flextable’ package. It is possible to add them in the header and in the footer. Several methods are possible but for most needs, the <code><a href="https://davidgohel.github.io/flextable/reference/add_header_lines.html">add_header_lines()</a></code> and <code><a href="https://davidgohel.github.io/flextable/reference/add_footer_lines.html">add_footer_lines()</a></code> functions will be the easiest to use.</p>
+<h3><span class="header-section-number">3.1.2</span> flextable<a href="formatting-and-rendering-tables.html#flextable-1" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>Titles and notes can be added and formatted with the ‘flextable’ package. It is possible to add them in the header and in the footer. Several methods are possible but for most needs, the <code>add_header_lines()</code> and <code>add_footer_lines()</code> functions will be the easiest to use.</p>
 <p>Let’s create first a flextable from an aggregation that
 will be used to illustrate the features.</p>
-<details class="chunk-details" open><summary class="chunk-summary"><span class="chunk-summary-text">Code</span></summary><div class="sourceCode" id="cb10"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="fu">resetSession</span><span class="op">(</span><span class="op">)</span></span>
-<span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://ardata-fr.github.io/flextable-book/">flextable</a></span><span class="op">)</span></span>
-<span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://dplyr.tidyverse.org">dplyr</a></span><span class="op">)</span></span>
-<span></span>
-<span><span class="va">z</span> <span class="op">&lt;-</span> <span class="va">adsl</span> <span class="op">|&gt;</span> </span>
-<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/group_by.html">group_by</a></span><span class="op">(</span><span class="va">ARM</span>, <span class="va">SEX</span><span class="op">)</span> <span class="op">|&gt;</span></span>
-<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/summarise.html">summarise</a></span><span class="op">(</span>avg <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/mean.html">mean</a></span><span class="op">(</span><span class="va">AGE</span><span class="op">)</span>, sd <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/stats/sd.html">sd</a></span><span class="op">(</span><span class="va">AGE</span><span class="op">)</span><span class="op">)</span> <span class="op">|&gt;</span></span>
-<span>  <span class="fu"><a href="https://davidgohel.github.io/flextable/reference/tabulator.html">tabulator</a></span><span class="op">(</span>rows <span class="op">=</span> <span class="st">"SEX"</span>, columns <span class="op">=</span> <span class="st">"ARM"</span>,</span>
-<span>    Y <span class="op">=</span> <span class="fu"><a href="https://davidgohel.github.io/flextable/reference/as_paragraph.html">as_paragraph</a></span><span class="op">(</span><span class="va">avg</span>, <span class="st">" ("</span>, <span class="va">sd</span>, <span class="st">")"</span><span class="op">)</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
-<span>  <span class="fu"><a href="https://davidgohel.github.io/flextable/reference/as_flextable.html">as_flextable</a></span><span class="op">(</span><span class="op">)</span></span>
-<span><span class="va">z</span></span></code></pre></div>
-</details><div class="tabwid">
-<style>.cl-3cdcb96a{}.cl-3cd538ac{font-family:'DejaVu Sans';font-size:11pt;font-weight:normal;font-style:normal;text-decoration:none;color:rgba(0, 0, 0, 1.00);background-color:transparent;}.cl-3cd872ba{margin:0;text-align:left;border-bottom: 0 solid rgba(0, 0, 0, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);padding-bottom:5pt;padding-top:5pt;padding-left:5pt;padding-right:5pt;line-height: 1;background-color:transparent;}.cl-3cd872c4{margin:0;text-align:left;border-bottom: 0 solid rgba(0, 0, 0, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);padding-bottom:0;padding-top:0;padding-left:0;padding-right:0;line-height: 1;background-color:transparent;}.cl-3cd872c5{margin:0;text-align:center;border-bottom: 0 solid rgba(0, 0, 0, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);padding-bottom:5pt;padding-top:5pt;padding-left:5pt;padding-right:5pt;line-height: 1;background-color:transparent;}.cl-3cd872ce{margin:0;text-align:left;border-bottom: 0 solid rgba(0, 0, 0, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);padding-bottom:5pt;padding-top:5pt;padding-left:5pt;padding-right:5pt;line-height: 1;background-color:transparent;}.cl-3cd872cf{margin:0;text-align:left;border-bottom: 0 solid rgba(0, 0, 0, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);padding-bottom:0;padding-top:0;padding-left:0;padding-right:0;line-height: 1;background-color:transparent;}.cl-3cd872d8{margin:0;text-align:center;border-bottom: 0 solid rgba(0, 0, 0, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);padding-bottom:5pt;padding-top:5pt;padding-left:5pt;padding-right:5pt;line-height: 1;background-color:transparent;}.cl-3cd88ac0{width:0.562in;background-color:transparent;vertical-align: bottom;border-bottom: 1.5pt solid rgba(102, 102, 102, 1.00);border-top: 1.5pt solid rgba(102, 102, 102, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-3cd88aca{width:0.079in;background-color:transparent;vertical-align: middle;border-bottom: 0 solid rgba(0, 0, 0, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-3cd88ad4{width:1.015in;background-color:transparent;vertical-align: middle;border-bottom: 1.5pt solid rgba(102, 102, 102, 1.00);border-top: 1.5pt solid rgba(102, 102, 102, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-3cd88ad5{width:1.065in;background-color:transparent;vertical-align: middle;border-bottom: 1.5pt solid rgba(102, 102, 102, 1.00);border-top: 1.5pt solid rgba(102, 102, 102, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-3cd88ad6{width:1.442in;background-color:transparent;vertical-align: middle;border-bottom: 1.5pt solid rgba(102, 102, 102, 1.00);border-top: 1.5pt solid rgba(102, 102, 102, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-3cd88ade{width:0.562in;background-color:transparent;vertical-align: top;border-bottom: 0 solid rgba(0, 0, 0, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-3cd88adf{width:0.079in;background-color:transparent;vertical-align: top;border-bottom: 0 solid rgba(0, 0, 0, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-3cd88ae8{width:1.015in;background-color:transparent;vertical-align: top;border-bottom: 0 solid rgba(0, 0, 0, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-3cd88ae9{width:1.065in;background-color:transparent;vertical-align: top;border-bottom: 0 solid rgba(0, 0, 0, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-3cd88aea{width:1.442in;background-color:transparent;vertical-align: top;border-bottom: 0 solid rgba(0, 0, 0, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-3cd88af2{width:0.562in;background-color:transparent;vertical-align: top;border-bottom: 1.5pt solid rgba(102, 102, 102, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-3cd88af3{width:1.015in;background-color:transparent;vertical-align: top;border-bottom: 1.5pt solid rgba(102, 102, 102, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-3cd88afc{width:1.065in;background-color:transparent;vertical-align: top;border-bottom: 1.5pt solid rgba(102, 102, 102, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-3cd88afd{width:1.442in;background-color:transparent;vertical-align: top;border-bottom: 1.5pt solid rgba(102, 102, 102, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}</style>
-<table data-quarto-disable-processing="true" class="cl-3cdcb96a">
-<thead><tr style="overflow-wrap:break-word;">
-<th class="cl-3cd88ac0"><p class="cl-3cd872ba"><span class="cl-3cd538ac">SEX</span></p></th>
-<th class="cl-3cd88aca"><p class="cl-3cd872c4"><span class="cl-3cd538ac"></span></p></th>
-<th class="cl-3cd88ad4"><p class="cl-3cd872c5"><span class="cl-3cd538ac">A: Drug X</span></p></th>
-<th class="cl-3cd88aca"><p class="cl-3cd872c4"><span class="cl-3cd538ac"></span></p></th>
-<th class="cl-3cd88ad5"><p class="cl-3cd872c5"><span class="cl-3cd538ac">B: Placebo</span></p></th>
-<th class="cl-3cd88aca"><p class="cl-3cd872c4"><span class="cl-3cd538ac"></span></p></th>
-<th class="cl-3cd88ad6"><p class="cl-3cd872c5"><span class="cl-3cd538ac">C: Combination</span></p></th>
-</tr></thead>
-<tbody>
-<tr style="overflow-wrap:break-word;">
-<td class="cl-3cd88ade"><p class="cl-3cd872ce"><span class="cl-3cd538ac">F</span></p></td>
-<td class="cl-3cd88adf"><p class="cl-3cd872cf"><span class="cl-3cd538ac"></span></p></td>
-<td class="cl-3cd88ae8"><p class="cl-3cd872d8"><span class="cl-3cd538ac">32.8</span><span class="cl-3cd538ac"> (</span><span class="cl-3cd538ac">6.1</span><span class="cl-3cd538ac">)</span></p></td>
-<td class="cl-3cd88adf"><p class="cl-3cd872cf"><span class="cl-3cd538ac"></span></p></td>
-<td class="cl-3cd88ae9"><p class="cl-3cd872d8"><span class="cl-3cd538ac">34.2</span><span class="cl-3cd538ac"> (</span><span class="cl-3cd538ac">7.0</span><span class="cl-3cd538ac">)</span></p></td>
-<td class="cl-3cd88adf"><p class="cl-3cd872cf"><span class="cl-3cd538ac"></span></p></td>
-<td class="cl-3cd88aea"><p class="cl-3cd872d8"><span class="cl-3cd538ac">35.2</span><span class="cl-3cd538ac"> (</span><span class="cl-3cd538ac">7.4</span><span class="cl-3cd538ac">)</span></p></td>
-</tr>
-<tr style="overflow-wrap:break-word;">
-<td class="cl-3cd88af2"><p class="cl-3cd872ce"><span class="cl-3cd538ac">M</span></p></td>
-<td class="cl-3cd88adf"><p class="cl-3cd872cf"><span class="cl-3cd538ac"></span></p></td>
-<td class="cl-3cd88af3"><p class="cl-3cd872d8"><span class="cl-3cd538ac">35.2</span><span class="cl-3cd538ac"> (</span><span class="cl-3cd538ac">7.0</span><span class="cl-3cd538ac">)</span></p></td>
-<td class="cl-3cd88adf"><p class="cl-3cd872cf"><span class="cl-3cd538ac"></span></p></td>
-<td class="cl-3cd88afc"><p class="cl-3cd872d8"><span class="cl-3cd538ac">37.3</span><span class="cl-3cd538ac"> (</span><span class="cl-3cd538ac">8.9</span><span class="cl-3cd538ac">)</span></p></td>
-<td class="cl-3cd88adf"><p class="cl-3cd872cf"><span class="cl-3cd538ac"></span></p></td>
-<td class="cl-3cd88afd"><p class="cl-3cd872d8"><span class="cl-3cd538ac">35.7</span><span class="cl-3cd538ac"> (</span><span class="cl-3cd538ac">8.2</span><span class="cl-3cd538ac">)</span></p></td>
-</tr>
-</tbody>
-</table>
-</div>
+<details class=chunk-details open><summary class=chunk-summary><span class=chunk-summary-text>Code</span></summary>
+<div class="sourceCode" id="cb10"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb10-1"><a href="formatting-and-rendering-tables.html#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="fu">resetSession</span>()</span>
+<span id="cb10-2"><a href="formatting-and-rendering-tables.html#cb10-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(flextable)</span>
+<span id="cb10-3"><a href="formatting-and-rendering-tables.html#cb10-3" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(dplyr)</span>
+<span id="cb10-4"><a href="formatting-and-rendering-tables.html#cb10-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-5"><a href="formatting-and-rendering-tables.html#cb10-5" aria-hidden="true" tabindex="-1"></a>z <span class="ot">&lt;-</span> adsl <span class="sc">|&gt;</span> </span>
+<span id="cb10-6"><a href="formatting-and-rendering-tables.html#cb10-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(ARM, SEX) <span class="sc">|&gt;</span></span>
+<span id="cb10-7"><a href="formatting-and-rendering-tables.html#cb10-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="at">avg =</span> <span class="fu">mean</span>(AGE), <span class="at">sd =</span> <span class="fu">sd</span>(AGE)) <span class="sc">|&gt;</span></span>
+<span id="cb10-8"><a href="formatting-and-rendering-tables.html#cb10-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">tabulator</span>(<span class="at">rows =</span> <span class="st">&quot;SEX&quot;</span>, <span class="at">columns =</span> <span class="st">&quot;ARM&quot;</span>,</span>
+<span id="cb10-9"><a href="formatting-and-rendering-tables.html#cb10-9" aria-hidden="true" tabindex="-1"></a>    <span class="at">Y =</span> <span class="fu">as_paragraph</span>(avg, <span class="st">&quot; (&quot;</span>, sd, <span class="st">&quot;)&quot;</span>)) <span class="sc">|&gt;</span> </span>
+<span id="cb10-10"><a href="formatting-and-rendering-tables.html#cb10-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">as_flextable</span>()</span>
+<span id="cb10-11"><a href="formatting-and-rendering-tables.html#cb10-11" aria-hidden="true" tabindex="-1"></a>z</span></code></pre></div>
+</details>
+<div class="tabwid"><style>.cl-5890b898{}.cl-58847330{font-family:'DejaVu Sans';font-size:11pt;font-weight:normal;font-style:normal;text-decoration:none;color:rgba(0, 0, 0, 1.00);background-color:transparent;}.cl-5889d442{margin:0;text-align:left;border-bottom: 0 solid rgba(0, 0, 0, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);padding-bottom:5pt;padding-top:5pt;padding-left:5pt;padding-right:5pt;line-height: 1;background-color:transparent;}.cl-5889d460{margin:0;text-align:left;border-bottom: 0 solid rgba(0, 0, 0, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);padding-bottom:0;padding-top:0;padding-left:0;padding-right:0;line-height: 1;background-color:transparent;}.cl-5889d46a{margin:0;text-align:center;border-bottom: 0 solid rgba(0, 0, 0, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);padding-bottom:5pt;padding-top:5pt;padding-left:5pt;padding-right:5pt;line-height: 1;background-color:transparent;}.cl-5889d46b{margin:0;text-align:left;border-bottom: 0 solid rgba(0, 0, 0, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);padding-bottom:5pt;padding-top:5pt;padding-left:5pt;padding-right:5pt;line-height: 1;background-color:transparent;}.cl-5889d474{margin:0;text-align:left;border-bottom: 0 solid rgba(0, 0, 0, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);padding-bottom:0;padding-top:0;padding-left:0;padding-right:0;line-height: 1;background-color:transparent;}.cl-5889d475{margin:0;text-align:center;border-bottom: 0 solid rgba(0, 0, 0, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);padding-bottom:5pt;padding-top:5pt;padding-left:5pt;padding-right:5pt;line-height: 1;background-color:transparent;}.cl-5889fdc8{width:0.562in;background-color:transparent;vertical-align: bottom;border-bottom: 1.5pt solid rgba(102, 102, 102, 1.00);border-top: 1.5pt solid rgba(102, 102, 102, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-5889fdd2{width:0.079in;background-color:transparent;vertical-align: middle;border-bottom: 0 solid rgba(0, 0, 0, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-5889fdd3{width:1.015in;background-color:transparent;vertical-align: middle;border-bottom: 1.5pt solid rgba(102, 102, 102, 1.00);border-top: 1.5pt solid rgba(102, 102, 102, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-5889fddc{width:1.065in;background-color:transparent;vertical-align: middle;border-bottom: 1.5pt solid rgba(102, 102, 102, 1.00);border-top: 1.5pt solid rgba(102, 102, 102, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-5889fde6{width:1.442in;background-color:transparent;vertical-align: middle;border-bottom: 1.5pt solid rgba(102, 102, 102, 1.00);border-top: 1.5pt solid rgba(102, 102, 102, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-5889fdf0{width:0.562in;background-color:transparent;vertical-align: top;border-bottom: 0 solid rgba(0, 0, 0, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-5889fdf1{width:0.079in;background-color:transparent;vertical-align: top;border-bottom: 0 solid rgba(0, 0, 0, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-5889fdfa{width:1.015in;background-color:transparent;vertical-align: top;border-bottom: 0 solid rgba(0, 0, 0, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-5889fdfb{width:1.065in;background-color:transparent;vertical-align: top;border-bottom: 0 solid rgba(0, 0, 0, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-5889fe04{width:1.442in;background-color:transparent;vertical-align: top;border-bottom: 0 solid rgba(0, 0, 0, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-5889fe05{width:0.562in;background-color:transparent;vertical-align: top;border-bottom: 1.5pt solid rgba(102, 102, 102, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-5889fe0e{width:1.015in;background-color:transparent;vertical-align: top;border-bottom: 1.5pt solid rgba(102, 102, 102, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-5889fe0f{width:1.065in;background-color:transparent;vertical-align: top;border-bottom: 1.5pt solid rgba(102, 102, 102, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-5889fe18{width:1.442in;background-color:transparent;vertical-align: top;border-bottom: 1.5pt solid rgba(102, 102, 102, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}</style><table data-quarto-disable-processing='true' class='cl-5890b898'><thead><tr style="overflow-wrap:break-word;"><th class="cl-5889fdc8"><p class="cl-5889d442"><span class="cl-58847330">SEX</span></p></th><th class="cl-5889fdd2"><p class="cl-5889d460"><span class="cl-58847330"></span></p></th><th class="cl-5889fdd3"><p class="cl-5889d46a"><span class="cl-58847330">A: Drug X</span></p></th><th class="cl-5889fdd2"><p class="cl-5889d460"><span class="cl-58847330"></span></p></th><th class="cl-5889fddc"><p class="cl-5889d46a"><span class="cl-58847330">B: Placebo</span></p></th><th class="cl-5889fdd2"><p class="cl-5889d460"><span class="cl-58847330"></span></p></th><th class="cl-5889fde6"><p class="cl-5889d46a"><span class="cl-58847330">C: Combination</span></p></th></tr></thead><tbody><tr style="overflow-wrap:break-word;"><td class="cl-5889fdf0"><p class="cl-5889d46b"><span class="cl-58847330">F</span></p></td><td class="cl-5889fdf1"><p class="cl-5889d474"><span class="cl-58847330"></span></p></td><td class="cl-5889fdfa"><p class="cl-5889d475"><span class="cl-58847330">32.8</span><span class="cl-58847330"> (</span><span class="cl-58847330">6.1</span><span class="cl-58847330">)</span></p></td><td class="cl-5889fdf1"><p class="cl-5889d474"><span class="cl-58847330"></span></p></td><td class="cl-5889fdfb"><p class="cl-5889d475"><span class="cl-58847330">34.2</span><span class="cl-58847330"> (</span><span class="cl-58847330">7.0</span><span class="cl-58847330">)</span></p></td><td class="cl-5889fdf1"><p class="cl-5889d474"><span class="cl-58847330"></span></p></td><td class="cl-5889fe04"><p class="cl-5889d475"><span class="cl-58847330">35.2</span><span class="cl-58847330"> (</span><span class="cl-58847330">7.4</span><span class="cl-58847330">)</span></p></td></tr><tr style="overflow-wrap:break-word;"><td class="cl-5889fe05"><p class="cl-5889d46b"><span class="cl-58847330">M</span></p></td><td class="cl-5889fdf1"><p class="cl-5889d474"><span class="cl-58847330"></span></p></td><td class="cl-5889fe0e"><p class="cl-5889d475"><span class="cl-58847330">35.2</span><span class="cl-58847330"> (</span><span class="cl-58847330">7.0</span><span class="cl-58847330">)</span></p></td><td class="cl-5889fdf1"><p class="cl-5889d474"><span class="cl-58847330"></span></p></td><td class="cl-5889fe0f"><p class="cl-5889d475"><span class="cl-58847330">37.3</span><span class="cl-58847330"> (</span><span class="cl-58847330">8.9</span><span class="cl-58847330">)</span></p></td><td class="cl-5889fdf1"><p class="cl-5889d474"><span class="cl-58847330"></span></p></td><td class="cl-5889fe18"><p class="cl-5889d475"><span class="cl-58847330">35.7</span><span class="cl-58847330"> (</span><span class="cl-58847330">8.2</span><span class="cl-58847330">)</span></p></td></tr></tbody></table></div>
 <p>The following shows how to add titles or notes:</p>
-<details class="chunk-details" open><summary class="chunk-summary"><span class="chunk-summary-text">Code</span></summary><div class="sourceCode" id="cb11"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">z</span> <span class="op">|&gt;</span></span>
-<span>  <span class="fu"><a href="https://davidgohel.github.io/flextable/reference/add_header_lines.html">add_header_lines</a></span><span class="op">(</span><span class="st">"hello world"</span><span class="op">)</span> <span class="op">|&gt;</span></span>
-<span>  <span class="fu"><a href="https://davidgohel.github.io/flextable/reference/add_footer_lines.html">add_footer_lines</a></span><span class="op">(</span><span class="st">"bye bye world"</span><span class="op">)</span></span></code></pre></div>
-</details><div class="tabwid">
-<style>.cl-3d03557a{}.cl-3cfb4c9a{font-family:'DejaVu Sans';font-size:11pt;font-weight:normal;font-style:normal;text-decoration:none;color:rgba(0, 0, 0, 1.00);background-color:transparent;}.cl-3cfe73ca{margin:0;text-align:left;border-bottom: 0 solid rgba(0, 0, 0, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);padding-bottom:5pt;padding-top:5pt;padding-left:5pt;padding-right:5pt;line-height: 1;background-color:transparent;}.cl-3cfe73de{margin:0;text-align:left;border-bottom: 0 solid rgba(0, 0, 0, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);padding-bottom:0;padding-top:0;padding-left:0;padding-right:0;line-height: 1;background-color:transparent;}.cl-3cfe73e8{margin:0;text-align:center;border-bottom: 0 solid rgba(0, 0, 0, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);padding-bottom:5pt;padding-top:5pt;padding-left:5pt;padding-right:5pt;line-height: 1;background-color:transparent;}.cl-3cfe73e9{margin:0;text-align:left;border-bottom: 0 solid rgba(0, 0, 0, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);padding-bottom:5pt;padding-top:5pt;padding-left:5pt;padding-right:5pt;line-height: 1;background-color:transparent;}.cl-3cfe73ea{margin:0;text-align:left;border-bottom: 0 solid rgba(0, 0, 0, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);padding-bottom:0;padding-top:0;padding-left:0;padding-right:0;line-height: 1;background-color:transparent;}.cl-3cfe73f2{margin:0;text-align:center;border-bottom: 0 solid rgba(0, 0, 0, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);padding-bottom:5pt;padding-top:5pt;padding-left:5pt;padding-right:5pt;line-height: 1;background-color:transparent;}.cl-3cfe73f3{margin:0;text-align:left;border-bottom: 0 solid rgba(0, 0, 0, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);padding-bottom:5pt;padding-top:5pt;padding-left:5pt;padding-right:5pt;line-height: 1;background-color:transparent;}.cl-3cfe88c4{width:0.562in;background-color:transparent;vertical-align: bottom;border-bottom: 1.5pt solid rgba(102, 102, 102, 1.00);border-top: 1.5pt solid rgba(102, 102, 102, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-3cfe88ce{width:0.079in;background-color:transparent;vertical-align: middle;border-bottom: 0 solid rgba(0, 0, 0, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-3cfe88d8{width:1.015in;background-color:transparent;vertical-align: middle;border-bottom: 1.5pt solid rgba(102, 102, 102, 1.00);border-top: 1.5pt solid rgba(102, 102, 102, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-3cfe88d9{width:1.065in;background-color:transparent;vertical-align: middle;border-bottom: 1.5pt solid rgba(102, 102, 102, 1.00);border-top: 1.5pt solid rgba(102, 102, 102, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-3cfe88da{width:1.442in;background-color:transparent;vertical-align: middle;border-bottom: 1.5pt solid rgba(102, 102, 102, 1.00);border-top: 1.5pt solid rgba(102, 102, 102, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-3cfe88e2{width:0.562in;background-color:transparent;vertical-align: top;border-bottom: 0 solid rgba(0, 0, 0, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-3cfe88e3{width:0.079in;background-color:transparent;vertical-align: top;border-bottom: 0 solid rgba(0, 0, 0, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-3cfe88ec{width:1.015in;background-color:transparent;vertical-align: top;border-bottom: 0 solid rgba(0, 0, 0, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-3cfe88ed{width:1.065in;background-color:transparent;vertical-align: top;border-bottom: 0 solid rgba(0, 0, 0, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-3cfe88ee{width:1.442in;background-color:transparent;vertical-align: top;border-bottom: 0 solid rgba(0, 0, 0, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-3cfe88f6{width:0.562in;background-color:transparent;vertical-align: top;border-bottom: 1.5pt solid rgba(102, 102, 102, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-3cfe88f7{width:1.015in;background-color:transparent;vertical-align: top;border-bottom: 1.5pt solid rgba(102, 102, 102, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-3cfe88f8{width:1.065in;background-color:transparent;vertical-align: top;border-bottom: 1.5pt solid rgba(102, 102, 102, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-3cfe8900{width:1.442in;background-color:transparent;vertical-align: top;border-bottom: 1.5pt solid rgba(102, 102, 102, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-3cfe8901{width:0.562in;background-color:transparent;vertical-align: middle;border-bottom: 0 solid rgba(255, 255, 255, 0.00);border-top: 0 solid rgba(255, 255, 255, 0.00);border-left: 0 solid rgba(255, 255, 255, 0.00);border-right: 0 solid rgba(255, 255, 255, 0.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-3cfe8902{width:0.079in;background-color:transparent;vertical-align: middle;border-bottom: 0 solid rgba(255, 255, 255, 0.00);border-top: 0 solid rgba(255, 255, 255, 0.00);border-left: 0 solid rgba(255, 255, 255, 0.00);border-right: 0 solid rgba(255, 255, 255, 0.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-3cfe890a{width:1.015in;background-color:transparent;vertical-align: middle;border-bottom: 0 solid rgba(255, 255, 255, 0.00);border-top: 0 solid rgba(255, 255, 255, 0.00);border-left: 0 solid rgba(255, 255, 255, 0.00);border-right: 0 solid rgba(255, 255, 255, 0.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-3cfe890b{width:1.065in;background-color:transparent;vertical-align: middle;border-bottom: 0 solid rgba(255, 255, 255, 0.00);border-top: 0 solid rgba(255, 255, 255, 0.00);border-left: 0 solid rgba(255, 255, 255, 0.00);border-right: 0 solid rgba(255, 255, 255, 0.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-3cfe890c{width:1.442in;background-color:transparent;vertical-align: middle;border-bottom: 0 solid rgba(255, 255, 255, 0.00);border-top: 0 solid rgba(255, 255, 255, 0.00);border-left: 0 solid rgba(255, 255, 255, 0.00);border-right: 0 solid rgba(255, 255, 255, 0.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}</style>
-<table data-quarto-disable-processing="true" class="cl-3d03557a">
-<thead>
-<tr style="overflow-wrap:break-word;"><th colspan="7" class="cl-3cfe88c4"><p class="cl-3cfe73ca"><span class="cl-3cfb4c9a">hello world</span></p></th></tr>
-<tr style="overflow-wrap:break-word;">
-<th class="cl-3cfe88c4"><p class="cl-3cfe73ca"><span class="cl-3cfb4c9a">SEX</span></p></th>
-<th class="cl-3cfe88ce"><p class="cl-3cfe73de"><span class="cl-3cfb4c9a"></span></p></th>
-<th class="cl-3cfe88d8"><p class="cl-3cfe73e8"><span class="cl-3cfb4c9a">A: Drug X</span></p></th>
-<th class="cl-3cfe88ce"><p class="cl-3cfe73de"><span class="cl-3cfb4c9a"></span></p></th>
-<th class="cl-3cfe88d9"><p class="cl-3cfe73e8"><span class="cl-3cfb4c9a">B: Placebo</span></p></th>
-<th class="cl-3cfe88ce"><p class="cl-3cfe73de"><span class="cl-3cfb4c9a"></span></p></th>
-<th class="cl-3cfe88da"><p class="cl-3cfe73e8"><span class="cl-3cfb4c9a">C: Combination</span></p></th>
-</tr>
-</thead>
-<tbody>
-<tr style="overflow-wrap:break-word;">
-<td class="cl-3cfe88e2"><p class="cl-3cfe73e9"><span class="cl-3cfb4c9a">F</span></p></td>
-<td class="cl-3cfe88e3"><p class="cl-3cfe73ea"><span class="cl-3cfb4c9a"></span></p></td>
-<td class="cl-3cfe88ec"><p class="cl-3cfe73f2"><span class="cl-3cfb4c9a">32.8</span><span class="cl-3cfb4c9a"> (</span><span class="cl-3cfb4c9a">6.1</span><span class="cl-3cfb4c9a">)</span></p></td>
-<td class="cl-3cfe88e3"><p class="cl-3cfe73ea"><span class="cl-3cfb4c9a"></span></p></td>
-<td class="cl-3cfe88ed"><p class="cl-3cfe73f2"><span class="cl-3cfb4c9a">34.2</span><span class="cl-3cfb4c9a"> (</span><span class="cl-3cfb4c9a">7.0</span><span class="cl-3cfb4c9a">)</span></p></td>
-<td class="cl-3cfe88e3"><p class="cl-3cfe73ea"><span class="cl-3cfb4c9a"></span></p></td>
-<td class="cl-3cfe88ee"><p class="cl-3cfe73f2"><span class="cl-3cfb4c9a">35.2</span><span class="cl-3cfb4c9a"> (</span><span class="cl-3cfb4c9a">7.4</span><span class="cl-3cfb4c9a">)</span></p></td>
-</tr>
-<tr style="overflow-wrap:break-word;">
-<td class="cl-3cfe88f6"><p class="cl-3cfe73e9"><span class="cl-3cfb4c9a">M</span></p></td>
-<td class="cl-3cfe88e3"><p class="cl-3cfe73ea"><span class="cl-3cfb4c9a"></span></p></td>
-<td class="cl-3cfe88f7"><p class="cl-3cfe73f2"><span class="cl-3cfb4c9a">35.2</span><span class="cl-3cfb4c9a"> (</span><span class="cl-3cfb4c9a">7.0</span><span class="cl-3cfb4c9a">)</span></p></td>
-<td class="cl-3cfe88e3"><p class="cl-3cfe73ea"><span class="cl-3cfb4c9a"></span></p></td>
-<td class="cl-3cfe88f8"><p class="cl-3cfe73f2"><span class="cl-3cfb4c9a">37.3</span><span class="cl-3cfb4c9a"> (</span><span class="cl-3cfb4c9a">8.9</span><span class="cl-3cfb4c9a">)</span></p></td>
-<td class="cl-3cfe88e3"><p class="cl-3cfe73ea"><span class="cl-3cfb4c9a"></span></p></td>
-<td class="cl-3cfe8900"><p class="cl-3cfe73f2"><span class="cl-3cfb4c9a">35.7</span><span class="cl-3cfb4c9a"> (</span><span class="cl-3cfb4c9a">8.2</span><span class="cl-3cfb4c9a">)</span></p></td>
-</tr>
-</tbody>
-<tfoot><tr style="overflow-wrap:break-word;"><td colspan="7" class="cl-3cfe8901"><p class="cl-3cfe73f3"><span class="cl-3cfb4c9a">bye bye world</span></p></td></tr></tfoot>
-</table>
-</div>
+<details class=chunk-details open><summary class=chunk-summary><span class=chunk-summary-text>Code</span></summary>
+<div class="sourceCode" id="cb11"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb11-1"><a href="formatting-and-rendering-tables.html#cb11-1" aria-hidden="true" tabindex="-1"></a>z <span class="sc">|&gt;</span></span>
+<span id="cb11-2"><a href="formatting-and-rendering-tables.html#cb11-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">add_header_lines</span>(<span class="st">&quot;hello world&quot;</span>) <span class="sc">|&gt;</span></span>
+<span id="cb11-3"><a href="formatting-and-rendering-tables.html#cb11-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">add_footer_lines</span>(<span class="st">&quot;bye bye world&quot;</span>)</span></code></pre></div>
+</details>
+<div class="tabwid"><style>.cl-58c93196{}.cl-58bb5116{font-family:'DejaVu Sans';font-size:11pt;font-weight:normal;font-style:normal;text-decoration:none;color:rgba(0, 0, 0, 1.00);background-color:transparent;}.cl-58c13b12{margin:0;text-align:left;border-bottom: 0 solid rgba(0, 0, 0, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);padding-bottom:5pt;padding-top:5pt;padding-left:5pt;padding-right:5pt;line-height: 1;background-color:transparent;}.cl-58c13b26{margin:0;text-align:left;border-bottom: 0 solid rgba(0, 0, 0, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);padding-bottom:0;padding-top:0;padding-left:0;padding-right:0;line-height: 1;background-color:transparent;}.cl-58c13b27{margin:0;text-align:center;border-bottom: 0 solid rgba(0, 0, 0, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);padding-bottom:5pt;padding-top:5pt;padding-left:5pt;padding-right:5pt;line-height: 1;background-color:transparent;}.cl-58c13b30{margin:0;text-align:left;border-bottom: 0 solid rgba(0, 0, 0, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);padding-bottom:5pt;padding-top:5pt;padding-left:5pt;padding-right:5pt;line-height: 1;background-color:transparent;}.cl-58c13b31{margin:0;text-align:left;border-bottom: 0 solid rgba(0, 0, 0, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);padding-bottom:0;padding-top:0;padding-left:0;padding-right:0;line-height: 1;background-color:transparent;}.cl-58c13b3a{margin:0;text-align:center;border-bottom: 0 solid rgba(0, 0, 0, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);padding-bottom:5pt;padding-top:5pt;padding-left:5pt;padding-right:5pt;line-height: 1;background-color:transparent;}.cl-58c13b3b{margin:0;text-align:left;border-bottom: 0 solid rgba(0, 0, 0, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);padding-bottom:5pt;padding-top:5pt;padding-left:5pt;padding-right:5pt;line-height: 1;background-color:transparent;}.cl-58c15b2e{width:0.562in;background-color:transparent;vertical-align: bottom;border-bottom: 1.5pt solid rgba(102, 102, 102, 1.00);border-top: 1.5pt solid rgba(102, 102, 102, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-58c15b38{width:0.079in;background-color:transparent;vertical-align: middle;border-bottom: 0 solid rgba(0, 0, 0, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-58c15b39{width:1.015in;background-color:transparent;vertical-align: middle;border-bottom: 1.5pt solid rgba(102, 102, 102, 1.00);border-top: 1.5pt solid rgba(102, 102, 102, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-58c15b42{width:1.065in;background-color:transparent;vertical-align: middle;border-bottom: 1.5pt solid rgba(102, 102, 102, 1.00);border-top: 1.5pt solid rgba(102, 102, 102, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-58c15b43{width:1.442in;background-color:transparent;vertical-align: middle;border-bottom: 1.5pt solid rgba(102, 102, 102, 1.00);border-top: 1.5pt solid rgba(102, 102, 102, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-58c15b4c{width:0.562in;background-color:transparent;vertical-align: top;border-bottom: 0 solid rgba(0, 0, 0, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-58c15b56{width:0.079in;background-color:transparent;vertical-align: top;border-bottom: 0 solid rgba(0, 0, 0, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-58c15b57{width:1.015in;background-color:transparent;vertical-align: top;border-bottom: 0 solid rgba(0, 0, 0, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-58c15b60{width:1.065in;background-color:transparent;vertical-align: top;border-bottom: 0 solid rgba(0, 0, 0, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-58c15b61{width:1.442in;background-color:transparent;vertical-align: top;border-bottom: 0 solid rgba(0, 0, 0, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-58c15b6a{width:0.562in;background-color:transparent;vertical-align: top;border-bottom: 1.5pt solid rgba(102, 102, 102, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-58c15b74{width:1.015in;background-color:transparent;vertical-align: top;border-bottom: 1.5pt solid rgba(102, 102, 102, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-58c15b75{width:1.065in;background-color:transparent;vertical-align: top;border-bottom: 1.5pt solid rgba(102, 102, 102, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-58c15b7e{width:1.442in;background-color:transparent;vertical-align: top;border-bottom: 1.5pt solid rgba(102, 102, 102, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-58c15b7f{width:0.562in;background-color:transparent;vertical-align: middle;border-bottom: 0 solid rgba(255, 255, 255, 0.00);border-top: 0 solid rgba(255, 255, 255, 0.00);border-left: 0 solid rgba(255, 255, 255, 0.00);border-right: 0 solid rgba(255, 255, 255, 0.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-58c15b88{width:0.079in;background-color:transparent;vertical-align: middle;border-bottom: 0 solid rgba(255, 255, 255, 0.00);border-top: 0 solid rgba(255, 255, 255, 0.00);border-left: 0 solid rgba(255, 255, 255, 0.00);border-right: 0 solid rgba(255, 255, 255, 0.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-58c15b89{width:1.015in;background-color:transparent;vertical-align: middle;border-bottom: 0 solid rgba(255, 255, 255, 0.00);border-top: 0 solid rgba(255, 255, 255, 0.00);border-left: 0 solid rgba(255, 255, 255, 0.00);border-right: 0 solid rgba(255, 255, 255, 0.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-58c15b8a{width:1.065in;background-color:transparent;vertical-align: middle;border-bottom: 0 solid rgba(255, 255, 255, 0.00);border-top: 0 solid rgba(255, 255, 255, 0.00);border-left: 0 solid rgba(255, 255, 255, 0.00);border-right: 0 solid rgba(255, 255, 255, 0.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-58c15b92{width:1.442in;background-color:transparent;vertical-align: middle;border-bottom: 0 solid rgba(255, 255, 255, 0.00);border-top: 0 solid rgba(255, 255, 255, 0.00);border-left: 0 solid rgba(255, 255, 255, 0.00);border-right: 0 solid rgba(255, 255, 255, 0.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}</style><table data-quarto-disable-processing='true' class='cl-58c93196'><thead><tr style="overflow-wrap:break-word;"><th  colspan="7"class="cl-58c15b2e"><p class="cl-58c13b12"><span class="cl-58bb5116">hello world</span></p></th></tr><tr style="overflow-wrap:break-word;"><th class="cl-58c15b2e"><p class="cl-58c13b12"><span class="cl-58bb5116">SEX</span></p></th><th class="cl-58c15b38"><p class="cl-58c13b26"><span class="cl-58bb5116"></span></p></th><th class="cl-58c15b39"><p class="cl-58c13b27"><span class="cl-58bb5116">A: Drug X</span></p></th><th class="cl-58c15b38"><p class="cl-58c13b26"><span class="cl-58bb5116"></span></p></th><th class="cl-58c15b42"><p class="cl-58c13b27"><span class="cl-58bb5116">B: Placebo</span></p></th><th class="cl-58c15b38"><p class="cl-58c13b26"><span class="cl-58bb5116"></span></p></th><th class="cl-58c15b43"><p class="cl-58c13b27"><span class="cl-58bb5116">C: Combination</span></p></th></tr></thead><tbody><tr style="overflow-wrap:break-word;"><td class="cl-58c15b4c"><p class="cl-58c13b30"><span class="cl-58bb5116">F</span></p></td><td class="cl-58c15b56"><p class="cl-58c13b31"><span class="cl-58bb5116"></span></p></td><td class="cl-58c15b57"><p class="cl-58c13b3a"><span class="cl-58bb5116">32.8</span><span class="cl-58bb5116"> (</span><span class="cl-58bb5116">6.1</span><span class="cl-58bb5116">)</span></p></td><td class="cl-58c15b56"><p class="cl-58c13b31"><span class="cl-58bb5116"></span></p></td><td class="cl-58c15b60"><p class="cl-58c13b3a"><span class="cl-58bb5116">34.2</span><span class="cl-58bb5116"> (</span><span class="cl-58bb5116">7.0</span><span class="cl-58bb5116">)</span></p></td><td class="cl-58c15b56"><p class="cl-58c13b31"><span class="cl-58bb5116"></span></p></td><td class="cl-58c15b61"><p class="cl-58c13b3a"><span class="cl-58bb5116">35.2</span><span class="cl-58bb5116"> (</span><span class="cl-58bb5116">7.4</span><span class="cl-58bb5116">)</span></p></td></tr><tr style="overflow-wrap:break-word;"><td class="cl-58c15b6a"><p class="cl-58c13b30"><span class="cl-58bb5116">M</span></p></td><td class="cl-58c15b56"><p class="cl-58c13b31"><span class="cl-58bb5116"></span></p></td><td class="cl-58c15b74"><p class="cl-58c13b3a"><span class="cl-58bb5116">35.2</span><span class="cl-58bb5116"> (</span><span class="cl-58bb5116">7.0</span><span class="cl-58bb5116">)</span></p></td><td class="cl-58c15b56"><p class="cl-58c13b31"><span class="cl-58bb5116"></span></p></td><td class="cl-58c15b75"><p class="cl-58c13b3a"><span class="cl-58bb5116">37.3</span><span class="cl-58bb5116"> (</span><span class="cl-58bb5116">8.9</span><span class="cl-58bb5116">)</span></p></td><td class="cl-58c15b56"><p class="cl-58c13b31"><span class="cl-58bb5116"></span></p></td><td class="cl-58c15b7e"><p class="cl-58c13b3a"><span class="cl-58bb5116">35.7</span><span class="cl-58bb5116"> (</span><span class="cl-58bb5116">8.2</span><span class="cl-58bb5116">)</span></p></td></tr></tbody><tfoot><tr style="overflow-wrap:break-word;"><td  colspan="7"class="cl-58c15b7f"><p class="cl-58c13b3b"><span class="cl-58bb5116">bye bye world</span></p></td></tr></tfoot></table></div>
 <p>For Word output, users can prepend a table number that will auto-incremente.</p>
-<details class="chunk-details" open><summary class="chunk-summary"><span class="chunk-summary-text">Code</span></summary><div class="sourceCode" id="cb12"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">docx_file</span> <span class="op">&lt;-</span> <span class="st">"reports/flextable-title-01.docx"</span></span>
-<span><span class="va">ft</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://davidgohel.github.io/flextable/reference/add_header_lines.html">add_header_lines</a></span><span class="op">(</span><span class="va">z</span>, <span class="st">"hello world"</span><span class="op">)</span> <span class="op">|&gt;</span></span>
-<span>  <span class="fu"><a href="https://davidgohel.github.io/flextable/reference/prepend_chunks.html">prepend_chunks</a></span><span class="op">(</span></span>
-<span>    i <span class="op">=</span> <span class="fl">1</span>, j <span class="op">=</span> <span class="fl">1</span>, part <span class="op">=</span> <span class="st">"header"</span>, </span>
-<span>    <span class="fu"><a href="https://davidgohel.github.io/flextable/reference/as_chunk.html">as_chunk</a></span><span class="op">(</span><span class="st">"Table "</span><span class="op">)</span>, <span class="fu"><a href="https://davidgohel.github.io/flextable/reference/as_word_field.html">as_word_field</a></span><span class="op">(</span><span class="st">"SEQ tab \u005C* Arabic"</span><span class="op">)</span>, </span>
-<span>    <span class="fu"><a href="https://davidgohel.github.io/flextable/reference/as_chunk.html">as_chunk</a></span><span class="op">(</span><span class="st">": "</span><span class="op">)</span><span class="op">)</span> <span class="op">|&gt;</span></span>
-<span>  <span class="fu"><a href="https://davidgohel.github.io/flextable/reference/add_footer_lines.html">add_footer_lines</a></span><span class="op">(</span><span class="st">"bye bye world"</span><span class="op">)</span> <span class="op">|&gt;</span></span>
-<span>  <span class="fu"><a href="https://davidgohel.github.io/flextable/reference/theme_vanilla.html">theme_vanilla</a></span><span class="op">(</span><span class="op">)</span></span>
-<span><span class="fu"><a href="https://davidgohel.github.io/flextable/reference/save_as_docx.html">save_as_docx</a></span><span class="op">(</span><span class="va">ft</span>, <span class="va">ft</span>, path <span class="op">=</span> <span class="va">docx_file</span><span class="op">)</span></span></code></pre></div>
-</details><p><img src="reports/flextable-title-01.png"></p>
+<details class=chunk-details open><summary class=chunk-summary><span class=chunk-summary-text>Code</span></summary>
+<div class="sourceCode" id="cb12"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb12-1"><a href="formatting-and-rendering-tables.html#cb12-1" aria-hidden="true" tabindex="-1"></a>docx_file <span class="ot">&lt;-</span> <span class="st">&quot;reports/flextable-title-01.docx&quot;</span></span>
+<span id="cb12-2"><a href="formatting-and-rendering-tables.html#cb12-2" aria-hidden="true" tabindex="-1"></a>ft <span class="ot">&lt;-</span> <span class="fu">add_header_lines</span>(z, <span class="st">&quot;hello world&quot;</span>) <span class="sc">|&gt;</span></span>
+<span id="cb12-3"><a href="formatting-and-rendering-tables.html#cb12-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">prepend_chunks</span>(</span>
+<span id="cb12-4"><a href="formatting-and-rendering-tables.html#cb12-4" aria-hidden="true" tabindex="-1"></a>    <span class="at">i =</span> <span class="dv">1</span>, <span class="at">j =</span> <span class="dv">1</span>, <span class="at">part =</span> <span class="st">&quot;header&quot;</span>, </span>
+<span id="cb12-5"><a href="formatting-and-rendering-tables.html#cb12-5" aria-hidden="true" tabindex="-1"></a>    <span class="fu">as_chunk</span>(<span class="st">&quot;Table &quot;</span>), <span class="fu">as_word_field</span>(<span class="st">&quot;SEQ tab \u005C* Arabic&quot;</span>), </span>
+<span id="cb12-6"><a href="formatting-and-rendering-tables.html#cb12-6" aria-hidden="true" tabindex="-1"></a>    <span class="fu">as_chunk</span>(<span class="st">&quot;: &quot;</span>)) <span class="sc">|&gt;</span></span>
+<span id="cb12-7"><a href="formatting-and-rendering-tables.html#cb12-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">add_footer_lines</span>(<span class="st">&quot;bye bye world&quot;</span>) <span class="sc">|&gt;</span></span>
+<span id="cb12-8"><a href="formatting-and-rendering-tables.html#cb12-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_vanilla</span>()</span>
+<span id="cb12-9"><a href="formatting-and-rendering-tables.html#cb12-9" aria-hidden="true" tabindex="-1"></a><span class="fu">save_as_docx</span>(ft, ft, <span class="at">path =</span> docx_file)</span></code></pre></div>
+</details>
+<p><img src="reports/flextable-title-01.png" /></p>
 <div class="office-download-link">
 <p><a href="reports/flextable-title-01.docx">reports/flextable-title-01.docx</a></p>
 </div>
-<p>Footnotes are also available in ‘flextable’ with function <code><a href="https://davidgohel.github.io/flextable/reference/footnote.html">footnote()</a></code>.
+<p>Footnotes are also available in ‘flextable’ with function <code>footnote()</code>.
 The function lets users add footnotes and references to it on the table.</p>
-<details class="chunk-details" open><summary class="chunk-summary"><span class="chunk-summary-text">Code</span></summary><div class="sourceCode" id="cb13"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="fu"><a href="https://davidgohel.github.io/flextable/reference/footnote.html">footnote</a></span><span class="op">(</span><span class="va">z</span>, i <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">1</span>, <span class="fl">2</span>, <span class="fl">2</span><span class="op">)</span>, j <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">1</span>, <span class="fl">5</span>, <span class="fl">7</span><span class="op">)</span>, </span>
-<span>         value <span class="op">=</span> <span class="fu"><a href="https://davidgohel.github.io/flextable/reference/as_paragraph.html">as_paragraph</a></span><span class="op">(</span><span class="st">"hello world"</span><span class="op">)</span>, ref_symbols <span class="op">=</span> <span class="st">"(1)"</span><span class="op">)</span></span></code></pre></div>
-</details><div class="tabwid">
-<style>.cl-3d8656a0{}.cl-3d7ef798{font-family:'DejaVu Sans';font-size:11pt;font-weight:normal;font-style:normal;text-decoration:none;color:rgba(0, 0, 0, 1.00);background-color:transparent;}.cl-3d7ef7a2{font-family:'DejaVu Sans';font-size:6.6pt;font-weight:normal;font-style:normal;text-decoration:none;color:rgba(0, 0, 0, 1.00);background-color:transparent;position: relative;bottom:3.3pt;}.cl-3d823296{margin:0;text-align:left;border-bottom: 0 solid rgba(0, 0, 0, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);padding-bottom:5pt;padding-top:5pt;padding-left:5pt;padding-right:5pt;line-height: 1;background-color:transparent;}.cl-3d8232a0{margin:0;text-align:left;border-bottom: 0 solid rgba(0, 0, 0, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);padding-bottom:0;padding-top:0;padding-left:0;padding-right:0;line-height: 1;background-color:transparent;}.cl-3d8232aa{margin:0;text-align:center;border-bottom: 0 solid rgba(0, 0, 0, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);padding-bottom:5pt;padding-top:5pt;padding-left:5pt;padding-right:5pt;line-height: 1;background-color:transparent;}.cl-3d8232ab{margin:0;text-align:left;border-bottom: 0 solid rgba(0, 0, 0, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);padding-bottom:5pt;padding-top:5pt;padding-left:5pt;padding-right:5pt;line-height: 1;background-color:transparent;}.cl-3d8232b4{margin:0;text-align:left;border-bottom: 0 solid rgba(0, 0, 0, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);padding-bottom:0;padding-top:0;padding-left:0;padding-right:0;line-height: 1;background-color:transparent;}.cl-3d8232b5{margin:0;text-align:center;border-bottom: 0 solid rgba(0, 0, 0, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);padding-bottom:5pt;padding-top:5pt;padding-left:5pt;padding-right:5pt;line-height: 1;background-color:transparent;}.cl-3d8232be{margin:0;text-align:left;border-bottom: 0 solid rgba(0, 0, 0, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);padding-bottom:5pt;padding-top:5pt;padding-left:5pt;padding-right:5pt;line-height: 1;background-color:transparent;}.cl-3d8247cc{width:0.562in;background-color:transparent;vertical-align: bottom;border-bottom: 1.5pt solid rgba(102, 102, 102, 1.00);border-top: 1.5pt solid rgba(102, 102, 102, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-3d8247cd{width:0.079in;background-color:transparent;vertical-align: middle;border-bottom: 0 solid rgba(0, 0, 0, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-3d8247d6{width:1.015in;background-color:transparent;vertical-align: middle;border-bottom: 1.5pt solid rgba(102, 102, 102, 1.00);border-top: 1.5pt solid rgba(102, 102, 102, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-3d8247d7{width:1.065in;background-color:transparent;vertical-align: middle;border-bottom: 1.5pt solid rgba(102, 102, 102, 1.00);border-top: 1.5pt solid rgba(102, 102, 102, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-3d8247e0{width:1.442in;background-color:transparent;vertical-align: middle;border-bottom: 1.5pt solid rgba(102, 102, 102, 1.00);border-top: 1.5pt solid rgba(102, 102, 102, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-3d8247e1{width:0.562in;background-color:transparent;vertical-align: top;border-bottom: 0 solid rgba(0, 0, 0, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-3d8247ea{width:0.079in;background-color:transparent;vertical-align: top;border-bottom: 0 solid rgba(0, 0, 0, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-3d8247eb{width:1.015in;background-color:transparent;vertical-align: top;border-bottom: 0 solid rgba(0, 0, 0, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-3d8247f4{width:1.065in;background-color:transparent;vertical-align: top;border-bottom: 0 solid rgba(0, 0, 0, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-3d8247f5{width:1.442in;background-color:transparent;vertical-align: top;border-bottom: 0 solid rgba(0, 0, 0, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-3d8247f6{width:0.562in;background-color:transparent;vertical-align: top;border-bottom: 1.5pt solid rgba(102, 102, 102, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-3d8247fe{width:1.015in;background-color:transparent;vertical-align: top;border-bottom: 1.5pt solid rgba(102, 102, 102, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-3d8247ff{width:1.065in;background-color:transparent;vertical-align: top;border-bottom: 1.5pt solid rgba(102, 102, 102, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-3d824808{width:1.442in;background-color:transparent;vertical-align: top;border-bottom: 1.5pt solid rgba(102, 102, 102, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-3d824809{width:0.562in;background-color:transparent;vertical-align: middle;border-bottom: 0 solid rgba(255, 255, 255, 0.00);border-top: 0 solid rgba(255, 255, 255, 0.00);border-left: 0 solid rgba(255, 255, 255, 0.00);border-right: 0 solid rgba(255, 255, 255, 0.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-3d824812{width:0.079in;background-color:transparent;vertical-align: middle;border-bottom: 0 solid rgba(255, 255, 255, 0.00);border-top: 0 solid rgba(255, 255, 255, 0.00);border-left: 0 solid rgba(255, 255, 255, 0.00);border-right: 0 solid rgba(255, 255, 255, 0.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-3d824813{width:1.015in;background-color:transparent;vertical-align: middle;border-bottom: 0 solid rgba(255, 255, 255, 0.00);border-top: 0 solid rgba(255, 255, 255, 0.00);border-left: 0 solid rgba(255, 255, 255, 0.00);border-right: 0 solid rgba(255, 255, 255, 0.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-3d824814{width:1.065in;background-color:transparent;vertical-align: middle;border-bottom: 0 solid rgba(255, 255, 255, 0.00);border-top: 0 solid rgba(255, 255, 255, 0.00);border-left: 0 solid rgba(255, 255, 255, 0.00);border-right: 0 solid rgba(255, 255, 255, 0.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-3d82481c{width:1.442in;background-color:transparent;vertical-align: middle;border-bottom: 0 solid rgba(255, 255, 255, 0.00);border-top: 0 solid rgba(255, 255, 255, 0.00);border-left: 0 solid rgba(255, 255, 255, 0.00);border-right: 0 solid rgba(255, 255, 255, 0.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}</style>
-<table data-quarto-disable-processing="true" class="cl-3d8656a0">
-<thead><tr style="overflow-wrap:break-word;">
-<th class="cl-3d8247cc"><p class="cl-3d823296"><span class="cl-3d7ef798">SEX</span></p></th>
-<th class="cl-3d8247cd"><p class="cl-3d8232a0"><span class="cl-3d7ef798"></span></p></th>
-<th class="cl-3d8247d6"><p class="cl-3d8232aa"><span class="cl-3d7ef798">A: Drug X</span></p></th>
-<th class="cl-3d8247cd"><p class="cl-3d8232a0"><span class="cl-3d7ef798"></span></p></th>
-<th class="cl-3d8247d7"><p class="cl-3d8232aa"><span class="cl-3d7ef798">B: Placebo</span></p></th>
-<th class="cl-3d8247cd"><p class="cl-3d8232a0"><span class="cl-3d7ef798"></span></p></th>
-<th class="cl-3d8247e0"><p class="cl-3d8232aa"><span class="cl-3d7ef798">C: Combination</span></p></th>
-</tr></thead>
-<tbody>
-<tr style="overflow-wrap:break-word;">
-<td class="cl-3d8247e1"><p class="cl-3d8232ab"><span class="cl-3d7ef798">F</span><span class="cl-3d7ef7a2">(1)</span></p></td>
-<td class="cl-3d8247ea"><p class="cl-3d8232b4"><span class="cl-3d7ef798"></span></p></td>
-<td class="cl-3d8247eb"><p class="cl-3d8232b5"><span class="cl-3d7ef798">32.8</span><span class="cl-3d7ef798"> (</span><span class="cl-3d7ef798">6.1</span><span class="cl-3d7ef798">)</span></p></td>
-<td class="cl-3d8247ea"><p class="cl-3d8232b4"><span class="cl-3d7ef798"></span></p></td>
-<td class="cl-3d8247f4"><p class="cl-3d8232b5"><span class="cl-3d7ef798">34.2</span><span class="cl-3d7ef798"> (</span><span class="cl-3d7ef798">7.0</span><span class="cl-3d7ef798">)</span></p></td>
-<td class="cl-3d8247ea"><p class="cl-3d8232b4"><span class="cl-3d7ef798"></span></p></td>
-<td class="cl-3d8247f5"><p class="cl-3d8232b5"><span class="cl-3d7ef798">35.2</span><span class="cl-3d7ef798"> (</span><span class="cl-3d7ef798">7.4</span><span class="cl-3d7ef798">)</span></p></td>
-</tr>
-<tr style="overflow-wrap:break-word;">
-<td class="cl-3d8247f6"><p class="cl-3d8232ab"><span class="cl-3d7ef798">M</span></p></td>
-<td class="cl-3d8247ea"><p class="cl-3d8232b4"><span class="cl-3d7ef798"></span></p></td>
-<td class="cl-3d8247fe"><p class="cl-3d8232b5"><span class="cl-3d7ef798">35.2</span><span class="cl-3d7ef798"> (</span><span class="cl-3d7ef798">7.0</span><span class="cl-3d7ef798">)</span></p></td>
-<td class="cl-3d8247ea"><p class="cl-3d8232b4"><span class="cl-3d7ef798"></span></p></td>
-<td class="cl-3d8247ff"><p class="cl-3d8232b5"><span class="cl-3d7ef798">37.3</span><span class="cl-3d7ef798"> (</span><span class="cl-3d7ef798">8.9</span><span class="cl-3d7ef798">)</span><span class="cl-3d7ef7a2">(1)</span></p></td>
-<td class="cl-3d8247ea"><p class="cl-3d8232b4"><span class="cl-3d7ef798"></span></p></td>
-<td class="cl-3d824808"><p class="cl-3d8232b5"><span class="cl-3d7ef798">35.7</span><span class="cl-3d7ef798"> (</span><span class="cl-3d7ef798">8.2</span><span class="cl-3d7ef798">)</span><span class="cl-3d7ef7a2">(1)</span></p></td>
-</tr>
-</tbody>
-<tfoot><tr style="overflow-wrap:break-word;"><td colspan="7" class="cl-3d824809"><p class="cl-3d8232be"><span class="cl-3d7ef7a2">(1)</span><span class="cl-3d7ef798">hello world</span></p></td></tr></tfoot>
-</table>
-</div>
+<details class=chunk-details open><summary class=chunk-summary><span class=chunk-summary-text>Code</span></summary>
+<div class="sourceCode" id="cb13"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb13-1"><a href="formatting-and-rendering-tables.html#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="fu">footnote</span>(z, <span class="at">i =</span> <span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">2</span>), <span class="at">j =</span> <span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">5</span>, <span class="dv">7</span>), </span>
+<span id="cb13-2"><a href="formatting-and-rendering-tables.html#cb13-2" aria-hidden="true" tabindex="-1"></a>         <span class="at">value =</span> <span class="fu">as_paragraph</span>(<span class="st">&quot;hello world&quot;</span>), <span class="at">ref_symbols =</span> <span class="st">&quot;(1)&quot;</span>)</span></code></pre></div>
+</details>
+<div class="tabwid"><style>.cl-59813430{}.cl-59758d06{font-family:'DejaVu Sans';font-size:11pt;font-weight:normal;font-style:normal;text-decoration:none;color:rgba(0, 0, 0, 1.00);background-color:transparent;}.cl-59758d1a{font-family:'DejaVu Sans';font-size:6.6pt;font-weight:normal;font-style:normal;text-decoration:none;color:rgba(0, 0, 0, 1.00);background-color:transparent;position: relative;bottom:3.3pt;}.cl-597ae670{margin:0;text-align:left;border-bottom: 0 solid rgba(0, 0, 0, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);padding-bottom:5pt;padding-top:5pt;padding-left:5pt;padding-right:5pt;line-height: 1;background-color:transparent;}.cl-597ae684{margin:0;text-align:left;border-bottom: 0 solid rgba(0, 0, 0, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);padding-bottom:0;padding-top:0;padding-left:0;padding-right:0;line-height: 1;background-color:transparent;}.cl-597ae68e{margin:0;text-align:center;border-bottom: 0 solid rgba(0, 0, 0, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);padding-bottom:5pt;padding-top:5pt;padding-left:5pt;padding-right:5pt;line-height: 1;background-color:transparent;}.cl-597ae698{margin:0;text-align:left;border-bottom: 0 solid rgba(0, 0, 0, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);padding-bottom:5pt;padding-top:5pt;padding-left:5pt;padding-right:5pt;line-height: 1;background-color:transparent;}.cl-597ae6a2{margin:0;text-align:left;border-bottom: 0 solid rgba(0, 0, 0, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);padding-bottom:0;padding-top:0;padding-left:0;padding-right:0;line-height: 1;background-color:transparent;}.cl-597ae6a3{margin:0;text-align:center;border-bottom: 0 solid rgba(0, 0, 0, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);padding-bottom:5pt;padding-top:5pt;padding-left:5pt;padding-right:5pt;line-height: 1;background-color:transparent;}.cl-597ae6ac{margin:0;text-align:left;border-bottom: 0 solid rgba(0, 0, 0, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);padding-bottom:5pt;padding-top:5pt;padding-left:5pt;padding-right:5pt;line-height: 1;background-color:transparent;}.cl-597b0380{width:0.562in;background-color:transparent;vertical-align: bottom;border-bottom: 1.5pt solid rgba(102, 102, 102, 1.00);border-top: 1.5pt solid rgba(102, 102, 102, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-597b038a{width:0.079in;background-color:transparent;vertical-align: middle;border-bottom: 0 solid rgba(0, 0, 0, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-597b0394{width:1.015in;background-color:transparent;vertical-align: middle;border-bottom: 1.5pt solid rgba(102, 102, 102, 1.00);border-top: 1.5pt solid rgba(102, 102, 102, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-597b0395{width:1.065in;background-color:transparent;vertical-align: middle;border-bottom: 1.5pt solid rgba(102, 102, 102, 1.00);border-top: 1.5pt solid rgba(102, 102, 102, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-597b039e{width:1.442in;background-color:transparent;vertical-align: middle;border-bottom: 1.5pt solid rgba(102, 102, 102, 1.00);border-top: 1.5pt solid rgba(102, 102, 102, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-597b039f{width:0.562in;background-color:transparent;vertical-align: top;border-bottom: 0 solid rgba(0, 0, 0, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-597b03a8{width:0.079in;background-color:transparent;vertical-align: top;border-bottom: 0 solid rgba(0, 0, 0, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-597b03b2{width:1.015in;background-color:transparent;vertical-align: top;border-bottom: 0 solid rgba(0, 0, 0, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-597b03b3{width:1.065in;background-color:transparent;vertical-align: top;border-bottom: 0 solid rgba(0, 0, 0, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-597b03bc{width:1.442in;background-color:transparent;vertical-align: top;border-bottom: 0 solid rgba(0, 0, 0, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-597b03bd{width:0.562in;background-color:transparent;vertical-align: top;border-bottom: 1.5pt solid rgba(102, 102, 102, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-597b03c6{width:1.015in;background-color:transparent;vertical-align: top;border-bottom: 1.5pt solid rgba(102, 102, 102, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-597b03c7{width:1.065in;background-color:transparent;vertical-align: top;border-bottom: 1.5pt solid rgba(102, 102, 102, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-597b03d0{width:1.442in;background-color:transparent;vertical-align: top;border-bottom: 1.5pt solid rgba(102, 102, 102, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-597b03d1{width:0.562in;background-color:transparent;vertical-align: middle;border-bottom: 0 solid rgba(255, 255, 255, 0.00);border-top: 0 solid rgba(255, 255, 255, 0.00);border-left: 0 solid rgba(255, 255, 255, 0.00);border-right: 0 solid rgba(255, 255, 255, 0.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-597b03da{width:0.079in;background-color:transparent;vertical-align: middle;border-bottom: 0 solid rgba(255, 255, 255, 0.00);border-top: 0 solid rgba(255, 255, 255, 0.00);border-left: 0 solid rgba(255, 255, 255, 0.00);border-right: 0 solid rgba(255, 255, 255, 0.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-597b03db{width:1.015in;background-color:transparent;vertical-align: middle;border-bottom: 0 solid rgba(255, 255, 255, 0.00);border-top: 0 solid rgba(255, 255, 255, 0.00);border-left: 0 solid rgba(255, 255, 255, 0.00);border-right: 0 solid rgba(255, 255, 255, 0.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-597b03e4{width:1.065in;background-color:transparent;vertical-align: middle;border-bottom: 0 solid rgba(255, 255, 255, 0.00);border-top: 0 solid rgba(255, 255, 255, 0.00);border-left: 0 solid rgba(255, 255, 255, 0.00);border-right: 0 solid rgba(255, 255, 255, 0.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-597b03e5{width:1.442in;background-color:transparent;vertical-align: middle;border-bottom: 0 solid rgba(255, 255, 255, 0.00);border-top: 0 solid rgba(255, 255, 255, 0.00);border-left: 0 solid rgba(255, 255, 255, 0.00);border-right: 0 solid rgba(255, 255, 255, 0.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}</style><table data-quarto-disable-processing='true' class='cl-59813430'><thead><tr style="overflow-wrap:break-word;"><th class="cl-597b0380"><p class="cl-597ae670"><span class="cl-59758d06">SEX</span></p></th><th class="cl-597b038a"><p class="cl-597ae684"><span class="cl-59758d06"></span></p></th><th class="cl-597b0394"><p class="cl-597ae68e"><span class="cl-59758d06">A: Drug X</span></p></th><th class="cl-597b038a"><p class="cl-597ae684"><span class="cl-59758d06"></span></p></th><th class="cl-597b0395"><p class="cl-597ae68e"><span class="cl-59758d06">B: Placebo</span></p></th><th class="cl-597b038a"><p class="cl-597ae684"><span class="cl-59758d06"></span></p></th><th class="cl-597b039e"><p class="cl-597ae68e"><span class="cl-59758d06">C: Combination</span></p></th></tr></thead><tbody><tr style="overflow-wrap:break-word;"><td class="cl-597b039f"><p class="cl-597ae698"><span class="cl-59758d06">F</span><span class="cl-59758d1a">(1)</span></p></td><td class="cl-597b03a8"><p class="cl-597ae6a2"><span class="cl-59758d06"></span></p></td><td class="cl-597b03b2"><p class="cl-597ae6a3"><span class="cl-59758d06">32.8</span><span class="cl-59758d06"> (</span><span class="cl-59758d06">6.1</span><span class="cl-59758d06">)</span></p></td><td class="cl-597b03a8"><p class="cl-597ae6a2"><span class="cl-59758d06"></span></p></td><td class="cl-597b03b3"><p class="cl-597ae6a3"><span class="cl-59758d06">34.2</span><span class="cl-59758d06"> (</span><span class="cl-59758d06">7.0</span><span class="cl-59758d06">)</span></p></td><td class="cl-597b03a8"><p class="cl-597ae6a2"><span class="cl-59758d06"></span></p></td><td class="cl-597b03bc"><p class="cl-597ae6a3"><span class="cl-59758d06">35.2</span><span class="cl-59758d06"> (</span><span class="cl-59758d06">7.4</span><span class="cl-59758d06">)</span></p></td></tr><tr style="overflow-wrap:break-word;"><td class="cl-597b03bd"><p class="cl-597ae698"><span class="cl-59758d06">M</span></p></td><td class="cl-597b03a8"><p class="cl-597ae6a2"><span class="cl-59758d06"></span></p></td><td class="cl-597b03c6"><p class="cl-597ae6a3"><span class="cl-59758d06">35.2</span><span class="cl-59758d06"> (</span><span class="cl-59758d06">7.0</span><span class="cl-59758d06">)</span></p></td><td class="cl-597b03a8"><p class="cl-597ae6a2"><span class="cl-59758d06"></span></p></td><td class="cl-597b03c7"><p class="cl-597ae6a3"><span class="cl-59758d06">37.3</span><span class="cl-59758d06"> (</span><span class="cl-59758d06">8.9</span><span class="cl-59758d06">)</span><span class="cl-59758d1a">(1)</span></p></td><td class="cl-597b03a8"><p class="cl-597ae6a2"><span class="cl-59758d06"></span></p></td><td class="cl-597b03d0"><p class="cl-597ae6a3"><span class="cl-59758d06">35.7</span><span class="cl-59758d06"> (</span><span class="cl-59758d06">8.2</span><span class="cl-59758d06">)</span><span class="cl-59758d1a">(1)</span></p></td></tr></tbody><tfoot><tr style="overflow-wrap:break-word;"><td  colspan="7"class="cl-597b03d1"><p class="cl-597ae6ac"><span class="cl-59758d1a">(1)</span><span class="cl-59758d06">hello world</span></p></td></tr></tfoot></table></div>
 </div>
 <div id="tables-1" class="section level3 hasAnchor" number="3.1.3">
-<h3>
-<span class="header-section-number">3.1.3</span> tables<a href="formatting-and-rendering-tables.html#tables-1" class="anchor-section" aria-label="Anchor link to header"></a>
-</h3>
+<h3><span class="header-section-number">3.1.3</span> tables<a href="formatting-and-rendering-tables.html#tables-1" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>The <code>tables</code> package concentrates on the table itself. The titles
 are generally written as part of the surrounding document. Footnotes
 would be added after constructing the table by modifying
@@ -496,29 +394,30 @@ individual entries.</p>
 <p>Alternatively for HTML output, only the footnote
 markers need to be added by modifying entries, and then
 the footnotes can be applied by using <code>toHTML(tab, options = list(doFooter = TRUE,  HTMLfooter = HTMLfootnotes(...))</code>.</p>
-<details class="chunk-details" open><summary class="chunk-summary"><span class="chunk-summary-text">Code</span></summary><div class="sourceCode" id="cb14"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="fu">resetSession</span><span class="op">(</span><span class="op">)</span></span>
-<span><span class="va">adsl</span> <span class="op">&lt;-</span> <span class="va">cadsl</span></span>
-<span></span>
-<span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/dmurdoch/tables/">tables</a></span><span class="op">)</span></span>
-<span><span class="fu"><a href="https://dmurdoch.github.io/tables/reference/table_options.html">table_options</a></span><span class="op">(</span>doCSS <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span>
-<span></span>
-<span><span class="va">sd_in_parens</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="va">x</span><span class="op">)</span> <span class="fu"><a href="https://rdrr.io/r/base/sprintf.html">sprintf</a></span><span class="op">(</span><span class="st">"(%.1f)"</span>, <span class="fu"><a href="https://rdrr.io/r/stats/sd.html">sd</a></span><span class="op">(</span><span class="va">x</span><span class="op">)</span><span class="op">)</span></span>
-<span></span>
-<span><span class="va">tab</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://dmurdoch.github.io/tables/reference/tabular.html">tabular</a></span><span class="op">(</span><span class="va">SEX</span> <span class="op">~</span> <span class="fu"><a href="https://dmurdoch.github.io/tables/reference/Heading.html">Heading</a></span><span class="op">(</span><span class="op">)</span><span class="op">*</span><span class="va">ARM</span><span class="op">*</span></span>
-<span>                     <span class="fu"><a href="https://dmurdoch.github.io/tables/reference/Heading.html">Heading</a></span><span class="op">(</span><span class="op">)</span><span class="op">*</span><span class="va">AGE</span><span class="op">*</span></span>
-<span>                     <span class="fu"><a href="https://dmurdoch.github.io/tables/reference/Heading.html">Heading</a></span><span class="op">(</span><span class="op">)</span><span class="op">*</span><span class="op">(</span><span class="va">mean</span> <span class="op">+</span> <span class="va">sd_in_parens</span><span class="op">)</span>, </span>
-<span>               data <span class="op">=</span> <span class="va">adsl</span><span class="op">)</span></span>
-<span></span>
-<span><span class="fu"><a href="https://dmurdoch.github.io/tables/reference/labels.html">rowLabels</a></span><span class="op">(</span><span class="va">tab</span><span class="op">)</span><span class="op">[</span><span class="fl">1</span>,<span class="fl">1</span><span class="op">]</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/paste.html">paste</a></span><span class="op">(</span><span class="fu"><a href="https://dmurdoch.github.io/tables/reference/labels.html">rowLabels</a></span><span class="op">(</span><span class="va">tab</span><span class="op">)</span><span class="op">[</span><span class="fl">1</span>,<span class="fl">1</span><span class="op">]</span>, <span class="st">"&lt;sup&gt;a&lt;/sup&gt;"</span><span class="op">)</span></span>
-<span><span class="va">tab</span><span class="op">[</span><span class="fl">2</span>,<span class="fl">2</span><span class="op">]</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/sprintf.html">sprintf</a></span><span class="op">(</span><span class="st">"%s%s"</span>, <span class="va">tab</span><span class="op">[</span><span class="fl">2</span>,<span class="fl">2</span><span class="op">]</span>, <span class="st">"&lt;sup&gt;b&lt;/sup&gt;"</span><span class="op">)</span></span>
-<span><span class="va">tab</span><span class="op">[</span><span class="fl">2</span>,<span class="fl">3</span><span class="op">]</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/sprintf.html">sprintf</a></span><span class="op">(</span><span class="st">"%.2f%s"</span>, <span class="va">tab</span><span class="op">[</span><span class="fl">2</span>,<span class="fl">3</span><span class="op">]</span>, <span class="st">"&lt;sup&gt;b&lt;/sup&gt;"</span><span class="op">)</span></span>
-<span></span>
-<span><span class="va">footnotes</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://dmurdoch.github.io/tables/reference/HTMLfootnotes.html">HTMLfootnotes</a></span><span class="op">(</span><span class="va">tab</span>, a <span class="op">=</span> <span class="st">"This is a label footnote."</span>,</span>
-<span>                                b <span class="op">=</span> <span class="st">"These are cell footnotes."</span><span class="op">)</span></span>
-<span><span class="fu"><a href="https://dmurdoch.github.io/tables/reference/html.tabular.html">toHTML</a></span><span class="op">(</span><span class="va">tab</span>, options <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span><span class="op">(</span>HTMLfooter <span class="op">=</span> <span class="va">footnotes</span>,</span>
-<span>                           doFooter <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
-</details><style>
+<details class=chunk-details open><summary class=chunk-summary><span class=chunk-summary-text>Code</span></summary>
+<div class="sourceCode" id="cb14"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb14-1"><a href="formatting-and-rendering-tables.html#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="fu">resetSession</span>()</span>
+<span id="cb14-2"><a href="formatting-and-rendering-tables.html#cb14-2" aria-hidden="true" tabindex="-1"></a>adsl <span class="ot">&lt;-</span> cadsl</span>
+<span id="cb14-3"><a href="formatting-and-rendering-tables.html#cb14-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-4"><a href="formatting-and-rendering-tables.html#cb14-4" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tables)</span>
+<span id="cb14-5"><a href="formatting-and-rendering-tables.html#cb14-5" aria-hidden="true" tabindex="-1"></a><span class="fu">table_options</span>(<span class="at">doCSS =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb14-6"><a href="formatting-and-rendering-tables.html#cb14-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-7"><a href="formatting-and-rendering-tables.html#cb14-7" aria-hidden="true" tabindex="-1"></a>sd_in_parens <span class="ot">&lt;-</span> <span class="cf">function</span>(x) <span class="fu">sprintf</span>(<span class="st">&quot;(%.1f)&quot;</span>, <span class="fu">sd</span>(x))</span>
+<span id="cb14-8"><a href="formatting-and-rendering-tables.html#cb14-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-9"><a href="formatting-and-rendering-tables.html#cb14-9" aria-hidden="true" tabindex="-1"></a>tab <span class="ot">&lt;-</span> <span class="fu">tabular</span>(SEX <span class="sc">~</span> <span class="fu">Heading</span>()<span class="sc">*</span>ARM<span class="sc">*</span></span>
+<span id="cb14-10"><a href="formatting-and-rendering-tables.html#cb14-10" aria-hidden="true" tabindex="-1"></a>                     <span class="fu">Heading</span>()<span class="sc">*</span>AGE<span class="sc">*</span></span>
+<span id="cb14-11"><a href="formatting-and-rendering-tables.html#cb14-11" aria-hidden="true" tabindex="-1"></a>                     <span class="fu">Heading</span>()<span class="sc">*</span>(mean <span class="sc">+</span> sd_in_parens), </span>
+<span id="cb14-12"><a href="formatting-and-rendering-tables.html#cb14-12" aria-hidden="true" tabindex="-1"></a>               <span class="at">data =</span> adsl)</span>
+<span id="cb14-13"><a href="formatting-and-rendering-tables.html#cb14-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-14"><a href="formatting-and-rendering-tables.html#cb14-14" aria-hidden="true" tabindex="-1"></a><span class="fu">rowLabels</span>(tab)[<span class="dv">1</span>,<span class="dv">1</span>] <span class="ot">&lt;-</span> <span class="fu">paste</span>(<span class="fu">rowLabels</span>(tab)[<span class="dv">1</span>,<span class="dv">1</span>], <span class="st">&quot;&lt;sup&gt;a&lt;/sup&gt;&quot;</span>)</span>
+<span id="cb14-15"><a href="formatting-and-rendering-tables.html#cb14-15" aria-hidden="true" tabindex="-1"></a>tab[<span class="dv">2</span>,<span class="dv">2</span>] <span class="ot">&lt;-</span> <span class="fu">sprintf</span>(<span class="st">&quot;%s%s&quot;</span>, tab[<span class="dv">2</span>,<span class="dv">2</span>], <span class="st">&quot;&lt;sup&gt;b&lt;/sup&gt;&quot;</span>)</span>
+<span id="cb14-16"><a href="formatting-and-rendering-tables.html#cb14-16" aria-hidden="true" tabindex="-1"></a>tab[<span class="dv">2</span>,<span class="dv">3</span>] <span class="ot">&lt;-</span> <span class="fu">sprintf</span>(<span class="st">&quot;%.2f%s&quot;</span>, tab[<span class="dv">2</span>,<span class="dv">3</span>], <span class="st">&quot;&lt;sup&gt;b&lt;/sup&gt;&quot;</span>)</span>
+<span id="cb14-17"><a href="formatting-and-rendering-tables.html#cb14-17" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-18"><a href="formatting-and-rendering-tables.html#cb14-18" aria-hidden="true" tabindex="-1"></a>footnotes <span class="ot">&lt;-</span> <span class="fu">HTMLfootnotes</span>(tab, <span class="at">a =</span> <span class="st">&quot;This is a label footnote.&quot;</span>,</span>
+<span id="cb14-19"><a href="formatting-and-rendering-tables.html#cb14-19" aria-hidden="true" tabindex="-1"></a>                                <span class="at">b =</span> <span class="st">&quot;These are cell footnotes.&quot;</span>)</span>
+<span id="cb14-20"><a href="formatting-and-rendering-tables.html#cb14-20" aria-hidden="true" tabindex="-1"></a><span class="fu">toHTML</span>(tab, <span class="at">options =</span> <span class="fu">list</span>(<span class="at">HTMLfooter =</span> footnotes,</span>
+<span id="cb14-21"><a href="formatting-and-rendering-tables.html#cb14-21" aria-hidden="true" tabindex="-1"></a>                           <span class="at">doFooter =</span> <span class="cn">TRUE</span>))</span></code></pre></div>
+</details>
+<style>
 .Rtable thead, .Rtable .even {
   background-color: inherit;
 }
@@ -537,19 +436,22 @@ the footnotes can be applied by using <code>toHTML(tab, options = list(doFooter 
   border-width: 0;
 }
 </style>
-<table class="Rtable">
-<thead><tr class="center">
-<th>SEX</th>
+ <table class="Rtable">
+ <thead>
+ <tr class="center">
+  <th>SEX</th>
   <th colspan="2">A: Drug X</th>
   <th colspan="2">B: Placebo</th>
   <th colspan="2">C: Combination</th>
-</tr></thead>
-<tfoot><tr><td colspan="7">
-<sup>a</sup>This is a label footnote.<br><sup>b</sup>These are cell footnotes.</td></tr></tfoot>
-<tbody>
-<tr class="center">
-<th class="left">F <sup>a</sup>
-</th>
+</tr>
+ </thead>
+ <tfoot>
+ <tr><td colspan=7><sup>a</sup>This is a label footnote.<br>
+<sup>b</sup>These are cell footnotes.</td></tr>
+ </tfoot>
+ <tbody>
+ <tr class="center">
+  <th class="left">F <sup>a</sup></th>
   <td>32.76</td>
   <td>(6.1)</td>
   <td>34.24</td>
@@ -557,103 +459,63 @@ the footnotes can be applied by using <code>toHTML(tab, options = list(doFooter 
   <td>35.20</td>
   <td>(7.4)</td>
 </tr>
-<tr class="center">
-<th class="left">M</th>
+ <tr class="center">
+  <th class="left">M</th>
   <td>35.22</td>
-  <td>(7.0)<sup>b</sup>
-</td>
-  <td>37.31<sup>b</sup>
-</td>
+  <td>(7.0)<sup>b</sup></td>
+  <td>37.31<sup>b</sup></td>
   <td>(8.9)</td>
   <td>35.69</td>
   <td>(8.2)</td>
 </tr>
-</tbody>
-</table>
+ </tbody>
+ </table>
+
 </div>
 </div>
 <div id="captions" class="section level2 hasAnchor" number="3.2">
-<h2>
-<span class="header-section-number">3.2</span> Captions<a href="formatting-and-rendering-tables.html#captions" class="anchor-section" aria-label="Anchor link to header"></a>
-</h2>
+<h2><span class="header-section-number">3.2</span> Captions<a href="formatting-and-rendering-tables.html#captions" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <p>A caption is a single paragraph of text describing the table it
 is associated to. Captions are often used because they allow you to
 cross-reference tables or list them in a ‘list of tables’ with the corresponding
 page numbers.</p>
 <div id="flextable-2" class="section level3 hasAnchor" number="3.2.1">
-<h3>
-<span class="header-section-number">3.2.1</span> flextable<a href="formatting-and-rendering-tables.html#flextable-2" class="anchor-section" aria-label="Anchor link to header"></a>
-</h3>
-<p>The <code><a href="https://davidgohel.github.io/flextable/reference/set_caption.html">set_caption()</a></code> function in ‘flextable’ is the recommanded way to add
+<h3><span class="header-section-number">3.2.1</span> flextable<a href="formatting-and-rendering-tables.html#flextable-2" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>The <code>set_caption()</code> function in ‘flextable’ is the recommanded way to add
 captions.</p>
-<details class="chunk-details" open><summary class="chunk-summary"><span class="chunk-summary-text">Code</span></summary><div class="sourceCode" id="cb15"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="fu">resetSession</span><span class="op">(</span><span class="op">)</span></span>
-<span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://ardata-fr.github.io/flextable-book/">flextable</a></span><span class="op">)</span></span>
-<span></span>
-<span><span class="fu"><a href="https://davidgohel.github.io/flextable/reference/flextable.html">flextable</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/utils/head.html">head</a></span><span class="op">(</span><span class="va">cars</span><span class="op">)</span><span class="op">)</span> <span class="op">|&gt;</span></span>
-<span>  <span class="fu"><a href="https://davidgohel.github.io/flextable/reference/set_caption.html">set_caption</a></span><span class="op">(</span></span>
-<span>    caption <span class="op">=</span> <span class="st">"a caption"</span>,</span>
-<span>    autonum <span class="op">=</span> <span class="fu">officer</span><span class="fu">::</span><span class="fu"><a href="https://davidgohel.github.io/officer/reference/run_autonum.html">run_autonum</a></span><span class="op">(</span>seq_id <span class="op">=</span> <span class="st">"tab"</span>, bkm <span class="op">=</span> <span class="st">"flextable-label"</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
-</details><div class="tabwid">
-<style>.cl-3dc19120{}.cl-3dba0a9a{font-family:'DejaVu Sans';font-size:11pt;font-weight:normal;font-style:normal;text-decoration:none;color:rgba(0, 0, 0, 1.00);background-color:transparent;}.cl-3dbd0614{margin:0;text-align:right;border-bottom: 0 solid rgba(0, 0, 0, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);padding-bottom:5pt;padding-top:5pt;padding-left:5pt;padding-right:5pt;line-height: 1;background-color:transparent;}.cl-3dbd1abe{width:0.75in;background-color:transparent;vertical-align: middle;border-bottom: 1.5pt solid rgba(102, 102, 102, 1.00);border-top: 1.5pt solid rgba(102, 102, 102, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-3dbd1ac8{width:0.75in;background-color:transparent;vertical-align: middle;border-bottom: 0 solid rgba(0, 0, 0, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-3dbd1ac9{width:0.75in;background-color:transparent;vertical-align: middle;border-bottom: 1.5pt solid rgba(102, 102, 102, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}</style>
-<table data-quarto-disable-processing="true" class="cl-3dc19120">
+<details class=chunk-details open><summary class=chunk-summary><span class=chunk-summary-text>Code</span></summary>
+<div class="sourceCode" id="cb15"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb15-1"><a href="formatting-and-rendering-tables.html#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="fu">resetSession</span>()</span>
+<span id="cb15-2"><a href="formatting-and-rendering-tables.html#cb15-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(flextable)</span>
+<span id="cb15-3"><a href="formatting-and-rendering-tables.html#cb15-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-4"><a href="formatting-and-rendering-tables.html#cb15-4" aria-hidden="true" tabindex="-1"></a><span class="fu">flextable</span>(<span class="fu">head</span>(cars)) <span class="sc">|&gt;</span></span>
+<span id="cb15-5"><a href="formatting-and-rendering-tables.html#cb15-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">set_caption</span>(</span>
+<span id="cb15-6"><a href="formatting-and-rendering-tables.html#cb15-6" aria-hidden="true" tabindex="-1"></a>    <span class="at">caption =</span> <span class="st">&quot;a caption&quot;</span>,</span>
+<span id="cb15-7"><a href="formatting-and-rendering-tables.html#cb15-7" aria-hidden="true" tabindex="-1"></a>    <span class="at">autonum =</span> officer<span class="sc">::</span><span class="fu">run_autonum</span>(<span class="at">seq_id =</span> <span class="st">&quot;tab&quot;</span>, <span class="at">bkm =</span> <span class="st">&quot;flextable-label&quot;</span>))</span></code></pre></div>
+</details>
+<div class="tabwid"><style>.cl-59cdacde{}.cl-59c0bd30{font-family:'DejaVu Sans';font-size:11pt;font-weight:normal;font-style:normal;text-decoration:none;color:rgba(0, 0, 0, 1.00);background-color:transparent;}.cl-59c57d8e{margin:0;text-align:right;border-bottom: 0 solid rgba(0, 0, 0, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);padding-bottom:5pt;padding-top:5pt;padding-left:5pt;padding-right:5pt;line-height: 1;background-color:transparent;}.cl-59c66654{width:0.75in;background-color:transparent;vertical-align: middle;border-bottom: 1.5pt solid rgba(102, 102, 102, 1.00);border-top: 1.5pt solid rgba(102, 102, 102, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-59c66668{width:0.75in;background-color:transparent;vertical-align: middle;border-bottom: 0 solid rgba(0, 0, 0, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-59c66669{width:0.75in;background-color:transparent;vertical-align: middle;border-bottom: 1.5pt solid rgba(102, 102, 102, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}</style><table data-quarto-disable-processing='true' class='cl-59cdacde'>
+
 <caption style="margin:0pt;text-align:center;border-bottom: 0.00pt solid transparent;border-top: 0.00pt solid transparent;border-left: 0.00pt solid transparent;border-right: 0.00pt solid transparent;padding-top:3pt;padding-bottom:3pt;padding-left:3pt;padding-right:3pt;line-height: 1;background-color:transparent;">
 <span id="tab:flextable-label">Table 3.1: </span><span>a caption</span>
 </caption>
 
-<thead><tr style="overflow-wrap:break-word;">
-<th class="cl-3dbd1abe"><p class="cl-3dbd0614"><span class="cl-3dba0a9a">speed</span></p></th>
-<th class="cl-3dbd1abe"><p class="cl-3dbd0614"><span class="cl-3dba0a9a">dist</span></p></th>
-</tr></thead>
-<tbody>
-<tr style="overflow-wrap:break-word;">
-<td class="cl-3dbd1ac8"><p class="cl-3dbd0614"><span class="cl-3dba0a9a">4</span></p></td>
-<td class="cl-3dbd1ac8"><p class="cl-3dbd0614"><span class="cl-3dba0a9a">2</span></p></td>
-</tr>
-<tr style="overflow-wrap:break-word;">
-<td class="cl-3dbd1ac8"><p class="cl-3dbd0614"><span class="cl-3dba0a9a">4</span></p></td>
-<td class="cl-3dbd1ac8"><p class="cl-3dbd0614"><span class="cl-3dba0a9a">10</span></p></td>
-</tr>
-<tr style="overflow-wrap:break-word;">
-<td class="cl-3dbd1ac8"><p class="cl-3dbd0614"><span class="cl-3dba0a9a">7</span></p></td>
-<td class="cl-3dbd1ac8"><p class="cl-3dbd0614"><span class="cl-3dba0a9a">4</span></p></td>
-</tr>
-<tr style="overflow-wrap:break-word;">
-<td class="cl-3dbd1ac8"><p class="cl-3dbd0614"><span class="cl-3dba0a9a">7</span></p></td>
-<td class="cl-3dbd1ac8"><p class="cl-3dbd0614"><span class="cl-3dba0a9a">22</span></p></td>
-</tr>
-<tr style="overflow-wrap:break-word;">
-<td class="cl-3dbd1ac8"><p class="cl-3dbd0614"><span class="cl-3dba0a9a">8</span></p></td>
-<td class="cl-3dbd1ac8"><p class="cl-3dbd0614"><span class="cl-3dba0a9a">16</span></p></td>
-</tr>
-<tr style="overflow-wrap:break-word;">
-<td class="cl-3dbd1ac9"><p class="cl-3dbd0614"><span class="cl-3dba0a9a">9</span></p></td>
-<td class="cl-3dbd1ac9"><p class="cl-3dbd0614"><span class="cl-3dba0a9a">10</span></p></td>
-</tr>
-</tbody>
-</table>
-</div>
+<thead><tr style="overflow-wrap:break-word;"><th class="cl-59c66654"><p class="cl-59c57d8e"><span class="cl-59c0bd30">speed</span></p></th><th class="cl-59c66654"><p class="cl-59c57d8e"><span class="cl-59c0bd30">dist</span></p></th></tr></thead><tbody><tr style="overflow-wrap:break-word;"><td class="cl-59c66668"><p class="cl-59c57d8e"><span class="cl-59c0bd30">4</span></p></td><td class="cl-59c66668"><p class="cl-59c57d8e"><span class="cl-59c0bd30">2</span></p></td></tr><tr style="overflow-wrap:break-word;"><td class="cl-59c66668"><p class="cl-59c57d8e"><span class="cl-59c0bd30">4</span></p></td><td class="cl-59c66668"><p class="cl-59c57d8e"><span class="cl-59c0bd30">10</span></p></td></tr><tr style="overflow-wrap:break-word;"><td class="cl-59c66668"><p class="cl-59c57d8e"><span class="cl-59c0bd30">7</span></p></td><td class="cl-59c66668"><p class="cl-59c57d8e"><span class="cl-59c0bd30">4</span></p></td></tr><tr style="overflow-wrap:break-word;"><td class="cl-59c66668"><p class="cl-59c57d8e"><span class="cl-59c0bd30">7</span></p></td><td class="cl-59c66668"><p class="cl-59c57d8e"><span class="cl-59c0bd30">22</span></p></td></tr><tr style="overflow-wrap:break-word;"><td class="cl-59c66668"><p class="cl-59c57d8e"><span class="cl-59c0bd30">8</span></p></td><td class="cl-59c66668"><p class="cl-59c57d8e"><span class="cl-59c0bd30">16</span></p></td></tr><tr style="overflow-wrap:break-word;"><td class="cl-59c66669"><p class="cl-59c57d8e"><span class="cl-59c0bd30">9</span></p></td><td class="cl-59c66669"><p class="cl-59c57d8e"><span class="cl-59c0bd30">10</span></p></td></tr></tbody></table></div>
 <p>In bookdown, use the syntax <code>\@ref(tab:flextable-label)</code> to create a linked
 reference to the table. See an example of a reference: <a href="formatting-and-rendering-tables.html#tab:flextable-label">3.1</a>.</p>
 <p>With ‘Quarto’, the R chunk code should be transformed as:</p>
-<details class="chunk-details" open><summary class="chunk-summary"><span class="chunk-summary-text">Code</span></summary><div class="sourceCode" id="cb16"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="co">#| label: tbl-flextable-label</span></span>
-<span><span class="co">#| tbl-cap: a caption</span></span>
-<span><span class="fu"><a href="https://davidgohel.github.io/flextable/reference/flextable.html">flextable</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/utils/head.html">head</a></span><span class="op">(</span><span class="va">cars</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
+<details class=chunk-details open><summary class=chunk-summary><span class=chunk-summary-text>Code</span></summary>
+<div class="sourceCode" id="cb16"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb16-1"><a href="formatting-and-rendering-tables.html#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="co">#| label: tbl-flextable-label</span></span>
+<span id="cb16-2"><a href="formatting-and-rendering-tables.html#cb16-2" aria-hidden="true" tabindex="-1"></a><span class="co">#| tbl-cap: a caption</span></span>
+<span id="cb16-3"><a href="formatting-and-rendering-tables.html#cb16-3" aria-hidden="true" tabindex="-1"></a><span class="fu">flextable</span>(<span class="fu">head</span>(cars))</span></code></pre></div>
 </details>
 </div>
 <div id="tables-2" class="section level3 hasAnchor" number="3.2.2">
-<h3>
-<span class="header-section-number">3.2.2</span> tables<a href="formatting-and-rendering-tables.html#tables-2" class="anchor-section" aria-label="Anchor link to header"></a>
-</h3>
+<h3><span class="header-section-number">3.2.2</span> tables<a href="formatting-and-rendering-tables.html#tables-2" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>As with titles, captions would be added as part of the
 surrounding document rather than part of the table object.</p>
 </div>
 </div>
 <div id="pagination" class="section level2 hasAnchor" number="3.3">
-<h2>
-<span class="header-section-number">3.3</span> Pagination<a href="formatting-and-rendering-tables.html#pagination" class="anchor-section" aria-label="Anchor link to header"></a>
-</h2>
+<h2><span class="header-section-number">3.3</span> Pagination<a href="formatting-and-rendering-tables.html#pagination" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <p>Historically tables have been printed to paper for submissions. Hence large tables
 that would not fit onto a single printed page (e.g. letter &amp; portrait) would have to
 be split into multiple tables that can be printed to the preferred page size. This
@@ -661,78 +523,69 @@ process of splitting the table is called <em>pagination</em> of tables.</p>
 <p>Pagination is a complex task as it requires to repeat information so that the tables
 on each page are correct tables with all relevant information for context.</p>
 <div id="rtables-2" class="section level3 hasAnchor" number="3.3.1">
-<h3>
-<span class="header-section-number">3.3.1</span> rtables<a href="formatting-and-rendering-tables.html#rtables-2" class="anchor-section" aria-label="Anchor link to header"></a>
-</h3>
+<h3><span class="header-section-number">3.3.1</span> rtables<a href="formatting-and-rendering-tables.html#rtables-2" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>In <code>rtables</code> pagination can be done with the <code>paginate_table</code> function which has
 a number of arguments to split the table, see the <a href="https://roche.github.io/rtables/reference/paginate.html">example documentation</a>.</p>
 </div>
 <div id="flextable-3" class="section level3 hasAnchor" number="3.3.2">
-<h3>
-<span class="header-section-number">3.3.2</span> flextable<a href="formatting-and-rendering-tables.html#flextable-3" class="anchor-section" aria-label="Anchor link to header"></a>
-</h3>
+<h3><span class="header-section-number">3.3.2</span> flextable<a href="formatting-and-rendering-tables.html#flextable-3" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>In ‘flextable’, there is no concept of pagination. The recommended method is to
 create a flextable for each modality of a group and to separate them with a page
 break; from R, this implies looping over a set of modalities with a <code>for</code>
-statement or a call to the <code><a href="https://rdrr.io/r/base/lapply.html">lapply()</a></code> function.</p>
+statement or a call to the <code>lapply()</code> function.</p>
 <p>Note this concept of page break is only valid for paginated documents, i.e.
 Word, PDF, eventually HTML with
 <a href="https://pagedjs.org/made-with-paged.js.html">paged.js</a> formats.</p>
 <p>In an ‘R Markdown’ document, the markdown code to insert a page break is
-<code>\newpage</code>; with the package ‘officer’, you have to use <code><a href="https://davidgohel.github.io/officer/reference/body_add_break.html">body_add_break()</a></code> (for
+<code>\newpage</code>; with the package ‘officer’, you have to use <code>body_add_break()</code> (for
 Word documents only).</p>
 </div>
 <div id="tables-3" class="section level3 hasAnchor" number="3.3.3">
-<h3>
-<span class="header-section-number">3.3.3</span> tables<a href="formatting-and-rendering-tables.html#tables-3" class="anchor-section" aria-label="Anchor link to header"></a>
-</h3>
+<h3><span class="header-section-number">3.3.3</span> tables<a href="formatting-and-rendering-tables.html#tables-3" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>Tables that span multiple pages are supported in PDF output using
 the LaTeX <code>longtable</code> package, specified when converting to LaTeX.</p>
 </div>
 </div>
 <div id="rendering-tables" class="section level2 hasAnchor" number="3.4">
-<h2>
-<span class="header-section-number">3.4</span> Rendering Tables<a href="formatting-and-rendering-tables.html#rendering-tables" class="anchor-section" aria-label="Anchor link to header"></a>
-</h2>
+<h2><span class="header-section-number">3.4</span> Rendering Tables<a href="formatting-and-rendering-tables.html#rendering-tables" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <p>The choice of file format is often dictated by your company’s processes to
 include the tables in a report.</p>
 <div id="ascii" class="section level3 hasAnchor" number="3.4.1">
-<h3>
-<span class="header-section-number">3.4.1</span> ASCII<a href="formatting-and-rendering-tables.html#ascii" class="anchor-section" aria-label="Anchor link to header"></a>
-</h3>
+<h3><span class="header-section-number">3.4.1</span> ASCII<a href="formatting-and-rendering-tables.html#ascii" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 </div>
 <div id="pdf" class="section level3 hasAnchor" number="3.4.2">
-<h3>
-<span class="header-section-number">3.4.2</span> PDF<a href="formatting-and-rendering-tables.html#pdf" class="anchor-section" aria-label="Anchor link to header"></a>
-</h3>
+<h3><span class="header-section-number">3.4.2</span> PDF<a href="formatting-and-rendering-tables.html#pdf" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 </div>
 <div id="html" class="section level3 hasAnchor" number="3.4.3">
-<h3>
-<span class="header-section-number">3.4.3</span> HTML<a href="formatting-and-rendering-tables.html#html" class="anchor-section" aria-label="Anchor link to header"></a>
-</h3>
+<h3><span class="header-section-number">3.4.3</span> HTML<a href="formatting-and-rendering-tables.html#html" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 </div>
 <div id="word" class="section level3 hasAnchor" number="3.4.4">
-<h3>
-<span class="header-section-number">3.4.4</span> WORD<a href="formatting-and-rendering-tables.html#word" class="anchor-section" aria-label="Anchor link to header"></a>
-</h3>
+<h3><span class="header-section-number">3.4.4</span> WORD<a href="formatting-and-rendering-tables.html#word" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 </div>
 <div id="rtf" class="section level3 hasAnchor" number="3.4.5">
-<h3>
-<span class="header-section-number">3.4.5</span> RTF<a href="formatting-and-rendering-tables.html#rtf" class="anchor-section" aria-label="Anchor link to header"></a>
-</h3>
+<h3><span class="header-section-number">3.4.5</span> RTF<a href="formatting-and-rendering-tables.html#rtf" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 
 </div>
 </div>
 </div>
             </section>
-</div>
+
+          </div>
         </div>
       </div>
 <a href="tablepkgs.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
 <a href="commontables.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
-<script src="libs/gitbook-2.6.7/js/app.min.js"></script><script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script><script src="libs/gitbook-2.6.7/js/plugin-search.js"></script><script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script><script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script><script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script><script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script><script src="libs/gitbook-2.6.7/js/plugin-clipboard.js"></script><script>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-clipboard.js"></script>
+<script>
 gitbook.require(["gitbook"], function(gitbook) {
 gitbook.start({
 "sharing": {
@@ -774,5 +627,7 @@ gitbook.start({
 });
 });
 </script>
+
 </body>
+
 </html>
