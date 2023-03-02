@@ -329,7 +329,7 @@ tab <- rbind(heading, body)
 useGroupLabels(tab, indent = "&emsp;", extraLines = 1)
 ```
 
-#### tidytlg
+### tidytlg
 
 ```{r}
 resetSession()
