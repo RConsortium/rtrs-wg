@@ -32,7 +32,8 @@ jobs:
 
       - name: Add some R options for later steps
         run: |
-          cat("\noptions(tinytex.verbose = TRUE)\n", file = "~/.Rprofile", append = TRUE)
+          dir.create('/usr/share/fonts/gfonts/', showWarnings = FALSE, recursive = TRUE)
+          cat("\noptions(tinytex.verbose = TRUE, GDTOOLS_CACHE_DIR = '/usr/share/fonts/gfonts/')\n", file = "~/.Rprofile", append = TRUE)
           cat(readLines("~/.Rprofile"), sep = "\n")
         shell: Rscript {0}
 
@@ -53,7 +54,7 @@ jobs:
 
       - name: install github packages
         run: |
-          remotes::install_local("tools/fakepkg")
+          remotes::install_local("tools/fakepkg", upgrade = "always")
         shell: Rscript {0}
 
       - name: Pandoc and Tinytex info
