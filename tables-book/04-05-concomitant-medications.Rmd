@@ -244,3 +244,59 @@ body <- tabular( (Heading("Any concomitant medication")*1*Heading("")*1 +
 
 useGroupLabels(rbind(heading, body), indent = "&emsp;")
 ```
+
+### tidytlg
+
+```{r}
+resetSession()
+library(dplyr)
+library(tidytlg)
+
+data("cadcm", package = "random.cdisc.data")
+data("cadsl", package = "random.cdisc.data")
+
+adsl <- cadsl 
+
+adcm <- cadcm %>% 
+  filter(SAFFL == "Y") %>% 
+  mutate(CMFL = "Y")
+
+# Create analysis population counts
+tbl1 <- freq(adsl,
+             rowvar = "SAFFL",
+             colvar = "ARM",
+             statlist = statlist("n"),
+             rowtext = "Analysis Set: Safety Population",
+             subset = SAFFL == "Y")
+
+# Create counts (percentages) for patients with any ConMed
+tbl2 <- freq(adcm,
+             denom_df = adsl,
+             rowvar = "CMFL",
+             colvar = "ARM",
+             statlist = statlist("n (x.x%)"),
+             rowtext = "Number of subjects with any concomitant medication",
+             subset = CMFL == "Y")
+
+# Create counts (percentages) by CMCLAS and CMDECOD
+tbl3 <- nested_freq(adcm,
+                    denom_df = adsl,
+                    rowvar = "CMCLAS*CMDECOD",
+                    colvar = "ARM",
+                    statlist = statlist("n (x.x%)"))
+
+# combine analysis results together
+tbl <- bind_table(tbl1, tbl2, tbl3) %>% 
+  select(-CMCLAS)
+
+# output the analysis results
+gentlg(huxme       = tbl,
+       format      = "HTML",
+       print.hux = FALSE,
+       file        = "Table x.x.x.x",
+       orientation = "portrait",
+       title = "Conmed Example Uses the ‘adcm’ dataset from ‘random.cdisc.data’",
+       colheader = c("","A: Drug X","B: Placebo","C: Combination"))
+
+```
+

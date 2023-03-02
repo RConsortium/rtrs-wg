@@ -328,3 +328,66 @@ body <- tabular( Heading("Patients with at least one event")*1*
 tab <- rbind(heading, body)
 useGroupLabels(tab, indent = "&emsp;", extraLines = 1)
 ```
+
+### tidytlg
+
+```{r}
+resetSession()
+library(dplyr)
+library(tidytlg)
+
+adsl <- formatters::ex_adsl
+adae <- formatters::ex_adae %>% 
+  mutate(TRTEMFL = "Y")
+
+# Create analysis population counts
+tbl1 <- freq(adsl,
+             rowvar = "SAFFL",
+             colvar = "ARM",
+             statlist = statlist("n"),
+             rowtext = "Analysis Set: Safety Population",
+             subset = SAFFL == "Y")
+
+# Create counts (percentages) for patients with at least one event
+tbl2 <- freq(adae,
+             denom_df = adsl,
+             rowvar = "TRTEMFL",
+             colvar = "ARM",
+             statlist = statlist("n (x.x%)"),
+             rowtext = "Patients with at least one event",
+             subset = TRTEMFL == "Y")
+
+# Create counts (percentages) of AE by AEBODSYS and AEDECOD
+tbl3a <- nested_freq(adae,
+                    denom_df = adsl,
+                    rowvar = "AEBODSYS*AEDECOD",
+                    colvar = "ARM",
+                    statlist = statlist("n (x.x%)"))
+
+# Create total event counts by AEBODSYS
+tbl3b <- freq(adae,
+              rowvar = "AEBODSYS",
+              colvar = "ARM",
+              statlist = statlist("n", distinct = FALSE)) %>% 
+  rename(AEBODSYS = label) %>% 
+  mutate(label = "Total number of events",
+         nested_level = 0)
+
+# interleave tbl3a and tbl3b by AEBODSYS
+tbl3 <- bind_rows(tbl3a, tbl3b) %>% 
+  arrange(AEBODSYS, nested_level)
+
+# combine analysis results together
+tbl <- bind_table(tbl1, tbl2, tbl3) %>% 
+  select(-AEBODSYS)
+
+# output the analysis results
+gentlg(huxme       = tbl,
+       format      = "HTML",
+       print.hux = FALSE,
+       file        = "Table x.x.x.x",
+       orientation = "portrait",
+       title = "Adverse Events Summary - Safety Analysis Set",
+       colheader = c("","A: Drug X","B: Placebo","C: Combination"))
+
+```

@@ -107,9 +107,23 @@ if (!requireNamespace("tables", quietly = TRUE) ||
   stop("This document requires tables version 0.9.10 or higher.")
 ```
 
+<<<<<<< HEAD
+## tidytlg
+
+Tidytlg provides a framework for creating tables, listings, and graphs (TLGs) using 
+Tidyverse. It offers a suite of analysis functions to summarize descriptive statistics 
+(univariate statistics and counts (percentages)) for table creation and a function 
+to convert analysis results to rtf/html outputs. For graphic output, tidytlg can 
+integrate plot objects created by ggplot2 or a png file with titles and footnotes 
+to produce rtf/html output. 
+
+`tidytlg` source code is on [GitHub](https://github.com/pharmaverse/tidytlg) as well
+as the [documentation](https://pharmaverse.github.io/tidytlg/main/).
+=======
 ```{r include=FALSE}
 # automatically create a bib database for R packages
 knitr::write_bib(c(
   "gt", "r2rtf", "rtables", "flextable", "tables"
 ), 'packages.bib')
 ```
+>>>>>>> origin/main

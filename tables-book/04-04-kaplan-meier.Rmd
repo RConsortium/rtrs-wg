@@ -574,3 +574,144 @@ part3 <- tabular( ( Heading("Hazard ratio")*1*Heading("")*hazardratio +
 useGroupLabels(rbind(heading, part1, part2, part3),
                indent = "&emsp;")
 ```
+
+### tidytlg
+
+```{r}
+resetSession(.kmState)
+library(dplyr)
+library(tidytlg)
+library(broom)
+library(stringr)
+
+# Create analysis population counts
+tbl1 <- freq(adtte,
+             rowvar = "SAFFL",
+             colvar = "TRT01A",
+             statlist = statlist("n"),
+             rowtext = "Analysis Set: Safety Population",
+             subset = SAFFL == "Y")
+
+# Create counts (percentages) for subjects with SAE
+tbl2 <- freq(adtte,
+             rowvar = "CNSR",
+             colvar = "TRT01A",
+             statlist = statlist("n (x.x%)"),
+             rowtext = "Number of subjects with serious adverse events, n(%)",
+             subset = CNSR == 0)
+
+# Create counts (percentages) for subjects with SAE
+tbl3a <- freq(adtte,
+             rowvar = "CNSR",
+             colvar = "TRT01A",
+             statlist = statlist("n (x.x%)"),
+             rowtext = "Number of censored subjects, n(%)",
+             subset = CNSR == 1)
+
+tbl3b <- freq(adtte,
+             rowvar = "CNSDTDSC",
+             colvar = "TRT01A",
+             statlist = statlist("n (x.x%)"),
+             subset = CNSR == 1)
+
+tbl3 <- bind_rows(tbl3a, tbl3b)
+
+# CoxPH model
+coxmod <- tidy(cph, exponentiate = TRUE, conf.int = TRUE, conf.level = 0.95) %>% 
+  filter(str_detect(term, "TRT01A")) %>% 
+  mutate(term = str_remove(term, "TRT01A"))
+
+tbl4a <- coxmod %>% 
+  mutate(hr = roundSAS(estimate, digits = 2, as_char = TRUE)) %>% 
+  select(term, hr) %>% 
+  pivot_wider(names_from = "term", values_from = "hr") %>% 
+  mutate(label = "Hazard ratio",
+         row_type = "HEADER")
+
+tbl4b <- coxmod %>% 
+  mutate(across(c(conf.low, conf.high), ~roundSAS(.x, digits = 2)),
+         ci = paste0("(", conf.low, ", ", conf.high, ")")) %>% 
+  select(term, ci) %>% 
+  pivot_wider(names_from = "term", values_from = "ci") %>% 
+  mutate(label = "95% Confidence Interval",
+         row_type = "VALUE")
+
+tbl4 <- bind_rows(tbl4a, tbl4b) %>% 
+  mutate(group_level = 0)
+
+# Logrank test
+log_rank_test <- purrr::map_df(.x = list(c("A: Drug X", "B: Placebo"),
+                                         c("A: Drug X", "C: Combination")),
+                               .f = ~{sdf <- survdiff(Surv(AVAL, CNSR==0) ~ TRT01A + STRATA1,
+                                                      data = adtte %>% dplyr::filter(TRT01A %in% .x));
+                               data.frame(TRT01A = .x[2],
+                                          pval = (1-pchisq(sdf$chisq, length(sdf$n)-1))/2)})
+
+tbl5 <- log_rank_test %>% 
+  mutate(pval = roundSAS(pval, digits = 3, as_char = TRUE)) %>% 
+  pivot_wider(names_from = "TRT01A", values_from = "pval") %>% 
+  mutate(label = "p-value (one-sided stratified log rank)",
+         row_type = "HEADER",
+         group_level = 0)
+
+# surv time stats
+tbl6a <- surv_tbl %>% 
+  mutate(median = roundSAS(median, digits = 2, as_char = TRUE)) %>% 
+  select(TRT01A, median) %>% 
+  pivot_wider(names_from = "TRT01A", values_from = "median") %>% 
+  mutate(label = "Median (years)",
+         row_type = "VALUE") %>% 
+  add_row(label = "Time to first serious adverse event (1)", row_type = "HEADER", .before = 1)
+
+tbl6b <- surv_tbl %>% 
+  mutate(across(c(`0.95LCL`, `0.95UCL`), ~roundSAS(.x, digits = 2, as_char = TRUE)),
+         ci = paste0("(", `0.95LCL`, ", ", `0.95UCL`, ")")) %>% 
+  select(TRT01A, ci) %>% 
+  pivot_wider(names_from = "TRT01A", values_from = "ci") %>% 
+  mutate(label = "95% Confidence Interval",
+         row_type = "VALUE")
+
+tbl6c <- adtte %>% 
+  filter(!(AVAL == 0 & CNSR == 1)) %>% 
+  group_by(TRT01A) %>% 
+  mutate(max_cnsr = !is.na(AVAL) & AVAL == max(AVAL, na.rm = TRUE) & CNSR == 1) %>% 
+  summarise(
+        min = min(AVAL, na.rm = TRUE),
+        max = max(AVAL, na.rm = TRUE),
+        is_censored = sum(max_cnsr) > 0) %>% 
+  mutate(across(c(min, max), ~roundSAS(.x, digits = 2, as_char = TRUE)),
+         min_max = ifelse(is_censored, paste0("(", min, ", ", max, "*)"), 
+                          paste0("(", min, ", ", max, ")"))) %>% 
+  select(TRT01A, min_max) %>% 
+  pivot_wider(names_from = "TRT01A", values_from = "min_max") %>% 
+  mutate(label = "Min - Max (2)",
+         row_type = "VALUE")
+
+
+tbl6 <- bind_rows(tbl6a, tbl6b, tbl6c) %>% 
+  mutate(group_level = 0)
+
+# combine analysis results together
+tbl <- bind_table(tbl1, tbl2, tbl3, tbl4, tbl5, tbl6)
+
+# output the analysis results
+gentlg(huxme       = tbl,
+       format      = "HTML",
+       print.hux = FALSE,
+       file        = "Table x.x.x.x",
+       orientation = "portrait",
+       title = "Time to First Serious Adverse Event",
+       footers = c("(1) Product-limit (Kaplan-Meier) estimates.",
+                   "(2) * indicates censoring",
+                   "Serious adverse events are defines as (...). All p-values are exploratory.",
+                   "Hazard ratios are from a stratified Cox model of serious adverse event hazard rate,
+with terms for treatment groups and strata1. Ties were handled using the exact
+method. Hazard ratios of Placebo Combination over Drug X are presented, an
+HR < 1 denotes improvement compared to Drug X.",
+"Source: ADTTE DDMMYYYY hh:mm; Listing x.xx; SDTM package: DDMMYYYY"),
+       colheader = c("","A: Drug X","B: Placebo","C: Combination"))  
+
+
+```
+
+

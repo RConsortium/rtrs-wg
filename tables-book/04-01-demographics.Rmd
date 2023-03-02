@@ -279,3 +279,51 @@ tab <- tabular( Heading()*1*Heading()*count +
 
 useGroupLabels(tab, indent = "&emsp;")
 ```
+
+### tidytlg
+
+```{r, warning=FALSE}
+resetSession()
+library(dplyr)
+library(tidytlg)
+
+adsl <- formatters::ex_adsl
+
+# create univariate stats for age
+tbl1 <- univar(adsl,
+               rowvar = "AGE",
+               colvar = "ARM",
+               statlist = statlist(c("N","MEANSD","MEDIAN","RANGE")),
+               row_header = "Age (years)",
+               decimal = 0)
+
+# create counts (percentages) for gender categories
+tbl2 <- freq(adsl,
+             rowvar = "SEX",
+             colvar = "ARM",
+             statlist = statlist(c("N", "n (x.x%)")),
+             row_header = "Gender, n(%)")
+
+# create counts (percentages) for country
+tbl3 <- freq(adsl,
+             rowvar = "COUNTRY",
+             colvar = "ARM",
+             statlist = statlist(c("N", "n (x.x%)")),
+             row_header = "Country, n(%)",
+             descending_by = "C: Combination")
+
+# combine analysis results together
+tbl <- bind_table(tbl1, tbl2, tbl3)
+
+# output the analysis results
+gentlg(huxme       = tbl,
+       format      = "HTML",
+       print.hux = FALSE,
+       file        = "Table x.x.x.x",
+       orientation = "portrait",
+       title = "Demographic Characteristics - Full Analysis Set",
+       footers = "Source: ADSL DDMMYYYY hh:mm; Listing x.xx; SDTM package: DDMMYYYY",
+       colheader = c("","A: Drug X","B: Placebo","C: Combination"))
+
+```
+
