@@ -15,7 +15,7 @@
 <meta name="twitter:title" content="Chapter 2 Overview table R packages | Tables in Clinical Trials with R">
 <meta name="twitter:description" content="Example code to create tables commonly used for analyzing clinical trials data.">
 <meta name="author" content="R Consortium Tables Working Group">
-<meta name="date" content="2023-02-23">
+<meta name="date" content="2023-03-02">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="black">
@@ -202,6 +202,7 @@ div.csl-indent {
 <li class="chapter" data-level="4.1.2" data-path="commontables.html"><a href="commontables.html#gt-1"><i class="fa fa-check"></i><b>4.1.2</b> gt</a></li>
 <li class="chapter" data-level="4.1.3" data-path="commontables.html"><a href="commontables.html#flextable-4"><i class="fa fa-check"></i><b>4.1.3</b> flextable</a></li>
 <li class="chapter" data-level="4.1.4" data-path="commontables.html"><a href="commontables.html#tables-4"><i class="fa fa-check"></i><b>4.1.4</b> tables</a></li>
+<li class="chapter" data-level="4.1.5" data-path="commontables.html"><a href="commontables.html#tidytlg"><i class="fa fa-check"></i><b>4.1.5</b> tidytlg</a></li>
 </ul>
 </li>
 <li class="chapter" data-level="4.2" data-path="commontables.html">
@@ -211,6 +212,7 @@ div.csl-indent {
 <li class="chapter" data-level="4.2.2" data-path="commontables.html"><a href="commontables.html#gt-2"><i class="fa fa-check"></i><b>4.2.2</b> gt</a></li>
 <li class="chapter" data-level="4.2.3" data-path="commontables.html"><a href="commontables.html#flextable-5"><i class="fa fa-check"></i><b>4.2.3</b> flextable</a></li>
 <li class="chapter" data-level="4.2.4" data-path="commontables.html"><a href="commontables.html#tables-5"><i class="fa fa-check"></i><b>4.2.4</b> tables</a></li>
+<li class="chapter" data-level="4.2.5" data-path="commontables.html"><a href="commontables.html#tidytlg-1"><i class="fa fa-check"></i><b>4.2.5</b> tidytlg</a></li>
 </ul>
 </li>
 <li class="chapter" data-level="4.3" data-path="commontables.html"><a href="commontables.html#laboratory-tables"><i class="fa fa-check"></i><b>4.3</b> Laboratory Tables</a></li>
@@ -223,6 +225,7 @@ div.csl-indent {
 <li class="chapter" data-level="4.4.4" data-path="commontables.html"><a href="commontables.html#gt-3"><i class="fa fa-check"></i><b>4.4.4</b> gt</a></li>
 <li class="chapter" data-level="4.4.5" data-path="commontables.html"><a href="commontables.html#flextable-6"><i class="fa fa-check"></i><b>4.4.5</b> flextable</a></li>
 <li class="chapter" data-level="4.4.6" data-path="commontables.html"><a href="commontables.html#tables-6"><i class="fa fa-check"></i><b>4.4.6</b> tables</a></li>
+<li class="chapter" data-level="4.4.7" data-path="commontables.html"><a href="commontables.html#tidytlg-2"><i class="fa fa-check"></i><b>4.4.7</b> tidytlg</a></li>
 </ul>
 </li>
 <li class="chapter" data-level="4.5" data-path="commontables.html">
@@ -232,6 +235,7 @@ div.csl-indent {
 <li class="chapter" data-level="4.5.2" data-path="commontables.html"><a href="commontables.html#gt-4"><i class="fa fa-check"></i><b>4.5.2</b> gt</a></li>
 <li class="chapter" data-level="4.5.3" data-path="commontables.html"><a href="commontables.html#flextable-7"><i class="fa fa-check"></i><b>4.5.3</b> flextable</a></li>
 <li class="chapter" data-level="4.5.4" data-path="commontables.html"><a href="commontables.html#tables-7"><i class="fa fa-check"></i><b>4.5.4</b> tables</a></li>
+<li class="chapter" data-level="4.5.5" data-path="commontables.html"><a href="commontables.html#tidytlg-3"><i class="fa fa-check"></i><b>4.5.5</b> tidytlg</a></li>
 </ul>
 </li>
 <li class="chapter" data-level="4.6" data-path="commontables.html">
@@ -241,6 +245,7 @@ div.csl-indent {
 <li class="chapter" data-level="4.6.2" data-path="commontables.html"><a href="commontables.html#gt-5"><i class="fa fa-check"></i><b>4.6.2</b> gt</a></li>
 <li class="chapter" data-level="4.6.3" data-path="commontables.html"><a href="commontables.html#flextable-8"><i class="fa fa-check"></i><b>4.6.3</b> flextable</a></li>
 <li class="chapter" data-level="4.6.4" data-path="commontables.html"><a href="commontables.html#tables-8"><i class="fa fa-check"></i><b>4.6.4</b> tables</a></li>
+<li class="chapter" data-level="4.6.5" data-path="commontables.html"><a href="commontables.html#tidytlg-4"><i class="fa fa-check"></i><b>4.6.5</b> tidytlg</a></li>
 </ul>
 </li>
 </ul>
@@ -371,6 +376,32 @@ at <a href="https://r-forge.r-project.org/projects/tables/" class="uri">https://
 Github at <a href="https://github.com/rforge/tables/" class="uri">https://github.com/rforge/tables/</a>. Vignettes in the package
 serve as a user manual. Browse them at <a href="https://rdrr.io/cran/tables/" class="uri">https://rdrr.io/cran/tables/</a>, or install the package, then run
 <code>browseVignettes(package = "tables")</code>.</p>
+<p>&lt;&lt;&lt;&lt;&lt;&lt;&lt; HEAD
+## tidytlg</p>
+<p>Tidytlg provides a framework for creating tables, listings, and graphs (TLGs) using
+Tidyverse. It offers a suite of analysis functions to summarize descriptive statistics
+(univariate statistics and counts (percentages)) for table creation and a function
+to convert analysis results to rtf/html outputs. For graphic output, tidytlg can
+integrate plot objects created by ggplot2 or a png file with titles and footnotes
+to produce rtf/html output.</p>
+<p><code>tidytlg</code> source code is on <a href="https://github.com/pharmaverse/tidytlg">GitHub</a> as well
+as the <a href="https://pharmaverse.github.io/tidytlg/main/">documentation</a>.
+=======</p>
+<blockquote>
+<blockquote>
+<blockquote>
+<blockquote>
+<blockquote>
+<blockquote>
+<blockquote>
+<p>origin/main</p>
+</blockquote>
+</blockquote>
+</blockquote>
+</blockquote>
+</blockquote>
+</blockquote>
+</blockquote>
 
 </div>
 </div>
