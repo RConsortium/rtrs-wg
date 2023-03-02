@@ -11,7 +11,7 @@ License: GPL-3
 Imports: knitr, officer, magrittr, rmarkdown, htmltools, 
  tidyr, ggplot2, dplyr,
  rsvg, bookdown, doconv, callr, patchwork,
- ragg, remotes, downlit, gt,
+ ragg, remotes, downlit, gt, tables, rtables,
  flextable, forcats, glue, tidyverse, 
  stringr, kableExtra, tfrmt, gdtools
 Encoding: UTF-8
