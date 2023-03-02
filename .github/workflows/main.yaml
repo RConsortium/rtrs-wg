@@ -54,6 +54,7 @@ jobs:
           remotes::install_github("ardata-fr/doconv")
           remotes::install_github("davidgohel/flextable")
           remotes::install_github("dmurdoch/tables")
+          remotes::install_github("pharmaverse/tidytlg")
         shell: Rscript {0}
 
       - name: Pandoc and Tinytex info
