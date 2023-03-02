@@ -2,25 +2,21 @@ on:
   push:
     branches:
       - main
+  pull_request:
+    branches:
+      - main
 
 name: bookdown
 
 jobs:
   bookdown:
     runs-on: ubuntu-20.04
-    if: "!contains(github.event.head_commit.message, 'buildskip')"
     env:
       GITHUB_PAT: ${{ secrets.GITHUB_TOKEN }}
+      GDTOOLS_CACHE_DIR: "/usr/share/fonts/gfonts/"
     steps:
 
       - uses: actions/checkout@v2
-
-      - name: Google fonts
-        run: |
-          mkdir -p /usr/share/fonts/truetype/google-fonts
-          find tables-book/static/fonts/ -name "*.ttf" -exec install -m644 {} /usr/share/fonts/truetype/google-fonts/ \; || return 1
-          fc-cache -f
-        shell: bash
 
       - uses: r-lib/actions/setup-r@v2
         with:
@@ -41,20 +37,23 @@ jobs:
         shell: Rscript {0}
 
       - uses: r-lib/actions/setup-r-dependencies@v2
+        with:
+          extra-packages: any::remotes
+
+      - name: Google fonts cache
+        run: |
+          gdtools::init_fonts_cache()
+        shell: Rscript {0}
+
+      - name: "Install 'Google Fonts'"
+        run: |
+          fontreq=$(Rscript -e "cat(gdtools::install_gfont_script(family = 'Open Sans'))")
+          sudo -s eval "$fontreq"
+        shell: bash
 
       - name: install github packages
         run: |
-          install.packages("remotes")
-          remotes::install_github("insightsengineering/random.cdisc.data")
-          remotes::install_github("insightsengineering/scda")
-          remotes::install_github("insightsengineering/nestcolor")
-          remotes::install_github("insightsengineering/formatters")
-          remotes::install_github("Roche/rtables")
-          remotes::install_github("insightsengineering/tern", ref = "v0.7.10")
-          remotes::install_github("ardata-fr/doconv")
-          remotes::install_github("davidgohel/flextable")
-          remotes::install_github("dmurdoch/tables")
-          remotes::install_github("pharmaverse/tidytlg")
+          remotes::install_local("tools/fakepkg")
         shell: Rscript {0}
 
       - name: Pandoc and Tinytex info
@@ -70,13 +69,8 @@ jobs:
           rmarkdown::render_site(encoding = 'UTF-8')
         shell: Rscript {0}
 
-      - name: Automatic Linking
-        run: |
-          setwd('tables-book')
-          for(z in list.files(path = '_book', pattern = '\\.html', full.names = TRUE)) {downlit::downlit_html_path(in_path = z, out_path = z)}
-        shell: Rscript {0}
-
       - name: Deploy 🚀
+        if: github.ref_name == 'main'
         uses: JamesIves/github-pages-deploy-action@releases/v3
         with:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
