@@ -54,7 +54,7 @@ jobs:
 
       - name: install github packages
         run: |
-          remotes::install_local("tools/fakepkg", upgrade = "always")
+          remotes::install_local("tools/fakepkg")
         shell: Rscript {0}
 
       - name: Pandoc and Tinytex info
