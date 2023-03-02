@@ -1,0 +1,25 @@
+Package: dummy
+Type: Package
+Title: dummy package
+Version: 0.1.0
+Authors@R: c(
+    person("David", "Gohel", role = c("aut", "cre"),
+    email = "david.gohel@ardata.fr")
+    )
+Description: dummy package description for CI
+License: GPL-3
+Imports: knitr, officer, magrittr, rmarkdown, tables, htmltools, 
+ tidyr, ggplot2, dplyr, magick, pdftools, 
+ rsvg, bookdown, doconv, callr, patchwork,
+ ragg, remotes, downlit, gt, tables, Tplyr, rtables,
+ flextable, forcats, glue, tidyverse, formatters,
+ stringr, quantreg, kableExtra, tfrmt, gdtools
+Encoding: UTF-8
+Remotes: insightsengineering/random.cdisc.data,
+ insightsengineering/scda,
+ insightsengineering/nestcolor,
+ insightsengineering/formatters,
+ Roche/rtables,
+ insightsengineering/tern@v0.7.10,
+ dmurdoch/tables,
+ pharmaverse/tidytlg
