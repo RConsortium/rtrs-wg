@@ -32,14 +32,14 @@ jobs:
 
       - name: Add some R options for later steps
         run: |
-          dir.create('/usr/share/fonts/gfonts/', showWarnings = FALSE, recursive = TRUE)
-          cat("\noptions(tinytex.verbose = TRUE, GDTOOLS_CACHE_DIR = '/usr/share/fonts/gfonts/')\n", file = "~/.Rprofile", append = TRUE)
+          cat("\noptions(tinytex.verbose = TRUE)\n", file = "~/.Rprofile", append = TRUE)
           cat(readLines("~/.Rprofile"), sep = "\n")
         shell: Rscript {0}
 
       - uses: r-lib/actions/setup-r-dependencies@v2
         with:
           extra-packages: any::remotes
+          working-directory: 'tools/fakepkg'
 
       - name: Google fonts cache
         run: |
@@ -51,11 +51,6 @@ jobs:
           fontreq=$(Rscript -e "cat(gdtools::install_gfont_script(family = 'Open Sans'))")
           sudo -s eval "$fontreq"
         shell: bash
-
-      - name: install github packages
-        run: |
-          remotes::install_local("tools/fakepkg")
-        shell: Rscript {0}
 
       - name: Pandoc and Tinytex info
         run: |

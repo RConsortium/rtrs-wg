@@ -1,4 +1,4 @@
-Package: dummy
+Package: tablebook
 Type: Package
 Title: dummy package
 Version: 0.1.0
@@ -9,11 +9,11 @@ Authors@R: c(
 Description: dummy package description for CI
 License: GPL-3
 Imports: knitr, officer, magrittr, rmarkdown, htmltools, 
- tidyr, ggplot2, dplyr, magick, pdftools, 
+ tidyr, ggplot2, dplyr,
  rsvg, bookdown, doconv, callr, patchwork,
- ragg, remotes, downlit, gt, Tplyr,
+ ragg, remotes, downlit, gt,
  flextable, forcats, glue, tidyverse, 
- stringr, quantreg, kableExtra, tfrmt, gdtools
+ stringr, kableExtra, tfrmt, gdtools
 Encoding: UTF-8
 Remotes: insightsengineering/random.cdisc.data,
  insightsengineering/scda,
