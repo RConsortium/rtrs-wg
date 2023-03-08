@@ -277,6 +277,45 @@ ft <- labelizor(
 ft
 ```
 
+
+#### tfrmt
+
+```{r}
+resetSession()
+library(tfrmt)
+library(dplyr)
+
+# Get data
+data_ae <- tfrmt::data_ae
+
+tfrmt(
+  # Specify table features
+  group = AEBODSYS,
+  label = AETERM,
+  column = c(col2, col1),
+  param = param,
+  value = value,
+
+  # Define cell formatting
+  body_plan = body_plan(
+    # Define rounding
+    frmt_structure(group_val = ".default", label_val = ".default", frmt("xx")),
+
+    frmt_structure(group_val = ".default", label_val = ".default",
+                   frmt_combine("{n} ({pct}%)",
+                                n = frmt("xx"),
+                                pct = frmt("x.x"))) ),
+
+  # Define columns
+  col_plan = col_plan(-starts_with("ord"))
+
+  ) %>%
+  print_to_gt(data_ae)
+```
+
+See this vignette for the completed table example: [link to website](https://gsk-biostatistics.github.io/tfrmt/articles/examples.html)
+
+
 ### tables
 
 The `tables` package normally generates tables from single datasets, while this
