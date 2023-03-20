@@ -13,7 +13,9 @@ Imports: knitr, officer, magrittr, rmarkdown, htmltools,
  rsvg, bookdown, doconv, callr, patchwork,
  ragg, remotes, downlit, gt, tables, rtables,
  flextable, forcats, glue, tidyverse, 
- stringr, kableExtra, tfrmt, gdtools
+ stringr, kableExtra, tfrmt, gdtools,
+ random.cdisc.data, scda, nestcolor, formatters,
+ tern, tidytlg
 Encoding: UTF-8
 Remotes: insightsengineering/random.cdisc.data,
  insightsengineering/scda,
