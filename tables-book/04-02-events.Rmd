@@ -391,3 +391,102 @@ gentlg(huxme       = tbl,
        colheader = c("","A: Drug X","B: Placebo","C: Combination"))
 
 ```
+
+### tfrmt
+Rather than starting with an ADaM, {tfrmt} assumes users will start with an ARD (Analysis Results Dataset), because of this, making this table will be split into two parts, first to make the ARD and second to format the table. 
+```{r}
+resetSession()
+library(tidyverse)
+library(tfrmt)
+
+# Make ARD 
+ex_adsl <- formatters::ex_adsl
+ex_adae <- formatters::ex_adae 
+
+big_n <- ex_adsl |> 
+  dplyr::group_by(ARM) |> 
+  dplyr::summarize(
+    N = dplyr::n_distinct(USUBJID)
+  ) 
+
+adae_with_n <- ex_adae |> 
+  dplyr::left_join(big_n, by = "ARM")
+
+calc_tot_and_any <- function(.data){
+  .data |>
+    dplyr::reframe(
+      n_subj = n_distinct(USUBJID),
+      pct_subj = n_subj/N,
+      n_evnts = n()
+    ) |> 
+    dplyr::distinct() |>
+    tidyr::pivot_longer(c("n_subj", "pct_subj", "n_evnts")) |> 
+    dplyr::mutate(label = dplyr::case_when(
+      name %in% c("n_subj", "pct_subj") ~ "Patients with at least one event",
+      name == "n_evnts" ~ "Total number of events"
+    ))
+}
+
+overall <- adae_with_n |> 
+  dplyr::group_by(ARM) |> 
+  calc_tot_and_any() |>
+  dplyr:: mutate(AEBODSYS = label)
+
+bdysys_overall <- adae_with_n |> 
+  dplyr::group_by(ARM, AEBODSYS) |> 
+  calc_tot_and_any()
+
+aeterm_sum <- adae_with_n |> 
+  dplyr::group_by(ARM, AEBODSYS, AETERM) |> 
+  dplyr::reframe(
+      n_subj = n_distinct(USUBJID),
+      pct_subj = n_subj/N) |> 
+  dplyr::distinct() |>
+  tidyr::pivot_longer(ends_with("subj")) |> 
+  dplyr::rename(label = AETERM)
+
+header_n <- big_n |> 
+  dplyr::rename(value = N) |> 
+  dplyr::mutate(name = "header_n")
+
+ae_ard <- dplyr::bind_rows(
+  overall, 
+  bdysys_overall,
+  aeterm_sum,
+  header_n
+)
+
+## Format Table 
+tfrmt(
+  column = ARM,
+  group = c("AEBODSYS"),
+  param = name,
+  value = value,
+  label = label, 
+) |>
+  # Then we cam combine it with an n percent template 
+tfrmt_n_pct(n = "n_subj",
+            pct = "pct_subj",
+  pct_frmt_when = frmt_when("==1" ~ "", 
+                            ">.99" ~ "(>99%)", 
+                            "==0" ~ "", 
+                            "<.01" ~ "(<1%)", 
+                            "TRUE" ~ frmt("(xx.x%)", transform = ~.*100))
+  ) |>
+  #Finally we are going to add some additional formatting
+  tfrmt(
+    body_plan = body_plan(
+      frmt_structure("n_evnts" = frmt("XXX"))
+    ),
+    big_n = big_n_structure("header_n"),
+    # Aligning on decimal places and spaces
+    col_style_plan = col_style_plan(
+      col_style_structure(col = matches("[A-Z]:.*"),
+                          align = c(".", " "))
+    )
+  ) |> 
+  print_to_gt(ae_ard)
+
+```
+
+

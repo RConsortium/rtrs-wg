@@ -333,3 +333,58 @@ gentlg(huxme       = tbl,
 ```
 
 
+### tfrmt
+Rather than starting with an ADaM, {tfrmt} assumes users will start with an ARD (Analysis Results Dataset), because of this, making this table will be split into two parts, first to make the ARD and second to format the table. 
+```{r}
+resetSession()
+
+library(tidyverse)
+library(tfrmt)
+
+data("cadsl", package = "random.cdisc.data")
+
+
+big_n <- cadsl |> 
+  dplyr::group_by(ARM) |> 
+  dplyr::summarize(
+    N = dplyr::n_distinct(USUBJID)
+  ) 
+
+disp_ard <- cadsl |>
+  dplyr::left_join(big_n, by = "ARM") |> 
+  dplyr::group_by(ARM, EOSSTT, DCSREAS, DTHCAT) |> 
+  dplyr::reframe(
+     n_subj = n_distinct(USUBJID),
+     pct_subj = n_subj/N
+  ) |> 
+  dplyr::distinct() |> 
+  tidyr::pivot_longer(ends_with("subj")) |> 
+  dplyr::mutate(
+    DCSREAS = if_else(is.na(DCSREAS), EOSSTT, DCSREAS),
+    DTHCAT = if_else(is.na(DTHCAT), DCSREAS, DTHCAT),
+    EOSSTT = forcats::fct_relevel(EOSSTT, 
+                                  "ONGOING", "COMPLETED", "DISCONTINUED")
+  ) %>% 
+  dplyr::arrange(EOSSTT, DCSREAS, DTHCAT)
+
+
+## Format Table 
+tfrmt(
+  column = ARM,
+  group = c("EOSSTT", "DCSREAS"),
+  param = name,
+  value = value,
+  label = DTHCAT
+) |>
+  # Then we cam combine it with an n percent template 
+tfrmt_n_pct(n = "n_subj",
+            pct = "pct_subj",
+  pct_frmt_when = frmt_when("==1" ~ "", 
+                            ">.99" ~ "(>99%)", 
+                            "==0" ~ "", 
+                            "<.01" ~ "(<1%)", 
+                            "TRUE" ~ frmt("(xx.x%)", transform = ~.*100)) 
+  ) |> 
+  print_to_gt(disp_ard)
+```
+
