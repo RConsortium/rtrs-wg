@@ -1,4 +1,4 @@
-Package: tablebook
+Package: fakepkg
 Type: Package
 Title: dummy package
 Version: 0.1.0
