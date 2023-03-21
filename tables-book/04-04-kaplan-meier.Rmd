@@ -714,4 +714,172 @@ HR < 1 denotes improvement compared to Drug X.",
 
 ```
 
+### tfrmt 
+
+This first chuck is clean up the data from the models to prepare it for going into a table.
+```{r}
+library(tidyverse)
+library(broom)
+
+big_n <- surv_tbl |> 
+  dplyr::select(N = n.max, TRT01A)
+
+# Number of subjects with a serious AE 
+sae_n <- surv_tbl |> # Calculated above 
+  dplyr::mutate(pct = events/n.max, 
+                group = "Number of subjects with serious adverse event, n (%)",
+                label = "Number of subjects with serious adverse event, n (%)",
+                ord1 = 1 ) |>
+  dplyr::select(TRT01A, n = events, pct, group, label, ord1) |> 
+  tidyr::pivot_longer(c("n", "pct"))
+
+# Count the number of censored subjects
+adtte_with_N <- adtte |>
+  dplyr::left_join(big_n, by = "TRT01A")
+
+cnsr_subjs <- adtte_with_N |> 
+  dplyr::filter(CNSR == "1") 
+
+tot_cnsr_subj <- cnsr_subjs |> 
+  dplyr::group_by(TRT01A) |> 
+  dplyr::reframe(
+    n = n_distinct(USUBJID),
+    pct = n/N
+  ) |> 
+  dplyr::distinct() |> 
+  tidyr::pivot_longer(c("n", "pct")) |> 
+  dplyr::mutate(
+    group = "Number of censored subjects, n (%)",
+    label = "Number of censored subjects, n (%)",
+    ord1 = 2
+  )
+
+sub_cnsr_subj <- cnsr_subjs |> 
+  dplyr::group_by(TRT01A, CNSDTDSC) |> 
+  dplyr::reframe(
+    n = n_distinct(USUBJID),
+    pct = n/N
+  ) |> 
+  dplyr::distinct() |> 
+  tidyr::pivot_longer(c("n", "pct")) |> 
+  dplyr::mutate(
+    group = "Number of censored subjects, n (%)",
+    ord1 = 2
+  ) |> 
+  dplyr::rename(label = CNSDTDSC)
+
+# Information from the CPH model 
+hzr <- broom::tidy(cph, conf.int = TRUE) |> 
+  mutate(across(c("estimate", "conf.low", "conf.high"), exp)) |> 
+  dplyr::filter(stringr::str_detect(term, "TRT01A")) |>
+  dplyr::select(term, estimate, conf.low, conf.high) |> 
+  tidyr::pivot_longer(c("estimate", "conf.low", "conf.high")) |> 
+  dplyr::mutate(group = "Hazard ratio",
+                label = case_when(
+                  name == "estimate" ~ "Hazard ratio",
+                  TRUE ~ "95% confidence interval"
+                ),
+                TRT01A = case_when(
+                  stringr::str_detect(term, "Placebo") ~ "B: Placebo",
+                  stringr::str_detect(term, "Combination") ~ "C: Combination"
+                ),
+                ord1 = 3) |> 
+  dplyr::select(-term)
+
+# Get one-sided p-value from survival model
+p_vals <- list(c("A: Drug X", "B: Placebo"), c("A: Drug X", "C: Combination")) |> 
+  map_dfr(function(comparison){
+    survdiff(Surv(AVAL, CNSR == 0) ~ TRT01A + STRATA1, data = adtte |> 
+                        dplyr::filter(TRT01A %in% comparison)) |> 
+    broom::glance() |> 
+      dplyr::mutate(TRT01A = comparison[2])
+  }) |> 
+  dplyr::select(value = p.value, TRT01A) |> 
+  dplyr::mutate(
+    name = "p.value",
+    group = "p-value (one-sided stratified log rank)",
+    label = "p-value (one-sided stratified log rank)",
+    ord1 = 5
+  )
+
+
+# Time to event from model 
+time_to_event <- surv_tbl |> 
+  dplyr::select(TRT01A, median, LCL = `0.95LCL`, UCL=`0.95UCL`) |> 
+  tidyr::pivot_longer(c("median", "LCL", "UCL")) |> 
+  dplyr::mutate(
+    group = "Time to first serious adverse event",
+    label = case_when(
+      name == "median" ~ "Median (years)",
+      TRUE ~ "95% confidence interval"
+    ),
+    ord1 = 6
+  )
+
+range <- adtte |> 
+  dplyr::group_by(TRT01A) |> 
+  dplyr::summarise(
+    min = min(AVAL),
+    max = max(AVAL)
+  ) |> 
+  dplyr::mutate(group = "Time to first serious adverse event",
+                label = "Min, Max",
+                ord1 = 6)|> 
+  tidyr::pivot_longer(c("min", "max"))
+
+
+model_ard <- bind_rows(
+  sae_n,
+  tot_cnsr_subj,
+  sub_cnsr_subj,
+  hzr,
+  p_vals,
+  time_to_event,
+  range
+)
+```
+
+Now time to format this information into a table 
+```{r}
+library(tfrmt)
+tfrmt(
+  column = TRT01A,
+  group = "group",
+  label = "label",
+  param = "name", 
+  value = "value", 
+  sorting_cols = "ord1",
+  body_plan = body_plan(
+    frmt_structure(group_val = ".default", label_val = ".default", 
+                   frmt_combine("{n} ({pct})",
+                                                                                n = frmt("xx"),
+                                                                                pct = frmt("xx%", transform = ~.*100))
+                   
+    ),
+    frmt_structure(group_val = "Hazard ratio", label_val = ".default",
+                   frmt_combine("[{conf.low}, {conf.high}]",
+                                frmt("x.x"))),
+    frmt_structure(group_val = ".default", label_val = "Hazard ratio", frmt("x.x")),
+    frmt_structure(group_val = ".default", label_val = "p-value (one-sided stratified log rank)", frmt("x.xxxx")),
+    frmt_structure(group_val = ".default", label_val = "Median (years)", frmt("x.xx")),
+    frmt_structure(group_val = "Time to first serious adverse event", label_val = "95% confidence interval",
+                   frmt_combine("[{LCL}, {UCL}]",
+                                frmt("x.xx"))),
+    frmt_structure(group_val = ".default", label_val = "Min, Max",
+                   frmt_combine("[{min}, {max}*]",
+                                frmt("x.xx")))
+    
+  ), 
+  col_plan = col_plan(-ord1), 
+  footnote_plan = footnote_plan(
+    footnote_structure("Serious adverse events are defines as (...). All p-values are exploratory.
+                       Hazard ratios are from a stratified Cox model of serious adverse event hazard rate, with terms for treatment groups and strata1. Ties were handled using the exact method. Hazard ratios of Placebo/ Combination over Drug X are presented, a HR < 1 denotes improvement compared to Drug X."),
+    footnote_structure(group_val = "Time to first serious adverse event",
+                       "Product-limit (Kaplan-Meier) estimates"), 
+    footnote_structure(group_val = "Time to first serious adverse event", 
+                       label_val = "Min, Max", "Minimum and maximum of event times. * Denotes censoring")
+  )
+) |> 
+  print_to_gt(model_ard)
+```
 
