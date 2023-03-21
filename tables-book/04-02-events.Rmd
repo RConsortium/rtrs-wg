@@ -393,7 +393,7 @@ gentlg(huxme       = tbl,
 ```
 
 ### tfrmt
-Rather than starting with an ADaM, {tfrmt} assumes users will start with an ARD (Analysis Results Dataset), because of this, making this table will be split into two parts, first to make the ARD and second to format the table. 
+Rather than starting with an [ADaM](https://www.cdisc.org/standards/foundational/adam), {tfrmt} assumes users will start with an ARD (Analysis Results Dataset), because of this, making this table will be split into two parts, first to make the ARD and second to format the table. 
 ```{r}
 resetSession()
 library(tidyverse)
