@@ -300,3 +300,79 @@ gentlg(huxme       = tbl,
 
 ```
 
+### tfrmt 
+Rather than starting with an [ADaM](https://www.cdisc.org/standards/foundational/adam), {tfrmt} assumes users will start with an ARD (Analysis Results Dataset), because of this, making this table will be split into two parts, first to make the ARD and second to format the table.
+```{r}
+resetSession()
+library(tidyverse)
+library(tfrmt)
+
+## Create ARD 
+data("cadcm", package = "random.cdisc.data")
+data("cadsl", package = "random.cdisc.data")
+
+big_n <- cadsl |> 
+  dplyr::group_by(ARM) |> 
+  dplyr::summarize(
+    N = dplyr::n_distinct(USUBJID)
+  ) 
+
+adcm_with_N <- cadcm |> 
+  left_join(big_n, by= "ARM")
+
+overall <- adcm_with_N |> 
+  dplyr::group_by(ARM) |>
+  dplyr::reframe(
+    n_subj = n_distinct(USUBJID),
+    pct_subj = n_subj/N
+  ) |>
+  dplyr::distinct() |>
+  dplyr::mutate(CMCLAS = "At Least One Concomittant Med",
+         CMDECOD = CMCLAS)
+
+med_lvl <- adcm_with_N |> 
+  dplyr::group_by(ARM,CMDECOD, CMCLAS) |>
+  dplyr::reframe(
+    n_subj = dplyr::n_distinct(USUBJID),
+    pct_subj = n_subj/N
+  ) |>
+  distinct() 
+
+label_N <- big_n |> 
+  dplyr::rename(value = N) |> 
+  dplyr::mutate(name = "header_n")
+
+
+cm_ard <- bind_rows(overall, med_lvl) |>
+  pivot_longer(ends_with("subj")) |> 
+  bind_rows(label_N)
+
+## Format Table 
+tfrmt(
+  column = ARM,
+  group = c("CMCLAS"),
+  param = name,
+  value = value,
+  label = CMDECOD, 
+) |>
+  # Then we cam combine it with an n percent template 
+tfrmt_n_pct(n = "n_subj",
+            pct = "pct_subj",
+  pct_frmt_when = frmt_when("==1" ~ "", 
+                            ">.99" ~ "(>99%)", 
+                            "==0" ~ "", 
+                            "<.01" ~ "(<1%)", 
+                            "TRUE" ~ frmt("(xx.x%)", transform = ~.*100))
+  ) |>
+  #Finally we are going to add some additional formatting
+  tfrmt(
+    big_n = big_n_structure("header_n"),
+    # Aligning on decimal places and spaces
+    col_style_plan = col_style_plan(
+      col_style_structure(col = matches("[A-Z]:.*"),
+                          align = c(".", " "))
+    )
+  ) |> 
+  print_to_gt(cm_ard)
+```
+

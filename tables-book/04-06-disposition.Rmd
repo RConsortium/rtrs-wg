@@ -333,3 +333,74 @@ gentlg(huxme       = tbl,
 ```
 
 
+### tfrmt
+Rather than starting with an [ADaM](https://www.cdisc.org/standards/foundational/adam), {tfrmt} assumes users will start with an ARD (Analysis Results Dataset), because of this, making this table will be split into two parts, first to make the ARD and second to format the table. 
+```{r}
+resetSession()
+
+library(tidyverse)
+library(tfrmt)
+
+data("cadsl", package = "random.cdisc.data")
+
+
+big_n <- cadsl |> 
+  dplyr::group_by(ARM) |> 
+  dplyr::summarize(
+    N = dplyr::n_distinct(USUBJID)
+  ) 
+
+disp_summary <- cadsl |>
+  dplyr::left_join(big_n, by = "ARM") |> 
+  dplyr::group_by(ARM, EOSSTT, DCSREAS, DTHCAUS) |> 
+  dplyr::reframe(
+     n_subj = n_distinct(USUBJID),
+     pct_subj = n_subj/N
+  ) |> 
+  dplyr::distinct() |> 
+  tidyr::pivot_longer(ends_with("subj")) |> 
+  dplyr::mutate(
+    DCSREAS = if_else(is.na(DCSREAS), EOSSTT, DCSREAS),
+    DTHCAUS = if_else(is.na(DTHCAUS), DCSREAS, DTHCAUS),
+    EOSSTT = forcats::fct_relevel(EOSSTT, 
+                                  "ONGOING", "COMPLETED", "DISCONTINUED")
+  ) %>% 
+  dplyr::arrange(EOSSTT, DCSREAS, DTHCAUS)
+
+label_N <- big_n |> 
+  dplyr::rename(value = N) |> 
+  dplyr::mutate(name = "header_n")
+
+
+disp_ard <- disp_summary |>
+  bind_rows(label_N)
+
+## Format Table 
+tfrmt(
+  column = ARM,
+  group = c("EOSSTT", "DCSREAS"),
+  param = name,
+  value = value,
+  label = DTHCAUS
+) |>
+  # Then we cam combine it with an n percent template 
+tfrmt_n_pct(n = "n_subj",
+            pct = "pct_subj",
+  pct_frmt_when = frmt_when("==1" ~ "", 
+                            ">.99" ~ "(>99%)", 
+                            "==0" ~ "", 
+                            "<.01" ~ "(<1%)", 
+                            "TRUE" ~ frmt("(xx.x%)", transform = ~.*100)) 
+  ) |>
+  #Finally we are going to add some additional formatting
+  tfrmt(
+    big_n = big_n_structure("header_n"),
+    # Aligning on decimal places and spaces
+    col_style_plan = col_style_plan(
+      col_style_structure(col = matches("[A-Z]:.*"),
+                          align = c(".", " "))
+    )
+  )|> 
+  print_to_gt(disp_ard)
+```
+
