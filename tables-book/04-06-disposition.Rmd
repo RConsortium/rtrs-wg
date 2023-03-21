@@ -352,7 +352,7 @@ big_n <- cadsl |>
 
 disp_ard <- cadsl |>
   dplyr::left_join(big_n, by = "ARM") |> 
-  dplyr::group_by(ARM, EOSSTT, DCSREAS, DTHCAT) |> 
+  dplyr::group_by(ARM, EOSSTT, DCSREAS, DTHCAUS) |> 
   dplyr::reframe(
      n_subj = n_distinct(USUBJID),
      pct_subj = n_subj/N
@@ -361,11 +361,11 @@ disp_ard <- cadsl |>
   tidyr::pivot_longer(ends_with("subj")) |> 
   dplyr::mutate(
     DCSREAS = if_else(is.na(DCSREAS), EOSSTT, DCSREAS),
-    DTHCAT = if_else(is.na(DTHCAT), DCSREAS, DTHCAT),
+    DTHCAUS = if_else(is.na(DTHCAUS), DCSREAS, DTHCAUS),
     EOSSTT = forcats::fct_relevel(EOSSTT, 
                                   "ONGOING", "COMPLETED", "DISCONTINUED")
   ) %>% 
-  dplyr::arrange(EOSSTT, DCSREAS, DTHCAT)
+  dplyr::arrange(EOSSTT, DCSREAS, DTHCAUS)
 
 
 ## Format Table 
@@ -374,7 +374,7 @@ tfrmt(
   group = c("EOSSTT", "DCSREAS"),
   param = name,
   value = value,
-  label = DTHCAT
+  label = DTHCAUS
 ) |>
   # Then we cam combine it with an n percent template 
 tfrmt_n_pct(n = "n_subj",
