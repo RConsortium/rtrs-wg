@@ -15,7 +15,7 @@ Imports: knitr, officer, magrittr, rmarkdown, htmltools,
  flextable, forcats, glue, tidyverse, 
  stringr, kableExtra, gdtools,
  random.cdisc.data, scda, nestcolor, formatters,
- tern, tidytlg
+ tern, tidytlg, broom
 Encoding: UTF-8
 Remotes: insightsengineering/random.cdisc.data,
  GSK-Biostatistics/tfrmt,
