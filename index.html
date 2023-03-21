@@ -23,7 +23,7 @@
 <meta name="author" content="R Consortium Tables Working Group" />
 
 
-<meta name="date" content="2023-03-20" />
+<meta name="date" content="2023-03-21" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -224,6 +224,7 @@ div.csl-indent {
 <li class="chapter" data-level="4.2.3" data-path="commontables.html"><a href="commontables.html#flextable-5"><i class="fa fa-check"></i><b>4.2.3</b> flextable</a></li>
 <li class="chapter" data-level="4.2.4" data-path="commontables.html"><a href="commontables.html#tables-5"><i class="fa fa-check"></i><b>4.2.4</b> tables</a></li>
 <li class="chapter" data-level="4.2.5" data-path="commontables.html"><a href="commontables.html#tidytlg-1"><i class="fa fa-check"></i><b>4.2.5</b> tidytlg</a></li>
+<li class="chapter" data-level="4.2.6" data-path="commontables.html"><a href="commontables.html#tfrmt-1"><i class="fa fa-check"></i><b>4.2.6</b> tfrmt</a></li>
 </ul></li>
 <li class="chapter" data-level="4.3" data-path="commontables.html"><a href="commontables.html#laboratory-tables"><i class="fa fa-check"></i><b>4.3</b> Laboratory Tables</a></li>
 <li class="chapter" data-level="4.4" data-path="commontables.html"><a href="commontables.html#time-to-event-analysis-tables"><i class="fa fa-check"></i><b>4.4</b> Time to Event Analysis Tables</a>
@@ -235,6 +236,7 @@ div.csl-indent {
 <li class="chapter" data-level="4.4.5" data-path="commontables.html"><a href="commontables.html#flextable-6"><i class="fa fa-check"></i><b>4.4.5</b> flextable</a></li>
 <li class="chapter" data-level="4.4.6" data-path="commontables.html"><a href="commontables.html#tables-6"><i class="fa fa-check"></i><b>4.4.6</b> tables</a></li>
 <li class="chapter" data-level="4.4.7" data-path="commontables.html"><a href="commontables.html#tidytlg-2"><i class="fa fa-check"></i><b>4.4.7</b> tidytlg</a></li>
+<li class="chapter" data-level="4.4.8" data-path="commontables.html"><a href="commontables.html#tfrmt-2"><i class="fa fa-check"></i><b>4.4.8</b> tfrmt</a></li>
 </ul></li>
 <li class="chapter" data-level="4.5" data-path="commontables.html"><a href="commontables.html#concomitant-medications"><i class="fa fa-check"></i><b>4.5</b> Concomitant Medications</a>
 <ul>
@@ -243,6 +245,7 @@ div.csl-indent {
 <li class="chapter" data-level="4.5.3" data-path="commontables.html"><a href="commontables.html#flextable-7"><i class="fa fa-check"></i><b>4.5.3</b> flextable</a></li>
 <li class="chapter" data-level="4.5.4" data-path="commontables.html"><a href="commontables.html#tables-7"><i class="fa fa-check"></i><b>4.5.4</b> tables</a></li>
 <li class="chapter" data-level="4.5.5" data-path="commontables.html"><a href="commontables.html#tidytlg-3"><i class="fa fa-check"></i><b>4.5.5</b> tidytlg</a></li>
+<li class="chapter" data-level="4.5.6" data-path="commontables.html"><a href="commontables.html#tfrmt-3"><i class="fa fa-check"></i><b>4.5.6</b> tfrmt</a></li>
 </ul></li>
 <li class="chapter" data-level="4.6" data-path="commontables.html"><a href="commontables.html#disposition"><i class="fa fa-check"></i><b>4.6</b> Disposition</a>
 <ul>
@@ -251,6 +254,7 @@ div.csl-indent {
 <li class="chapter" data-level="4.6.3" data-path="commontables.html"><a href="commontables.html#flextable-8"><i class="fa fa-check"></i><b>4.6.3</b> flextable</a></li>
 <li class="chapter" data-level="4.6.4" data-path="commontables.html"><a href="commontables.html#tables-8"><i class="fa fa-check"></i><b>4.6.4</b> tables</a></li>
 <li class="chapter" data-level="4.6.5" data-path="commontables.html"><a href="commontables.html#tidytlg-4"><i class="fa fa-check"></i><b>4.6.5</b> tidytlg</a></li>
+<li class="chapter" data-level="4.6.6" data-path="commontables.html"><a href="commontables.html#tfrmt-4"><i class="fa fa-check"></i><b>4.6.6</b> tfrmt</a></li>
 </ul></li>
 </ul></li>
 <li class="chapter" data-level="" data-path="references.html"><a href="references.html"><i class="fa fa-check"></i>References</a></li>
@@ -277,7 +281,7 @@ div.csl-indent {
 <div id="header">
 <h1 class="title">Tables in Clinical Trials with R</h1>
 <p class="author"><em>R Consortium Tables Working Group</em></p>
-<p class="date"><em>2023-03-20</em></p>
+<p class="date"><em>2023-03-21</em></p>
 </div>
 <div id="about" class="section level1 hasAnchor" number="1">
 <h1><span class="header-section-number">Chapter 1</span> About<a href="index.html#about" class="anchor-section" aria-label="Anchor link to header"></a></h1>
@@ -344,7 +348,7 @@ synthetic subject level dataset <code>ADSL</code>:</p>
 <div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb4-1"><a href="index.html#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="fu">data</span>(<span class="st">&quot;cadsl&quot;</span>, <span class="at">package =</span> <span class="st">&quot;random.cdisc.data&quot;</span>)</span>
 <span id="cb4-2"><a href="index.html#cb4-2" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(cadsl)</span></code></pre></div>
 </details>
-<pre><code># A tibble: 6 × 56
+<pre><code># A tibble: 6 × 55
   STUDYID USUBJID     SUBJID SITEID   AGE AGEU  SEX   RACE  ETHNIC COUNTRY DTHFL
   &lt;chr&gt;   &lt;chr&gt;       &lt;chr&gt;  &lt;chr&gt;  &lt;int&gt; &lt;fct&gt; &lt;fct&gt; &lt;fct&gt; &lt;fct&gt;  &lt;fct&gt;   &lt;fct&gt;
 1 AB12345 AB12345-CH… id-128 CHN-3     32 YEARS M     ASIAN HISPA… CHN     Y    
@@ -353,7 +357,7 @@ synthetic subject level dataset <code>ADSL</code>:</p>
 4 AB12345 AB12345-CH… id-220 CHN-11    26 YEARS F     ASIAN NOT H… CHN     N    
 5 AB12345 AB12345-CH… id-267 CHN-7     40 YEARS M     ASIAN NOT H… CHN     N    
 6 AB12345 AB12345-CH… id-201 CHN-15    49 YEARS M     ASIAN NOT H… CHN     Y    
-# … with 45 more variables: INVID &lt;chr&gt;, INVNAM &lt;chr&gt;, ARM &lt;fct&gt;, ARMCD &lt;fct&gt;,
+# … with 44 more variables: INVID &lt;chr&gt;, INVNAM &lt;chr&gt;, ARM &lt;fct&gt;, ARMCD &lt;fct&gt;,
 #   ACTARM &lt;fct&gt;, ACTARMCD &lt;fct&gt;, TRT01P &lt;fct&gt;, TRT01A &lt;fct&gt;, TRT02P &lt;fct&gt;,
 #   TRT02A &lt;fct&gt;, REGION1 &lt;fct&gt;, STRATA1 &lt;fct&gt;, STRATA2 &lt;fct&gt;, BMRKR1 &lt;dbl&gt;,
 #   BMRKR2 &lt;fct&gt;, ITTFL &lt;fct&gt;, SAFFL &lt;fct&gt;, BMEASIFL &lt;fct&gt;, BEP01FL &lt;fct&gt;,
@@ -377,7 +381,8 @@ for this book. For right now you can install the packages yourself with:</p>
 <span id="cb7-6"><a href="index.html#cb7-6" aria-hidden="true" tabindex="-1"></a>remotes<span class="sc">::</span><span class="fu">install_github</span>(<span class="st">&quot;insightsengineering/nestcolor&quot;</span>)</span>
 <span id="cb7-7"><a href="index.html#cb7-7" aria-hidden="true" tabindex="-1"></a>remotes<span class="sc">::</span><span class="fu">install_github</span>(<span class="st">&quot;insightsengineering/tern&quot;</span>, <span class="at">ref =</span> <span class="st">&quot;v0.7.10&quot;</span>)</span>
 <span id="cb7-8"><a href="index.html#cb7-8" aria-hidden="true" tabindex="-1"></a>remotes<span class="sc">::</span><span class="fu">install_github</span>(<span class="st">&quot;dmurdoch/tables&quot;</span>)</span>
-<span id="cb7-9"><a href="index.html#cb7-9" aria-hidden="true" tabindex="-1"></a>remotes<span class="sc">::</span><span class="fu">install_github</span>(<span class="st">&quot;pharmaverse/tidytlg&quot;</span>)</span></code></pre></div>
+<span id="cb7-9"><a href="index.html#cb7-9" aria-hidden="true" tabindex="-1"></a>remotes<span class="sc">::</span><span class="fu">install_github</span>(<span class="st">&quot;pharmaverse/tidytlg&quot;</span>)</span>
+<span id="cb7-10"><a href="index.html#cb7-10" aria-hidden="true" tabindex="-1"></a>remotes<span class="sc">::</span><span class="fu">install_github</span>(<span class="st">&quot;GSK-Biostatistics/tfrmt&quot;</span>)</span></code></pre></div>
 </details>
 <p>In each of the sections below, we will reset R to close to the
 present state
