@@ -94,12 +94,29 @@ adsl <- cadsl
 ## Installing the R packages
 
 At some point we may switch to `renv` to install the `R` packages used 
-for this book. For now you can install the latest 
-versions of the packages yourself by installing the `pak` package
-from CRAN, then
+for this book. For now you can generate a script to update to the latest 
+versions of the packages yourself by running this function:
 
 ```{r, eval = FALSE}
-pak::pkg_install("RConsortium/rtrs-wg/tools/fakepkg", upgrade = TRUE)
+getInstallScript <- function() {
+  prop <- pkgdepends::new_pkg_installation_proposal(
+    "RConsortium/rtrs-wg/tools/fakepkg",
+    config = list(dependencies = TRUE)
+  )
+  prop$set_solve_policy("upgrade")
+  prop$solve()
+  deps <- prop$get_solution()$data
+  deps <- subset(deps, !directpkg & type != "installed")
+  if (!nrow(deps)) return("# All up to date, no installs needed")
+
+  cmd <- ifelse(deps$type == "standard", "install.packages", "remotes::install_github")
+  reason <- ifelse(deps$lib_status == "new", "# new install",
+                   paste("# update from", deps$old_version, "to", deps$version))
+
+  sprintf('%s("%s") \t%s', cmd, deps$ref, reason)
+}
+
+cat(getInstallScript(), sep = "\n")
 ```
 
 In each of the sections below, we will reset R to close to the
