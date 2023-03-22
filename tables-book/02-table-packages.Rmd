@@ -107,7 +107,6 @@ if (!requireNamespace("tables", quietly = TRUE) ||
   stop("This document requires tables version 0.9.10 or higher.")
 ```
 
-<<<<<<< HEAD
 ## tidytlg
 
 Tidytlg provides a framework for creating tables, listings, and graphs (TLGs) using 
@@ -119,11 +118,10 @@ to produce rtf/html output.
 
 `tidytlg` source code is on [GitHub](https://github.com/pharmaverse/tidytlg) as well
 as the [documentation](https://pharmaverse.github.io/tidytlg/main/).
-=======
+
 ```{r include=FALSE}
 # automatically create a bib database for R packages
 knitr::write_bib(c(
   "gt", "r2rtf", "rtables", "flextable", "tables"
 ), 'packages.bib')
 ```
->>>>>>> origin/main
