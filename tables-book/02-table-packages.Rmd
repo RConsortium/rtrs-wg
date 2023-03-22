@@ -101,12 +101,6 @@ Github at https://github.com/rforge/tables/.  Vignettes in the package
 serve as a user manual.  Browse them at https://rdrr.io/cran/tables/, or install the package, then run
 `browseVignettes(package = "tables")`.
 
-```{r echo = FALSE}
-if (!requireNamespace("tables", quietly = TRUE) ||
-    packageVersion("tables") < "0.9.10")
-  stop("This document requires tables version 0.9.10 or higher.")
-```
-
 ## tidytlg
 
 Tidytlg provides a framework for creating tables, listings, and graphs (TLGs) using 
