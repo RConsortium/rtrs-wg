@@ -96,7 +96,11 @@ adsl <- cadsl
 At some point we may switch to `renv` to install the `R` packages used 
 for this book. For right now you can install the packages yourself with:
 
-```{r, eval = FALSE}
+```{r, eval = FALSE, echo = -(1:4)}
+# Authors:  to add a package, enter it here (for the readers)
+# and also in ../tools/fakepkg/DESCRIPTION (used in the online
+# builds).  Version requirements should go there.
+
 install.packages(c("rtables", "gt", "remotes", "tidyverse", "bookdown", "r2rtf"))
 install.packages('flextable', repos = 'https://davidgohel.r-universe.dev')
 install.packages('tfrmt')
@@ -107,6 +111,7 @@ remotes::install_github("insightsengineering/nestcolor")
 remotes::install_github("insightsengineering/tern", ref = "v0.7.10")
 remotes::install_github("dmurdoch/tables")
 remotes::install_github("pharmaverse/tidytlg")
+remotes::install_github("GSK-Biostatistics/tfrmt")
 ```
 
 In each of the sections below, we will reset R to close to the
