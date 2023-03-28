@@ -327,3 +327,175 @@ gentlg(huxme       = tbl,
 
 ```
 
+### tfrmt
+
+Please note that the`tfrmt` package is intended for use with mock data or ARD (analysis results data).
+This package creates the same tables as other packages but requires the starting data to be transformed first. 
+
+The first chunk of code takes the CDISC data and modifies it into an ARD. The second chunk demonstrates 
+how to format the table.
+
+```{r}
+resetSession()
+library(tidyverse)
+library(tfrmt)
+
+# Get data
+data("cadsl", package = "random.cdisc.data")
+
+# Number of unique subjects per ARM
+big_n <- cadsl |>
+  dplyr::group_by(ARM) |>
+  dplyr::summarize(
+    N = dplyr::n_distinct(USUBJID)
+  )
+
+# Join big_n with adsl
+adsl_with_n <- cadsl |>
+  dplyr::left_join(big_n, by = "ARM")
+
+# Explore column: AGE
+age_stats <-
+  adsl_with_n |>
+  group_by(ARM) |>
+  reframe(
+    n = n_distinct(AGE),
+    Mean = mean(AGE),
+    SD = sd(AGE),
+    Median = median(AGE),
+    Min = min(AGE),
+    Max = max(AGE)
+  ) |>
+  pivot_longer(
+    c("n", "Mean", "SD", "Median", "Min", "Max")
+  ) |>
+  mutate(
+    group = "Age (years)",
+    label = case_when(name == "Mean" ~ "Mean (SD)",
+                      name == "SD" ~ "Mean (SD)",
+                      name == "Min" ~ "Min - Max",
+                      name == "Max" ~ "Min - Max",
+                      TRUE ~ name)
+  )
+
+sex_n <-
+  adsl_with_n |>
+  group_by(ARM, SEX) |>
+  reframe(
+    n = n(),
+    pct = (n/N)*100
+  ) |>
+  distinct() |>
+  pivot_longer(
+    c("n", "pct")
+  ) |>
+  rename(
+    label = SEX
+  ) |>
+  mutate(
+    group = "Sex"
+  )
+
+# Explore column: COUNTRY
+country_n <-
+  adsl_with_n |>
+  group_by(ARM, COUNTRY) |>
+  reframe(
+    n = n(),
+    pct = (n/N)*100
+) |>
+  distinct() |>
+  pivot_longer(
+    c("n", "pct")
+  ) |>
+  rename(
+    label = COUNTRY
+  ) |>
+  mutate(
+    group = "Country"
+  )
+
+# Header n
+header_n <- big_n |>
+  dplyr::rename(value = N) |>
+  dplyr::mutate(name = "header_n")
+
+# Create ARD
+demog_ard <-
+  bind_rows(
+    age_stats,
+    sex_n,
+    country_n,
+    #header_n
+  ) |>
+  rename(
+    column = ARM,
+    param = name
+  ) |>
+  select(
+    group, label, param, column, value
+  ) |>
+  group_by(group, label)
+```
+
+Now we can used the `demog_ard` to make the demographic table using `tfrmt`.
+
+```{r}
+tfrmt(
+  # Add titles
+  title = "x.x: Study Subject Data",
+  subtitle = c("x.x.x: Demographic Characteristics. \n
+               Table x.x.x.x: Demographic Characteristics - Full Analysis Set"),
+
+  # Specify table features
+  group = group,
+  label = label,
+  column = column,
+  param = param,
+  value = value,
+
+  # Define cell formatting
+  body_plan = body_plan(
+    # Define rounding and structure of values in each row
+    frmt_structure(group_val = ".default", label_val = ".default", frmt("xx")),
+
+    frmt_structure(group_val = "Age (years)",
+                   label_val = c("Mean (SD)"),
+                   frmt_combine(
+                     "{Mean} ({SD})",
+                     Mean = frmt("xx.x"),
+                     SD = frmt("x.x") )),
+
+    frmt_structure(group_val = "Age (years)",
+                   label_val = c("Min - Max"),
+                   frmt_combine(
+                     "{Min} - {Max}",
+                     frmt("xx.x") )),
+
+    frmt_structure(group_val = "Sex",
+                   label_val = c("M", "F", "U", "UNDIFFERENTIATED"),
+                   frmt_combine(
+                     "{n} ({pct}%)",
+                     n = frmt("XXX"),
+                     pct = frmt("XX.X") )),
+
+    frmt_structure(group_val = "Country",
+                   label_val = c("CHN", "USA", "BRA", "PAK", "NGA", "RUS", "JPN", "GBR", "CAN", "NA"),
+                   frmt_combine(
+                     "{n} ({pct}%)",
+                     n = frmt("XXX"),
+                     pct = frmt("XX.X") ))
+  ),
+
+  # Align values on decimal places and spaces
+  col_style_plan = col_style_plan(
+    col_style_structure(col = matches("[A-Z]:.*"),
+                        align = c(".", " "))
+  ) ) %>%
+  print_to_gt(demog_ard)
+```
+
+See this vignette for more details on formatting functions: [link to website](https://gsk-biostatistics.github.io/tfrmt/articles/body_plan.html)
+
+See this vignette for the completed table example: [link to website](https://gsk-biostatistics.github.io/tfrmt/articles/examples.html)
+
