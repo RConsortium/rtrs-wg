@@ -101,8 +101,7 @@ for this book. For right now you can install the packages yourself with:
 # and also in ../tools/fakepkg/DESCRIPTION (used in the online
 # builds).  Version requirements should go there.
 
-install.packages(c("rtables", "gt", "remotes", "tidyverse", "bookdown", "r2rtf"))
-install.packages('flextable', repos = 'https://davidgohel.r-universe.dev')
+install.packages(c("rtables", "gt", "remotes", "tidyverse", "bookdown", "r2rtf", "flextable"))
 
 remotes::install_github("insightsengineering/random.cdisc.data")
 remotes::install_github("insightsengineering/scda")
