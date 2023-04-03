@@ -195,24 +195,17 @@ a number of arguments to split the table, see the [example documentation](https:
 
 ### flextable
 
-In 'flextable', there is no concept of pagination. The recommended method is to
-create a flextable for each modality of a group and to separate them with a page
-break; from R, this implies looping over a set of modalities with a `for`
-statement or a call to the `lapply()` function. 
+The pagination of flextable objects let user control their position in relation 
+to page breaks. It can prevent breaks between tables rows of a same group. 
 
-Note this concept of page break is only valid for paginated documents, i.e.
-Word, PDF, eventually HTML with
-[paged.js](https://pagedjs.org/made-with-paged.js.html) formats. 
+Function `paginate()` let you define this pagination, this feature is only 
+available for RTF and Word outputs; see the [documentation about pagination](https://ardata-fr.github.io/flextable-book/layout.html#pagination).
 
-In an 'R Markdown' document, the markdown code to insert a page break is
-`\newpage`; with the package 'officer', you have to use `body_add_break()` (for
-Word documents only).
 
 ### tables
 
 Tables that span multiple pages are supported in PDF output using
 the LaTeX `longtable` package, specified when converting to LaTeX.
-
 
 
 ## Rendering Tables

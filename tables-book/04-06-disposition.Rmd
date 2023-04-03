@@ -153,13 +153,14 @@ library(glue)
 adsl <- cadsl |>
   select(USUBJID, TRT01A, EOSSTT, DCSREAS)
 
-labels <- tools::toTitleCase(tolower(levels(adsl$DCSREAS)))
-names(labels) <- levels(adsl$DCSREAS)
-
 # data parts calculations
 part_header <- adsl |> count(TRT01A, name = "n_part")
 
 part_completed <- adsl |> filter(EOSSTT %in% "COMPLETED") |> 
+  mutate(DCSREAS = "") |>
+  count(TRT01A, EOSSTT, DCSREAS)
+
+part_ongoing <- adsl |> filter(EOSSTT %in% "ONGOING") |> 
   mutate(DCSREAS = "") |>
   count(TRT01A, EOSSTT, DCSREAS)
 
@@ -170,18 +171,25 @@ part_discontinued <- adsl |>
 part_death <- cadsl |> 
   filter(EOSSTT %in% "DISCONTINUED", DCSREAS %in% "DEATH") |> 
   count(TRT01A, EOSSTT, DTHCAUS) |> 
-  mutate(EOSSTT = forcats::fct_expand(EOSSTT, "Death Cause"),
-         EOSSTT = "Death Cause",
-         DTHCAUS = tools::toTitleCase(tolower(DTHCAUS))
-         ) |> 
+  mutate(DTHCAUS = paste0("\t", DTHCAUS)) |> 
   rename(DCSREAS = DTHCAUS)
+
+DCSREAS_LEV <- c(
+  "", "ADVERSE EVENT", "DEATH", 
+  part_death$DCSREAS, levels(part_discontinued$DCSREAS)) |> 
+  unique()
+EOSSTT_LEV <- c("COMPLETED", "ONGOING", "DISCONTINUED")
 
 dat <- bind_rows(
   part_completed, 
+  part_ongoing, 
   part_discontinued, 
   part_death) |> 
   inner_join(part_header, by = "TRT01A") |> 
-  mutate(percent = n / n_part, n_part = NULL)
+  mutate(percent = n / n_part, n_part = NULL,
+         DCSREAS = factor(DCSREAS, levels = DCSREAS_LEV),
+         EOSSTT = factor(EOSSTT, levels = EOSSTT_LEV)
+  )
 
 # Now the flextable creation with help of `tabulator()`. 
 
@@ -192,7 +200,7 @@ tab <- tabulator(
   `content_cell` = as_paragraph(fmt_n_percent(n, percent))
 )
 ft <- as_flextable(tab, spread_first_col = TRUE, 
-                   columns_alignment = "right" )
+                   columns_alignment = "center" )
 
 TRT_COUNTS <- setNames(part_header$n_part, part_header$TRT01A)
 for (TRT_COD in names(TRT_COUNTS)) {
@@ -201,11 +209,8 @@ for (TRT_COD in names(TRT_COUNTS)) {
                       as_chunk(TRT_COUNTS[TRT_COD], formatter = function(n) sprintf("\n(N=%.0f)", n)))
 }
 
-ft <- ft |> 
-  labelizor(
-    labels = c(labels, DCSREAS = "", ANY = "Number of patients", 
-               COMPLETED = "Completed", DISCONTINUED = "Discontinued"), 
-    j = "DCSREAS", part = "all") |> 
+ft <- labelizor(ft, j = "DCSREAS", part = "all", labels = function(x) tools::toTitleCase(tolower(x))) |> 
+  labelizor(labels = c(Dcsreas = ""), j = "DCSREAS", part = "header") |> 
   align(i = ~!is.na(EOSSTT) | seq_along(EOSSTT) == 1, j = 1, align = "left") |> 
   prepend_chunks(i = ~is.na(EOSSTT), j = "DCSREAS", as_chunk("\t")) |> 
   autofit()
