@@ -104,6 +104,63 @@ footnote(z, i = c(1, 2, 2), j = c(1, 5, 7),
          value = as_paragraph("hello world"), ref_symbols = "(1)")
 ```
 
+### tfrmt
+
+The `tfrmt` function in the `tfrmt` package includes the arguments `title` and
+`subtitle` to add titles. Within the `footnote_plan` function, the user can nest 
+multiple `footnote_structure`s to add footnotes with superscript reference 
+symbols on groups, columns or labels.
+
+To demonstrate, this example will create a mock demographics table:
+
+```{r}
+resetSession()
+library(tfrmt)
+library(dplyr)
+library(tidyr)
+
+# Create mock data
+df <- crossing(group = c("AGE", "SEX"),
+               label = c("label 1", "label 2"),
+               column = c("Drug X", "Placebo", "Combination"),
+               param = c("count", "percent"))
+
+# Create specification
+tfrmt_spec <- tfrmt(
+  # Add titles
+  title = "Demographic Table - All Patients",
+  subtitle = "Cutoff Date: June 01, 2022. Arm B received a placebo.",
+
+  # Specify table features
+  group = group,
+  label = label,
+  column = column,
+  param = param,
+  row_grp_plan = row_grp_plan(
+    row_grp_structure(group_val = ".default",
+                      element_block(post_space = "   ")) ),
+
+  # Define cell formatting
+  body_plan = body_plan(
+    frmt_structure(group_val = ".default", label_val = ".default",
+                   frmt_combine("{count} ({percent})",
+                                count = frmt("xx"),
+                                percent = frmt("xx.x")))),
+
+  # Add footnotes here
+  footnote_plan = footnote_plan(
+    footnote_structure(footnote_text = "Footnote about column", column_val = "Combination"),
+    footnote_structure(footnote_text = "Footnote about group", group_val = "AGE"),
+    marks = "numbers"),
+
+)
+
+print_mock_gt(tfrmt_spec, df)
+```
+
+See this vignette for more details on footnotes: [link to website](https://gsk-biostatistics.github.io/tfrmt/articles/footnotes.html)
+
+
 ### tables
 
 The `tables` package concentrates on the table itself.  The titles
