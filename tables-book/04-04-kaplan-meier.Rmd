@@ -349,7 +349,7 @@ prepare_tte_df <- function(adtte, cph, surv_tbl) {
   ## Number of censored subjects - detail per CNSDTDSC ----
   subj_censored_detail <- adtte |>
     filter(CNSR > 0) |>
-    dplyr::count(TRT01A, CNSDTDSC) |>
+    count(TRT01A, CNSDTDSC) |>
     left_join(subj_count |> select(TRT01A, records), by = "TRT01A") |>
     mutate(pct = n / records, description = "CENSOR_EVENTS") |>
     rename(subdescription = "CNSDTDSC")

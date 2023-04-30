@@ -67,13 +67,13 @@ adcm <- cadcm |>
 
 ct_cm <- dplyr::group_by(cadcm, TRT01A) |> 
   dplyr::summarize(n = dplyr::n_distinct(USUBJID)) |> 
-  dplyr::left_join(dplyr::count(cadsl, TRT01A, name = "nall"), by = "TRT01A") |> 
+  dplyr::left_join(count(cadsl, TRT01A, name = "nall"), by = "TRT01A") |> 
   dplyr::mutate(pct = n / nall, nall = NULL,
                 CMDECOD = factor("Number of sujects with any concomitant medication", levels = cmdecod_levels))
 
 ct_adcm <- dplyr::group_by(cadcm, TRT01A, CMCLAS, CMDECOD) |> 
   dplyr::summarize(n = dplyr::n_distinct(USUBJID), .groups = "drop") |> 
-  dplyr::left_join(dplyr::count(cadsl, TRT01A, name = "nall"), by = "TRT01A") |> 
+  dplyr::left_join(count(cadsl, TRT01A, name = "nall"), by = "TRT01A") |> 
   dplyr::mutate(pct = n / nall, nall = NULL)
 
 gt_adcm <- dplyr::bind_rows(ct_cm, ct_adcm) |>  
@@ -166,7 +166,7 @@ trt_count <- setNames(trt_count$n, trt_count$TRT01A)
 
 ct_cm <- group_by(cadcm, TRT01A) |> 
   summarise(n = n_distinct(USUBJID)) |> 
-  left_join(dplyr::count(cadsl, TRT01A, name = "nall"), by = "TRT01A") |> 
+  left_join(count(cadsl, TRT01A, name = "nall"), by = "TRT01A") |> 
   mutate(pct = n / nall, nall = NULL,
          CMCLAS = factor("N_CM", levels = cmclas_levels), 
          CMDECOD = factor("N_CM", levels = cmdecod_levels))
@@ -174,7 +174,7 @@ ct_cm <- group_by(cadcm, TRT01A) |>
 ct_adcm <- group_by(cadcm, TRT01A, CMCLAS, CMDECOD) |> 
   summarize(n = n_distinct(USUBJID)) |> 
   ungroup() |> 
-  left_join(dplyr::count(cadsl, TRT01A, name = "nall"), by = "TRT01A") |> 
+  left_join(count(cadsl, TRT01A, name = "nall"), by = "TRT01A") |> 
   mutate(pct = n / nall, nall = NULL)
 
 dat <- bind_rows(ct_cm, ct_adcm)
