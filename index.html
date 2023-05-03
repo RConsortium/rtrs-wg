@@ -23,7 +23,7 @@
 <meta name="author" content="R Consortium Tables Working Group" />
 
 
-<meta name="date" content="2023-04-30" />
+<meta name="date" content="2023-05-03" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -286,7 +286,7 @@ div.csl-indent {
 <div id="header">
 <h1 class="title">Tables in Clinical Trials with R</h1>
 <p class="author"><em>R Consortium Tables Working Group</em></p>
-<p class="date"><em>2023-04-30</em></p>
+<p class="date"><em>2023-05-03</em></p>
 </div>
 <div id="about" class="section level1 hasAnchor" number="1">
 <h1><span class="header-section-number">Chapter 1</span> About<a href="index.html#about" class="anchor-section" aria-label="Anchor link to header"></a></h1>
@@ -378,15 +378,14 @@ synthetic subject level dataset <code>ADSL</code>:</p>
 <p>At some point we may switch to <code>renv</code> to install the <code>R</code> packages used
 for this book. For right now you can install the packages yourself with:</p>
 <details class=chunk-details open><summary class=chunk-summary><span class=chunk-summary-text>Code</span></summary>
-<div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb7-1"><a href="index.html#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="fu">install.packages</span>(<span class="fu">c</span>(<span class="st">&quot;rtables&quot;</span>, <span class="st">&quot;gt&quot;</span>, <span class="st">&quot;remotes&quot;</span>, <span class="st">&quot;tidyverse&quot;</span>, <span class="st">&quot;bookdown&quot;</span>, <span class="st">&quot;r2rtf&quot;</span>, <span class="st">&quot;flextable&quot;</span>))</span>
+<div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb7-1"><a href="index.html#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="fu">install.packages</span>(<span class="fu">c</span>(<span class="st">&quot;rtables&quot;</span>, <span class="st">&quot;gt&quot;</span>, <span class="st">&quot;remotes&quot;</span>, <span class="st">&quot;tidyverse&quot;</span>, <span class="st">&quot;bookdown&quot;</span>, <span class="st">&quot;r2rtf&quot;</span>, <span class="st">&quot;flextable&quot;</span>, <span class="st">&quot;tables&quot;</span>))</span>
 <span id="cb7-2"><a href="index.html#cb7-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb7-3"><a href="index.html#cb7-3" aria-hidden="true" tabindex="-1"></a>remotes<span class="sc">::</span><span class="fu">install_github</span>(<span class="st">&quot;insightsengineering/random.cdisc.data&quot;</span>)</span>
 <span id="cb7-4"><a href="index.html#cb7-4" aria-hidden="true" tabindex="-1"></a>remotes<span class="sc">::</span><span class="fu">install_github</span>(<span class="st">&quot;insightsengineering/scda&quot;</span>)</span>
 <span id="cb7-5"><a href="index.html#cb7-5" aria-hidden="true" tabindex="-1"></a>remotes<span class="sc">::</span><span class="fu">install_github</span>(<span class="st">&quot;insightsengineering/nestcolor&quot;</span>)</span>
 <span id="cb7-6"><a href="index.html#cb7-6" aria-hidden="true" tabindex="-1"></a>remotes<span class="sc">::</span><span class="fu">install_github</span>(<span class="st">&quot;insightsengineering/tern&quot;</span>, <span class="at">ref =</span> <span class="st">&quot;v0.7.10&quot;</span>)</span>
-<span id="cb7-7"><a href="index.html#cb7-7" aria-hidden="true" tabindex="-1"></a>remotes<span class="sc">::</span><span class="fu">install_github</span>(<span class="st">&quot;dmurdoch/tables&quot;</span>)</span>
-<span id="cb7-8"><a href="index.html#cb7-8" aria-hidden="true" tabindex="-1"></a>remotes<span class="sc">::</span><span class="fu">install_github</span>(<span class="st">&quot;pharmaverse/tidytlg&quot;</span>)</span>
-<span id="cb7-9"><a href="index.html#cb7-9" aria-hidden="true" tabindex="-1"></a>remotes<span class="sc">::</span><span class="fu">install_github</span>(<span class="st">&quot;GSK-Biostatistics/tfrmt&quot;</span>)</span></code></pre></div>
+<span id="cb7-7"><a href="index.html#cb7-7" aria-hidden="true" tabindex="-1"></a>remotes<span class="sc">::</span><span class="fu">install_github</span>(<span class="st">&quot;pharmaverse/tidytlg&quot;</span>)</span>
+<span id="cb7-8"><a href="index.html#cb7-8" aria-hidden="true" tabindex="-1"></a>remotes<span class="sc">::</span><span class="fu">install_github</span>(<span class="st">&quot;GSK-Biostatistics/tfrmt&quot;</span>)</span></code></pre></div>
 </details>
 <p>In each of the sections below, we will reset R to close to the
 present state
