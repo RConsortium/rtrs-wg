@@ -274,21 +274,13 @@ table shows current capabilities.
 
 ```{r echo = FALSE}
 resetSession()
-<<<<<<< Updated upstream
-formats <- c("ASCII", "PDF", "HTML", "Word", "RTF", "PPTX", "Grid")
-=======
 formats <- c("ASCII", "PDF", "HTML", ".docx", "RTF", ".pptx", "grid")
->>>>>>> Stashed changes
 packages <- sort(c("gt", "r2rtf", "rtables", "flextable", "tfrmt",
               "tables", "tidytlg"))
 capable <- matrix("?", length(packages), length(formats),
                   dimnames = list(packages, formats))
 check <- "\u2713"
-<<<<<<< Updated upstream
-                      #  ASCII   PDF    HTML   Word RTF    PPT R
-=======
                       #  ASCII   PDF    HTML   Word RTF    PPT Grid
->>>>>>> Stashed changes
 capable["gt", ] <-      c(check, check, check, "",  "",    "", "")
 capable["r2rtf",] <-    c("",    "",    "",    "",  check, "", "")
 capable["rtables", ] <- c(check, check, check, "",  "",    "", "")
@@ -300,14 +292,9 @@ capable["tidytlg",] <-  c("",    "",    check, "",  check, "", "")
 knitr::kable(capable, align = "c")
 ```
 
-Note that if the format you need is not supported by the package you
+If the format you need is not supported by the package you
 would like to use, there are still options.
-<<<<<<< Updated upstream
-Some of the packages contain functions to convert tables to
-the format used by another package.  Pandoc [@pandoc]
-=======
 Some of the packages contain functions to convert tables between
 formats.  Pandoc [@pandoc]
->>>>>>> Stashed changes
 is another option:  it can convert documents between a wide range of 
 document formats.
