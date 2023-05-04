@@ -130,9 +130,14 @@ adsl_summary <- purrr::map_df(.x = vars(AGE, SEX, COUNTRY),
 
 # Count number of patients per Arm
 
-total_n_arm <- ex_adsl |>
-  dplyr::group_by(ARM) |> 
-  dplyr::summarise(N = n(), .groups = "drop")
+adsl_n <- ex_adsl |>
+  dplyr::summarize(
+    NLBL = sprintf("%s  \n(N=%i)",unique(ARM), dplyr::n()), 
+    .by = ARM
+    )
+
+header_n <- as.list(adsl_n$NLBL)
+names(header_n) <- paste0("val_", adsl_n$ARM)
 
 # gt
 
@@ -155,8 +160,7 @@ gt(adsl_summary,
     columns = starts_with("val"),
     fns = list(n = ~sum(.)),
     missing_text = "",
-    formatter = fmt_integer #,
-    # side = "top"
+    side = "top"
     ) |> 
   cols_merge_n_pct(col_n = "val_A: Drug X", col_pct = "sd_A: Drug X") |>
   cols_merge_n_pct(col_n = "val_B: Placebo", col_pct = "sd_B: Placebo") |> 
@@ -168,13 +172,22 @@ gt(adsl_summary,
   cols_merge(columns = c("val_B: Placebo", "min_B: Placebo"), pattern = "{1}{2}") |> 
   cols_merge(columns = c("val_C: Combination", "min_C: Combination"), pattern = "{1}{2}") |> 
   cols_hide(columns = isnum) |> 
-  cols_align(align = c("center"),
-             columns = c("val_A: Drug X", "val_B: Placebo", "val_C: Combination")) |> 
-  cols_align(align = "center",
-             columns = 1) |> 
-  cols_label("val_A: Drug X" = md(sprintf("A: Drug X  \n  N=%i (100%%)", total_n_arm$N[1])),
-             "val_B: Placebo" = md(sprintf("B: Placebo  \n  N=%i (100%%)", total_n_arm$N[2])),
-             "val_C: Combination" = md(sprintf("C: Combination  \n  N=%i (100%%)", total_n_arm$N[3]))) |> 
+  cols_align(
+    align = "center",
+    columns = c("val_A: Drug X", "val_B: Placebo", "val_C: Combination")
+    ) |> 
+  cols_align(
+    align = "left",
+    columns = 1
+    ) |> 
+  tab_style(
+    style = cell_text(indent = px(10)), 
+    locations = cells_stub()
+    ) |> 
+  cols_label(
+    .list = header_n,
+    .fn = md
+    ) |> 
   tab_options(
     table.font.size = 9,
     page.orientation = "landscape",

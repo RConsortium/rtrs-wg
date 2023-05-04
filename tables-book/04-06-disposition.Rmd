@@ -115,10 +115,7 @@ gt_disp |>
     pattern = "<<{1}>><<{2}>>"
   ) |> 
   text_transform(
-    fn = stringr::str_to_title
-  ) |> 
-  text_transform(
-    locations = cells_stub(),
+    locations = list(cells_body(), cells_stub()),
     fn = stringr::str_to_title
   ) |> 
   tab_style(
