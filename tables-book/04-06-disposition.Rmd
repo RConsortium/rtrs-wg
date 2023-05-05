@@ -48,21 +48,13 @@ adsl_tot <- cadsl |>
 header_n <- as.list(adsl_tot$NTOTLBL)
 names(header_n) <- paste0("n_", adsl_tot$TRT01A)
 
-disp_subset <- merge(cadsl, adsl_tot, by = "TRT01A") |> 
-  dplyr::filter(EOSSTT %in% c("COMPLETED", "DISCONTINUED")) |> 
+disp_df <- merge(cadsl, adsl_tot, by = "TRT01A") |> 
   dplyr::mutate(
-    DISCGRP = factor(
-      ifelse(DCSREAS %in% c("ADVERSE EVENT", "DEATH"), "Safety", "Non-Safety"),
-      levels = c("Safety", "Non-Safety")
-    ),
-    EOSSTT = factor(
-      EOSSTT,
-      levels = c("COMPLETED", "DISCONTINUED"),
-      labels = c("Completed Study", "Discontinued Study")
-    )
+    EOSSTT = factor(EOSSTT, levels = c("COMPLETED", "ONGOING", "DISCONTINUED"))
   )
 
-disc_status <- disp_subset |> 
+disc_status <- disp_df |> 
+  dplyr::filter(EOSSTT != "DISCONTINUED") |> 
   dplyr::summarize(
     n = dplyr::n(),
     pct = dplyr::n()/mean(NTOT),
@@ -71,60 +63,71 @@ disc_status <- disp_subset |>
   tidyr::pivot_wider(id_cols = EOSSTT, names_from = TRT01A, values_from = c(n, pct)) |> 
   dplyr::arrange(EOSSTT)
 
-disc_reason <- disp_subset |> 
-  dplyr::filter(EOSSTT == "Discontinued Study") |> 
+disc_reason <- disp_df |> 
+  dplyr::filter(EOSSTT == "DISCONTINUED") |> 
   dplyr::summarize(
     n = dplyr::n(),
     pct = dplyr::n()/mean(NTOT),
-    .by = c(TRT01A, EOSSTT, DISCGRP, DCSREAS)
+    .by = c(TRT01A, EOSSTT, DCSREAS)
   ) |> 
-  tidyr::pivot_wider(id_cols = c(EOSSTT, DISCGRP, DCSREAS), names_from = TRT01A, values_from = c(n, pct)) |> 
-  dplyr::arrange(EOSSTT, DISCGRP, DCSREAS)
+  tidyr::pivot_wider(id_cols = c(EOSSTT, DCSREAS), names_from = TRT01A, values_from = c(n, pct)) |> 
+  dplyr::arrange(EOSSTT, DCSREAS)
 
-gt_disp <- dplyr::bind_rows(disc_status, disc_reason) |> 
+disc_death <- disp_df |> 
+  dplyr::filter(DCSREAS == "DEATH") |> 
   dplyr::mutate(
-    EOSSTT = dplyr::if_else(is.na(DISCGRP), EOSSTT, "")
-  ) 
+    EOSSTT = "DEATH",
+    DCSREAS = DTHCAUS
+    ) |> 
+  dplyr::summarize(
+    n = dplyr::n(),
+    pct = dplyr::n()/mean(NTOT),
+    .by = c(TRT01A, EOSSTT, DCSREAS)
+  ) |> 
+  tidyr::pivot_wider(id_cols = c(EOSSTT, DCSREAS), names_from = TRT01A, values_from = c(n, pct)) |> 
+  dplyr::arrange(EOSSTT, DCSREAS)
+
+gt_disp <- dplyr::bind_rows(disc_status, disc_reason, disc_death) 
 
 gt_disp |> 
   gt(rowname_col = "DCSREAS") |> 
   tab_row_group(
-    label = "Safety",
-    rows = DISCGRP == "Safety"
+    label = "Discontinued",
+    rows = EOSSTT == "DISCONTINUED"
   ) |> 
   tab_row_group(
-    label = "Non-Safety",
-    rows = DISCGRP == "Non-Safety"
+    label = "Death",
+    rows = EOSSTT == "DEATH"
   ) |> 
   row_group_order(
-    groups = c(NA, "Safety", "Non-Safety") 
+    groups = c(NA, "Discontinued", "Death") 
   ) |> 
-  cols_hide(DISCGRP) |> 
   fmt_integer(
     columns = starts_with("n_")
   ) |> 
   fmt_percent(
     columns = starts_with("pct_"),
-    decimals = 1
+    decimals = 2
   ) |> 
   cols_merge_n_pct(col_n = "n_A: Drug X", col_pct = "pct_A: Drug X") |> 
   cols_merge_n_pct(col_n = "n_B: Placebo", col_pct = "pct_B: Placebo") |> 
   cols_merge_n_pct(col_n = "n_C: Combination", col_pct = "pct_C: Combination") |> 
   cols_merge(
     columns = c("DCSREAS", "EOSSTT"),
+    rows = EOSSTT %in% c("COMPLETED", "ONGOING"),
     pattern = "<<{1}>><<{2}>>"
+  ) |> 
+  sub_missing(
+    columns = starts_with("n_"),
+    missing_text = "0"
   ) |> 
   text_transform(
     locations = list(cells_body(), cells_stub()),
     fn = stringr::str_to_title
   ) |> 
-  tab_style(
-    style = cell_text(indent = px(10)),
-    locations = cells_row_groups()
-  ) |> 
   cols_align(
     align = "left",
-    columns = c("EOSSTT", "DCSREAS")
+    columns = "DCSREAS"
   ) |> 
   cols_align(
     align = "center",
@@ -135,7 +138,7 @@ gt_disp |>
     .fn = md
   )  |> 
   tab_stub_indent(
-    rows = 3:9,
+    rows = 3:16,
     indent = 5
   ) |> 
   cols_width(
