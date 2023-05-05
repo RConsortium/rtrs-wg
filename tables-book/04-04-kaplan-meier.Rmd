@@ -489,9 +489,11 @@ subject_counts <- table(adsl$ARM)
 
 countpercentid <- function(num, ARM) {
   n <- length(unique(num))
+  if (n == 0) pct <- 0
+  else        pct <- 100*n/subject_counts[ARM[1]]
   sprintf("%d (%.2f%%)", 
           length(unique(num)), 
-          100*n/subject_counts[ARM[1]])
+          pct)
 }
 
 valuepercent <- function(x, ARM) {

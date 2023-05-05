@@ -236,9 +236,11 @@ subject_counts <- table(adsl$ARM)
 
 countpercentid <- function(num, ARM) {
   n <- length(unique(num))
+  if (n == 0) pct <- 0
+  else        pct <- 100*n/subject_counts[ARM[1]]
   sprintf("%d (%.2f%%)", 
           length(unique(num)), 
-          100*n/subject_counts[ARM[1]])
+          pct)
 }
 
 count <- function(x) sprintf("(N=%d)", length(x))
@@ -246,7 +248,7 @@ count <- function(x) sprintf("(N=%d)", length(x))
 heading <- tabular(Heading("")*1*Heading("")*count  ~
              Heading()*TRT01A, data = adsl)
 
-part1 <- tabular( Heading("")*EOSSTT*DropEmpty()*
+part1 <- tabular( Heading("")*EOSSTT*DropEmpty(which = "row")*
                     Heading("")*1*
                     Heading()*countpercentid*Arguments(ARM = TRT01A)*
                     Heading()*USUBJID ~
@@ -254,7 +256,7 @@ part1 <- tabular( Heading("")*EOSSTT*DropEmpty()*
                   data = subset(adsl, EOSSTT != "Discontinued"))
 
 part2 <- tabular( Heading("")*EOSSTT*
-                    Heading("")*DCSREAS*DropEmpty()*
+                    Heading("")*DCSREAS*DropEmpty(which = "row")*
                     Heading()*countpercentid*Arguments(ARM = TRT01A)*
                     Heading()*USUBJID ~
                   Heading()*TRT01A, 
@@ -262,7 +264,7 @@ part2 <- tabular( Heading("")*EOSSTT*
                                       DCSREAS != "Death"))
 
 part3 <- tabular( Heading("")*DCSREAS*
-                    Heading("")*DTHCAUS*DropEmpty()*
+                    Heading("")*DTHCAUS*DropEmpty(which = "row")*
                     Heading()*countpercentid*Arguments(ARM = TRT01A)*
                     Heading()*USUBJID ~
                   Heading()*TRT01A, 
