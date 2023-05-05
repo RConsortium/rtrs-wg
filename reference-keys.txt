@@ -75,3 +75,4 @@ flextable-8
 tables-8
 tidytlg-5
 tfrmt-5
+contributors
