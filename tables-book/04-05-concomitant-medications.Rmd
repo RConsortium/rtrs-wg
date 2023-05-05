@@ -231,9 +231,11 @@ subject_counts <- table(adsl$ARM)
 
 countpercentid <- function(num, ARM) {
   n <- length(unique(num))
+  if (n == 0) pct <- 0
+  else        pct <- 100*n/subject_counts[ARM[1]]
   sprintf("%d (%.2f%%)", 
           length(unique(num)), 
-          100*n/subject_counts[ARM[1]])
+          pct)
 }
 
 count <- function(x) sprintf("(N=%d)", length(x))
@@ -244,7 +246,7 @@ heading <- tabular(Heading("")*1*Heading("")*count ~
 
 body <- tabular( (Heading("Any concomitant medication")*1*Heading("")*1 + 
                   Heading()*CMCLAS*
-                    Heading()*CMDECOD*DropEmpty())*
+                    Heading()*CMDECOD*DropEmpty(which = "row"))*
                  Heading()*countpercentid*Arguments(ARM = TRT01A)*
                    Heading()*USUBJID ~
                  Heading()*TRT01A, 
