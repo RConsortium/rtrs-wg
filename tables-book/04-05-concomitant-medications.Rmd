@@ -59,20 +59,28 @@ cmdecod_levels <- c("Number of sujects with any concomitant medication", levels(
 cmclas_levels <- c(NA, levels(cadcm$CMCLAS))
 
 adcm <- cadcm |> 
-  select(CMDECOD, CMCLAS, TRT01A) |> 
-  mutate(
+  dplyr::select(CMDECOD, CMCLAS, TRT01A) |> 
+  dplyr::mutate(
     CMDECOD = factor(CMDECOD, levels = cmdecod_levels),
     CMCLAS = factor(CMCLAS, levels = cmclas_levels)
     )
 
-ct_cm <- dplyr::group_by(cadcm, TRT01A) |> 
-  dplyr::summarize(n = dplyr::n_distinct(USUBJID)) |> 
+ct_cm <- cadcm |> 
+  dplyr::summarize(
+    n = dplyr::n_distinct(USUBJID), 
+    .by = TRT01A
+    ) |> 
   dplyr::left_join(count(cadsl, TRT01A, name = "nall"), by = "TRT01A") |> 
-  dplyr::mutate(pct = n / nall, nall = NULL,
-                CMDECOD = factor("Number of sujects with any concomitant medication", levels = cmdecod_levels))
+  dplyr::mutate(
+    pct = n / nall, nall = NULL,
+    CMDECOD = factor("Number of sujects with any concomitant medication", levels = cmdecod_levels)
+    )
 
-ct_adcm <- dplyr::group_by(cadcm, TRT01A, CMCLAS, CMDECOD) |> 
-  dplyr::summarize(n = dplyr::n_distinct(USUBJID), .groups = "drop") |> 
+ct_adcm <- cadcm |> 
+  dplyr::summarize(
+    n = dplyr::n_distinct(USUBJID), 
+    .by = c(TRT01A, CMCLAS, CMDECOD)
+    ) |> 
   dplyr::left_join(count(cadsl, TRT01A, name = "nall"), by = "TRT01A") |> 
   dplyr::mutate(pct = n / nall, nall = NULL)
 
@@ -82,12 +90,13 @@ gt_adcm <- dplyr::bind_rows(ct_cm, ct_adcm) |>
 
 trt_n <- cadsl |> 
   dplyr::filter(SAFFL == "Y") |> 
-  dplyr::group_by(TRT01A) |> 
-  dplyr::summarize(n = sprintf("%s  \nN=%i (100%%)", unique(TRT01A), dplyr::n()), .groups = "drop") 
+  dplyr::summarize(
+    n = sprintf("%s  \n(N=%i)", unique(TRT01A), dplyr::n()), 
+    .by = TRT01A
+    ) 
 
-tab_n <- dplyr::pull(trt_n, n) |> 
-  as.list()
-names(tab_n) <- paste("n", dplyr::pull(trt_n, TRT01A), sep = "_")
+header_n <- as.list(trt_n$n) 
+names(header_n) <- paste("n", dplyr::pull(trt_n, TRT01A), sep = "_")
 
 
 gt_adcm |> 
@@ -118,9 +127,8 @@ gt_adcm |>
   ) |> 
   cols_hide(CMCLAS) |> 
   cols_label(
-    `n_A: Drug X` = md(tab_n[[1]]),
-    `n_B: Placebo` = md(tab_n[[2]]),
-    `n_C: Combination` = md(tab_n[[3]])
+    .list = header_n,
+    .fn = md
   ) |> 
   cols_width(
     1 ~ px(500),
@@ -223,9 +231,11 @@ subject_counts <- table(adsl$ARM)
 
 countpercentid <- function(num, ARM) {
   n <- length(unique(num))
+  if (n == 0) pct <- 0
+  else        pct <- 100*n/subject_counts[ARM[1]]
   sprintf("%d (%.2f%%)", 
           length(unique(num)), 
-          100*n/subject_counts[ARM[1]])
+          pct)
 }
 
 count <- function(x) sprintf("(N=%d)", length(x))
@@ -236,7 +246,7 @@ heading <- tabular(Heading("")*1*Heading("")*count ~
 
 body <- tabular( (Heading("Any concomitant medication")*1*Heading("")*1 + 
                   Heading()*CMCLAS*
-                    Heading()*CMDECOD*DropEmpty())*
+                    Heading()*CMDECOD*DropEmpty(which = "row"))*
                  Heading()*countpercentid*Arguments(ARM = TRT01A)*
                    Heading()*USUBJID ~
                  Heading()*TRT01A, 
