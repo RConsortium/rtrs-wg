@@ -1,0 +1,21 @@
+# (APPENDIX) Appendix {-} 
+
+# Contributors to this book {#contributors}
+
+This book has had contributions from the following individuals (in
+alphabetical order):
+
+- Karima Ahmad, GSK plc.
+- Gabe Becker
+- Christina Fillmore, GSK plc.
+- David Gohel, ArData
+- Richard Iannone, Posit PBC
+- James J. Kim, Pfizer Inc.
+- Alexandra Lauer, Merck KGaA
+- Duncan Murdoch, University of Western Ontario
+- Adrian Waddell, Roche
+- Sheng-Wei Wang, Johnson & Johnson
+- Yilong Zhang, Meta
+
+The project has been coordinated by the *R Tables for Regulatory
+Submissions (RTRS)* Working Group.
