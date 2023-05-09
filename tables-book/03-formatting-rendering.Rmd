@@ -284,7 +284,7 @@ check <- "\u2713"
 capable["gt", ] <-      c(check, check, check, "",  "",    "", "")
 capable["r2rtf",] <-    c("",    "",    "",    "",  check, "", "")
 capable["rtables", ] <- c(check, check, check, "",  "",    "", "")
-capable["flextable", ] <- check
+capable["flextable", ] <-c("",   check, check, check,check, check, check)
 capable["tfrmt",]    <- capable["gt", ]
 capable["tables", ] <-  c(check, check, check, "",  "",    "", "")
 capable["tidytlg",] <-  c("",    "",    check, "",  check, "", "")
@@ -293,8 +293,9 @@ knitr::kable(capable, align = "c")
 ```
 
 If the format you need is not supported by the package you
-would like to use, there are still options.
-Some of the packages contain functions to convert tables between
-formats.  Pandoc [@pandoc]
+would like to use, there are still options.  For example, tables produced
+in `rtables` and `tables` can be converted to `flextable` objects,
+giving access to the other output formats.
+Pandoc [@pandoc]
 is another option:  it can convert documents between a wide range of 
 document formats.
