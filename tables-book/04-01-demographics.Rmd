@@ -359,7 +359,7 @@ age_stats <-
   adsl_with_n |>
   group_by(ARM) |>
   reframe(
-    n = n_distinct(AGE),
+    n = n_distinct(USUBJID),
     Mean = mean(AGE),
     SD = sd(AGE),
     Median = median(AGE),
