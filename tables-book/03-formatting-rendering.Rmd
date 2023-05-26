@@ -247,8 +247,56 @@ on each page are correct tables with all relevant information for context.
 
 ### rtables
 
-In `rtables` pagination can be done with the `paginate_table` function which has 
-a number of arguments to split the table, see the [example documentation](https://roche.github.io/rtables/reference/paginate.html).
+`rtables` supports simultaneous vertical and horizontal pagination
+(via the interface provided by `formatters`). Users specify page
+dimensions (in either inches, or lines long and characters wide) and
+font information and the pagination and export machinery paginates the
+table such that each portion will fit fully on its page when rendered
+as text, including title, footer, and referential footnote materials.
+
+For vertical pagination, summary rows (whether label rows, or so-called
+content rows containing summary values) are repeated after page
+breaks to preserve context on the following page. We see this in action below when pagination occurs within the strtata B - ASIAN facet of the the following table
+
+```{r}
+resetSession()
+library(rtables)
+
+lyt <- basic_table(title = "main title", subtitles = "subtitle", main_footer = "main footer", prov_footer = "provenance footer") |>
+  split_cols_by("ARM") |>
+  split_cols_by("SEX", split_fun = keep_split_levels(c("F", "M"))) |>
+  split_rows_by("STRATA1", split_fun = keep_split_levels(c("A", "B"))) |>
+  split_rows_by("RACE", split_fun = keep_split_levels(c("ASIAN", "WHITE"))) |>
+  summarize_row_groups() |>
+  analyze("AGE", afun = function(x, ...) in_rows("mean (sd)" = rcell(c(mean(x), sd(x)), format = "xx.x (xx.x)"),
+                                                 "range" = rcell(range(x), format = "xx.x - xx.x")))
+
+tbl <- build_table(lyt, ex_adsl)
+tbl
+```
+```{r}
+paginate_table(tbl, lpp = 22, cpp = 55, min_siblings = 0)
+```
+
+`rtables` also supports *page-by splits* in it's layouting framework,
+which declares that -- regardless of rendering dimensions --
+pagination should occur between distinct levels of a variable. Each of
+these "pagination sections" have an additional title specific to the
+level, and are independently paginated for dimension as needed. 
+
+```{r}
+lyt2 <- basic_table(title = "main title", subtitles = "subtitle", main_footer = "main footer", prov_footer = "provenance footer") |>
+  split_cols_by("ARM") |>
+  split_rows_by("STRATA1", split_fun = keep_split_levels(c("A", "B")), page_by = TRUE, page_prefix = "Stratum") |>
+  split_rows_by("RACE", split_fun = keep_split_levels(c("ASIAN", "WHITE"))) |>
+  summarize_row_groups() |>
+  analyze("AGE", afun = function(x, ...) in_rows("mean (sd)" = rcell(c(mean(x), sd(x)), format = "xx.x (xx.x)"),
+                                                 "range" = rcell(range(x), format = "xx.x - xx.x")))
+
+tbl2 <- build_table(lyt2, ex_adsl)
+
+paginate_table(tbl2, lpp = 16)
+```
 
 ### flextable
 
