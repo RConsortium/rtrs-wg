@@ -267,17 +267,35 @@ the LaTeX `longtable` package, specified when converting to LaTeX.
 
 ## Rendering Tables
 
-The choice of file format is often dictated by your company's processes to 
-include the tables in a report.
+The choice of output format is often dictated by your company's processes to 
+include the tables in a report.  The packages discussed in this book
+vary in which output formats are supported natively.  The following
+table shows current capabilities.
 
-### ASCII
+```{r echo = FALSE}
+resetSession()
+formats <- c("ASCII", "PDF", "HTML", ".docx", "RTF", ".pptx", "grid")
+packages <- sort(c("gt", "r2rtf", "rtables", "flextable", "tfrmt",
+              "tables", "tidytlg"))
+capable <- matrix("?", length(packages), length(formats),
+                  dimnames = list(packages, formats))
+check <- "\u2713"
+                      #  ASCII   PDF    HTML   Word RTF    PPT Grid
+capable["gt", ] <-      c(check, check, check, "",  "",    "", "")
+capable["r2rtf",] <-    c("",    "",    "",    "",  check, "", "")
+capable["rtables", ] <- c(check, check, check, "",  "",    "", "")
+capable["flextable", ] <-c("",   check, check, check,check, check, check)
+capable["tfrmt",]    <- capable["gt", ]
+capable["tables", ] <-  c(check, check, check, "",  "",    "", "")
+capable["tidytlg",] <-  c("",    "",    check, "",  check, "", "")
 
-### PDF
+knitr::kable(capable, align = "c")
+```
 
-### HTML
-
-### WORD
-
-### RTF
-
-
+If the format you need is not supported by the package you
+would like to use, there are still options.  For example, tables produced
+in `rtables` and `tables` can be converted to `flextable` objects,
+giving access to the other output formats.
+Pandoc [@pandoc]
+is another option:  it can convert documents between a wide range of 
+document formats.
