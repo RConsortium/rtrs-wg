@@ -278,7 +278,7 @@ tbl
 paginate_table(tbl, lpp = 22, cpp = 55, min_siblings = 0)
 ```
 
-`rtables` also supports *page-by splits* in it's layouting framework,
+`rtables` also supports *page-by splits* in its layouting framework,
 which declares that -- regardless of rendering dimensions --
 pagination should occur between distinct levels of a variable. Each of
 these "pagination sections" have an additional title specific to the
