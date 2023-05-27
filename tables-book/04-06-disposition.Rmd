@@ -17,14 +17,26 @@ library(rtables)
 
 data("cadsl", package = "random.cdisc.data")
 adsl <- cadsl |>
-  select(USUBJID, TRT01A, EOSSTT, DCSREAS)
+  select(USUBJID, TRT01A, EOSSTT, DCSREAS, DTHCAUS)
 
-lyt <- basic_table() |>
+top_afun <- function(x, .N_col) {
+    in_rows(Completed = rcell(sum(x=="COMPLETED") * c(1, 1/.N_col), format = c("xx (xx.x%)")),
+            Ongoing = rcell(sum(x=="ONGOING") * c(1, 1/.N_col), format = c("xx (xx.x%)")))
+}
+
+count_pct_afun <- function(x, .N_col) {
+    tbl <- table(x)
+    lst <- lapply(tbl, function(xi) rcell(xi * c(1, 1/.N_col), format = c("xx (xx.x%)")))
+    in_rows(.list = lst, .names = names(tbl))
+}
+            
+lyt <- basic_table(show_colcounts = TRUE) |>
   split_cols_by("TRT01A") |>
-  add_colcounts() |>
-  split_rows_by("EOSSTT") |>
-  split_rows_by("DCSREAS") |>
-  summarize_row_groups()
+  analyze("EOSSTT", top_afun) |>
+  split_rows_by("EOSSTT", split_fun = keep_split_levels("DISCONTINUED")) |>
+  analyze("DCSREAS", count_pct_afun) |>
+  split_rows_by("DCSREAS", split_fun = keep_split_levels("DEATH")) |>
+  analyze("DTHCAUS", count_pct_afun)
 
 build_table(lyt, adsl)
 
