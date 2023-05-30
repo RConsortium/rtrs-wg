@@ -242,17 +242,23 @@ that would not fit onto a single printed page (e.g. letter & portrait) would hav
 be split into multiple tables that can be printed to the preferred page size. This 
 process of splitting the table is called *pagination* of tables.
 
+![Illustration of a table being paginated in both horizontal and vertical directions](./table_pagination.png)
+
 Pagination is a complex task as it requires to repeat information so that the tables
 on each page are correct tables with all relevant information for context.
+
 
 ### rtables
 
 `rtables` supports simultaneous vertical and horizontal pagination
-(via the interface provided by `formatters`). Users specify page
-dimensions (in either inches, or lines long and characters wide) and
-font information and the pagination and export machinery paginates the
-table such that each portion will fit fully on its page when rendered
-as text, including title, footer, and referential footnote materials.
+(via the interface provided by `formatters`) via calling
+`paginate_table` directly, and within the `export_as_*` rendering
+functions. Users specify page dimensions (in either inches, or lines
+long and characters wide) and font information and the pagination and
+export machinery paginates the table such that each portion will fit
+fully on its page when rendered as text, including title, footer, and
+referential footnote materials.
+
 
 For vertical pagination, summary rows (whether label rows, or so-called
 content rows containing summary values) are repeated after page
@@ -274,8 +280,11 @@ lyt <- basic_table(title = "main title", subtitles = "subtitle", main_footer = "
 tbl <- build_table(lyt, ex_adsl)
 tbl
 ```
+
+`paginate_table`, then, breaks our table into subtables -- including repeated context where appropriate -- which will fit on physical pages (we use 3.5 x 5.2 in "pages" for illustrative purposes here):
+
 ```{r}
-paginate_table(tbl, lpp = 22, cpp = 55, min_siblings = 0)
+paginate_table(tbl, pg_width = 5.2, pg_height = 3.5, min_siblings = 0)
 ```
 
 `rtables` also supports *page-by splits* in its layouting framework,
