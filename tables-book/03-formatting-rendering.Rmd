@@ -244,20 +244,23 @@ process of splitting the table is called *pagination* of tables.
 
 ![Illustration of a table being paginated in both horizontal and vertical directions](./table_pagination.png)
 
-Pagination is a complex task as it requires to repeat information so that the tables
-on each page are correct tables with all relevant information for context.
+Pagination of complex structured tables is complicated by the fact
+that some rows of such tables require contextual information -- e.g.,
+any group labels or summaries they fall under -- to be fully
+understood. This means that any such context must be repeated after a
+page break for that page to be understood in isolation.
 
 
 ### rtables
 
-`rtables` supports simultaneous vertical and horizontal pagination
-(via the interface provided by `formatters`) via calling
-`paginate_table` directly, and within the `export_as_*` rendering
-functions. Users specify page dimensions (in either inches, or lines
-long and characters wide) and font information and the pagination and
-export machinery paginates the table such that each portion will fit
-fully on its page when rendered as text, including title, footer, and
-referential footnote materials.
+`rtables` supports context-preserving pagination in both the
+horizontal and vertical directions (via the interface provided by
+`formatters`) via calling `paginate_table` directly, and within the
+`export_as_*` rendering functions. Users specify page dimensions (in
+either inches, or lines long and characters wide) and font information
+and the pagination and export machinery paginates the table such that
+each portion will fit fully on its page when rendered as text,
+including title, footer, and referential footnote materials.
 
 
 For vertical pagination, summary rows (whether label rows, or so-called
@@ -281,7 +284,7 @@ tbl <- build_table(lyt, ex_adsl)
 tbl
 ```
 
-`paginate_table`, then, breaks our table into subtables -- including repeated context where appropriate -- which will fit on physical pages (we use 3.5 x 5.2 in "pages" for illustrative purposes here):
+`paginate_table`, then, breaks our table into subtables -- including repeated context where appropriate -- which will fit on physical pages (we use 5.2 x 3.5 inch "pages" for illustrative purposes here):
 
 ```{r}
 paginate_table(tbl, pg_width = 5.2, pg_height = 3.5, min_siblings = 0)
