@@ -242,13 +242,73 @@ that would not fit onto a single printed page (e.g. letter & portrait) would hav
 be split into multiple tables that can be printed to the preferred page size. This 
 process of splitting the table is called *pagination* of tables.
 
-Pagination is a complex task as it requires to repeat information so that the tables
-on each page are correct tables with all relevant information for context.
+![Illustration of a table being paginated in both horizontal and vertical directions](./table_pagination.png)
+
+Pagination of complex structured tables is complicated by the fact
+that some rows of such tables require contextual information -- e.g.,
+any group labels or summaries they fall under -- to be fully
+understood. This means that any such context must be repeated after a
+page break for that page to be understood in isolation.
+
 
 ### rtables
 
-In `rtables` pagination can be done with the `paginate_table` function which has 
-a number of arguments to split the table, see the [example documentation](https://roche.github.io/rtables/reference/paginate.html).
+`rtables` supports context-preserving pagination in both the
+horizontal and vertical directions (via the interface provided by
+`formatters`) via calling `paginate_table` directly, and within the
+`export_as_*` rendering functions. Users specify page dimensions (in
+either inches, or lines long and characters wide) and font information
+and the pagination and export machinery paginates the table such that
+each portion will fit fully on its page when rendered as text,
+including title, footer, and referential footnote materials.
+
+
+For vertical pagination, summary rows (whether label rows, or so-called
+content rows containing summary values) are repeated after page
+breaks to preserve context on the following page. We see this in action below when pagination occurs within the strtata B - ASIAN facet of the the following table
+
+```{r}
+resetSession()
+library(rtables)
+
+lyt <- basic_table(title = "main title", subtitles = "subtitle", main_footer = "main footer", prov_footer = "provenance footer") |>
+  split_cols_by("ARM") |>
+  split_cols_by("SEX", split_fun = keep_split_levels(c("F", "M"))) |>
+  split_rows_by("STRATA1", split_fun = keep_split_levels(c("A", "B"))) |>
+  split_rows_by("RACE", split_fun = keep_split_levels(c("ASIAN", "WHITE"))) |>
+  summarize_row_groups() |>
+  analyze("AGE", afun = function(x, ...) in_rows("mean (sd)" = rcell(c(mean(x), sd(x)), format = "xx.x (xx.x)"),
+                                                 "range" = rcell(range(x), format = "xx.x - xx.x")))
+
+tbl <- build_table(lyt, ex_adsl)
+tbl
+```
+
+`paginate_table`, then, breaks our table into subtables -- including repeated context where appropriate -- which will fit on physical pages (we use 5.2 x 3.5 inch "pages" for illustrative purposes here):
+
+```{r}
+paginate_table(tbl, pg_width = 5.2, pg_height = 3.5, min_siblings = 0)
+```
+
+`rtables` also supports *page-by splits* in its layouting framework,
+which declares that -- regardless of rendering dimensions --
+pagination should occur between distinct levels of a variable. Each of
+these "pagination sections" have an additional title specific to the
+level, and are independently paginated for dimension as needed. 
+
+```{r}
+lyt2 <- basic_table(title = "main title", subtitles = "subtitle", main_footer = "main footer", prov_footer = "provenance footer") |>
+  split_cols_by("ARM") |>
+  split_rows_by("STRATA1", split_fun = keep_split_levels(c("A", "B")), page_by = TRUE, page_prefix = "Stratum") |>
+  split_rows_by("RACE", split_fun = keep_split_levels(c("ASIAN", "WHITE"))) |>
+  summarize_row_groups() |>
+  analyze("AGE", afun = function(x, ...) in_rows("mean (sd)" = rcell(c(mean(x), sd(x)), format = "xx.x (xx.x)"),
+                                                 "range" = rcell(range(x), format = "xx.x - xx.x")))
+
+tbl2 <- build_table(lyt2, ex_adsl)
+
+paginate_table(tbl2, lpp = 16)
+```
 
 ### flextable
 
