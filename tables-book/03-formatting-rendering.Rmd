@@ -197,6 +197,70 @@ toHTML(tab, options = list(HTMLfooter = footnotes,
                            doFooter = TRUE))
 ```
 
+### tidytlg
+
+The `gentlg` function in the `tidytlg` package includes the `title` argument for 
+adding title and the `footers` argument for adding footnotes to the table output. 
+Users can include a vector of character strings for multiple lines of footnotes 
+(please see an example below). At the bottom line of the footnotes, the file name 
+of the table and the path of the table program along with the datetime stamp are automatically created.
+
+```{r, warning=FALSE}
+resetSession()
+library(dplyr)
+library(tidytlg)
+
+adsl <- formatters::ex_adsl 
+
+# create analysis set row
+t1 <- freq(adsl,
+           rowvar = "ITTFL",
+           colvar = "ARM",
+           statlist = statlist("n"),
+           subset = ITTFL == "Y",
+           rowtext = "Analysis set: ITT") 
+
+# create univariate stats for age
+t2 <- univar(adsl,
+               rowvar = "AGE",
+               colvar = "ARM",
+               statlist = statlist(c("N", "MEANSD", "MEDIAN", "RANGE", "IQRANGE")),
+               row_header = "Age (years)",
+               decimal = 0)
+
+tbl <- bind_table(t1, t2)
+
+# assign table id
+tblid <- "Table01"
+
+# output the analysis results
+gentlg(huxme       = tbl,
+       format      = "HTML",
+       print.hux = FALSE,
+       file        = tblid,
+       orientation = "portrait",
+       title = "Demographic and Baseline Characteristics; Intent-to-treat Analysis Set",
+       footers = c("Key: IQ = Interquartile","Note: N reflects non-missing values"),
+       colheader = c("","A: Drug X","B: Placebo","C: Combination"))
+
+```
+
+To programmatically incorporate titles and footnotes into each table program, users can create an excel file called titles.xls (see below snapshot) with the columns of "TABLE ID","IDENTIFIER","TEXT". In the `gentlg` function call, users just need to provide the argument of title_file for specifying the location of the titles.xls. Then the title and footnotes corresponding to the table ID will be automatically included in the table output. Users need to make sure the correct table ID is used for the `file` argument of the `gentlg` function call.
+
+```{r, echo=FALSE, out.width = "600px"}
+knitr::include_graphics("./titles.PNG")
+```
+
+```{r, eval=FALSE}
+gentlg(huxme       = tbl,
+       format      = "HTML",
+       print.hux = FALSE,
+       file        = tblid,
+       orientation = "portrait",
+       title_file = system.file("extdata/titles.xls", package = "tidytlg"),
+       colheader = c("","A: Drug X","B: Placebo","C: Combination"))
+```
+
 ## Captions
 
 A caption is a single paragraph of text describing the table it
