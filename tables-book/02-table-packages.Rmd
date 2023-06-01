@@ -1,17 +1,17 @@
-# Overview table R packages {#tablepkgs}
+# Overview of table R packages {#tablepkgs}
 
-We summarize various `R` packages (ordered alphabetically) to 
+We summarize various R packages to 
 create production-ready tables in clinical research. 
 The list is by no means complete; if you know another package that has been useful for you to
-create tables or listing using clinical trial data. 
-Please contribute to this chapter.
+create tables or listing using clinical trial data, 
+please contribute to this chapter.
 
 
 ## gt
 
-The `gt` package [@R-gt, [website](https://gt.rstudio.com/)] provides
+The *gt* package [@R-gt, [website](https://gt.rstudio.com/)] provides
 a high-level and declarative interface for composing tables. 
-Contains a variety of `formatter` functions for transforming cell values
+Contains a variety of *formatter* functions for transforming cell values
 from an input data frame to the desired reporting values (combines mutation and
 aesthetic styling with options for: scientific notation, uncertainty, ranges,
 percentages, suffixes, localized currency, etc.). Multiple output formats are
@@ -19,7 +19,7 @@ supported with the same declarative interface (e.g., HTML, LaTeX/PDF, and RTF).
 
 ## r2rtf
 
-The `r2rtf` package [@r2rtf2020, [website](https://merck.github.io/r2rtf/)]
+The *r2rtf* package [@r2rtf2020, [website](https://merck.github.io/r2rtf/)]
 creates production-ready tables and figures in RTF format. 
 The R package is designed to
 
@@ -31,13 +31,13 @@ shall be handled by other R packages. (e.g., tidyverse)
 minimizes package dependency
 
 Chapter 1-9 of [The R for Clinical Study Reports and Submission](https://r4csr.org/) book 
-provides examples by using `r2rtf` package. 
+provides examples by using *r2rtf* package. 
 
 
 ## rtables
 
-The `rtables` package [@R-rtables] defines a pipe-able grammar for declaring complex table
-structure layouts via nested splitting - in row- and column-space - and the
+The *rtables* package [@R-rtables, [website](https://insightsengineering.github.io/rtables/main/)] defines a pipe-able grammar for declaring complex table
+structure layouts via nested splitting -- in row- and column-space -- and the
 specification of analysis functions which will calculate cell values within that
 structure. These pre-data table layouts are then applied to data to build the
 table, during which all necessary data grouping implied by the row and column
@@ -45,13 +45,14 @@ splits, cell value calculation, and tabulation occurs automatically. Additional
 table features such as titles, footers, and referential footnotes are supported.
 ASCII, HTML, and PDF are supported as output formats for rendering tables.
 
-`rtables` source code is on [GitHub](https://github.com/roche/rtables) as well
-as the [documentation](https://roche.github.io/rtables/). `rtables` is also available
+*rtables* source code is on [GitHub](https://github.com/roche/rtables) as well
+as the [documentation](https://roche.github.io/rtables/). *rtables* is also available
 on [CRAN](https://CRAN.R-project.org/package=rtables).
 
 ## flextable
 
-`flextable` [@R-flextable] is providing a *grammar* for creating and customizing tables. The
+*flextable* [@R-flextable, [website](https://davidgohel.github.io/flextable/)] 
+provides a *grammar* for creating and customizing tables. The
 following formats are supported: 'Word' (*.docx), 'PowerPoint' (*.pptx), 'RTF', 'PDF'
 ,'HTML' and R 'Grid Graphics'. The syntax is the same for the user regardless of
 the type of output to be produced. A set of functions allows the creation,
@@ -60,29 +61,29 @@ definition of cell content (i.e. text and or images). The package also offers a
 set of high-level functions that allow, for example, tabular reporting of
 statistical models and the creation of complex cross tabulations.
 
-Source code is on [GitHub](https://github.com/davidgohel/flextable), a 
+Source code is on [GitHub](https://github.com/davidgohel/flextable) and a 
 [user manual](https://ardata-fr.github.io/flextable-book/) is available. 
-`flextable` is available on [CRAN](https://CRAN.R-project.org/package=flextable).
+*flextable* is available on [CRAN](https://CRAN.R-project.org/package=flextable).
 
 ## tfrmt
 
-The `tfrmt` (@R-tfrmt, [website](https://gsk-biostatistics.github.io/tfrmt/)) package 
+The *tfrmt* (@R-tfrmt, [website](https://gsk-biostatistics.github.io/tfrmt/)) package 
 provides a language for defining display-related metadata and table formatting 
 before any data is available. This package offers an intuitive interface for 
 defining and layering standard or custom formats, to which ARD (analysis 
 results data) is supplied. It also presents the novel ability to easily 
 generate mock displays using metadata that will be used for the actual 
-displays. `tfrmt` is built on top of the `gt` package, which is intended to 
+displays. *tfrmt* is built on top of the *gt* package, which is intended to 
 support a variety of output formats in the future. Table features (titles, 
 header, footnotes, etc.) as well as specific formatting (e.g. rounding, 
 scientific notation, alignment, spacing) are supported.
 
-`tfrmt` source code is on [GitHub](https://github.com/GSK-Biostatistics/tfrmt). 
-`tfrmt` is also available on [CRAN](https://CRAN.R-project.org/package=tfrmt).
+*tfrmt* source code is on [GitHub](https://github.com/GSK-Biostatistics/tfrmt). 
+*tfrmt* is also available on [CRAN](https://CRAN.R-project.org/package=tfrmt).
 
 ## tables
 
-The `tables` package [@R-tables] provides a formula-driven interface for
+The *tables* package [@R-tables, [website](https://dmurdoch.github.io/tables/)] provides a formula-driven interface for
 computing the contents of tables and formatting them.  It was 
 inspired by `SAS PROC TABULATE`, but is not compatible with it.
 
@@ -103,19 +104,22 @@ serve as a user manual.  Browse them at https://rdrr.io/cran/tables/, or install
 
 ## tidytlg
 
-Tidytlg (@R-tidytlg) provides a framework for creating tables, listings, and graphs (TLGs) using 
-Tidyverse. It offers a suite of analysis functions to summarize descriptive statistics 
+The *tidytlg* package (@R-tidytlg, [website](https://github.com/pharmaverse/tidytlg)) provides a framework for creating tables, listings, and graphs (TLGs) using 
+Tidyverse (@tidyverse). It offers a suite of analysis functions to summarize descriptive statistics 
 (univariate statistics and counts (percentages)) for table creation and a function 
 to convert analysis results to rtf/html outputs. For graphic output, tidytlg can 
 integrate plot objects created by ggplot2 or a png file with titles and footnotes 
 to produce rtf/html output. 
 
-`tidytlg` source code is on [GitHub](https://github.com/pharmaverse/tidytlg) as well
-as the [documentation](https://pharmaverse.github.io/tidytlg/main/).
+*tidytlg* [source code](https://github.com/pharmaverse/tidytlg) and  [documentation](https://pharmaverse.github.io/tidytlg/main/)
+are on Github.
 
 ```{r include=FALSE}
 # automatically create a bib database for R packages
 knitr::write_bib(c(
   "gt", "r2rtf", "rtables", "flextable", "tables", "tidytlg", "tfrmt"
 ), 'packages.bib')
+lines <- readLines("packages.bib")
+lines <- sub("^  note = \\{http", "  note = {R package},\n  url = {http", lines)
+writeLines(lines, "packages.bib")
 ```

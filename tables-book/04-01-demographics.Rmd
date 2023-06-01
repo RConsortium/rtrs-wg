@@ -8,7 +8,7 @@ editor_options:
 
 ### rtables
 
-Using `rtables` only:
+Using *rtables* only:
 
 ```{r, comment= NA}
 resetSession()
@@ -37,7 +37,7 @@ lyt <- basic_table(title = "x.x: Study Subject Data",
 build_table(lyt, ex_adsl)
 ```
 
-Using `rtables` and `tern`
+Using *rtables* and *tern*
 
 ```{r, comment=NA}
 library(tern)
@@ -248,7 +248,7 @@ ft
 
 ### tables
 
-The `tables` package uses a different style
+The *tables* package uses a different style
 than the other packages for tables such as this, where
 there are separate sections for age, sex and country
 breakdowns of the data.  Rather than putting
@@ -342,7 +342,7 @@ gentlg(huxme       = tbl,
 
 ### tfrmt
 
-Please note that the`tfrmt` package is intended for use with mock data or ARD (analysis results data).
+Please note that the *tfrmt* package is intended for use with mock data or ARD (analysis results data).
 This package creates the same tables as other packages but requires the starting data to be transformed first. 
 
 The first chunk of code takes the CDISC data and modifies it into an ARD. The second chunk demonstrates 
@@ -451,7 +451,7 @@ demog_ard <-
   group_by(group, label)
 ```
 
-Now we can used the `demog_ard` to make the demographic table using `tfrmt`.
+Now we can used the `demog_ard` to make the demographic table using *tfrmt*.
 
 ```{r}
 tfrmt(

@@ -718,7 +718,7 @@ HR < 1 denotes improvement compared to Drug X.",
 
 ### tfrmt 
 
-This first chuck is clean up the data from the models to prepare it for going into a table.
+This first code chunk cleans up the data from the models to prepare it for going into a table.
 ```{r}
 library(tidyverse)
 library(broom)
@@ -841,7 +841,7 @@ model_ard <- bind_rows(
 )
 ```
 
-Now time to format this information into a table 
+We now format this information into a table. 
 ```{r}
 library(tfrmt)
 tfrmt(
@@ -884,4 +884,3 @@ tfrmt(
 ) |> 
   print_to_gt(model_ard)
 ```
-

@@ -6,8 +6,8 @@ Table generation usually is a two step process
 1. Derive the cell value and tabulate them.
 1. Create the final table output, save it to a file to be shared with collaborators. 
 
-Chapter [Commonly Used Tables] focuses with the work involved in 1, in this chapter we
-discuss the various aspects of creating the final outputs that is commonly stored
+Chapter [Commonly Used Tables] focuses on the work involved in step 1.  In this chapter we
+discuss the various aspects of creating the final output that is commonly stored
 in a file with a particular file format (`pdf`, `txt`, `html`, `docx` or `rtf`).
 
 ## Title & Footnotes
@@ -26,11 +26,11 @@ Often footnotes include cell references.
 
 ### rtables
 
-The `basic_table` function in `rtables` has the argument `titles`, `subtitles`,
-`main_footer`, `prov_footer` to add titles and footnotes to tables. `rtables`
+The `basic_table()` function in *rtables* has the arguments `titles`, `subtitles`,
+`main_footer`, `prov_footer` to add titles and footnotes to tables. *rtables*
 also supports referential footnotes.
 
-So for example a basic demographics table created with `rtables` via `tern` with
+So for example a basic demographics table created with *rtables* via *tern* with
 title and footnotes would look as follows:
 
 ```{r, comment=NA }
@@ -50,7 +50,7 @@ build_table(lyt, adsl)
 
 ### flextable
 
-Titles and notes can be added and formatted with the 'flextable' package. It is possible to add them in the header and in the footer. Several methods are possible but for most needs, the `add_header_lines()` and `add_footer_lines()` functions will be the easiest to use.
+Titles and notes can be added and formatted with the *flextable* package. It is possible to add them in the header and in the footer. Several methods are possible but for most needs, the `add_header_lines()` and `add_footer_lines()` functions will be the easiest to use.
 
 Let's create first a flextable from an aggregation that 
 will be used to illustrate the features.
@@ -95,7 +95,7 @@ save_as_docx(ft, ft, path = docx_file)
 ```{r echo=FALSE, link_preview=TRUE, path_to_doc = "reports/flextable-title-01.docx"}
 ```
 
-Footnotes are also available in 'flextable' with function `footnote()`. 
+Footnotes are also available in *flextable* with function `footnote()`. 
 The function lets users add footnotes and references to it on the table.
 
 
@@ -106,8 +106,8 @@ footnote(z, i = c(1, 2, 2), j = c(1, 5, 7),
 
 ### tfrmt
 
-The `tfrmt` function in the `tfrmt` package includes the arguments `title` and
-`subtitle` to add titles. Within the `footnote_plan` function, the user can nest 
+The `tfrmt()` function in the *tfrmt* package includes the arguments `title` and
+`subtitle` to add titles. Within the `footnote_plan()` function, the user can nest 
 multiple `footnote_structure`s to add footnotes with superscript reference 
 symbols on groups, columns or labels.
 
@@ -163,7 +163,7 @@ See this vignette for more details on footnotes: [link to website](https://gsk-b
 
 ### tables
 
-The `tables` package concentrates on the table itself.  The titles
+The *tables* package concentrates on the table itself.  The titles
 are generally written as part of the surrounding document.  Footnotes
 would be added after constructing the table by modifying 
 individual entries.
@@ -199,7 +199,7 @@ toHTML(tab, options = list(HTMLfooter = footnotes,
 
 ### tidytlg
 
-The `gentlg` function in the `tidytlg` package includes the `title` argument for 
+The `gentlg()` function in the *tidytlg* package includes the `title` argument for 
 adding title and the `footers` argument for adding footnotes to the table output. 
 Users can include a vector of character strings for multiple lines of footnotes 
 (please see an example below). At the bottom line of the footnotes, the file name 
@@ -245,7 +245,7 @@ gentlg(huxme       = tbl,
 
 ```
 
-To programmatically incorporate titles and footnotes into each table program, users can create an excel file called titles.xls (see below snapshot) with the columns of "TABLE ID","IDENTIFIER","TEXT". In the `gentlg` function call, users just need to provide the argument of title_file for specifying the location of the titles.xls. Then the title and footnotes corresponding to the table ID will be automatically included in the table output. Users need to make sure the correct table ID is used for the `file` argument of the `gentlg` function call.
+To programmatically incorporate titles and footnotes into each table program, users can create an excel file called `titles.xls` (see below snapshot) with the columns of `"TABLE ID","IDENTIFIER","TEXT"`. In the `gentlg()` function call, users just need to provide the argument of `title_file` for specifying the location of `titles.xls`. Then the title and footnotes corresponding to the table ID will be automatically included in the table output. Users need to make sure the correct table ID is used for the `file` argument of the `gentlg()` function call.
 
 ```{r, echo=FALSE, out.width = "600px"}
 knitr::include_graphics("./titles.PNG")
@@ -263,14 +263,14 @@ gentlg(huxme       = tbl,
 
 ## Captions
 
-A caption is a single paragraph of text describing the table it
-is associated to. Captions are often used because they allow you to
+A caption is a single paragraph of text describing the table. 
+Captions are often used because they allow you to
 cross-reference tables or list them in a 'list of tables' with the corresponding
 page numbers.
 
 ### flextable
 
-The `set_caption()` function in 'flextable' is the recommanded way to add
+The `set_caption()` function in *flextable* is the recommended way to add
 captions. 
 
 ```{r}
@@ -283,10 +283,10 @@ flextable(head(cars)) |>
     autonum = officer::run_autonum(seq_id = "tab", bkm = "flextable-label"))
 ```
 
-In bookdown, use the syntax `\@ref(tab:flextable-label)` to create a linked 
-reference to the table. See an example of a reference: \@ref(tab:flextable-label).
+In *bookdown*, use the syntax `\@ref(tab:flextable-label)` to create a linked 
+reference to the table. Here is an example of a reference: \@ref(tab:flextable-label).
 
-With 'Quarto', the R chunk code should be transformed as: 
+With `Quarto`, the R chunk code should be transformed as: 
 
 ````r
 #| label: tbl-flextable-label
@@ -317,9 +317,9 @@ page break for that page to be understood in isolation.
 
 ### rtables
 
-`rtables` supports context-preserving pagination in both the
+*rtables* supports context-preserving pagination in both the
 horizontal and vertical directions (via the interface provided by
-`formatters`) via calling `paginate_table` directly, and within the
+*formatters*) via calling `paginate_table()` directly, and within the
 `export_as_*` rendering functions. Users specify page dimensions (in
 either inches, or lines long and characters wide) and font information
 and the pagination and export machinery paginates the table such that
@@ -348,13 +348,13 @@ tbl <- build_table(lyt, ex_adsl)
 tbl
 ```
 
-`paginate_table`, then, breaks our table into subtables -- including repeated context where appropriate -- which will fit on physical pages (we use 5.2 x 3.5 inch "pages" for illustrative purposes here):
+`paginate_table()`, then, breaks our table into subtables -- including repeated context where appropriate -- which will fit on physical pages (we use 5.2 x 3.5 inch "pages" for illustrative purposes here):
 
 ```{r}
 paginate_table(tbl, pg_width = 5.2, pg_height = 3.5, min_siblings = 0)
 ```
 
-`rtables` also supports *page-by splits* in its layouting framework,
+*rtables* also supports *page-by splits* in its layouting framework,
 which declares that -- regardless of rendering dimensions --
 pagination should occur between distinct levels of a variable. Each of
 these "pagination sections" have an additional title specific to the
@@ -418,7 +418,7 @@ knitr::kable(capable, align = "c")
 
 If the format you need is not supported by the package you
 would like to use, there are still options.  For example, tables produced
-in `rtables` and `tables` can be converted to `flextable` objects,
+in *rtables* and *tables* can be converted to *flextable* objects,
 giving access to the other output formats.
 Pandoc [@pandoc]
 is another option:  it can convert documents between a wide range of 
