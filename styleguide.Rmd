@@ -11,19 +11,45 @@ knitr::opts_chunk$set(echo = TRUE)
 
 ## Style choices
 
-The instructions below should be read in the .Rmd file;
-the HTML file mostly shows them as they will appear, not
-as they are entered.
-
-- R is written as R
-- R package names are written as *pkgname* so they appear
-in italics, except in section headings, where they are written in plain text, e.g. pkgname.
-- First package citations use the standard citation, followed by a "website" link, e.g. tables (@R-tables, [website](...))
-- Function names are written as `fnname()`
-- Function arguments are written as `argument`
-- git is written `git`, as are other software packages
-(e.g. the LaTeX package `longtables`)
-- Github is written capitalized in plain text: Github
+- R is written as 
+  ```
+  R
+  ```
+- R package names are written as 
+  ```
+  *pkgname*
+  ``` 
+  and will appear
+  in italics (e.g. *pkgname*), except in section headings,
+  where they are written in plain text, e.g. 
+  ```
+  pkgname
+  ```
+- First package citations use the standard citation, followed by a "website" link, e.g. 
+  ```
+  tables (@R-tables, [website](...))
+  ```
+- Function names are written as 
+  ```
+  `fnname()`
+  ```
+- Function arguments are written as 
+  ```
+  `argument`
+  ```
+- git is written 
+  ```
+  `git`
+  ```
+  as are other software packages
+  e.g. 
+  ```
+  the LaTeX package `longtables`
+  ```
+- Github is written capitalized in plain text: 
+  ```
+  Github
+  ```
 
 
 ## Fixes needed 
@@ -31,7 +57,15 @@ in italics, except in section headings, where they are written in plain text, e.
 - The citations in the Reference section give inconsistent amounts of
 detail. -- This is a bug in `citation()`; I've added a 
 workaround.
-- Citations in text sometimes put dates in parens (e.g. "tfrmt (Fillmore et al. (2023), website)") and sometimes don't (e.g. "gt package (Iannone et al. 2023, website)").-- I don't know why this happens.
+- Citations in text sometimes put dates in parens, e.g. 
+
+  > *tfrmt* (Fillmore et al. (2023), website)  
+
+  and sometimes don't, e.g.  
+  
+  > *gt* package (Iannone et al. 2023, website)
+  
+  -- I don't know why this happens.
 - The `tern` package suddenly appears in 4.1.1 without any 
 intro.
     
