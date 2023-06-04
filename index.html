@@ -23,7 +23,7 @@
 <meta name="author" content="R Consortium Tables Working Group" />
 
 
-<meta name="date" content="2023-06-01" />
+<meta name="date" content="2023-06-04" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -177,7 +177,7 @@ div.csl-indent {
 <li class="chapter" data-level="1.3" data-path="index.html"><a href="index.html#data-used-for-examples"><i class="fa fa-check"></i><b>1.3</b> Data Used For Examples</a></li>
 <li class="chapter" data-level="1.4" data-path="index.html"><a href="index.html#installing-the-r-packages"><i class="fa fa-check"></i><b>1.4</b> Installing the R packages</a></li>
 </ul></li>
-<li class="chapter" data-level="2" data-path="tablepkgs.html"><a href="tablepkgs.html"><i class="fa fa-check"></i><b>2</b> Overview table R packages</a>
+<li class="chapter" data-level="2" data-path="tablepkgs.html"><a href="tablepkgs.html"><i class="fa fa-check"></i><b>2</b> Overview of table R packages</a>
 <ul>
 <li class="chapter" data-level="2.1" data-path="tablepkgs.html"><a href="tablepkgs.html#gt"><i class="fa fa-check"></i><b>2.1</b> gt</a></li>
 <li class="chapter" data-level="2.2" data-path="tablepkgs.html"><a href="tablepkgs.html#r2rtf"><i class="fa fa-check"></i><b>2.2</b> r2rtf</a></li>
@@ -223,7 +223,7 @@ div.csl-indent {
 </ul></li>
 <li class="chapter" data-level="4.2" data-path="commontables.html"><a href="commontables.html#adverse-event-tables"><i class="fa fa-check"></i><b>4.2</b> Adverse Event Tables</a>
 <ul>
-<li class="chapter" data-level="4.2.1" data-path="commontables.html"><a href="commontables.html#rtables-only"><i class="fa fa-check"></i><b>4.2.1</b> <code>rtables</code> Only</a></li>
+<li class="chapter" data-level="4.2.1" data-path="commontables.html"><a href="commontables.html#rtables-only"><i class="fa fa-check"></i><b>4.2.1</b> rtables Only</a></li>
 <li class="chapter" data-level="4.2.2" data-path="commontables.html"><a href="commontables.html#gt-2"><i class="fa fa-check"></i><b>4.2.2</b> gt</a></li>
 <li class="chapter" data-level="4.2.3" data-path="commontables.html"><a href="commontables.html#flextable-5"><i class="fa fa-check"></i><b>4.2.3</b> flextable</a></li>
 <li class="chapter" data-level="4.2.4" data-path="commontables.html"><a href="commontables.html#tables-5"><i class="fa fa-check"></i><b>4.2.4</b> tables</a></li>
@@ -287,14 +287,14 @@ div.csl-indent {
 <div id="header">
 <h1 class="title">Tables in Clinical Trials with R</h1>
 <p class="author"><em>R Consortium Tables Working Group</em></p>
-<p class="date"><em>2023-06-01</em></p>
+<p class="date"><em>2023-06-04</em></p>
 </div>
 <div id="about" class="section level1 hasAnchor" number="1">
 <h1><span class="header-section-number">Chapter 1</span> About<a href="index.html#about" class="anchor-section" aria-label="Anchor link to header"></a></h1>
 <div id="introduction" class="section level2 hasAnchor" number="1.1">
 <h2><span class="header-section-number">1.1</span> Introduction<a href="index.html#introduction" class="anchor-section" aria-label="Anchor link to header"></a></h2>
-<p>In this book we present various aspects of creating tables with the <code>R</code> language
-to analyze and report clinical trials data. The book is initiated by the
+<p>In this book we present various aspects of creating tables with the R language <span class="citation">(<a href="#ref-Rmanual" role="doc-biblioref">R Core Team 2023</a>)</span>
+to analyze and report clinical trials data. The book was initiated by the
 R Consortium working group <em>R Tables for Regulatory Submissions (RTRS)</em>. For a list of contributors to this book, see Appendix <a href="contributors.html#contributors">A</a>.</p>
 <p>The RTRS includes
 representation from several large pharmaceutical companies and contract research organizations.
@@ -311,7 +311,7 @@ For more information on the R Consortium see <a href="https://www.r-consortium.o
 <div id="call-for-contributions" class="section level2 hasAnchor" number="1.2">
 <h2><span class="header-section-number">1.2</span> Call for Contributions<a href="index.html#call-for-contributions" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <p>The content of this book is intended to grow via community contribution, so please
-add your subject matter expertise to this content by cloning the <a href="https://github.com/RConsortium/rtrs-wg">github repository of this book</a> and make a pull request with your changes.</p>
+add your subject matter expertise to this content by cloning the <a href="https://github.com/RConsortium/rtrs-wg">Github repository of this book</a> and making a pull request with your changes.</p>
 <p>We welcome all contribution, including but not limited to:</p>
 <ul>
 <li>summarizing table packages</li>
@@ -319,15 +319,16 @@ add your subject matter expertise to this content by cloning the <a href="https:
 <li>clarifying requirements and analyses</li>
 <li>improving R code</li>
 </ul>
-<p>In case you are new to using git and GitHub but would like to make a
+<p>In case you are new to using <code>git</code> and GitHub but would like to make a
 contribution then please write a GitHub issue and we will reach out to you to
 add the content.</p>
-<p>The most convenient way to get started is to:</p>
+<p>One convenient way to get started is to:</p>
 <ul>
 <li>clone the <a href="https://github.com/RConsortium/rtrs-wg">GitHub repository of this book</a></li>
 <li>install the <a href="https://www.rstudio.com/products/rstudio/download/">RStudio IDE</a></li>
 <li>Open the RStudio project in <code>rtrs-wg/tables-book/tables-book.Rproj</code></li>
-<li>start working, see the <a href="https://bookdown.org/yihui/bookdown/">Bookdown documentation</a>, you can develop the book with the <code>bookdown::serve_book()</code> call.</li>
+<li>start working! See the <a href="https://bookdown.org/yihui/bookdown/">Bookdown documentation</a>. You can
+continuously preview the book with the <code>bookdown::serve_book()</code> call.</li>
 <li>once ready to share your work <a href="https://docs.github.com/en/pull-requests/collaborating-with-pull-requests/proposing-changes-to-your-work-with-pull-requests/creating-a-pull-request">create a PR</a></li>
 <li>use <a href="https://github.com/RConsortium/rtrs-wg/issues">GitHub issues</a> to communicate with us if you have difficulties</li>
 </ul>
@@ -378,7 +379,7 @@ synthetic subject level dataset <code>ADSL</code>:</p>
 </div>
 <div id="installing-the-r-packages" class="section level2 hasAnchor" number="1.4">
 <h2><span class="header-section-number">1.4</span> Installing the R packages<a href="index.html#installing-the-r-packages" class="anchor-section" aria-label="Anchor link to header"></a></h2>
-<p>At some point we may switch to <code>renv</code> to install the <code>R</code> packages used
+<p>At some point we may switch to <code>renv</code> to install the R packages used
 for this book. For right now you can install the packages yourself with:</p>
 <details class=chunk-details open><summary class=chunk-summary><span class=chunk-summary-text>Code</span></summary>
 <div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb7-1"><a href="index.html#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="fu">install.packages</span>(<span class="fu">c</span>(<span class="st">&quot;rtables&quot;</span>, <span class="st">&quot;gt&quot;</span>, <span class="st">&quot;remotes&quot;</span>, <span class="st">&quot;tidyverse&quot;</span>, <span class="st">&quot;bookdown&quot;</span>, <span class="st">&quot;r2rtf&quot;</span>, <span class="st">&quot;flextable&quot;</span>, <span class="st">&quot;tables&quot;</span>))</span>
@@ -397,6 +398,12 @@ code more or less independently of the other sections. This is done using
 the functions defined below. In your own documents, you wouldn’t
 need these resets.</p>
 
+</div>
+</div>
+<h3>References<a href="references.html#references" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<div id="refs" class="references csl-bib-body hanging-indent">
+<div id="ref-Rmanual" class="csl-entry">
+R Core Team. 2023. <em>R: A Language and Environment for Statistical Computing</em>. Vienna, Austria: R Foundation for Statistical Computing. <a href="https://www.R-project.org/">https://www.R-project.org/</a>.
 </div>
 </div>
             </section>
