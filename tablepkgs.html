@@ -23,7 +23,7 @@
 <meta name="author" content="R Consortium Tables Working Group" />
 
 
-<meta name="date" content="2023-06-04" />
+<meta name="date" content="2023-06-08" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -304,16 +304,12 @@ supported with the same declarative interface (e.g., HTML, LaTeX/PDF, and RTF).<
 <div id="r2rtf" class="section level2 hasAnchor" number="2.2">
 <h2><span class="header-section-number">2.2</span> r2rtf<a href="tablepkgs.html#r2rtf" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <p>The <em>r2rtf</em> package <span class="citation">(<a href="#ref-r2rtf2020" role="doc-biblioref"><strong>r2rtf2020?</strong></a>, <a href="https://merck.github.io/r2rtf/" role="doc-biblioref">website</a>)</span>
-creates production-ready tables and figures in RTF format.
-The R package is designed to</p>
-<ul>
-<li>provide simple “verb” functions that correspond to each component of a table, to help you translate data frame(s) to a table in RTF file.</li>
-<li>enables pipes (%&gt;%).</li>
-<li>only focus on table format.</li>
-<li>Data manipulation and analysis
-shall be handled by other R packages. (e.g., tidyverse)
-minimizes package dependency</li>
-</ul>
+allows for the creation of production-ready tables and figures in the RTF format.
+This R package provides simple, composable functions (with the “verb” semantics
+pattern) that correspond to each component of a table. Incoming data is treated as
+immutable so the only focus for the final formatting of the table. The package is
+well-suited for regulatory filings given that it has extensive support for table
+pagination and a means for compiling several tables into a single RTF file.</p>
 <p>Chapter 1-9 of <a href="https://r4csr.org/">The R for Clinical Study Reports and Submission</a> book
 provides examples by using <em>r2rtf</em> package.</p>
 </div>
