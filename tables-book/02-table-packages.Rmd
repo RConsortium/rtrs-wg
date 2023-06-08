@@ -19,6 +19,10 @@ rows, footnotes, source notes, and structure the table with a stub and column
 spanners. Multiple output formats are supported with the same declarative interface
 (e.g., HTML, LaTeX/PDF, RTF, and Word).
 
+The *gt* source code is on [GitHub](https://github.com/rstudio/gt) and the
+[project website](https://gt.rstudio.com) provides a wealth of documentation. The
+package is also available on [CRAN](https://CRAN.R-project.org/package=gt).
+
 ## r2rtf
 
 The *r2rtf* package [@r2rtf2020, [website](https://merck.github.io/r2rtf/)]
@@ -43,8 +47,8 @@ splits, cell value calculation, and tabulation occurs automatically. Additional
 table features such as titles, footers, and referential footnotes are supported.
 ASCII, HTML, and PDF are supported as output formats for rendering tables.
 
-*rtables* source code is on [GitHub](https://github.com/roche/rtables) as well
-as the [documentation](https://roche.github.io/rtables/). *rtables* is also available
+The *rtables* source code is on [GitHub](https://github.com/roche/rtables) as well
+as the [documentation](https://roche.github.io/rtables/). The package is also available
 on [CRAN](https://CRAN.R-project.org/package=rtables).
 
 ## flextable
@@ -61,7 +65,7 @@ statistical models and the creation of complex cross tabulations.
 
 Source code is on [GitHub](https://github.com/davidgohel/flextable) and a 
 [user manual](https://ardata-fr.github.io/flextable-book/) is available. 
-*flextable* is available on [CRAN](https://CRAN.R-project.org/package=flextable).
+The package is also available on [CRAN](https://CRAN.R-project.org/package=flextable).
 
 ## tfrmt
 
@@ -76,8 +80,9 @@ support a variety of output formats in the future. Table features (titles,
 header, footnotes, etc.) as well as specific formatting (e.g. rounding, 
 scientific notation, alignment, spacing) are supported.
 
-*tfrmt* source code is on [GitHub](https://github.com/GSK-Biostatistics/tfrmt). 
-*tfrmt* is also available on [CRAN](https://CRAN.R-project.org/package=tfrmt).
+The *tfrmt* source code is on [GitHub](https://github.com/GSK-Biostatistics/tfrmt) and
+documentation can be found in the [project website](https://gsk-biostatistics.github.io/tfrmt/).
+The package is also available on [CRAN](https://CRAN.R-project.org/package=tfrmt).
 
 ## tables
 
@@ -86,18 +91,16 @@ computing the contents of tables and formatting them.  It was
 inspired by `SAS PROC TABULATE`, but is not compatible with it.
 
 The user computes a table object by specifying a formula, with the
-left-hand
-side giving the rows, and the right-hand side giving the columns;
-the formula describes the summary functions to apply and how to
-organize them.  The objects can be subsetted or combined
-using matrix-like operations.  Tables can
-be rendered in plain text, LaTeX code to appear
-in a PDF document, or HTML code for a web document.
+left-hand side giving the rows, and the right-hand side giving the columns;
+the formula describes the summary functions to apply and how to organize them.
+The objects can be subsetted or combined using matrix-like operations. Tables can
+be rendered in plain text, LaTeX code to appear in a PDF document, or HTML
+code for a web document.
 
-The package is on CRAN.  Source is maintained on R-forge
-at https://r-forge.r-project.org/projects/tables/ and mirrored on
-Github at https://github.com/rforge/tables/.  Vignettes in the package
-serve as a user manual.  Browse them at https://rdrr.io/cran/tables/, or install the package, then run
+The package is on CRAN. Source is maintained on R-forge at
+https://r-forge.r-project.org/projects/tables/ and mirrored on Github at
+https://github.com/rforge/tables/. Vignettes in the package serve as a user manual;
+browse them at https://rdrr.io/cran/tables/, or install the package, then run
 `browseVignettes(package = "tables")`.
 
 ## tidytlg
