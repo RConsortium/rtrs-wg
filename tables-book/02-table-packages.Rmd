@@ -10,12 +10,14 @@ please contribute to this chapter.
 ## gt
 
 The *gt* package [@R-gt, [website](https://gt.rstudio.com/)] provides
-a high-level and declarative interface for composing tables. 
-Contains a variety of *formatter* functions for transforming cell values
-from an input data frame to the desired reporting values (combines mutation and
-aesthetic styling with options for: scientific notation, uncertainty, ranges,
-percentages, suffixes, localized currency, etc.). Multiple output formats are
-supported with the same declarative interface (e.g., HTML, LaTeX/PDF, and RTF).
+a high-level and declarative interface for composing tables. The package
+contains a large variety of formatting functions for transforming cell values
+from an input data frame to the desired reporting values. There are options for
+scientific notation, percentages, localized currencies, expressing uncertainties
+and ranges, dates and times, etc.). The package has the ability to generate summary
+rows, footnotes, source notes, and structure the table with a stub and column
+spanners. Multiple output formats are supported with the same declarative interface
+(e.g., HTML, LaTeX/PDF, RTF, and Word).
 
 ## r2rtf
 
