@@ -20,19 +20,15 @@ supported with the same declarative interface (e.g., HTML, LaTeX/PDF, and RTF).
 ## r2rtf
 
 The *r2rtf* package [@r2rtf2020, [website](https://merck.github.io/r2rtf/)]
-creates production-ready tables and figures in RTF format. 
-The R package is designed to
-
-- provide simple “verb” functions that correspond to each component of a table, to help you translate data frame(s) to a table in RTF file.
-- enables pipes (%>%).
-- only focus on table format.
-- Data manipulation and analysis 
-shall be handled by other R packages. (e.g., tidyverse)
-minimizes package dependency
+allows for the creation of production-ready tables and figures in the RTF format. 
+This R package provides simple, composable functions (with the “verb” semantics
+pattern) that correspond to each component of a table. Incoming data is treated as
+immutable so the only focus for the final formatting of the table. The package is
+well-suited for regulatory filings given that it has extensive support for table
+pagination and a means for compiling several tables into a single RTF file.
 
 Chapter 1-9 of [The R for Clinical Study Reports and Submission](https://r4csr.org/) book 
-provides examples by using *r2rtf* package. 
-
+provides examples by using *r2rtf* package.
 
 ## rtables
 
