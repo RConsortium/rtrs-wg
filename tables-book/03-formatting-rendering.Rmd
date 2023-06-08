@@ -24,6 +24,66 @@ and footnotes with information such as:
 
 Often footnotes include cell references.
 
+### gt
+
+The *gt* package lets you add a title and even a subtitle and *preheader* lines (for RTF) with its `tab_header()` function. In the following example, we create some `sample_data` and feed that into the `gt()` function. We can automatically create a table stub (for row labels) and row groups with the `rowname_col` and `groupname_col` arguments of `gt()`.
+
+```{r}
+sample_data <-
+  dplyr::tibble(
+    label = c("n", "Mean (SD)", "Median", "Min - Max", "F", "M", "U", "UNDIFFERENTIATED"),
+    `val_A: Drug X` = c(134, 33.8, 33, NA, 79, 51, 3, 1),
+    `val_B: Placebo` = c(134, 35.4, 35, NA, 77, 55, 2, 0),
+    `val_C: Combination` = c(132, 35.4, 35, NA, 66, 60, 4, 2),
+    category = c(rep("Age (Years)", 4), rep("Sex, n (%)", 4))
+  )
+
+gt_tbl <-
+  gt(
+    sample_data, 
+    rowname_col = "label",
+    groupname_col = "category"
+  ) |>
+  tab_header(
+    title = "x.x: Study Subject Data",
+    subtitle = md(
+      "x.x.x: Demographic Characteristics  \n Table x.x.x.x: Demographic
+      Characteristics - Full Analysis Set"
+    ),
+    preheader = c("Protocol: XXXXX", "Cutoff date: DDMMYYYY")
+  ) |> 
+  tab_source_note("Source: ADSL DDMMYYYY hh:mm; Listing x.xx; SDTM package: DDMMYYYY") |> 
+  sub_missing(missing_text = "") |> 
+  tab_options(
+    page.orientation = "landscape",
+    page.numbering = TRUE,
+    page.header.use_tbl_headings = TRUE,
+    page.footer.use_tbl_notes = TRUE
+  )
+
+gt_tbl
+```
+
+The above example contains the use of the `tab_source_note()` function. You can create as many source notes in the table footer as you need, and they typically describe the data table as whole (i.e., not pointing to anything specific). For that, you can use footnotes and target cells that require additional explanation. Here's an example of that using `tab_footnote()`:
+
+```{r}
+gt_tbl |>
+  tab_footnote(
+    footnote = "This is the combination of the two.",
+    locations = cells_column_labels(columns = `val_C: Combination`)
+  ) |>
+  tab_footnote(
+    footnote = "These values are the same.",
+    locations = cells_body(
+      columns = matches("_A|_B"), rows = "n"
+      )
+  )
+```
+
+The `tab_footnote()` function allows for footnotes to be placed anywhere in the table (using the `cells_*()` helper functions for targeting). Targeting `columns`, `rows`, or other locations can be done with Tidyselect-style helper functions, ID values, or indices.
+
+As a final note on the first example, we can specify certain `page.*` options that make RTF output ideal for regulatory filing purposes. The options employed above in the `tab_options()` call ensure that pages are in landscape orientation, page numbering for each table is activated, and that page header and footer are used for the table's headings and footer elements.
+
 ### rtables
 
 The `basic_table()` function in *rtables* has the arguments `titles`, `subtitles`,
