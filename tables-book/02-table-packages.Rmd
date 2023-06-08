@@ -31,10 +31,14 @@ This R package provides simple, composable functions (with the “verb” semant
 pattern) that correspond to each component of a table. Incoming data is treated as
 immutable so the only focus for the final formatting of the table. The package is
 well-suited for regulatory filings given that it has extensive support for table
-pagination and a means for compiling several tables into a single RTF file.
+pagination and a means for compiling several tables into a single RTF file. Chapters
+1-9 of [The R for Clinical Study Reports and Submission](https://r4csr.org/) book 
+provides examples that use *r2rtf*.
 
-Chapter 1-9 of [The R for Clinical Study Reports and Submission](https://r4csr.org/) book 
-provides examples by using *r2rtf* package.
+The source code is on [GitHub]([https://github.com/rstudio/gt](https://github.com/Merck/r2rtf)
+and the [project website]([https://gt.rstudio.com](https://merck.github.io/r2rtf/)
+provides a function reference and many helpful articles. The package is also
+available on [CRAN](https://CRAN.R-project.org/package=r2rtf).
 
 ## rtables
 
