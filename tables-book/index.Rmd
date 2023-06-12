@@ -19,8 +19,8 @@ editor_options:
 
 ## Introduction
 
-In this book we present various aspects of creating tables with the `R` language
-to analyze and report clinical trials data. The book is initiated by the
+In this book we present various aspects of creating tables with the R language [@Rmanual]
+to analyze and report clinical trials data. The book was initiated by the
 R Consortium working group *R Tables for Regulatory Submissions (RTRS)*.  For a list of contributors to this book, see Appendix \@ref(contributors).
 
 The RTRS includes
@@ -35,11 +35,10 @@ using the R programming environment in conjunction with open-source packages
 without the need for closed and often expensive proprietary tools.
 For more information on the R Consortium see https://www.r-consortium.org.
 
-
 ## Call for Contributions
 
 The content of this book is intended to grow via community contribution, so please
-add your subject matter expertise to this content by cloning the [github repository of this book](https://github.com/RConsortium/rtrs-wg) and make a pull request with your changes.
+add your subject matter expertise to this content by cloning the [Github repository of this book](https://github.com/RConsortium/rtrs-wg) and making a pull request with your changes.
 
 We welcome all contribution, including but not limited to:
 
@@ -48,17 +47,17 @@ We welcome all contribution, including but not limited to:
  - clarifying requirements and analyses
  - improving R code
 
-In case you are new to using git and GitHub but would like to make a
+In case you are new to using `git` and GitHub but would like to make a
 contribution then please write a GitHub issue and we will reach out to you to
 add the content.
 
-
-The most convenient way to get started is to:
+One convenient way to get started is to:
 
   - clone the [GitHub repository of this book](https://github.com/RConsortium/rtrs-wg)
   - install the [RStudio IDE](https://www.rstudio.com/products/rstudio/download/)
   - Open the RStudio project in `rtrs-wg/tables-book/tables-book.Rproj`
-  - start working, see the [Bookdown documentation](https://bookdown.org/yihui/bookdown/), you can develop the book with the `bookdown::serve_book()` call.
+  - start working! See the [Bookdown documentation](https://bookdown.org/yihui/bookdown/).  You can 
+continuously preview the book with the `bookdown::serve_book()` call.
   - once ready to share your work [create a PR](https://docs.github.com/en/pull-requests/collaborating-with-pull-requests/proposing-changes-to-your-work-with-pull-requests/creating-a-pull-request)
   - use [GitHub issues](https://github.com/RConsortium/rtrs-wg/issues) to communicate with us if you have difficulties
 
@@ -91,11 +90,9 @@ head(cadsl)
 adsl <- cadsl
 ```
 
-
-
 ## Installing the R packages
 
-At some point we may switch to `renv` to install the `R` packages used 
+At some point we may switch to `renv` to install the R packages used 
 for this book. For right now you can install the packages yourself with:
 
 ```{r, eval = FALSE, echo = -(1:4)}
@@ -103,7 +100,7 @@ for this book. For right now you can install the packages yourself with:
 # and also in ../tools/fakepkg/DESCRIPTION (used in the online
 # builds).  Version requirements should go there.
 
-install.packages(c("rtables", "gt", "remotes", "tidyverse", "bookdown", "r2rtf", "flextable", "tables"))
+install.packages(c("rtables", "gt", "remotes", "tidyverse", "bookdown", "r2rtf", "flextable", "tables", "formatters"))
 
 remotes::install_github("insightsengineering/random.cdisc.data")
 remotes::install_github("insightsengineering/scda")
@@ -114,10 +111,9 @@ remotes::install_github("GSK-Biostatistics/tfrmt")
 ```
 
 In each of the sections below, we will reset R to close to the
-present state
-at the start of the section, so readers can execute the demonstration
-code more or less independently of the other sections.  This is done using
-the functions defined below.  In your own documents, you wouldn't 
+present state at the start of the section, so readers can execute the demonstration
+code more or less independently of the other sections. This is done using
+the functions defined below. In your own documents, you wouldn't 
 need these resets.
 
 ```{r include=FALSE}

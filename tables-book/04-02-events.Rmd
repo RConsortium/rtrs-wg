@@ -6,14 +6,14 @@ editor_options:
 
 ## Adverse Event Tables
 
-We will use the `ex_adae` data included within the `formatters` package.
+We will use the `ex_adae` data included within the *formatters* package.
 
 ```{r, comment=NA}
 head(formatters::ex_adae)
 ```
 
 
-### `rtables` Only
+### rtables Only
 
 Adverse Events by ID
 
@@ -183,13 +183,13 @@ ex_tbl |>
 
 ### tables
 
-The `tables` package normally generates tables from single datasets, while this
+The *tables* package normally generates tables from single datasets, while this
 kind of table requires information from two:  `adsl` and `ex_adae`.
 One way to handle this would be to add the `adsl` patient count 
 information to a copy of the `ex_adae` table.  In this code we
 use a different approach:  we generate one table of patient counts
 to produce the heading lines, and a second table with the adverse
-event data, then use `rbind` to combine the two tables.
+event data, then use `rbind()` to combine the two tables.
 
 ```{r}
 resetSession()
@@ -318,7 +318,8 @@ gentlg(huxme       = tbl,
 ```
 
 ### tfrmt
-Rather than starting with an [ADaM](https://www.cdisc.org/standards/foundational/adam), {tfrmt} assumes users will start with an ARD (Analysis Results Dataset), because of this, making this table will be split into two parts, first to make the ARD and second to format the table. 
+
+Rather than starting with an [ADaM](https://www.cdisc.org/standards/foundational/adam), *tfrmt* assumes users will start with an ARD (Analysis Results Dataset), because of this, making this table will be split into two parts, first to make the ARD and second to format the table. 
 ```{r}
 resetSession()
 library(tidyverse)

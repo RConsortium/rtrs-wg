@@ -1,0 +1,43 @@
+---
+title: "Style guide for this book"
+author: "Duncan Murdoch"
+date: "2023-06-01"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+## Style choices
+
+- R is written as `R`
+- R package names are written as `*pkgname*`
+  and will appear
+  in italics (e.g. *pkgname*), except in section headings,
+  where they are written in plain text, e.g. `pkgname`
+- First package citations use the standard citation, followed by a "website" link, e.g. `tables (@R-tables, [website](...))`
+- Function names are written as ``` `fname()` ```
+- Function arguments are written as ``` `argument` ```
+- git is written ``` `git` ``` as are other software packages
+  e.g. ```the LaTeX package `longtables` ```
+- Github is written capitalized in plain text: `Github`
+
+
+## Fixes needed 
+
+- The citations in the Reference section give inconsistent amounts of
+detail. -- This is a bug in `citation()`; I've added a 
+workaround.
+- Citations in text sometimes put dates in parens, e.g. 
+
+  > *tfrmt* (Fillmore et al. (2023), website)  
+
+  and sometimes don't, e.g.  
+  
+  > *gt* package (Iannone et al. 2023, website)
+  
+  -- I don't know why this happens.
+- The `tern` package suddenly appears in 4.1.1 without any 
+intro.
+    
