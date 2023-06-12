@@ -29,6 +29,9 @@ Often footnotes include cell references.
 The *gt* package lets you add a title and even a subtitle and *preheader* lines (for RTF) with its `tab_header()` function. In the following example, we create some `sample_data` and feed that into the `gt()` function. We can automatically create a table stub (for row labels) and row groups with the `rowname_col` and `groupname_col` arguments of `gt()`.
 
 ```{r}
+resetSession()
+library(gt)
+
 sample_data <-
   dplyr::tibble(
     label = c("n", "Mean (SD)", "Median", "Min - Max", "F", "M", "U", "UNDIFFERENTIATED"),
