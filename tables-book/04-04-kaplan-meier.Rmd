@@ -403,21 +403,19 @@ This is a situation where the code required to create a flextable directly
 becomes too long or complex. In such case, it is more convenient to leverage
 existing functions from other packages to generate a tabular object and then
 convert it to a flextable using the `as_flextable()` method. Here we reuse 
-the 'tables' objects created in the previous section.
+the `tables` objects created in the previous section.
 
 ```{r}
 library(flextable)
 rbind(part1, part2, part3) |> 
-  as_flextable(spread_first_col = TRUE) |>
+  as_flextable(spread_first_col = TRUE, add_tab = TRUE) |>
+  align(j = 1, part = "all", align = "left") |> 
+  padding(padding = 4, part = "all") |> 
   add_header_row(
-    values = c("", sprintf("(N=%s)", subject_counts)),
+    values = c("", fmt_header_n(subject_counts, newline = FALSE)),
     top = FALSE
   ) |> 
-  theme_booktabs() |> 
-  prepend_chunks(i = ~ .is_row_title == FALSE, j = 1, 
-                 as_chunk("\t")) |> 
-  align(part = "all", j = 2:4, align = "center") |> 
-  autofit()
+  hline(i = 1, part = "header", border = fp_border_default(width = 0))
 ```
 
 

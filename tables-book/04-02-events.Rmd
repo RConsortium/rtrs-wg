@@ -241,20 +241,17 @@ By using `tables::tabular()` to create a table and then
 converting it to a flextable using `as_flextable()`, you 
 can take advantage of the convenience and flexibility provided 
 by the tables package while still benefiting from the 
-formatting capabilities of flextable.
+formatting capabilities of *flextable*.
 
 ```{r}
 library(flextable)
-as_flextable(body, spread_first_col = TRUE) |>
+as_flextable(body, spread_first_col = TRUE, add_tab = TRUE) |>
+  align(j = 1, part = "all", align = "left") |> 
+  padding(padding = 4, part = "all") |> 
   add_header_row(
-    values = c("", sprintf("(N=%s)", subject_counts)),
-    top = FALSE
-  ) |> 
-  prepend_chunks(i = ~ .is_row_title == FALSE, j = 1, 
-                 as_chunk("\t")) |>
-  theme_booktabs() |> 
-  align(part = "all", j = 2:4, align = "center") |> 
-  autofit()
+    values = c("", fmt_header_n(subject_counts, newline = FALSE)),
+    top = FALSE) |> 
+  hline(i = 1, part = "header", border = fp_border_default(width = 0))
 ```
 
 ### tidytlg
