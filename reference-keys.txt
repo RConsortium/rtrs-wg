@@ -3,7 +3,6 @@ tab:flextable-label
 tab:unnamed-chunk-35
 tab:unnamed-chunk-44
 tab:unnamed-chunk-55
-tab:unnamed-chunk-61
 tab:unnamed-chunk-63
 tab:unnamed-chunk-70
 about
@@ -46,8 +45,8 @@ tfrmt-2
 adverse-event-tables
 rtables-only
 gt-3
-flextable-5
 tables-5
+flextable-5
 tidytlg-3
 tfrmt-3
 laboratory-tables
@@ -56,14 +55,14 @@ data-and-models-used-throughout
 rtables-4
 cell-value-derivation-for-gt-of-time-to-event-analysis
 gt-4
-flextable-6
 tables-6
+flextable-6
 tidytlg-4
 tfrmt-4
 concomitant-medications
 rtables-5
-gt-5
 flextable-7
+gt-5
 tables-7
 tidytlg-5
 tfrmt-5
