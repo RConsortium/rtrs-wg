@@ -128,6 +128,6 @@ knitr::write_bib(c(
   "gt", "r2rtf", "rtables", "flextable", "tables", "tidytlg", "tfrmt"
 ), 'packages.bib')
 lines <- readLines("packages.bib")
-lines <- sub("^  note = \\{http", "  note = {R package},\n  url = {http", lines)
+lines <- sub("^  note = \\{R package", "  edition = {R package", lines)
 writeLines(lines, "packages.bib")
 ```
