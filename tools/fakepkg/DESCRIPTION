@@ -24,4 +24,5 @@ Remotes: insightsengineering/random.cdisc.data,
  insightsengineering/formatters,
  Roche/rtables,
  insightsengineering/tern@v0.7.10,
- pharmaverse/tidytlg
+ pharmaverse/tidytlg,
+ davidgohel/flextable

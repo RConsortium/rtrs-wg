@@ -181,104 +181,6 @@ ex_tbl |>
 ```
 
 
-### flextable
-
-```{r message=FALSE}
-resetSession()
-ex_adsl <- formatters::ex_adsl
-ex_adae <- formatters::ex_adae
-library(flextable)
-library(tidyr)
-library(dplyr)
-library(forcats)
-ae_tabulator <- function(ADSL, ADAE){
-  
-  
-  subject_cts <- group_by(ADSL, ARM) |> 
-    summarise(n_subject = n())
-  
-  all_event_total_cts <- group_by(ADAE, ARM) |> 
-    summarise(n_usub = n_distinct(USUBJID), n_events = n())
-  
-  aebodsys_cts <- group_by(ADAE, ARM, AEBODSYS) |> 
-    summarise(n_usub = n_distinct(USUBJID), n_events = n(),
-              .groups = "drop")
-  
-  aedecod_cts <- group_by(ADAE, ARM, AEBODSYS, AEDECOD) |> 
-    summarise(n_usub = n_distinct(USUBJID), n_events = n(),
-              .groups = "drop")
-  
-  x <- bind_rows(all_event_total_cts, aebodsys_cts, aedecod_cts) |> 
-    mutate(
-      AEBODSYS = fct_expand(AEBODSYS, "ALL1") |> fct_relevel("ALL1"),
-      AEDECOD = fct_expand(AEDECOD, "ALL2") |> fct_relevel("ALL2")
-    ) |> 
-    left_join(subject_cts, by = "ARM") |> 
-    replace_na(replace = list(AEBODSYS = "ALL1", AEDECOD = "ALL2")) |>
-    arrange(AEBODSYS, AEDECOD) |> 
-    mutate(pct = n_usub / n_subject)
-  attr(x, "ARM_COUNTS") <- setNames(subject_cts$n_subject, subject_cts$ARM)
-  x
-  
-}
-
-# Labels for `flextable::labelizor()`:
-AEDECOD_LABELS <- c(
-  ALL1 = "Patients with at least one event", 
-  ALL2 = "Patients with at least one event")
-HEADER_LABELS <- c(
-  AEDECOD = "dictionary-derived term\n\tbody system or organ class",
-  nevents = "Total number\nof events", 
-  n = "n\n(% of subjects)",
-  "ARM A" = "Treatment A",
-  "ARM B" = "Treatment B"
-)
-
-# `tabulator()` call:
-dat <- ae_tabulator(ADSL = ex_adsl, ADAE = ex_adae)
-ARM_COUNTS <- attr(dat, "ARM_COUNTS")
-
-tab <- tabulator(
-  dat,
-  rows = c("AEBODSYS", "AEDECOD"),
-  columns = "ARM",
-  `n` = as_paragraph(fmt_n_percent(n_usub, pct)),
-  `nevents` = as_paragraph(n_events)
-)
-
-.ARM_COUNTS <- ARM_COUNTS
-
-# flextable creation:
-
-ft <- as_flextable(tab, spread_first_col = TRUE) |> 
-  fontsize(size = 9, part = "all") |>
-  prepend_chunks(
-    i = ~ is.na(AEBODSYS), j = 1, 
-    as_chunk("\t")
-  )
-
-for(ARM_COD in names(ARM_COUNTS)){
-  ft <- append_chunks(
-    x = ft, 
-    part = "header", 
-    i = 1, 
-    j = tabulator_colnames(tab, columns = "n", ARM %in% !!ARM_COD),
-    as_chunk(ARM_COUNTS[ARM_COD], 
-             formatter = fmt_header_n)
-  )
-}
-ft <- labelizor(
-    ft, 
-    j = "AEDECOD", 
-    part = "body", 
-    labels = AEDECOD_LABELS) |> 
-  labelizor(part = "header", labels = HEADER_LABELS) |> 
-  align(j = 1, align = "left") |> 
-  autofit()
-
-ft
-```
-
 ### tables
 
 The *tables* package normally generates tables from single datasets, while this
@@ -331,6 +233,25 @@ body <- tabular( Heading("Patients with at least one event")*1*
 
 tab <- rbind(heading, body)
 useGroupLabels(tab, indent = "&emsp;", extraLines = 1)
+```
+
+### flextable 
+
+By using `tables::tabular()` to create a table and then 
+converting it to a flextable using `as_flextable()`, you 
+can take advantage of the convenience and flexibility provided 
+by the tables package while still benefiting from the 
+formatting capabilities of *flextable*.
+
+```{r}
+library(flextable)
+as_flextable(body, spread_first_col = TRUE, add_tab = TRUE) |>
+  align(j = 1, part = "all", align = "left") |> 
+  padding(padding = 4, part = "all") |> 
+  add_header_row(
+    values = c("", fmt_header_n(subject_counts, newline = FALSE)),
+    top = FALSE) |> 
+  hline(i = 1, part = "header", border = fp_border_default(width = 0))
 ```
 
 ### tidytlg

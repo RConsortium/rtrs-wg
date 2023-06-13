@@ -42,6 +42,30 @@ lyt <- basic_table(title = "Conmed Example",
 build_table(lyt, cadcm, alt_counts_df = cadsl)
 ```
 
+### flextable
+
+This is again a situation where the code required to create a flextable directly
+requires too much data preparation. In the following example, we convert the
+'rtables' object to a flextable using the `as_flextable()` method and then we
+change its aspect. 
+
+```{r}
+library(flextable)
+
+tt_to_flextable(build_table(lyt, cadcm, alt_counts_df = cadsl)) |> 
+  theme_booktabs() |> 
+  font(fontname = "Open Sans") |> 
+  bold(i = ~ V2 %in% "", j = 1, bold = TRUE) |> 
+  bold(i = 1, j = 1, bold = TRUE) |> 
+  align(j = 2:4, align = "center", part = "all") |> 
+  set_table_properties(layout = "fixed") |> 
+  autofit() |> 
+  mk_par(i = 1, j = 1, part = "header",
+         as_paragraph(as_chunk("Conmed Example", props = fp_text_default(font.size = 14)))) |> 
+  mk_par(i = 2, j = 1, part = "header",
+         as_paragraph("Uses the adcm dataset from ", as_b("random.cdisc.data")))
+```
+
 ### gt
 
 ```{r, comment=NA}
@@ -143,78 +167,6 @@ gt_adcm |>
     columns = 1
   ) 
 
-```
-
-### flextable
-
-```{r}
-resetSession()
-
-library(flextable)
-library(dplyr)
-library(forcats)
-
-data("cadcm", package = "random.cdisc.data")
-data("cadsl", package = "random.cdisc.data")
-
-
-cmdecod_levels <- c("N_CM", levels(cadcm$CMDECOD))
-cmclas_levels <- c("N_CM", levels(cadcm$CMCLAS))
-
-adcm <- cadcm |> 
-  select(CMDECOD, CMCLAS, TRT01A) |> 
-  mutate(
-    CMDECOD = factor(CMDECOD, levels = cmdecod_levels),
-    CMCLAS = factor(CMCLAS, levels = cmclas_levels)
-    )
-
-trt_count <- group_by(cadsl, TRT01A) |> 
-  summarise(n = n())
-trt_count <- setNames(trt_count$n, trt_count$TRT01A)
-
-ct_cm <- group_by(cadcm, TRT01A) |> 
-  summarise(n = n_distinct(USUBJID)) |> 
-  left_join(count(cadsl, TRT01A, name = "nall"), by = "TRT01A") |> 
-  mutate(pct = n / nall, nall = NULL,
-         CMCLAS = factor("N_CM", levels = cmclas_levels), 
-         CMDECOD = factor("N_CM", levels = cmdecod_levels))
-
-ct_adcm <- group_by(cadcm, TRT01A, CMCLAS, CMDECOD) |> 
-  summarize(n = n_distinct(USUBJID)) |> 
-  ungroup() |> 
-  left_join(count(cadsl, TRT01A, name = "nall"), by = "TRT01A") |> 
-  mutate(pct = n / nall, nall = NULL)
-
-dat <- bind_rows(ct_cm, ct_adcm)
-
-tab <- tabulator(
-  dat, rows = c("CMCLAS", "CMDECOD"), columns = "TRT01A",
-  cts = as_paragraph(fmt_n_percent(n, pct)))
-
-ft <- as_flextable(tab, spread_first_col = TRUE) |> 
-  prepend_chunks(
-    i = ~ is.na(CMCLAS) & seq_along(CMCLAS) > 1, j = 1, 
-    as_chunk("\t")
-  )
-
-for(TRT01A_COD in names(trt_count)){
-  ft <- append_chunks(
-    x = ft, 
-    part = "header", 
-    i = 1, 
-    j = tabulator_colnames(tab, columns = "cts", TRT01A %in% !!TRT01A_COD),
-    as_chunk(trt_count[TRT01A_COD], formatter = fmt_header_n)
-  )
-}
-ft <- autofit(ft) |> 
-  align(j = 1, align = "left") |> 
-  labelizor(part = "all", j = "CMDECOD", 
-            labels = c(CMDECOD="", 
-                       N_CM = "Number of sujects with any concomitant medication")) |> 
-  hline_top(part = "header", border = fp_border_default(width=2)) |>
-  set_caption("Conmed Example\nUses the 'adcm' dataset from 'random.cdisc.data'")
-
-ft
 ```
 
 ### tables
