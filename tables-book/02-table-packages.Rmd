@@ -54,6 +54,8 @@ splits, cell value calculation, and tabulation occurs automatically. Additional
 table features such as titles, footers, and referential footnotes are supported.
 ASCII, HTML, and PDF are supported as output formats for rendering tables.
 
+*rtables* works with the *tern* package [@R-tern, [website](https://github.com/insightsengineering/tern)].
+
 The *rtables* source code is on [GitHub](https://github.com/roche/rtables) as well
 as the [documentation](https://roche.github.io/rtables/). The package is also available
 on [CRAN](https://CRAN.R-project.org/package=rtables).
@@ -76,7 +78,7 @@ The package is also available on [CRAN](https://CRAN.R-project.org/package=flext
 
 ## tfrmt
 
-The *tfrmt* (@R-tfrmt, [website](https://gsk-biostatistics.github.io/tfrmt/)) package 
+The *tfrmt* [@R-tfrmt, [website](https://gsk-biostatistics.github.io/tfrmt/)] package 
 provides a language for defining display-related metadata and table formatting 
 before any data is available. This package offers an intuitive interface for 
 defining and layering standard or custom formats, to which ARD (analysis 
@@ -123,9 +125,10 @@ to produce rtf/html output.
 are on Github.
 
 ```{r include=FALSE}
-# automatically create a bib database for R packages
-knitr::write_bib(c(
-  "gt", "r2rtf", "rtables", "flextable", "tables", "tidytlg", "tfrmt"
+# automatically create a bib database for R packages using our
+# patched version of write_bib
+write_bib(c(
+  "gt", "r2rtf", "rtables", "flextable", "tables", "tern", "tidytlg", "tfrmt"
 ), 'packages.bib')
 lines <- readLines("packages.bib")
 lines <- sub("^  note = \\{R package", "  edition = {R package", lines)
