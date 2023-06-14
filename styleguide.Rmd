@@ -16,7 +16,7 @@ knitr::opts_chunk$set(echo = TRUE)
   and will appear
   in italics (e.g. *pkgname*), except in section headings,
   where they are written in plain text, e.g. `pkgname`
-- First package citations use the standard citation, followed by a "website" link, e.g. `tables (@R-tables, [website](...))`
+- First package citations use the standard citation, followed by a "website" link, e.g. `*tables* package [@R-tables, [website](...)]`
 - Function names are written as ``` `fname()` ```
 - Function arguments are written as ``` `argument` ```
 - git is written ``` `git` ``` as are other software packages
