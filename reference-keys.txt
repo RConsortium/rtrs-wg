@@ -12,7 +12,6 @@ data-used-for-examples
 installing-the-r-packages
 tablepkgs
 gt
-r2rtf
 rtables
 flextable
 tfrmt
@@ -43,7 +42,7 @@ tables-4
 tidytlg-2
 tfrmt-2
 adverse-event-tables
-rtables-only
+rtables-4
 gt-3
 tables-5
 flextable-5
@@ -51,7 +50,7 @@ tidytlg-3
 tfrmt-3
 time-to-event-analysis-tables
 data-and-models-used-throughout
-rtables-4
+rtables-5
 cell-value-derivation-for-gt-of-time-to-event-analysis
 gt-4
 tables-6
@@ -59,14 +58,14 @@ flextable-6
 tidytlg-4
 tfrmt-4
 concomitant-medications
-rtables-5
+rtables-6
 flextable-7
 gt-5
 tables-7
 tidytlg-5
 tfrmt-5
 disposition
-rtables-6
+rtables-7
 gt-6
 flextable-8
 tables-8
