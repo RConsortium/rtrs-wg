@@ -89,17 +89,16 @@ The objects can be subsetted or combined using matrix-like operations. Tables ca
 be rendered in plain text, LaTeX code to appear in a PDF document, or HTML
 code for a web document.
 
-The package is on CRAN. Source is maintained on R-forge at
-https://r-forge.r-project.org/projects/tables/ and mirrored on Github at
-https://github.com/rforge/tables/. Vignettes in the package serve as a user manual;
-browse them at https://rdrr.io/cran/tables/, or install the package, then run
+The package is on CRAN. Source is maintained on Github at
+https://github.com/dmurdoch/tables/. Vignettes in the package serve as a user manual;
+browse them at https://dmurdoch.github.io/tables/, or install the package, then run
 `browseVignettes(package = "tables")`.
 
 ## tidytlg
 
 The *tidytlg* package [@R-tidytlg, [website](https://github.com/pharmaverse/tidytlg)] provides a framework for creating tables, listings, and graphs (TLGs) using 
-Tidyverse (@tidyverse). It offers a suite of analysis functions to summarize descriptive statistics 
-(univariate statistics and counts (percentages)) for table creation and a function 
+Tidyverse [@tidyverse]. It offers a suite of analysis functions to summarize descriptive statistics 
+(univariate statistics and counts or percentages) for table creation and a function 
 to convert analysis results to rtf/html outputs. For graphic output, tidytlg can 
 integrate plot objects created by ggplot2 or a png file with titles and footnotes 
 to produce rtf/html output. 
