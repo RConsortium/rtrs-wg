@@ -26,23 +26,6 @@ The *gt* source code is on [GitHub](https://github.com/rstudio/gt) and the
 [project website](https://gt.rstudio.com) provides a wealth of documentation. The
 package is also available on [CRAN](https://CRAN.R-project.org/package=gt).
 
-## r2rtf
-
-The *r2rtf* package [@r2rtf2020, [website](https://merck.github.io/r2rtf/)]
-allows for the creation of production-ready tables and figures in the RTF format. 
-This R package provides simple, composable functions (with the “verb” semantics
-pattern) that correspond to each component of a table. Incoming data is treated as
-immutable so the only focus for the final formatting of the table. The package is
-well-suited for regulatory filings given that it has extensive support for table
-pagination and a means for compiling several tables into a single RTF file. Chapters
-1-9 of [The R for Clinical Study Reports and Submission](https://r4csr.org/) book 
-provides examples that use *r2rtf*.
-
-The source code is on [GitHub]([https://github.com/rstudio/gt](https://github.com/Merck/r2rtf)
-and the [project website]([https://gt.rstudio.com](https://merck.github.io/r2rtf/)
-provides a function reference and many helpful articles. The package is also
-available on [CRAN](https://CRAN.R-project.org/package=r2rtf).
-
 ## rtables
 
 The *rtables* package [@R-rtables, [website](https://insightsengineering.github.io/rtables/main/)] defines a pipe-able grammar for declaring complex table
@@ -128,7 +111,7 @@ are on Github.
 # automatically create a bib database for R packages using our
 # patched version of write_bib
 write_bib(c(
-  "gt", "r2rtf", "rtables", "flextable", "tables", "tern", "tidytlg", "tfrmt"
+  "gt", "rtables", "flextable", "tables", "tern", "tidytlg", "tfrmt"
 ), 'packages.bib')
 lines <- readLines("packages.bib")
 lines <- sub("^  note = \\{R package", "  edition = {R package", lines)

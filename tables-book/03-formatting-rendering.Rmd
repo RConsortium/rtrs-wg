@@ -474,15 +474,14 @@ current output capabilities for each package.
 ```{r echo = FALSE}
 resetSession()
 formats <- c("ASCII", "PDF", "HTML", ".docx", "RTF", ".pptx", "grid")
-packages <- sort(c("gt", "r2rtf", "rtables", "flextable", "tfrmt",
+packages <- sort(c("gt", "rtables", "flextable", "tfrmt",
               "tables", "tidytlg"))
 capable <- matrix("?", length(packages), length(formats),
                   dimnames = list(packages, formats))
 check <- "\u2713"
                       #  ASCII   PDF    HTML   Word RTF    PPT Grid
-capable["gt", ] <-      c(check, check, check, check,check,"", "")
-capable["r2rtf",] <-    c("",    "",    "",    "",  check, "", "")
-capable["rtables", ] <- c(check, check, check, "",  "",    "", "")
+capable["gt", ] <-      c("", check, check, check,check,"", "")
+capable["rtables", ] <- c(check, check, check, check,  check,  check, check)
 capable["flextable", ] <-c("",   check, check, check,check, check, check)
 capable["tfrmt",]    <- capable["gt", ]
 capable["tables", ] <-  c(check, check, check, "",  "",    "", "")

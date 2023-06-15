@@ -13,7 +13,7 @@ head(formatters::ex_adae)
 ```
 
 
-### rtables Only
+### rtables
 
 Adverse Events by ID
 
