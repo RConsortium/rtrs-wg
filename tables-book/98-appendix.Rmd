@@ -13,9 +13,10 @@ alphabetical order):
 - James J. Kim, Pfizer Inc.
 - Alexandra Lauer, Merck KGaA
 - Duncan Murdoch, University of Western Ontario
+- Joseph Rickert, R Consortium
 - Adrian Waddell, Roche
 - Sheng-Wei Wang, Johnson & Johnson
 - Yilong Zhang, Meta
 
-The project has been coordinated by the *R Tables for Regulatory
-Submissions (RTRS)* Working Group.
+The project has been coordinated by the *[R Tables for Regulatory
+Submissions (RTRS)](https://github.com/RConsortium/rtrs-wg)* Working Group.
