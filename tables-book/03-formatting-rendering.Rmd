@@ -26,7 +26,10 @@ Often footnotes include cell references.
 
 ### gt
 
-The *gt* package lets you add a title and even a subtitle and *preheader* lines (for RTF) with its `tab_header()` function. In the following example, we create some `sample_data` and feed that into the `gt()` function. We can automatically create a table stub (for row labels) and row groups with the `rowname_col` and `groupname_col` arguments of `gt()`.
+The *gt* package lets you add a title and even a subtitle and *preheader* lines (for RTF)
+with its `tab_header()` function. In the following example, we create some `sample_data` and feed
+that into the `gt()` function. We can automatically create a table stub (for row labels) and
+row groups with the `rowname_col` and `groupname_col` arguments of `gt()`.
 
 ```{r}
 resetSession()
@@ -67,7 +70,10 @@ gt_tbl <-
 gt_tbl
 ```
 
-The above example contains the use of the `tab_source_note()` function. You can create as many source notes in the table footer as you need, and they typically describe the data table as whole (i.e., not pointing to anything specific). For that, you can use footnotes and target cells that require additional explanation. Here's an example of that using `tab_footnote()`:
+The above example contains the use of the `tab_source_note()` function. You can create as
+many source notes in the table footer as you need, and they typically describe the data table as
+a whole (i.e., not pointing to anything specific). For that, you can use footnotes and target
+cells that require additional explanation. Here's an example of that using `tab_footnote()`:
 
 ```{r}
 gt_tbl |>
@@ -83,9 +89,15 @@ gt_tbl |>
   )
 ```
 
-The `tab_footnote()` function allows for footnotes to be placed anywhere in the table (using the `cells_*()` helper functions for targeting). Targeting `columns`, `rows`, or other locations can be done with Tidyselect-style helper functions, ID values, or indices.
+The `tab_footnote()` function allows for footnotes to be placed anywhere in the table (using
+the `cells_*()` helper functions for targeting). Targeting `columns`, `rows`, or other
+locations can be done with Tidyselect-style helper functions (e.g., `matches()`, `starts_with()`,
+etc.), ID values, or indices.
 
-As a final note on the first example, we can specify certain `page.*` options that make RTF output ideal for regulatory filing purposes. The options employed above in the `tab_options()` call ensure that pages are in landscape orientation, page numbering for each table is activated, and that page header and footer are used for the table's headings and footer elements.
+As a final note on the first example, we can specify certain `page.*` options that make RTF
+output ideal for regulatory filing purposes. The options employed above in the `tab_options()`
+call ensure that pages are in landscape orientation, page numbering for each table is activated,
+and that page header and footer are used for the table's headings and footer elements.
 
 ### rtables
 
