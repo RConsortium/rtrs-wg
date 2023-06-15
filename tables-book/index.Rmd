@@ -40,7 +40,7 @@ For more information on the R Consortium see https://www.r-consortium.org.
 The content of this book is intended to grow via community contribution, so please
 add your subject matter expertise to this content by cloning the [Github repository of this book](https://github.com/RConsortium/rtrs-wg) and making a pull request with your changes.
 
-We welcome all contribution, including but not limited to:
+We welcome all contributions, including but not limited to:
 
  - summarizing table packages 
  - adding new example tables
@@ -65,7 +65,7 @@ continuously preview the book with the `bookdown::serve_book()` call.
 ## Data Used For Examples
 
 We use synthetic data for the examples in this book. The data is available from the
-`random.cidsc.data` R package which contains a number of datasets that follow the 
+`random.cdisc.data` R package which contains a number of datasets that follow the 
 [CDISC ADaM specifications](https://www.cdisc.org/standards/foundational/adam).
 
 ```{r, eval=FALSE}
@@ -100,8 +100,10 @@ for this book. For right now you can install the packages yourself with:
 # and also in ../tools/fakepkg/DESCRIPTION (used in the online
 # builds).  Version requirements should go there.
 
-install.packages(c("rtables", "gt", "remotes", "tidyverse", "bookdown", "flextable", "tables", "formatters", "tidytlg"))
+install.packages(c("rtables", "gt", "remotes", "tidyverse", "bookdown",
+                   "tables", "formatters", "tidytlg"))
 
+remotes::install_github("davidgohel/flextable")
 remotes::install_github("insightsengineering/random.cdisc.data")
 remotes::install_github("insightsengineering/scda")
 remotes::install_github("insightsengineering/nestcolor")
