@@ -2,9 +2,9 @@ tab:unnamed-chunk-20
 tab:flextable-label
 tab:unnamed-chunk-35
 tab:unnamed-chunk-44
-tab:unnamed-chunk-55
-tab:unnamed-chunk-63
-tab:unnamed-chunk-70
+tab:unnamed-chunk-54
+tab:unnamed-chunk-62
+tab:unnamed-chunk-69
 about
 introduction
 call-for-contributions
@@ -49,7 +49,6 @@ tables-5
 flextable-5
 tidytlg-3
 tfrmt-3
-laboratory-tables
 time-to-event-analysis-tables
 data-and-models-used-throughout
 rtables-4
