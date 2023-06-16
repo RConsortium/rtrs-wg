@@ -1,7 +1,6 @@
 library(knitr)
 library(magrittr)
 library(ragg)
-library(random.cdisc.data)
 
 is_doconvable <- require("doconv") && locatexec::exec_available("word")
 is_webshotable <- require("webshot2")
@@ -88,6 +87,15 @@ knit_hooks$set(link_preview = function(before, options, envir) {
 if (!exists(".initial_state")) {
   .initial_state <- currentState()
 }
+
+local({
+  r <- getOption("repos")
+  r["CRAN"] <- "https://cloud.r-project.org"
+  options(repos = r)
+})
+
+doInstalls <- function()
+  toupper(Sys.getenv("RTRS_DO_INSTALLS", "FALSE")) ==  "TRUE"
 
 # This code is taken from the knitr package, modified to work
 # around bugs in utils::citation

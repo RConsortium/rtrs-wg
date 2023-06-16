@@ -38,7 +38,6 @@ jobs:
 
       - uses: r-lib/actions/setup-r-dependencies@v2
         with:
-          extra-packages: any::remotes
           working-directory: 'tools/fakepkg'
 
       - name: Google fonts cache
@@ -60,6 +59,8 @@ jobs:
         shell: Rscript {0}
 
       - name: render book
+        env:
+          RTRS_DO_INSTALLS: true
         run: |
           setwd('tables-book')
           rmarkdown::render_site(encoding = 'UTF-8')
