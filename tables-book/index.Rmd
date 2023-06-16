@@ -68,7 +68,7 @@ We use synthetic data for the examples in this book. The data is available from 
 `random.cdisc.data` R package which contains a number of datasets that follow the 
 [CDISC ADaM specifications](https://www.cdisc.org/standards/foundational/adam).
 
-```{r, eval=FALSE}
+```{r, eval=doInstalls(), results='hide'}
 remotes::install_github("insightsengineering/random.cdisc.data")
 ```
 
@@ -95,14 +95,8 @@ adsl <- cadsl
 At some point we may switch to `renv` to install the R packages used 
 for this book. For right now you can install the packages yourself with:
 
-```{r, eval = FALSE, echo = -(1:4)}
-# Authors:  to add a package, enter it here (for the readers)
-# and also in ../tools/fakepkg/DESCRIPTION (used in the online
-# builds).  Version requirements should go there.
-
-install.packages(c("rtables", "gt", "remotes", "tidyverse", "bookdown",
-                   "tables", "formatters", "tidytlg"))
-
+```{r, eval = doInstalls(), results = 'hide'}
+install.packages(c("gt",  "formatters", "rtables", "tables", "tidytlg"))
 remotes::install_github("davidgohel/flextable")
 remotes::install_github("insightsengineering/random.cdisc.data")
 remotes::install_github("insightsengineering/scda")
