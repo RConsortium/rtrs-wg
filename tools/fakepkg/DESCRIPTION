@@ -8,5 +8,5 @@ Authors@R: c(
     )
 Description: dummy package description for CI
 License: GPL-3
-Imports: bookdown, remotes, gdtools
+Imports: bookdown, remotes, gdtools, ragg
 Encoding: UTF-8

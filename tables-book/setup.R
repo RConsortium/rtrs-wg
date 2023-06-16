@@ -1,7 +1,6 @@
 library(knitr)
 library(magrittr)
 library(ragg)
-library(random.cdisc.data)
 
 is_doconvable <- require("doconv") && locatexec::exec_available("word")
 is_webshotable <- require("webshot2")
