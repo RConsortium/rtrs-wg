@@ -37,11 +37,41 @@ splits, cell value calculation, and tabulation occurs automatically. Additional
 table features such as titles, footers, and referential footnotes are supported.
 ASCII, HTML, and PDF are supported as output formats for rendering tables.
 
-*rtables* works with the *tern* package [@R-tern, [website](https://github.com/insightsengineering/tern)].
+The *rtables* package is available on
+[CRAN](https://CRAN.R-project.org/package=rtables). Its source code
+[GitHub](https://github.com/insightsengineering/rtables) and
+[documentation](https://insightsengineering.github.io/rtables/) are
+also available on Github, where development of the package occurs.
 
-The *rtables* source code is on [GitHub](https://github.com/roche/rtables) as well
-as the [documentation](https://roche.github.io/rtables/). The package is also available
-on [CRAN](https://CRAN.R-project.org/package=rtables).
+*rtables* is also the table engine used (as wrapped by *tern*) in the open source
+[TLG Catalog](https://insightsengineering.github.io/tlg-catalog/).
+
+## tern (+ rtables)
+
+The *tern* package [@R-tern,
+[website](https://github.com/insightsengineering/tern)] is an open
+sourced, opinionated TLG generation package for clinical trials. With
+respect to tables, *tern* acts as wrapper around the core *rtables*
+tabulation engine which performs two functions with respect to
+standard tables clinical trial tables: implementation of statistical
+logic, and providing convenience wrappers for common table layout
+patterns. In particular, *tern* implements and open-sources the
+statistical choices used by Roche &trade; when constructing clinical
+trial tables.
+
+The open source [TLG
+Catalog](https://insightsengineering.github.io/tlg-catalog/) uses
+*tern* and *rtables* to implement over 220 stanard clinical trial
+table variants across 8 table categories. The catalog includes open
+source-permissively licensed, runnable code for each entry.
+
+
+The *tern* package is available on
+[CRAN](https://CRAN.R-project.org/package=tern). Its source code
+[GitHub](https://github.com/insightsengineering/tern) and
+[documentation](https://insightsengineering.github.io/tern/) are also
+available on Github, where development of the package occurs.
+
 
 ## flextable
 
