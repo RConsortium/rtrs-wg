@@ -111,7 +111,6 @@ adtte2 <- adtte |>
 lyt <- basic_table(show_colcounts = TRUE,
                    title = "x.x: Safety Data",
                    subtitles = stitle_txt,
-                                 "Table x.x.x.x: Safety Endpoint - Safety Analysis Set"),
                    main_footer = mn_footer_txt,
                    prov_footer = "Source: ADTTE DDMMYYYY hh:mm; Listing x.xx; SDTM package: DDMMYYYY") |>
     split_cols_by("ARM", ref_group = "A: Drug X") |>

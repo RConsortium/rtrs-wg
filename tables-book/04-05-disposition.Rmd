@@ -50,6 +50,7 @@ the percent when a cell count is 0), but we can see the table
 structure and cell values are the same.
 
 ```{r}
+library(tern)
 lyt <- basic_table(show_colcounts = TRUE) |>
   split_cols_by("TRT01A") |>
   count_values("EOSSTT",

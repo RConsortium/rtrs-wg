@@ -45,6 +45,7 @@ build_table(lyt, cadcm, alt_counts_df = cadsl)
 ### tern (+ rtables)
 
 ```{r}
+library(tern)
 lyt <- basic_table(show_colcounts = TRUE) |>
   split_cols_by(var = "ARM") |>
   analyze_num_patients(vars = "USUBJID",
