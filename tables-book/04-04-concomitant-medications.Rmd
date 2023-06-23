@@ -26,10 +26,10 @@ one_count_pct_gen <- function(label = NULL) {
 
 lyt <- basic_table(title = "Conmed Example",
                    subtitles = "Uses the adcm dataset from random.cdisc.data",
-                   show_colcounts = TRUE) %>%
-    split_cols_by("ARM") %>%
-    analyze("USUBJID", afun = one_count_pct_gen("At Least One Concomittant Med")) %>%
-    split_rows_by("CMCLAS", split_fun = trim_levels_in_group("CMTRT")) %>%
+                   show_colcounts = TRUE) |>
+    split_cols_by("ARM") |>
+    analyze("USUBJID", afun = one_count_pct_gen("At Least One Concomittant Med")) |>
+    split_rows_by("CMCLAS", split_fun = trim_levels_in_group("CMTRT")) |>
     analyze("CMTRT", afun = function(df, .N_col) {
         cmtrtvec <- df$CMTRT
         spl_usubj <- split(df$USUBJID, cmtrtvec)
@@ -40,6 +40,22 @@ lyt <- basic_table(title = "Conmed Example",
     })
 
 build_table(lyt, cadcm, alt_counts_df = cadsl)
+```
+
+### tern (+ rtables)
+
+```{r}
+library(tern)
+lyt <- basic_table(show_colcounts = TRUE) |>
+  split_cols_by(var = "ARM") |>
+  analyze_num_patients(vars = "USUBJID",
+                       .stats = "unique",
+                       .labels = "At Least One Concomittant Med") |>
+  split_rows_by("CMCLAS",
+                split_fun = drop_split_levels) |>
+  count_occurrences(vars = "CMDECOD")
+
+build_table(lyt = lyt, df = cadcm, alt_counts_df = cadsl)
 ```
 
 ### flextable

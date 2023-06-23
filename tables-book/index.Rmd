@@ -100,13 +100,11 @@ for this book. For right now you can install the packages yourself with:
 # and also in ../tools/fakepkg/DESCRIPTION (used in the online
 # builds).  Version requirements should go there.
 
-install.packages(c("rtables", "gt", "remotes", "tidyverse", "bookdown",
+install.packages(c("rtables", "tern", "gt", "remotes", "tidyverse", "bookdown",
                    "tables", "formatters", "tidytlg", "flextable"))
 
 remotes::install_github("insightsengineering/random.cdisc.data")
 remotes::install_github("insightsengineering/scda")
-remotes::install_github("insightsengineering/nestcolor")
-remotes::install_github("insightsengineering/tern", ref = "v0.7.10")
 remotes::install_github("GSK-Biostatistics/tfrmt")
 ```
 

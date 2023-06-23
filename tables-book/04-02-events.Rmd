@@ -56,6 +56,41 @@ lyt <- basic_table(show_colcounts = TRUE) %>%
 build_table(lyt, ex_adae, alt_counts_df = ex_adsl)
 ```
 
+### tern (+ rtables)
+
+```{r, comment = NA}
+resetSession()
+library(tern)
+
+lyt <- basic_table(show_colcounts = TRUE) %>%
+  split_cols_by(var = "ARM") %>%
+  analyze_num_patients(
+    vars = "USUBJID",
+    .stats = c("unique", "nonunique"),
+    .labels = c(
+      unique = "Patients with at least one event",
+      nonunique = "Total number of events"
+    )
+  ) %>%
+  split_rows_by(
+      "AEBODSYS",
+      child_labels = "visible",
+      split_fun = drop_split_levels,
+      section_div = " "
+  ) %>%
+  summarize_num_patients(
+    var = "USUBJID",
+    .stats = c("unique", "nonunique"),
+    .labels = c(
+      unique = "Patients with at least one event",
+      nonunique = "Total number of events"
+    )
+  ) %>%
+  count_occurrences(vars = "AEDECOD", .indent_mods = -1L)
+
+build_table(lyt, df = ex_adae, alt_counts_df = ex_adsl)
+```
+
 ### gt
 
 ```{r}

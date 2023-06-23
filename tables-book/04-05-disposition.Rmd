@@ -12,7 +12,6 @@ editor_options:
 resetSession()
 
 library(dplyr)
-library(magrittr)
 library(rtables)
 
 data("cadsl", package = "random.cdisc.data")
@@ -41,6 +40,41 @@ lyt <- basic_table(show_colcounts = TRUE) |>
 build_table(lyt, adsl)
 
 ```
+
+
+### tern (+ rtables)
+
+*tern* makes slightly different formatting choices (2 decimals for
+the percents of completed and ongoing study counts, and not displaying
+the percent when a cell count is 0), but we can see the table
+structure and cell values are the same.
+
+```{r}
+library(tern)
+lyt <- basic_table(show_colcounts = TRUE) |>
+  split_cols_by("TRT01A") |>
+  count_values("EOSSTT",
+               values = "COMPLETED",
+               table_names = "Completed",
+               .labels = c(count_fraction = "Completed Study")) |>
+  count_values("EOSSTT",
+               values = "ONGOING",
+               table_names = "Ongoing",
+               .labels = c(count_fraction = "Ongoing Study")) |>
+  split_rows_by("EOSSTT",
+                split_fun = keep_split_levels("DISCONTINUED")) |>
+  summarize_vars("DCSREAS",
+                 .stats = "count_fraction",
+                 denom = "N_col") |>
+  split_rows_by("DCSREAS",
+                split_fun = keep_split_levels("DEATH")) |>
+  summarize_vars("DTHCAUS",
+                 .stats = "count_fraction",
+                 denom = "N_col")
+
+build_table(lyt = lyt, df = adsl)
+```
+
 
 ### gt
 

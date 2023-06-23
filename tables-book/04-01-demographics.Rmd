@@ -37,9 +37,10 @@ lyt <- basic_table(title = "x.x: Study Subject Data",
 build_table(lyt, ex_adsl)
 ```
 
-Using *rtables* and *tern*
+### tern (+ rtables)
 
 ```{r, comment=NA}
+resetSession()
 library(tern)
 lyt <- basic_table(title = "x.x: Study Subject Data",
                    subtitles= c("x.x.x: Demographic Characteristics",

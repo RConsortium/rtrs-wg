@@ -7,6 +7,7 @@ alphabetical order):
 
 - Karima Ahmad, GSK plc.
 - Gabe Becker
+- Emily de la Rua, Roche
 - Christina Fillmore, GSK plc.
 - David Gohel, ArData
 - Richard Iannone, Posit PBC
