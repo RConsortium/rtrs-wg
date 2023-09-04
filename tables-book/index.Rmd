@@ -17,6 +17,8 @@ editor_options:
 
 # About
 
+This is the DEV version of the book.
+
 ## Introduction
 
 In this book we present various aspects of creating tables with the R language [@Rmanual]
