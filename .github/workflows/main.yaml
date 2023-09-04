@@ -2,9 +2,11 @@ on:
   push:
     branches:
       - main
+      - dev
   pull_request:
     branches:
       - main
+      - dev
 
 name: bookdown
 
@@ -17,6 +19,8 @@ jobs:
     steps:
 
       - uses: actions/checkout@v2
+
+      - run: echo "BRANCH_NAME=${{ github.event.pull_request && github.head_ref || github.ref_name }}" >> $GITHUB_ENV
 
       - uses: r-lib/actions/setup-r@v2
         with:
@@ -65,8 +69,8 @@ jobs:
           rmarkdown::render_site(encoding = 'UTF-8')
         shell: Rscript {0}
 
-      - name: Deploy 🚀
-        if: github.ref_name == 'main'
+      - name: Deploy main 🚀
+        if: env.BRANCH_NAME == 'main'
         uses: JamesIves/github-pages-deploy-action@releases/v3
         with:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
@@ -74,3 +78,13 @@ jobs:
           FOLDER: tables-book/_book/
           TARGET_FOLDER: '.' # The folder the action should deploy.
           CLEAN: true
+
+      - name: Deploy any but not main
+        if: env.BRANCH_NAME != 'main'
+        uses: JamesIves/github-pages-deploy-action@releases/v3
+        with:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          BRANCH: gh-pages # The branch the action should deploy to.
+          FOLDER: tables-book/_book/
+          TARGET_FOLDER: ${{ env.BRANCH_NAME }} # The folder the action should deploy.
+          CLEAN: false
