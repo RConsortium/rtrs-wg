@@ -13,6 +13,7 @@ name: bookdown
 jobs:
   bookdown:
     runs-on: ubuntu-20.04
+    if: "!contains(github.event.head_commit.message, 'skip build')"
     env:
       GITHUB_PAT: ${{ secrets.GITHUB_TOKEN }}
       GDTOOLS_CACHE_DIR: "/usr/share/fonts/gfonts/"
