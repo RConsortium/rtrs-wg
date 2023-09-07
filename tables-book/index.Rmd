@@ -21,10 +21,10 @@ params:
 
 <!---You are currently reading version `r params$version` of the book whose URL is https://rconsortium.github.io/rtrs-wg/. 
 
-The future version named *dev* version, currently being prepared, is 
+The future version (named the *dev* version, which is currently being prepared) is 
 available at the URL https://rconsortium.github.io/rtrs-wg/dev/.--->
 
-You are currently reading developpement version `r params$version` 
+You are currently reading the development version (`r params$version`) 
 of the book whose URL is https://rconsortium.github.io/rtrs-wg/dev. 
 
 ## Introduction
