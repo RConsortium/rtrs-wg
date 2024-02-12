@@ -56,7 +56,7 @@ library(rtables)
 
 ## this is exported in development version of rtables, and will be so in the
 ## next CRAN release
-RefFootnote <- rtables:::RefFoonote
+RefFootnote <- rtables:::RefFootnote
 
 cnsr_counter <- function(df, .var, .N_col) {
     x <- df[!duplicated(df$USUBJID), .var]
@@ -148,7 +148,7 @@ library(tern)
 
 ## this is exported in development version of rtables, and will be so in the
 ## next CRAN release
-RefFootnote <- rtables:::RefFoonote
+RefFootnote <- rtables:::RefFootnote
 
 
 adtte3 <- adtte
