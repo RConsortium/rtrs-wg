@@ -217,6 +217,9 @@ rest of the table structure.
 
 ```{r}
 
+## this is exported in development version of rtables, and will be so in the
+## next CRAN release
+RefFootnote <- rtables:::RefFootnote
 
 a_cph <- function(df, .var, .in_ref_col, .ref_full, full_cox_fit) {
   if(.in_ref_col) {
