@@ -77,9 +77,7 @@ tt_to_flextable(build_table(lyt, cadcm, alt_counts_df = cadsl)) |>
   set_table_properties(layout = "fixed") |> 
   autofit() |> 
   mk_par(i = 1, j = 1, part = "header",
-         as_paragraph(as_chunk("Conmed Example", props = fp_text_default(font.size = 14)))) |> 
-  mk_par(i = 2, j = 1, part = "header",
-         as_paragraph("Uses the adcm dataset from ", as_b("random.cdisc.data")))
+         as_paragraph(as_chunk("Conmed Example", props = fp_text_default(font.size = 14))))
 ```
 
 ### gt
