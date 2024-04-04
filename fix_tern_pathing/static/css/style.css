@@ -1,0 +1,21 @@
+.book.font-family-1 {
+  font-family: 'Fira Sans Condensed' !important;
+}
+.book .book-body .page-wrapper .page-inner section.normal code, .book .book-body .page-wrapper .page-inner section.normal pre {
+  font-family: 'Fira Code' !important;
+}
+
+p.caption {
+  color: #777;
+  margin-top: 10px;
+}
+p code {
+  white-space: inherit;
+}
+pre {
+  word-break: normal;
+  word-wrap: normal;
+}
+pre code {
+  white-space: inherit;
+}
