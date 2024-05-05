@@ -47,7 +47,7 @@ lyt <- basic_table(title = "x.x: Study Subject Data",
                                 "Table x.x.x.x: Demographic Characteristics - Full Analysis Set"),
                    prov_footer = "Source: ADSL DDMMYYYY hh:mm; Listing x.xx; SDTM package: DDMMYYYY") |>
   split_cols_by("ARM") |>
-  summarize_vars(c("AGE", "SEX", "COUNTRY"))
+  analyze_vars(c("AGE", "SEX", "COUNTRY"))
 
 build_table(lyt, ex_adsl)
 ```
