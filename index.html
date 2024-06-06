@@ -6,7 +6,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <title>Tables in Clinical Trials with R</title>
   <meta name="description" content="Example code to create tables commonly used for analyzing clinical trials data." />
-  <meta name="generator" content="bookdown 0.37 and GitBook 2.6.7" />
+  <meta name="generator" content="bookdown 0.39 and GitBook 2.6.7" />
 
   <meta property="og:title" content="Tables in Clinical Trials with R" />
   <meta property="og:type" content="book" />
@@ -23,7 +23,7 @@
 <meta name="author" content="R Consortium Tables Working Group" />
 
 
-<meta name="date" content="2023-12-07" />
+<meta name="date" content="2024-06-06" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -55,12 +55,12 @@
 <script src="libs/anchor-sections-1.1.0/anchor-sections.js"></script>
 <link href="libs/tabwid-1.1.3/tabwid.css" rel="stylesheet" />
 <script src="libs/tabwid-1.1.3/tabwid.js"></script>
-<link href="libs/open-sans-0.3.4/css/open-sans.css" rel="stylesheet" />
+<link href="libs/open-sans-0.3.7/css/open-sans.css" rel="stylesheet" />
 
 
 <style type="text/css">
 pre > code.sourceCode { white-space: pre; position: relative; }
-pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span { line-height: 1.25; }
 pre > code.sourceCode > span:empty { height: 1.2em; }
 .sourceCode { overflow: visible; }
 code.sourceCode > span { color: inherit; text-decoration: inherit; }
@@ -132,6 +132,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 div.csl-bib-body { }
 div.csl-entry {
   clear: both;
+  margin-bottom: 0em;
 }
 .hanging div.csl-entry {
   margin-left:2em;
@@ -292,16 +293,19 @@ div.csl-indent {
 <div id="header">
 <h1 class="title">Tables in Clinical Trials with R</h1>
 <p class="author"><em>R Consortium Tables Working Group</em></p>
-<p class="date"><em>2023-12-07</em></p>
+<p class="date"><em>2024-06-06</em></p>
 </div>
 <div id="about" class="section level1 hasAnchor" number="1">
 <h1><span class="header-section-number">Chapter 1</span> About<a href="index.html#about" class="anchor-section" aria-label="Anchor link to header"></a></h1>
-<p>You are currently reading version 1.0 of the book whose URL is <a href="https://rconsortium.github.io/rtrs-wg/" class="uri">https://rconsortium.github.io/rtrs-wg/</a>.</p>
-<p>The future version named <em>dev</em> version, currently being prepared, is
-available at the URL <a href="https://rconsortium.github.io/rtrs-wg/dev/" class="uri">https://rconsortium.github.io/rtrs-wg/dev/</a>.</p>
+<!---You are currently reading version 1.1.001 of the book whose URL is https://rconsortium.github.io/rtrs-wg/. 
+
+The future version (named the *dev* version, which is currently being prepared) is 
+available at the URL https://rconsortium.github.io/rtrs-wg/dev/.--->
+<p>You are currently reading the development version (1.1.001)
+of the book whose URL is <a href="https://rconsortium.github.io/rtrs-wg/dev" class="uri">https://rconsortium.github.io/rtrs-wg/dev</a>.</p>
 <div id="introduction" class="section level2 hasAnchor" number="1.1">
 <h2><span class="header-section-number">1.1</span> Introduction<a href="index.html#introduction" class="anchor-section" aria-label="Anchor link to header"></a></h2>
-<p>In this book we present various aspects of creating tables with the R language <span class="citation">(<a href="#ref-Rmanual" role="doc-biblioref">R Core Team 2023</a>)</span>
+<p>In this book we present various aspects of creating tables with the R language <span class="citation">(<a href="#ref-Rmanual">R Core Team 2023</a>)</span>
 to analyze and report clinical trials data. The book was initiated by the
 R Consortium working group <em>R Tables for Regulatory Submissions (RTRS)</em>. For a list of contributors to this book, see Appendix <a href="contributors.html#contributors">A</a>.</p>
 <p>The RTRS includes
@@ -347,13 +351,13 @@ continuously preview the book with the <code>bookdown::serve_book()</code> call.
 <code>random.cdisc.data</code> R package which contains a number of datasets that follow the
 <a href="https://www.cdisc.org/standards/foundational/adam">CDISC ADaM specifications</a>.</p>
 <details class=chunk-details open><summary class=chunk-summary><span class=chunk-summary-text>Code</span></summary>
-<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1-1"><a href="index.html#cb1-1" aria-hidden="true" tabindex="-1"></a>remotes<span class="sc">::</span><span class="fu">install_github</span>(<span class="st">&quot;insightsengineering/random.cdisc.data&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1-1"><a href="index.html#cb1-1" tabindex="-1"></a>remotes<span class="sc">::</span><span class="fu">install_github</span>(<span class="st">&quot;insightsengineering/random.cdisc.data&quot;</span>)</span></code></pre></div>
 </details>
 <p>The data in <code>random.cdisc.data</code> is completely synthetic, meaning no patient data
 has been used to create it. The data is also fairly basic, meaning real study
 data often has more signal and patterns.</p>
 <details class=chunk-details open><summary class=chunk-summary><span class=chunk-summary-text>Code</span></summary>
-<div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb2-1"><a href="index.html#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="fu">data</span>(<span class="at">package=</span><span class="st">&quot;random.cdisc.data&quot;</span>)<span class="sc">$</span>results[, <span class="st">&quot;Item&quot;</span>]</span></code></pre></div>
+<div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb2-1"><a href="index.html#cb2-1" tabindex="-1"></a><span class="fu">data</span>(<span class="at">package=</span><span class="st">&quot;random.cdisc.data&quot;</span>)<span class="sc">$</span>results[, <span class="st">&quot;Item&quot;</span>]</span></code></pre></div>
 </details>
 <pre><code> [1] &quot;cadab&quot;    &quot;cadae&quot;    &quot;cadaette&quot; &quot;cadcm&quot;    &quot;caddv&quot;    &quot;cadeg&quot;   
  [7] &quot;cadex&quot;    &quot;cadhy&quot;    &quot;cadlb&quot;    &quot;cadmh&quot;    &quot;cadpc&quot;    &quot;cadpp&quot;   
@@ -362,8 +366,8 @@ data often has more signal and patterns.</p>
 <p>In this document, the prepending <code>c</code> stands for caches. So, for example the cached
 synthetic subject level dataset <code>ADSL</code>:</p>
 <details class=chunk-details open><summary class=chunk-summary><span class=chunk-summary-text>Code</span></summary>
-<div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb4-1"><a href="index.html#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="fu">data</span>(<span class="st">&quot;cadsl&quot;</span>, <span class="at">package =</span> <span class="st">&quot;random.cdisc.data&quot;</span>)</span>
-<span id="cb4-2"><a href="index.html#cb4-2" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(cadsl)</span></code></pre></div>
+<div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb4-1"><a href="index.html#cb4-1" tabindex="-1"></a><span class="fu">data</span>(<span class="st">&quot;cadsl&quot;</span>, <span class="at">package =</span> <span class="st">&quot;random.cdisc.data&quot;</span>)</span>
+<span id="cb4-2"><a href="index.html#cb4-2" tabindex="-1"></a><span class="fu">head</span>(cadsl)</span></code></pre></div>
 </details>
 <pre><code># A tibble: 6 × 55
   STUDYID USUBJID     SUBJID SITEID   AGE AGEU  SEX   RACE  ETHNIC COUNTRY DTHFL
@@ -382,7 +386,7 @@ synthetic subject level dataset <code>ADSL</code>:</p>
 #   TRT01SDTM &lt;dttm&gt;, TRT01EDTM &lt;dttm&gt;, TRT02SDTM &lt;dttm&gt;, TRT02EDTM &lt;dttm&gt;,
 #   AP01SDTM &lt;dttm&gt;, AP01EDTM &lt;dttm&gt;, AP02SDTM &lt;dttm&gt;, AP02EDTM &lt;dttm&gt;, …</code></pre>
 <details class=chunk-details open><summary class=chunk-summary><span class=chunk-summary-text>Code</span></summary>
-<div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb6-1"><a href="index.html#cb6-1" aria-hidden="true" tabindex="-1"></a>adsl <span class="ot">&lt;-</span> cadsl</span></code></pre></div>
+<div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb6-1"><a href="index.html#cb6-1" tabindex="-1"></a>adsl <span class="ot">&lt;-</span> cadsl</span></code></pre></div>
 </details>
 </div>
 <div id="installing-the-r-packages" class="section level2 hasAnchor" number="1.4">
@@ -390,12 +394,12 @@ synthetic subject level dataset <code>ADSL</code>:</p>
 <p>At some point we may switch to <code>renv</code> to install the R packages used
 for this book. For right now you can install the packages yourself with:</p>
 <details class=chunk-details open><summary class=chunk-summary><span class=chunk-summary-text>Code</span></summary>
-<div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb7-1"><a href="index.html#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="fu">install.packages</span>(<span class="fu">c</span>(<span class="st">&quot;rtables&quot;</span>, <span class="st">&quot;tern&quot;</span>, <span class="st">&quot;gt&quot;</span>, <span class="st">&quot;remotes&quot;</span>, <span class="st">&quot;tidyverse&quot;</span>, <span class="st">&quot;bookdown&quot;</span>,</span>
-<span id="cb7-2"><a href="index.html#cb7-2" aria-hidden="true" tabindex="-1"></a>                   <span class="st">&quot;tables&quot;</span>, <span class="st">&quot;formatters&quot;</span>, <span class="st">&quot;tidytlg&quot;</span>, <span class="st">&quot;flextable&quot;</span>))</span>
-<span id="cb7-3"><a href="index.html#cb7-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb7-4"><a href="index.html#cb7-4" aria-hidden="true" tabindex="-1"></a>remotes<span class="sc">::</span><span class="fu">install_github</span>(<span class="st">&quot;insightsengineering/random.cdisc.data&quot;</span>)</span>
-<span id="cb7-5"><a href="index.html#cb7-5" aria-hidden="true" tabindex="-1"></a>remotes<span class="sc">::</span><span class="fu">install_github</span>(<span class="st">&quot;insightsengineering/scda&quot;</span>)</span>
-<span id="cb7-6"><a href="index.html#cb7-6" aria-hidden="true" tabindex="-1"></a>remotes<span class="sc">::</span><span class="fu">install_github</span>(<span class="st">&quot;GSK-Biostatistics/tfrmt&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb7-1"><a href="index.html#cb7-1" tabindex="-1"></a><span class="fu">install.packages</span>(<span class="fu">c</span>(<span class="st">&quot;rtables&quot;</span>, <span class="st">&quot;tern&quot;</span>, <span class="st">&quot;gt&quot;</span>, <span class="st">&quot;remotes&quot;</span>, <span class="st">&quot;tidyverse&quot;</span>, <span class="st">&quot;bookdown&quot;</span>,</span>
+<span id="cb7-2"><a href="index.html#cb7-2" tabindex="-1"></a>                   <span class="st">&quot;tables&quot;</span>, <span class="st">&quot;formatters&quot;</span>, <span class="st">&quot;tidytlg&quot;</span>, <span class="st">&quot;flextable&quot;</span>))</span>
+<span id="cb7-3"><a href="index.html#cb7-3" tabindex="-1"></a></span>
+<span id="cb7-4"><a href="index.html#cb7-4" tabindex="-1"></a>remotes<span class="sc">::</span><span class="fu">install_github</span>(<span class="st">&quot;insightsengineering/random.cdisc.data&quot;</span>)</span>
+<span id="cb7-5"><a href="index.html#cb7-5" tabindex="-1"></a>remotes<span class="sc">::</span><span class="fu">install_github</span>(<span class="st">&quot;insightsengineering/scda&quot;</span>)</span>
+<span id="cb7-6"><a href="index.html#cb7-6" tabindex="-1"></a>remotes<span class="sc">::</span><span class="fu">install_github</span>(<span class="st">&quot;GSK-Biostatistics/tfrmt&quot;</span>)</span></code></pre></div>
 </details>
 <p>In each of the sections below, we will reset R to close to the
 present state at the start of the section, so readers can execute the demonstration
@@ -406,7 +410,7 @@ need these resets.</p>
 </div>
 </div>
 <h3>References<a href="references.html#references" class="anchor-section" aria-label="Anchor link to header"></a></h3>
-<div id="refs" class="references csl-bib-body hanging-indent">
+<div id="refs" class="references csl-bib-body hanging-indent" entry-spacing="0">
 <div id="ref-Rmanual" class="csl-entry">
 R Core Team. 2023. <em>R: A Language and Environment for Statistical Computing</em>. Vienna, Austria: R Foundation for Statistical Computing. <a href="https://www.R-project.org/">https://www.R-project.org/</a>.
 </div>

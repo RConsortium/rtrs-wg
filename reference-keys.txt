@@ -1,10 +1,3 @@
-tab:unnamed-chunk-20
-tab:flextable-label
-tab:unnamed-chunk-35
-tab:unnamed-chunk-45
-tab:unnamed-chunk-57
-tab:unnamed-chunk-66
-tab:unnamed-chunk-74
 about
 introduction
 call-for-contributions
