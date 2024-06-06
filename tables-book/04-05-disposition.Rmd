@@ -63,12 +63,12 @@ lyt <- basic_table(show_colcounts = TRUE) |>
                .labels = c(count_fraction = "Ongoing Study")) |>
   split_rows_by("EOSSTT",
                 split_fun = keep_split_levels("DISCONTINUED")) |>
-  summarize_vars("DCSREAS",
+  analyze_vars("DCSREAS",
                  .stats = "count_fraction",
                  denom = "N_col") |>
   split_rows_by("DCSREAS",
                 split_fun = keep_split_levels("DEATH")) |>
-  summarize_vars("DTHCAUS",
+  analyze_vars("DTHCAUS",
                  .stats = "count_fraction",
                  denom = "N_col")
 
