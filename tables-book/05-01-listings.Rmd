@@ -1,0 +1,74 @@
+---
+output: html_document
+editor_options: 
+  chunk_output_type: console
+---
+
+## Introduction
+
+Listings are similar to tables in that they present formatted information
+via text rendered in a rectangular form. They differ from tables in a number
+of key aspects, however:
+
+- No aggregation is performed,
+- No complex structure is present in row- or column-space
+  - No row labels
+  - No column spanning labels, 
+- Can often have thousands, tens of thousands or hundreds of thousands of rows
+
+By convention, listings have *key columns* which the data are sorted
+by, and for duplicate values are printed only once run of the value
+(per page, when paginating vertically).
+
+Listings generally are an exercise in maximizing information density
+while maintaining readability. To this end, they often include
+computed variables which are concatenations of multiple variables in
+the raw ADaM data, e.g., our `demogs` variable below which combines
+age, gender and ethnicity.
+
+They also very often involve packing columns onto the page (avoiding
+horizontal pagination) and wrapping labels and cell values to 
+certain widths to achieve this.
+
+
+```{r, comment = NA}
+
+lsting_data <- ex_adae
+
+lsting_data$demogs <- with(lsting_data,
+                           paste(AGE, SEX, RACE, sep = " / "))
+
+```
+
+### rlistings (/rtables) 
+
+Due to a lack of the complex aggregation structures it is designed to
+handle, along with the much larger row counts, `rtables` is not suitable 
+for creating listings. 
+
+Instead, we use its sister package `rlistings`:
+
+```{r, comment = NA}
+resetSession()
+library(rlistings)
+lsting <- as_listing(lsting_data, key_cols = c("ARM", "USUBJID", "demogs", "AESOC", "AEDECOD"), 
+                     disp_cols = c("ASTDTM", "AENDTM"))
+
+
+```
+
+We can see the non-printing of repeat values by rendering the head of the listing:
+
+```{r, comment = NA}
+cat(export_as_txt(head(lsting), file = NULL, landscape = TRUE, colwidths = rep(15, 7)))
+```
+
+Importantly, however, these repeated values **are** printed directly after pagination,
+by artificially setting the lines per page (`lpp`) to ten:
+
+
+```{r, comment = NA}
+
+cat(export_as_txt(head(lsting), file = NULL, landscape = TRUE, colwidths = rep(15, 7), lpp = 10))
+
+```

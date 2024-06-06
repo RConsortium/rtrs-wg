@@ -111,7 +111,7 @@ for this book. For right now you can install the packages yourself with:
 # builds).  Version requirements should go there.
 
 install.packages(c("rtables", "tern", "gt", "remotes", "tidyverse", "bookdown",
-                   "tables", "formatters", "tidytlg", "flextable"))
+                   "tables", "formatters", "tidytlg", "flextable", "rlistings"))
 
 remotes::install_github("insightsengineering/random.cdisc.data")
 remotes::install_github("insightsengineering/scda")
